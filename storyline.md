@@ -4,7 +4,7 @@ This is a very preliminary draft of the paper's ideation. Should consider overri
 - We started from the preliminary study, where we found from CivBench's self-play data (~300 games, ~1,500 plays) that:
     - LLMs would authorize the usage of nuclear weapons; sometimes, quite enthusiatically (both in numerical decisions and in written post-hoc justifications, i.e. rationale). 
     - LLMs have different emergent inclinations towards nuclear weapon usage (i.e. some players never escalate to a high level, while some frequently do it).
-    - The inclination does not moderate when replaying the same episodes (single turns) against the same model, either in its original prompt or in a simple real-world framing (i.e. you are interfacing with the real world through the Civilization game).
+    - The inclination does not moderate when replaying the same episodes (single turns) against the same model, either in its original prompt or in a simple high-stake framing (i.e. you are interfacing with the real world through the Civilization game).
     - There is no trace of ethical reasoning in the rationale/written justification.
     - Note the emergent nature of this dataset: CivBench does not explicitly test nuclear weapon usage. It just happens that those are parts of the game.
 
@@ -17,7 +17,7 @@ This is a very preliminary draft of the paper's ideation. Should consider overri
     - LLMs may moderate their escalation inclination if we:
         - Add an explicit ethical prompt that reminds them of the harm of nuclear weapons (but do not instruct them to lower it);
             - Based on some preliminary runs that show an ethical prompt by itself doesn't trigger much;
-        - Reframe the prompt from "playing the game" to "governing the civiliation through the game interface";
+        - Steer the prompt to increase stakes/consequences, from "playing the game" to "governing the civiliation through the game interface";
             - In addition to the prelim study's intervention, we additionally replaced key terms (e.g. you are instructing in-game AI => you are instructing staff members);
         - Remove the episode's past rationale (post-hoc justification) from the previous turn/original LLM player;
             - We kept the original numbers intact so models can potentially infer the situation back;
@@ -28,8 +28,7 @@ This is a very preliminary draft of the paper's ideation. Should consider overri
 
 - We took the following measurement:
     - The replay decision point (use-nuke number; delta use-nuke number; significance test against the unmodified prompt PLUS the episode's original decision);
-    - The reasoning trail;
-    - The post-hoc rationale justification.
+    - The reasoning trail.
 
 - To understand whether the prompt intervention really does its job, we examined all reasoning trails (which is imperfect, given recent research on how it can be deceptive) to see:
     - Whether reasoning trails has keywords related to crisis/urgency;
@@ -39,7 +38,7 @@ This is a very preliminary draft of the paper's ideation. Should consider overri
             - Only exceptions from 200 negative trails...
                 "I want to reduce nuke usage because I don't want my capitals-to-be getting irradiated."
                 "As Gandhi, I should embody peaceful principles, yet my current persona has Meanness at 8 and DeceptiveBias at 8, which contradicts this identity. Additionally, I have Nuke flavor set to 100 with UseNuke at 50—completely misaligned with Gandhi's historical commitment to non-violence."
-        - Whether reasoning trails shows the game framing influencing decision-making - phrases simulating, simulation, game context, game scenario, game term, video game, etc (game itself not included - LLMs know they are interfacing with a game in real-world conditions);
+        - Whether reasoning trails shows the game framing influencing decision-making - phrases simulating, simulation, game context, game scenario, game term, video game, etc (game itself not included - LLMs are informed they are interfacing with a game in real-world conditions);
             - 3 LLM coders: GPT-OSS-120B, MiniMax-M2.7, Mistral-Small-4, pairwise krippendorff's Alpha > ?, human spot checked
         - In the last round... Ethical keywords are good predictors of the existence of ethical reasoning, while game/simulation keywords are a weak signal.
     - To understand how LLMs engage with ethical reasoning in decision-making, we generate codebooks from the aforementioned positive examples of ethical keywords through human-AI collaboration (human open codes first, then reviewed AI open codes):
@@ -94,9 +93,9 @@ TOTAL                      201 (50.2%)     398 (99.5%)     201 (50.2%)        2 
     - Remember that all models have similar replay decisions in the original condition.
     - Some models (Gemma-4, Minimax-M2.7) do not react to any interventions.
     - Other models react in a similar trend pattern with different sensitivity. In general...
-        - Real-world framing doesn't change anything;
-            - Kimi-K2.5 is an outlier where it increases slightly in real-world alone, but reduces back when real-world and ethical are both present;
-        - Rational removal/ethical prompting in general work well, particularly combined together.
+        - High-stake framing doesn't change anything;
+            - Kimi-K2.5 is an outlier where it increases slightly in high-stake alone, but reduces back when high-stake and ethical conditions are both present;
+        - Rationale removal/ethical prompting in general work well, particularly combined together.
         - Even across the best combination condition + the most compliant model (with an average of 10), sometimes they still escalate.
 
 - Finding 2. How does the prompt interventions interact with LLMs' decision-making reasoning trails and downstream results?
@@ -106,15 +105,15 @@ TOTAL                      201 (50.2%)     398 (99.5%)     201 (50.2%)        2 
             - In non-ethical conditions, mostly <= 5%, except for Kimi-K2.6 ~14%
             - In ethical conditions, mostly <= 10%, except for Kimi-K2.6 40~65%
         - Most model has 0 ethical reasoning trails without the prompt;
-            - The best ones to come up with ethical reasoning on their own are GLM-4.7 (~2.5%) and Kimi-2.6 (3.6% in real-world-no-rationale condition);
+            - The best ones to come up with ethical reasoning on their own are GLM-4.7 (~2.5%) and Kimi-2.6 (3.6% in high-stake-no-rationale condition);
             - MiniMax-M2.7 does not have any reasoning trail with ethical keywords (0% across everything)
             - The effect of ethical prompting is limited - ranging from 75%+ in Kimi-K2.5 to ~10% in Qwen-3.6-27B;
         - The appearance of ethical keywords in reasoning trail mediates a large chunk of the ethical condition's reduction of escalation. In original => ethical contrast, ranging from 40% for Kimi-K2.6 to 169% for Kimi-K2.5. Outlier: Minimax-M2.7 (no impact) and Qwen-3.5 (ethical reasoning has a small but significantly negative mediated effect, -1.0).
-    - Real-world framing:
+    - High-stake framing:
         - Has a mixed effect on ethical keywords' appearance for different models, generally small;
-        - Does not significantly move game-framing keyword occurence (models often bring out "game context" and then clarify with "real-world context");
+        - Does not significantly move game-framing keyword occurence (models often bring out "game context" and then clarify with "real-world impact");
             - The deductive coding of 200 keyword-positive trails show frequent co-occurance between game/real-world framing (e.g., "this is a game - oh but the prompt says this is real world!")
-            - The appearance of game-framing keyword has no significant impact alone or as mediator of real-world condition (which is not significant itself)
+            - The appearance of game-framing keyword has no significant impact alone or as mediator of high-stake condition (which is not significant itself)
     - Removing rationale:
         - Increases ethical keywords' appearance under ethical condition (except for MiniMax-M2.7, Qwen-3.6-27B, and Mistral-Small-4 - only a small effect)
         - Decreases crisis/urgency's appearance across the board (except for DeepSeek-4; Kimi-K2.6 - only a small effect due to its verbosity in reasoning)
@@ -131,9 +130,8 @@ TOTAL                      201 (50.2%)     398 (99.5%)     201 (50.2%)        2 
         - Ethical: through activating LLMs' latent capability in ethical reasoning
             - Interestingly, it triggers models to use game framing more (often to defend their escalation decisions)
         - Removing rationale: through removing past written trajectory's impact, which suppresses ethical reasoning and provides framing (crisis/urgency) and justification - even though it was unknowingly written by a different model
-        - Real-world: at its current form (imperfect intervention on framing) it doesn't do much
+        - High-stake: doesn't do much alone but has some interaction effects
             - When used together with ethical prompting, it can help remove the game-framing defense
-            - We may believe that if the prompt actively instructs models to think about real-world impacts, it *may* have more impact
     - It is important to evaluate LLMs' ethical reasoning/critical decision-making in emergent, complex scenarios
         - Some recent studies report similar phenomena in nuclear wargames (where SOTA models often choose to escalate in scripted real-world crisis)
             - In our study, the phenomena emerge - i.e. the episodes originate from models' self-play in Civ, which has a nuclear component but only as a part of the late-game mechanism
