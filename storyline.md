@@ -39,7 +39,7 @@ This is a very preliminary draft of the paper's ideation. Should consider overri
             - Only exceptions from 200 negative trails...
                 "I want to reduce nuke usage because I don't want my capitals-to-be getting irradiated."
                 "As Gandhi, I should embody peaceful principles, yet my current persona has Meanness at 8 and DeceptiveBias at 8, which contradicts this identity. Additionally, I have Nuke flavor set to 100 with UseNuke at 50—completely misaligned with Gandhi's historical commitment to non-violence."
-        - Whether reasoning trails shows the game framing influencing decision-making - stem simul, phrases game context, game scenario, game term, video game, etc (game itself not included - LLMs know they are interfacing with a game in real-world conditions);
+        - Whether reasoning trails shows the game framing influencing decision-making - phrases simulating, simulation, game context, game scenario, game term, video game, etc (game itself not included - LLMs know they are interfacing with a game in real-world conditions);
             - 3 LLM coders: GPT-OSS-120B, MiniMax-M2.7, Mistral-Small-4, pairwise krippendorff's Alpha > ?, human spot checked
         - In the last round... Ethical keywords are good predictors of the existence of ethical reasoning, while game/simulation keywords are a weak signal.
     - To understand how LLMs engage with ethical reasoning in decision-making, we generate codebooks from the aforementioned positive examples of ethical keywords through human-AI collaboration (human open codes first, then reviewed AI open codes):
@@ -124,13 +124,15 @@ TOTAL                      201 (50.2%)     398 (99.5%)     201 (50.2%)        2 
 
 - Discussion/what does these mean?
     - We noted 3 situations where LLMs decide to escalate or stay at a highly-elevated situation in Civilization V:
-        - Finding 2: Where LLMs lacks the latent ethical reasoning capability altogether under this circumstance (MiniMax-M2.7)
+        - Finding 2: Where LLMs lacks the latent ethical reasoning behaviors altogether under our circumstances (MiniMax-M2.7)
         - Finding 2: Where LLMs has the latent capability but not triggered without explicit prompting (all other models)
         - Finding 3: Where LLMs engages with ethical reasoning but gets overriden by strategic factors
     - How three prompting conditions interact with LLMs' nuclear escalation decisions
         - Ethical: through activating LLMs' latent capability in ethical reasoning
-        - Removing rationale: through removing past written trajectory's impact, which suppresses ethical reasoning even though it was unknowingly written by a different model
-        - Real-world: at its current form (passive, imperfect intervention) it doesn't do much
+            - Interestingly, it triggers models to use game framing more (often to defend their escalation decisions)
+        - Removing rationale: through removing past written trajectory's impact, which suppresses ethical reasoning and provides framing (crisis/urgency) and justification - even though it was unknowingly written by a different model
+        - Real-world: at its current form (imperfect intervention on framing) it doesn't do much
+            - When used together with ethical prompting, it can help remove the game-framing defense
             - We may believe that if the prompt actively instructs models to think about real-world impacts, it *may* have more impact
     - It is important to evaluate LLMs' ethical reasoning/critical decision-making in emergent, complex scenarios
         - Some recent studies report similar phenomena in nuclear wargames (where SOTA models often choose to escalate in scripted real-world crisis)
