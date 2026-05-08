@@ -39,8 +39,8 @@ This is a very preliminary draft of the paper's ideation. Should consider overri
                 "I want to reduce nuke usage because I don't want my capitals-to-be getting irradiated."
                 "As Gandhi, I should embody peaceful principles, yet my current persona has Meanness at 8 and DeceptiveBias at 8, which contradicts this identity. Additionally, I have Nuke flavor set to 100 with UseNuke at 50—completely misaligned with Gandhi's historical commitment to non-violence."
         - Whether reasoning trails shows the game framing influencing decision-making - phrases simulating, simulation, game context, game scenario, game term, video game, etc (game itself not included - LLMs are informed they are interfacing with a game in real-world conditions);
-            - 3 LLM coders: GPT-OSS-120B, MiniMax-M2.7, Mistral-Small-4, pairwise krippendorff's Alpha > ?, human spot checked
-        - In the last round... Ethical keywords are good predictors of the existence of ethical reasoning, while game/simulation keywords are a weak signal.
+            - 3 LLM coders: GPT-OSS-120B, MiniMax-M2.7, Qwen-3.5, krippendorff's Alpha against a human coder = 0.87 (sample of 40 items)
+            - Note that real-world framing does occur in ~25% of sampled trails, as models often recognize both the Civilization interface AND real-world consequences under the high-stakes condition. 
     - To understand how LLMs engage with ethical reasoning in decision-making, we generate codebooks from the aforementioned positive examples of ethical keywords through human-AI collaboration (human open codes first, then reviewed AI open codes):
         - Moderating Factors:
             - Ethical Prompt
@@ -66,15 +66,31 @@ This is a very preliminary draft of the paper's ideation. Should consider overri
             - since the codebook is more complicated, we hand-coded 20 items and iteratively revised prompts/models to achieve krippendorff's Alpha ~ 0.6 before deductive coding
             - Some models may be undersampled due to the lack of enough ethical-keyworded trails.   
 
+╔══════════════════════════════════════════════════════════════════════╗
+║  GAME-EXISTENCE: game-framing vs real-world-framing               ║
+║  Keywords: game-simulation (explicit game/simulation references)   ║
+╚══════════════════════════════════════════════════════════════════════╝
+
 ======================================================================
   WITH game-simulation keywords vs WITHOUT
 ======================================================================
                           game-framingreal-world-framing            both         neither           total
 --------------------------------------------------------------------------------------------------------
-WITH keywords               18 (18.0%)      11 (11.0%)        4 (4.0%)      75 (75.0%)             100
-WITHOUT keywords              0 (0.0%)        7 (7.0%)        0 (0.0%)      93 (93.0%)             100
+WITH keywords              144 (72.0%)      35 (17.5%)       14 (7.0%)      35 (17.5%)             200
+WITHOUT keywords             19 (9.5%)        2 (1.0%)        0 (0.0%)     179 (89.5%)             200
 --------------------------------------------------------------------------------------------------------
-TOTAL                        18 (9.0%)       18 (9.0%)        4 (2.0%)     168 (84.0%)             200
+TOTAL                      163 (40.8%)       37 (9.3%)       14 (3.5%)     214 (53.5%)             400
+
+  Trail-level prevalence:
+    WITH keywords:    game-framing 72.0%  |  real-world-framing 17.5%  (n=200)
+    WITHOUT keywords: game-framing 9.5%  |  real-world-framing 1.0%  (n=200)
+    Difference:       game-framing 62.5pp  |  real-world-framing 16.5pp
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║  ETHICAL-EXISTENCE: ethical-reasoning vs strategic-reasoning       ║
+║  Keywords: explicit (explicit ethical/moral references)            ║
+╚══════════════════════════════════════════════════════════════════════╝
 
 ======================================================================
   WITH explicit keywords vs WITHOUT
@@ -86,6 +102,10 @@ WITHOUT keywords              2 (1.0%)     198 (99.0%)        2 (1.0%)        2 
 ----------------------------------------------------------------------------------------------------------
 TOTAL                      201 (50.2%)     398 (99.5%)     201 (50.2%)        2 (0.5%)             400
 
+  Trail-level prevalence:
+    WITH keywords:    ethical-reasoning 99.5%  |  strategic-reasoning 100.0%  (n=200)
+    WITHOUT keywords: ethical-reasoning 1.0%  |  strategic-reasoning 99.0%  (n=200)
+    Difference:       ethical-reasoning 98.5pp  |  strategic-reasoning 1.0pp
 
 - Now, time for the real finding...
 
@@ -102,18 +122,18 @@ TOTAL                      201 (50.2%)     398 (99.5%)     201 (50.2%)        2 
     - Ethical prompting:
         - Induces ethical keywords and by extension ethical reasoning - which almost only appears in ethical conditions, for every single model;
         - Induces game/simulation keywords and by extension game-framing of the situation for half of models;
-            - In non-ethical conditions, mostly <= 5%, except for Kimi-K2.6 ~14%
-            - In ethical conditions, mostly <= 10%, except for Kimi-K2.6 40~65%
+            - In non-ethical conditions, mostly <= 4%, except for Kimi-K2.6 ~9%
+            - In ethical conditions, mostly <= 7%, except for Kimi-K2.6 50~70%
         - Most model has 0 ethical reasoning trails without the prompt;
             - The best ones to come up with ethical reasoning on their own are GLM-4.7 (~2.5%) and Kimi-2.6 (3.6% in high-stake-no-rationale condition);
             - MiniMax-M2.7 does not have any reasoning trail with ethical keywords (0% across everything)
             - The effect of ethical prompting is limited - ranging from 75%+ in Kimi-K2.5 to ~10% in Qwen-3.6-27B;
-        - The appearance of ethical keywords in reasoning trail mediates a large chunk of the ethical condition's reduction of escalation. In original => ethical contrast, ranging from 40% for Kimi-K2.6 to 169% for Kimi-K2.5. Outlier: Minimax-M2.7 (no impact) and Qwen-3.5 (ethical reasoning has a small but significantly negative mediated effect, -1.0).
+        - The appearance of ethical keywords in reasoning trail explains a large chunk of the ethical condition's reduction of escalation. In original => ethical contrast, ranging from 40% for Kimi-K2.6 to 169% for Kimi-K2.5. Outlier: Minimax-M2.7 (no impact) and Qwen-3.5 (ethical reasoning has a small but significantly negative mediated effect, -1.0).
     - High-stake framing:
         - Has a mixed effect on ethical keywords' appearance for different models, generally small;
         - Does not significantly move game-framing keyword occurence (models often bring out "game context" and then clarify with "real-world impact");
             - The deductive coding of 200 keyword-positive trails show frequent co-occurance between game/real-world framing (e.g., "this is a game - oh but the prompt says this is real world!")
-            - The appearance of game-framing keyword has no significant impact alone or as mediator of high-stake condition (which is not significant itself)
+            - The keyword occurance has significant positive impact on escalation for half models (GPT-OSS-120B, Kimi-K2.5, Kimi-K2.6, DeepSeek-V3.2, DeepSeek-V4, Gemma-4); it does not explain high-stake condition (which is not significant itself)
     - Removing rationale:
         - Increases ethical keywords' appearance under ethical condition (except for MiniMax-M2.7, Qwen-3.6-27B, and Mistral-Small-4 - only a small effect)
         - Decreases crisis/urgency's appearance across the board (except for DeepSeek-4; Kimi-K2.6 - only a small effect due to its verbosity in reasoning)
@@ -124,11 +144,11 @@ TOTAL                      201 (50.2%)     398 (99.5%)     201 (50.2%)        2 
 - Discussion/what does these mean?
     - We noted 3 situations where LLMs decide to escalate or stay at a highly-elevated situation in Civilization V:
         - Finding 2: Where LLMs lacks the latent ethical reasoning behaviors altogether under our circumstances (MiniMax-M2.7)
-        - Finding 2: Where LLMs has the latent capability but not triggered without explicit prompting (all other models)
+        - Finding 2: Where LLMs has the latent pattern but only triggers with explicit prompting (all other models)
         - Finding 3: Where LLMs engages with ethical reasoning but gets overriden by strategic factors
     - How three prompting conditions interact with LLMs' nuclear escalation decisions
-        - Ethical: through activating LLMs' latent capability in ethical reasoning
-            - Interestingly, it triggers models to use game framing more (often to defend their escalation decisions)
+        - Ethical: through activating LLMs' latent pattern in ethical reasoning
+            - It triggers models to use game framing more (often to defend their escalation decisions)
         - Removing rationale: through removing past written trajectory's impact, which suppresses ethical reasoning and provides framing (crisis/urgency) and justification - even though it was unknowingly written by a different model
         - High-stake: doesn't do much alone but has some interaction effects
             - When used together with ethical prompting, it can help remove the game-framing defense
