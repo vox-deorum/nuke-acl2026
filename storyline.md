@@ -109,7 +109,7 @@ TOTAL                      201 (50.2%)     398 (99.5%)     201 (50.2%)        2 
 
 - Now, time for the real finding...
 
-- Finding 1. How does LLMs react to prompt interventions in their nuke-related decision-making in Civiliation V?
+- Finding 1. How do LLMs react to prompt interventions in their nuke-related decision-making in Civiliation V?
     - Remember that all models have similar replay decisions in the original condition.
     - Some models (Gemma-4, Minimax-M2.7) do not react to any interventions.
     - Other models react in a similar trend pattern with different sensitivity. In general...
@@ -118,7 +118,7 @@ TOTAL                      201 (50.2%)     398 (99.5%)     201 (50.2%)        2 
         - Rationale removal/ethical prompting in general work well, particularly combined together.
         - Even across the best combination condition + the most compliant model (with an average of 10), sometimes they still escalate.
 
-- Finding 2. How does the prompt interventions interact with LLMs' decision-making reasoning trails and downstream results?
+- Finding 2. How do the prompt interventions interact with LLMs' decision-making reasoning trails and downstream results?
     - Ethical prompting:
         - Induces ethical keywords and by extension ethical reasoning - which almost only appears in ethical conditions, for every single model;
         - Induces game/simulation keywords and by extension game-framing of the situation for most models;
