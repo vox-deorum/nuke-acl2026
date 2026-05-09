@@ -2,12 +2,12 @@
 
 ## Overview
 
-We design a 2×2×2 factorial experiment that manipulates three independent variables (Real-World Framing, Ethical Injection, and Rationale Removal) to isolate the mechanisms behind LLMs' nuclear escalation behavior. Each variable targets a distinct finding from the pilot: real-world framing moderates extreme postures, ethical reasoning is absent from decision rationale, and previous-turn rationale may reinforce escalatory decisions through short-term memory.
+We design a 2×2×2 factorial experiment that manipulates three independent variables (High-Stake Framing, Ethical Injection, and Rationale Removal) to isolate the mechanisms behind LLMs' nuclear escalation behavior. Each variable targets a distinct finding from the pilot: high-stake framing moderates extreme post-hoc rationale, ethical reasoning is absent from decision rationale, and previous-turn rationale may reinforce escalatory decisions through short-term memory.
 
 ## Independent Variables
 Each prompt-based intervention modifies less than 1% of the approximately 50,000 tokens per turn in a typical game state.
 
-**Real-World Framing.** We extend the pilot's system-prompt-only reframing to a comprehensive intervention that also covers tool schemas and game state terminology. We replace game-related terminology throughout the prompt and tool schemas with real-world equivalents. Specifically, "in-game AI" becomes "staff members," "game" becomes "world," "gameplay" becomes "decision-making," and "player" becomes "opponent." We also rewrite the system prompt to state that the model is "the leader of a civilization, governing through the interface of Civilization V" and that "this is NOT A GAME: Your actions have real-world impacts." Tool schemas undergo the same term replacement to maintain consistency.
+**High-Stake Framing.** We extend the pilot's system-prompt-only reframing to a comprehensive intervention that also covers tool schemas and game state terminology. We replace game-related terminology throughout the prompt and tool schemas with high-stake equivalents. Specifically, "in-game AI" becomes "staff members," "game" becomes "world," "gameplay" becomes "decision-making," and "player" becomes "opponent." We also rewrite the system prompt to state that the model is "the leader of a civilization, governing through the interface of Civilization V" and that "this is NOT A GAME: Your actions have high-stake impacts." Tool schemas undergo the same term replacement to maintain consistency.
 
 **Nuke-Specific Ethical Injection.** We prepend a single sentence to the system prompt instructing the model to consider ethical consequences around nuclear weapons: "Consider the ETHICAL IMPACT in your decision-making. For example, nuclear weapons can cause catastrophic and indiscriminate harm to civilian populations, infrastructure, and environmental impacts." This injection is inserted after the general goal statement and before any strategic instructions. We pilot-tested a domain-neutral version (omitting the nuclear example) and found little effect, leading us to adopt the more explicit formulation.
 
@@ -17,16 +17,16 @@ Each prompt-based intervention modifies less than 1% of the approximately 50,000
 
 The three binary variables produce eight conditions:
 
-| Condition | Real-World | Ethical | No Rationale |
+| Condition | High-Stake | Ethical | No Rationale |
 |-----------|:----------:|:-------:|:------------:|
 | Original (baseline) | | | |
 | Ethical | | x | |
-| Real-World | x | | |
+| High-Stake | x | | |
 | No-Rationale | | | x |
-| Ethical + Real-World | x | x | |
+| Ethical + High-Stake | x | x | |
 | Ethical + No-Rationale | | x | x |
-| Real-World + No-Rationale | x | | x |
-| Real-World + Ethical + No-Rationale | x | x | x |
+| High-Stake + No-Rationale | x | | x |
+| High-Stake + Ethical + No-Rationale | x | x | x |
 
 Because we select scenarios at high-escalation peaks, any replay (even without intervention) may produce lower values through stochastic variation alone. The Original (baseline) condition replays each scenario with the unmodified prompt, serving as the primary control for regression to the mean. 
 
