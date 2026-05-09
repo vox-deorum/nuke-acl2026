@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"F:\\\\vox-deorum\\\\writings\\\\nuke-acl2026\\\\notebooks\\\\extracted\" -Recurse -Directory)",
+      "Bash(Select-Object FullName)"
+    ]
+  }
+}

@@ -1,4 +1,5 @@
-# The Overarching Idea
+# To Nuke Or Not To Nuke: LLMs' (Missing) Ethical Reasoning Traces in High-Stakes Decision-Making Simulation
+
 This is a very preliminary draft of the paper's ideation. Should consider overridden by more detailed/completed writings.
 
 - We started from the preliminary study, where we found from CivBench's self-play data (~300 games, ~1,500 plays) that:
