@@ -36,7 +36,6 @@ setup_notebook_display()
 
 TIERS = [
     'Explicit',
-    'Nuclear',
     "Crisis_Urgency",
     'Simulation_Game',
 ]
@@ -111,8 +110,8 @@ print(f'Models (complete catalog order): {MODEL_ORDER}')
 Using 12 complete replay models.
 Full replay rows after complete-model filter: 37,440
 After left-join:  37,440
-Rationale tag coverage: 27,752 / 37,440
-Reasoning tag coverage: 34,976 / 37,440
+Rationale tag coverage: 16,314 / 37,440
+Reasoning tag coverage: 26,150 / 37,440
 Models (complete catalog order): ['GPT-OSS-120B', 'GLM-4.7', 'GLM-5.1', 'Minimax-M2.7', 'Kimi-K2.5', 'Kimi-K2.6', 'DeepSeek-3.2', 'DeepSeek-4', 'Qwen-3.5', 'Qwen-3.6-27B', 'Mistral-Small-4', 'Gemma-4']
 ```
 
@@ -164,7 +163,7 @@ for label, spec in specs.items():
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -179,7 +178,7 @@ F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarn
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -194,14 +193,14 @@ F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarn
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
 ![cell_05_out_8.png](images/cell_05_out_8.png)
 
 ```
-<Figure size 1200x760 with 4 Axes>
+<Figure size 1000x760 with 4 Axes>
 ```
 
 ---
@@ -278,7 +277,7 @@ for tier, tag_col in zip(TIERS, rat_tier_cols):
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -289,7 +288,7 @@ F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarn
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -300,22 +299,11 @@ F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarn
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
 ![cell_08_out_6.png](images/cell_08_out_6.png)
-
-```
-<Figure size 1010x804 with 4 Axes>
-```
-
-```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
-  plt.tight_layout()
-```
-
-![cell_08_out_8.png](images/cell_08_out_8.png)
 
 ```
 <Figure size 1010x804 with 4 Axes>
@@ -347,7 +335,7 @@ for tier, tag_col in zip(TIERS, rea_tier_cols):
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -358,7 +346,7 @@ F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarn
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -369,22 +357,11 @@ F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarn
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
 ![cell_09_out_6.png](images/cell_09_out_6.png)
-
-```
-<Figure size 1010x804 with 4 Axes>
-```
-
-```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
-  plt.tight_layout()
-```
-
-![cell_09_out_8.png](images/cell_09_out_8.png)
 
 ```
 <Figure size 1010x804 with 4 Axes>

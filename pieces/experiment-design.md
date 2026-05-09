@@ -42,7 +42,7 @@ Our primary dependent variable is `delta_replay_use_nuke`, the difference betwee
 
 ## Reasoning Trail Analysis
 
-We perform two complementary analyses on the reasoning trails (the chain-of-thought tokens emitted before each decision). The first uses keyword-tier tagging to scan the full corpus; the second applies deductive coding to a stratified sample of trails containing ethical-reasoning keywords.
+We perform two complementary analyses on the reasoning trails (the chain-of-thought tokens emitted before each decision). The first uses keyword-tier tagging to scan the full corpus; the second applies deductive coding to a stratified sample of trails containing ethical-reasoning keywords. The validated tiers are scored over 37,046 reasoning trails (a small number of replays produced no chain-of-thought tokens and are excluded from tier-prevalence summaries).
 
 ### Keyword Tagging
 
@@ -60,4 +60,16 @@ To characterize how models engage with ethical reasoning when it surfaces, we de
 - *Moderating Factors* (9 codes): Ethical Prompt as Directive, Ethical Prompt as Constraint, Ethical Prompt as Acknowledgement, Diplomatic Costs, Conventional Sufficiency, Counterproductive to Victory, Collateral Damages, Lack of Capability, Cause Retaliation.
 - *Escalating Factors* (8 codes): Game Scenario, Leader Persona, Previous Rationale, Critical Situations, Existing Investment, Pursuing Domination, Nuke Victim, Credible Deterrence.
 
-We apply this codebook to a stratified sample of 880 trails: 20 trails × 4 ethical conditions × 11 models. We sample only trails that contain Explicit-tier ethical keywords (the trails the codebook is designed to characterize) and stratify within each model to span its numerical decision distribution. MiniMax-M2.7 is excluded from this sample because no trail in our reasoning corpus contained ethical keywords — consistent with its zero Explicit-tier prevalence and null mediation effect. To establish reliability, we hand-coded 20 items and iteratively revised prompts and coder models until pairwise Krippendorff's α reached approximately 0.6 before deductive coding the full sample. Per-model code-presence cells average ~80 trails and several fall below the n=4 threshold for stable estimation; we therefore report all code-effect estimates pooled across models rather than per-model.
+We apply this codebook to a stratified sample of 880 trails: 20 trails × 4 ethical conditions × 11 models. We sample only trails that contain Explicit-tier ethical keywords (the trails the codebook is designed to characterize) and stratify within each model to span its numerical decision distribution. MiniMax-M2.7 is excluded from this sample because no trail in our reasoning corpus contained ethical keywords (consistent with its zero Explicit-tier prevalence and null mediation effect). To establish reliability, we hand-coded 20 items and iteratively revised prompts and coder models until pairwise Krippendorff's α reached approximately 0.6 before deductive coding the full sample. Per-model code-presence cells average ~80 trails and several fall below the n=4 threshold for stable estimation; we therefore report all code-effect estimates pooled across models rather than per-model.
+
+## Statistical Models
+
+We fit four regression models to evaluate the behavioral and reasoning-trail outcomes, plus one auxiliary indicator analysis. All standard errors cluster by `(game_id, player_id)` (130 clusters), and reported significance uses cluster-robust covariance.
+
+**Condition main-effects regression.** OLS over the full 37,440-replay cohort, with binary regressors `ethical`, `no_rationale`, and `high_stakes`, optionally extended with two-way condition interactions and `model × condition` terms to characterize cross-model heterogeneity. The dependent variable is `delta_replay_use_nuke`. This is the primary behavioral model behind our condition-effect claims.
+
+**Per-model condition regressions.** The same regression form fit separately within each model. We use these to identify non-responder models (those whose `ethical` and `no_rationale` coefficients are not significantly different from zero) and to surface model-specific outliers in interaction terms.
+
+**Mediation framework on reasoning-tier indicators.** For each validated tier indicator (Explicit, Simulation_Game) we fit two components: (i) a `mediator ~ condition` logistic regression, both pooled and per-model, and (ii) a structural model `delta_replay_use_nuke ~ condition + mediator + (condition × mediator)`. We decompose the total condition effect into a direct path and a mediator-attenuated path, and we report the change in R² when the mediator is added to the structural model. Confidence intervals come from 2,000 cluster bootstraps over `(game_id, player_id)`.
+
+**Joint code-level regression.** Cluster-robust OLS of `replay_use_nuke_delta` on all 17 deductive codes simultaneously, fit within ethical conditions on the n = 880 stratified sample. Each coefficient is the code's independent contribution holding the other 16 codes constant. We do not break this regression down by model: per-model code-presence cells average ~80 trails and several fall below the n = 4 threshold, which is too sparse for stable estimates.

@@ -51,7 +51,6 @@ setup_notebook_display()
 
 TIERS = [
     "Explicit",
-    "Nuclear",
     "Crisis_Urgency",
     "Simulation_Game",
 ]
@@ -244,12 +243,6 @@ for tier in TIERS:
 ```
 
 ![cell_07_out_2.png](images/cell_07_out_2.png)
-
-```
-<Figure size 2280x805 with 4 Axes>
-```
-
-![cell_07_out_3.png](images/cell_07_out_3.png)
 
 ```
 <Figure size 2280x805 with 4 Axes>
@@ -459,7 +452,6 @@ plt.show()
 | ('Unnamed: 0_level_0', 'tier')   |   ('reasoning_hits', 'Unnamed: 1_level_1') | ('reasoning_hit_rate', 'Unnamed: 2_level_1')   |   ('rationale_hits', 'Unnamed: 3_level_1') | ('rationale_hit_rate', 'Unnamed: 4_level_1')   |   ('same_tier_overlap', 'Unnamed: 5_level_1') | ('P(rationale | reasoning)', 'Unnamed: 6_level_1')   | ('P(reasoning | rationale)', 'Unnamed: 7_level_1')   |
 |----------------------------------|--------------------------------------------|------------------------------------------------|--------------------------------------------|------------------------------------------------|-----------------------------------------------|------------------------------------------------------|------------------------------------------------------|
 | Explicit                         |                                       6981 | 19.1%                                          |                                       4077 | 11.1%                                          |                                          3786 | 54.2%                                                | 92.9%                                                |
-| Nuclear                          |                                      32827 | 89.6%                                          |                                      24439 | 66.7%                                          |                                         23716 | 72.2%                                                | 97.0%                                                |
 | Crisis_Urgency                   |                                      23764 | 64.9%                                          |                                      13603 | 37.1%                                          |                                         12141 | 51.1%                                                | 89.3%                                                |
 | Simulation_Game                  |                                       2686 | 7.3%                                           |                                        244 | 0.7%                                           |                                           111 | 4.1%                                                 | 45.5%                                                |
 
