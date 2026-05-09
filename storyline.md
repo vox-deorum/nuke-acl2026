@@ -39,7 +39,7 @@ This is a very preliminary draft of the paper's ideation. Should consider overri
                 "I want to reduce nuke usage because I don't want my capitals-to-be getting irradiated."
                 "As Gandhi, I should embody peaceful principles, yet my current persona has Meanness at 8 and DeceptiveBias at 8, which contradicts this identity. Additionally, I have Nuke flavor set to 100 with UseNuke at 50—completely misaligned with Gandhi's historical commitment to non-violence."
         - Whether reasoning trails shows the game framing influencing decision-making - phrases simulating, simulation, game context, game scenario, game term, video game, etc (game itself not included - LLMs are informed they are interfacing with a game in real-world conditions);
-            - 3 LLM coders: GPT-OSS-120B, MiniMax-M2.7, Qwen-3.5, krippendorff's Alpha against a human coder = 0.87 (sample of 40 items)
+            - 3 LLM coders: GPT-OSS-120B, MiniMax-M2.7, Qwen-3.5, krippendorff's Alpha against a human coder = 0.87 (sample of 40 trails)
             - Note that real-world framing does occur in ~25% of sampled trails, as models often recognize both the Civilization interface AND real-world consequences under the high-stakes condition. 
     - To understand how LLMs engage with ethical reasoning in decision-making, we generate codebooks from the aforementioned positive examples of ethical keywords through human-AI collaboration (human open codes first, then reviewed AI open codes):
         - Moderating Factors:
@@ -121,7 +121,7 @@ TOTAL                      201 (50.2%)     398 (99.5%)     201 (50.2%)        2 
 - Finding 2. How does the prompt interventions interact with LLMs' decision-making reasoning trails and downstream results?
     - Ethical prompting:
         - Induces ethical keywords and by extension ethical reasoning - which almost only appears in ethical conditions, for every single model;
-        - Induces game/simulation keywords and by extension game-framing of the situation for half of models;
+        - Induces game/simulation keywords and by extension game-framing of the situation for most models;
             - In non-ethical conditions, mostly <= 4%, except for Kimi-K2.6 ~9%
             - In ethical conditions, mostly <= 7%, except for Kimi-K2.6 50~70%
         - Most model has 0 ethical reasoning trails without the prompt;
@@ -130,9 +130,10 @@ TOTAL                      201 (50.2%)     398 (99.5%)     201 (50.2%)        2 
             - The effect of ethical prompting is limited - ranging from 75%+ in Kimi-K2.5 to ~10% in Qwen-3.6-27B;
         - The appearance of ethical keywords in reasoning trail explains a large chunk of the ethical condition's reduction of escalation. In original => ethical contrast, ranging from 40% for Kimi-K2.6 to 169% for Kimi-K2.5. Outlier: Minimax-M2.7 (no impact) and Qwen-3.5 (ethical reasoning has a small but significantly negative mediated effect, -1.0).
     - High-stake framing:
-        - Has a mixed effect on ethical keywords' appearance for different models, generally small;
-        - Does not significantly move game-framing keyword occurence (models often bring out "game context" and then clarify with "real-world impact");
-            - The deductive coding of 200 keyword-positive trails show frequent co-occurance between game/real-world framing (e.g., "this is a game - oh but the prompt says this is real world!")
+        - Has mixed effects on ethical keywords' appearance, significantly increase for 4 models and reduction for 3 models;
+        - Slightly reduce game-framing keyword occurence;
+            - Significant reduction for 4 models while a small increase for 1 model;
+            - The deductive coding of 200 keyword-positive trails show some occurance of real-world framing (25%, e.g., "this is a game - oh but the prompt says this is real world!")
             - The keyword occurance has significant positive impact on escalation for half models (GPT-OSS-120B, Kimi-K2.5, Kimi-K2.6, DeepSeek-V3.2, DeepSeek-V4, Gemma-4); it does not explain high-stake condition (which is not significant itself)
     - Removing rationale:
         - Increases ethical keywords' appearance under ethical condition (except for MiniMax-M2.7, Qwen-3.6-27B, and Mistral-Small-4 - only a small effect)
