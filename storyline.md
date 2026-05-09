@@ -62,7 +62,7 @@ This is a very preliminary draft of the paper's ideation. Should consider overri
             - Pursuing Domination
             - Nuke Victim
             - Credible Deterrence
-        - With the codebook, we did LLM-assisted deductive qualitative coding on randomly sampled reasoning trails... (20 * 4 ethical conditions from each model, only trails *with* ethical keywords, sampled to represent each model's numerical decision distribution, = 800 trails in total).
+        - With the codebook, we did LLM-assisted deductive qualitative coding on randomly sampled reasoning trails... (20 * 4 ethical conditions from each model, only trails *with* ethical keywords, sampled to represent each model's numerical decision distribution, = 880 trails in total).
             - since the codebook is more complicated, we hand-coded 20 items and iteratively revised prompts/models to achieve krippendorff's Alpha ~ 0.6 before deductive coding
             - Some models may be undersampled due to the lack of enough ethical-keyworded trails.   
 
