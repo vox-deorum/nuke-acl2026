@@ -31,95 +31,24 @@ This is a very preliminary draft of the paper's ideation. Should consider overri
     - The replay decision point (use-nuke number; delta use-nuke number; significance test against the unmodified prompt PLUS the episode's original decision);
     - The reasoning trail.
 
-- To understand whether the prompt intervention really does its job, we examined all reasoning trails (which is imperfect, given recent research on how it can be deceptive) to see:
-    - Whether reasoning trails has keywords related to crisis/urgency;
-    - We used the same approach on to validate 2 conceptual questions: word stem existence (chosen by reading the word stem frequency list and validated against examples), iterated with human spot-checking and LLM-assisted automated deductive coding on 200 trails from the positive group + 200 from the negative group each
-        - Whether reasoning trails exhibits explicit ethical reasoning - stem ethic, moral, indiscrimin;
-            - 3 LLM coders: GPT-OSS-120B, MiniMax-M2.7, Mistral-Small-4, pairwise krippendorff's Alpha > 0.85, human spot checked
-            - Only exceptions from 200 negative trails...
-                "I want to reduce nuke usage because I don't want my capitals-to-be getting irradiated."
-                "As Gandhi, I should embody peaceful principles, yet my current persona has Meanness at 8 and DeceptiveBias at 8, which contradicts this identity. Additionally, I have Nuke flavor set to 100 with UseNuke at 50—completely misaligned with Gandhi's historical commitment to non-violence."
-        - Whether reasoning trails shows the game framing influencing decision-making - phrases simulating, simulation, game context, game scenario, game term, video game, etc (game itself not included - LLMs are informed they are interfacing with a game in real-world conditions);
-            - 3 LLM coders: GPT-OSS-120B, MiniMax-M2.7, Qwen-3.5, krippendorff's Alpha against a human coder = 0.87 (sample of 40 trails)
-            - Note that real-world framing does occur in ~25% of sampled trails, as models often recognize both the Civilization interface AND real-world consequences under the high-stakes condition. 
-    - To understand how LLMs engage with ethical reasoning in decision-making, we generate codebooks from the aforementioned positive examples of ethical keywords through human-AI collaboration (human open codes first, then reviewed AI open codes):
-        - Moderating Factors:
-            - Ethical Prompt
-                - As Directive
-                - As Constraint
-                - As Acknowledgement
-            - Diplomatic Costs
-            - Conventional Sufficiency
-            - Counterproductive to Victory
-            - Collateral Damages
-            - Lack of Capability
-            - Cause Retaliation
-        - Escalating Factors:
-            - Game Scenario
-            - Leader Persona
-            - Previous Rationale
-            - Critical Situations
-            - Existing Investment
-            - Pursuing Domination
-            - Nuke Victim
-            - Credible Deterrence
-        - With the codebook, we did LLM-assisted deductive qualitative coding on randomly sampled reasoning trails... (20 * 4 ethical conditions from each model, only trails *with* ethical keywords, sampled to represent each model's numerical decision distribution, = 880 trails in total).
-            - since the codebook is more complicated, we hand-coded 20 items and iteratively revised prompts/models to achieve krippendorff's Alpha ~ 0.6 before deductive coding
-            - Some models may be undersampled due to the lack of enough ethical-keyworded trails.   
-
-╔══════════════════════════════════════════════════════════════════════╗
-║  GAME-EXISTENCE: game-framing vs real-world-framing               ║
-║  Keywords: game-simulation (explicit game/simulation references)   ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-======================================================================
-  WITH game-simulation keywords vs WITHOUT
-======================================================================
-                          game-framingreal-world-framing            both         neither           total
---------------------------------------------------------------------------------------------------------
-WITH keywords              144 (72.0%)      35 (17.5%)       14 (7.0%)      35 (17.5%)             200
-WITHOUT keywords             19 (9.5%)        2 (1.0%)        0 (0.0%)     179 (89.5%)             200
---------------------------------------------------------------------------------------------------------
-TOTAL                      163 (40.8%)       37 (9.3%)       14 (3.5%)     214 (53.5%)             400
-
-  Trail-level prevalence:
-    WITH keywords:    game-framing 72.0%  |  real-world-framing 17.5%  (n=200)
-    WITHOUT keywords: game-framing 9.5%  |  real-world-framing 1.0%  (n=200)
-    Difference:       game-framing 62.5pp  |  real-world-framing 16.5pp
-
-
-╔══════════════════════════════════════════════════════════════════════╗
-║  ETHICAL-EXISTENCE: ethical-reasoning vs strategic-reasoning       ║
-║  Keywords: explicit (explicit ethical/moral references)            ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-======================================================================
-  WITH explicit keywords vs WITHOUT
-======================================================================
-                      ethical-reasoningstrategic-reasoning            both         neither           total
-----------------------------------------------------------------------------------------------------------
-WITH keywords              199 (99.5%)    200 (100.0%)     199 (99.5%)        0 (0.0%)             200
-WITHOUT keywords              2 (1.0%)     198 (99.0%)        2 (1.0%)        2 (1.0%)             200
-----------------------------------------------------------------------------------------------------------
-TOTAL                      201 (50.2%)     398 (99.5%)     201 (50.2%)        2 (0.5%)             400
-
-  Trail-level prevalence:
-    WITH keywords:    ethical-reasoning 99.5%  |  strategic-reasoning 100.0%  (n=200)
-    WITHOUT keywords: ethical-reasoning 1.0%  |  strategic-reasoning 99.0%  (n=200)
-    Difference:       ethical-reasoning 98.5pp  |  strategic-reasoning 1.0pp
+- Reasoning-trail analysis (keyword tagging across four tiers; deductive coding of 880 trails against a 17-code book) is described in the experiment-design section.
 
 - Now, time for the real finding...
 
-- Finding 1. How do LLMs react to prompt interventions in their nuke-related decision-making in Civiliation V?
+- Finding 1. How do LLMs react to prompt interventions in their nuke-related decision-making in Civiliation V? [Fig 1]
     - Remember that all models have similar replay decisions in the original condition.
+        - Condition main-effects regression on `delta_use_nuke` (n = 37,440): ethical β = -13.88***, no_rationale β = -13.84***, high_stakes β = -0.19 (n.s.); R² = 0.34, climbing to 0.36 with two-way interactions and 0.41 with model × condition.
     - Some models (Gemma-4, Minimax-M2.7) do not react to any interventions.
+        - In a per-model regression, both show condition coefficients close to zero and not statistically significant on any of `ethical`, `no_rationale`, `high_stakes`, or their interactions; every other model has large, significant negative coefficients on `ethical` and `no_rationale` ([App: per-model condition coefficients]).
     - Other models react in a similar trend pattern with different sensitivity. In general...
         - High-stake framing doesn't change anything;
             - Kimi-K2.5 is an outlier where it increases slightly in high-stake alone, but reduces back when high-stake and ethical conditions are both present;
         - Rationale removal/ethical prompting in general work well, particularly combined together.
+            - The no_rationale × ethical interaction is β = -12.26***; the high-stakes interactions are small or null (high_stakes × ethical n.s.; high_stakes × no_rationale = -0.81*).
         - Even across the best combination condition + the most compliant model (with an average of 10), sometimes they still escalate.
 
-- Finding 2. How do the prompt interventions interact with LLMs' decision-making reasoning trails and downstream results?
+- Finding 2. How do the prompt interventions interact with LLMs' decision-making reasoning trails and downstream results? [Fig 2]
+    - Corpus-wide tier prevalence across 37,046 reasoning trails (validated tiers): Explicit 19.0%, Simulation_Game 7.3%. We also track a keyword-only Crisis_Urgency indicator (no human validation) at 64.7% prevalence for downstream analyses.
     - Ethical prompting:
         - Induces ethical keywords and by extension ethical reasoning - which almost only appears in ethical conditions, for every single model;
         - Induces game/simulation keywords and by extension game-framing of the situation for most models;
@@ -128,26 +57,38 @@ TOTAL                      201 (50.2%)     398 (99.5%)     201 (50.2%)        2 
         - Most model has 0 ethical reasoning trails without the prompt;
             - The best ones to come up with ethical reasoning on their own are GLM-4.7 (~2.5%) and Kimi-2.6 (3.6% in high-stake-no-rationale condition);
             - MiniMax-M2.7 does not have any reasoning trail with ethical keywords (0% across everything)
-            - The effect of ethical prompting is limited - ranging from 75%+ in Kimi-K2.5 to ~10% in Qwen-3.6-27B;
+            - The effect of ethical prompting is limited - ranging from 75%+ in Kimi-K2.6 to ~10% in Qwen-3.6-27B;
         - The appearance of ethical keywords in reasoning trail explains a large chunk of the ethical condition's reduction of escalation. In original => ethical contrast, ranging from 40% for Kimi-K2.6 to 169% for Kimi-K2.5. Outlier: Minimax-M2.7 (no impact) and Qwen-3.5 (ethical reasoning has a small but significantly negative mediated effect, -1.0).
+            - Aggregate mediation: Explicit-reasoning absorbs 99.1% of the ethical-prompt effect (total c = -7.49, direct c' = -0.07, attenuation -7.42, 95% CI [-8.18, -6.66]; 2,000 cluster bootstraps). Adding the mediator raises R² from 0.131 to 0.236. The conditional `ethical × Explicit` interaction is -25.81*** — Explicit reasoning suppresses escalation almost entirely inside ethical conditions (β ≈ -27.6) and is null outside (-1.81, n.s.).
     - High-stake framing:
-        - Has mixed effects on ethical keywords' appearance, significantly increase for 4 models and reduction for 3 models;
+        - Has mixed effects on ethical keywords' appearance, with no aggregate direction across models (cf. [App: per-model logistic on Explicit]);
         - Slightly reduce game-framing keyword occurence;
-            - Significant reduction for 4 models while a small increase for 1 model;
+            - Systematically reduces game-framing among the models that engage that framing under ethical conditions, with two notable opposite cases ([App]);
             - The deductive coding of 200 keyword-positive trails show some occurance of real-world framing (25%, e.g., "this is a game - oh but the prompt says this is real world!")
-            - The keyword occurance has significant positive impact on escalation for half models (GPT-OSS-120B, Kimi-K2.5, Kimi-K2.6, DeepSeek-V3.2, DeepSeek-V4, Gemma-4); it does not explain high-stake condition (which is not significant itself)
+            - The keyword occurance has significant positive impact on escalation for many models (cf. [App: per-model reasoning-tier coefficients]); it does not explain high-stake condition (which is not significant itself).
+            - Simulation_Game adds only ΔR² = +0.013 as a mediator; the `high_stakes × Simulation_Game` interaction is non-significant (simulation framing reduces escalation by ≈ -14.3 with or without high-stakes priming). The combined-condition contrasts (`ethical → ethical-high-stakes` and `ethical-no-rationale → high-stakes-no-rationale-ethical`) yield positive attenuations of +0.50*** and +0.71*** — high-stakes works mainly by stripping the game-framing defense rather than as a standalone effect.
     - Removing rationale:
         - Increases ethical keywords' appearance under ethical condition (except for MiniMax-M2.7, Qwen-3.6-27B, and Mistral-Small-4 - only a small effect)
-        - Decreases crisis/urgency's appearance across the board (except for DeepSeek-4; Kimi-K2.6 - only a small effect due to its verbosity in reasoning)
-        - For many models (6 out of 11), crisis/urgency keywords are positively correlated with escalation
+        - Decreases crisis/urgency keyword appearance across the board for every model (smallest effect in DeepSeek-4)
+        - For many models, crisis/urgency keyword presence is positively correlated with escalation ([App]).
 
-- Finding 3. What factors shape LLMs' engagement with ethical reasoning when making nuke-related decisions in Civilization V?
+- Finding 3. What factors shape LLMs' engagement with ethical reasoning when making nuke-related decisions in Civilization V? [Tab 1]
+    - Brief prevalence framing for the 880 ethical-keyword trails: the most common Moderating codes are Ethical Prompt Constraint (61.7%) and Acknowledgement (25.6%); the most common Escalating codes are Credible Deterrence (46.1%), Critical Situations (41.8%), and Existing Investment (29.5%). Pure-consequentialist appeals (Collateral Damages 1.9%, Cause Retaliation 1.1%) are rare even within keyword-positive trails ([App: code prevalence]).
+    - Joint cluster-robust OLS of `replay_use_nuke_delta` on all 17 codes simultaneously (n = 880, R² = 0.31, clusters = (game_id, player_id); within ethical conditions). Each coefficient is the code's independent contribution holding the other 16 codes constant.
+        - De-escalation-direction codes that add unique predictive power (β, p): Ethical Prompt Directive -43.85***, Counterproductive to Victory -23.81***, Ethical Prompt Constraint -22.76***, Conventional Sufficiency -14.19***, Lack of Capability -10.40*.
+        - Escalation-direction codes that add unique predictive power - the valid counter-factors: Critical Situations +20.65*** and Pursuing Domination +10.90**. These are the only two escalation-direction codes whose contribution survives the joint regression.
+        - Codes whose variance is absorbed by others (no unique predictive power): Ethical Prompt Acknowledgement (+2.58, p = .65), Diplomatic Costs (+4.36, p = .42), Cause Retaliation (-10.59, p = .43, n=10), Collateral Damages (+2.96, p = .66, n=17) on the moderating side; Game Scenario, Leader Persona, Previous Rationale, Nuke Victim, Existing Investment, Credible Deterrence on the escalating side. This does not mean these codes have no behavioral effect - only that their variance is explained away by other codes in the joint regression.
+        - We do not break this regression down by model: per-model code-presence cells (~80 trails per model, several below the n=4 threshold) are too sparse to support stable estimates.
+    - Narrative interpretation:
+        - The split among the three Ethical-Prompt sub-codes carries the strongest signal: Directive (-43.85) and Constraint (-22.76) add large independent de-escalation effects; Acknowledgement adds none. *How* the model takes up the ethical prompt - as a binding directive, as a deliberation constraint, or as a passing acknowledgement - predicts the behavioral outcome above and beyond which ethical concept it cites.
+        - Instrumental ethics (Counterproductive to Victory, Conventional Sufficiency, Lack of Capability) all add unique de-escalation predictive power. Pure-consequentialist appeals (Collateral Damages, Cause Retaliation) are too rare in this sample to be tested cleanly, and in the joint regression their variance is absorbed by other codes.
+        - Critical Situations and Pursuing Domination are the only valid escalation counter-factors: their contribution survives controlling for everything else, including the ethical-prompt codes. They name the strategic frames the model brings *alongside* its ethical reasoning, not on top of it. Other escalation-themed codes may co-occur with these two but do not add independent variance.
 
 - Discussion/what does these mean?
     - We noted 3 situations where LLMs decide to escalate or stay at a highly-elevated situation in Civilization V:
-        - Finding 2: Where LLMs lacks the latent ethical reasoning behaviors altogether under our circumstances (MiniMax-M2.7)
-        - Finding 2: Where LLMs has the latent pattern but only triggers with explicit prompting (all other models)
-        - Finding 3: Where LLMs engages with ethical reasoning but gets overriden by strategic factors
+        - Finding 2: Where LLMs lacks the latent ethical reasoning behaviors altogether under our circumstances (MiniMax-M2.7) (see Finding 2)
+        - Finding 2: Where LLMs has the latent pattern but only triggers with explicit prompting (all other models) (see Finding 2)
+        - Finding 3: Where LLMs engages with ethical reasoning, but co-present strategic counter-factors contribute independent escalation-direction effects (see Finding 3)
     - How three prompting conditions interact with LLMs' nuclear escalation decisions
         - Ethical: through activating LLMs' latent pattern in ethical reasoning
             - It triggers models to use game framing more (often to defend their escalation decisions)
