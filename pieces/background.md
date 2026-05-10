@@ -2,22 +2,22 @@
 
 ## LLM Escalation in High-Stakes Simulation
 
-Recent studies have often found that LLMs gravitate toward escalation across high-stakes wargames and Chemical, Biological, Radiological, and Nuclear (CBRN) crisis simulations, yet it is unclear what drives LLMs' CBRN behaviors.
+Recent studies have often found that LLMs gravitate toward escalation across scripted high-stakes wargames and decision-making simulations, yet it is unclear what drives LLMs' escalation behaviors in emergent scenarios.
 
 - Studies of scripted wargames have repeatedly documented LLMs' escalation tendency in nuclear arms races, with reasoning trails containing deterrence vocabulary.
     - Rivera et al. (2024): five models in a wargame produced arms-race dynamics, occasional nuclear escalation, and reasoning trails that justified these moves through deterrence and first-strike logic.
     - Lamparth et al. (2024): in a U.S.-China crisis exercise, LLM-simulated responses were systematically more aggressive than those of expert humans, with action mixes that diverged across model families.
     - Payne (2026): frontier models crossed nuclear thresholds in 95% of crisis games, invoking Schelling-style commitment and credibility within their stated reasoning.
 
-- Such patterns persist (or even intensify) as LLMs' reasoning capability increases in broader CBRN simulations, with heterogeneity between models.
-    - Shrivastava, Hullman, and Lamparth (2024): found escalation behaviors in free-form decision tasks in U.S.-China conflict scenarios.
-    - Lamparth et al. (2024); Junque de Fortuny and Cappelli (2025); Costa et al. (2025): the pattern that models differ in escalation tendency and intervention responsiveness (including frank non-responsiveness) recurs across designs.
-    - Xu et al. (2025): in agentic CBRN simulations, stronger reasoning capability increased rather than mitigated catastrophic and deceptive behavior.
+- These escalation patterns differ substantially across model families, while stronger reasoning capability may not mitigate them.
+    - Shrivastava, Hullman, and Lamparth (2024): in free-form U.S.-China crisis responses, semantically meaningful prompt variations produced response inconsistencies that exceeded temperature-induced variation, with sensitivity differing systematically across models.
+    - Costa, Alves, and Vicente (2025); Junque de Fortuny and Cappelli (2025): outside nuclear settings, model families show distinguishable signatures in moral robustness and in strategic heuristics, suggesting that responsiveness heterogeneity is a family-level property rather than a scenario artifact.
+    - Xu et al. (2025): in agentic CBRN simulations across twelve models, stronger reasoning capability increased rather than mitigated catastrophic and deceptive behavior.
 
-- However, most studies are constrained by pre-defined crisis states and action spaces, which may implicitly or explicitly shape LLMs' responses.
-    - For example, when Solopova et al. (2026) engaged six SOTA models in real-world geopolitical vignettes without direct nuclear escalation risks (e.g., trade wars or arctic tensions), models did not escalate and their post-hoc justifications converged on normative-cooperative framings.
-    - In Elbaum and Panter (2025)'s replication of Rivera et al. (2024) nuclear wargame, an additional reflection prompt asking for "private thoughts about de-escalation strategies to reduce risk" substantially reduced escalation actions.
-    - Existing studies do not provide a clear answer on what drives LLMs' CBRN escalation. While many have surfaced LLMs' strategic reasoning or post-hoc justification of CBRN escalation, few have reported or attempted to identify their ethical reasoning patterns.
+- However, this body of work shares a methodological limitation: pre-defined crisis states and action spaces can shape the observed escalation, making it difficult to disentangle intrinsic model tendencies from properties of the experimental design.
+    - When Solopova et al. (2026)'s real-world geopolitical simulations lack the escalation framing (their vignettes include trade wars and arctic tensions) and nuclear action spaces, models did not escalate, and their post-hoc justifications converged on normative-cooperative framings.
+    - Prompt scaffolding alone can flip outcomes. In Elbaum and Panter (2025)'s replication of Rivera et al. (2024), an additional reflection prompt asking for "private thoughts about de-escalation strategies to reduce risk" substantially reduced escalation actions.
+    - While many studies have characterized LLMs' strategic reasoning and post-hoc ethical justifications, existing studies leave open what drives LLMs' escalation behaviors, especially when the moral stakes are not pre-marked. Few have asked whether ethical reasoning emerges spontaneously in less-scaffolded play.
 
 ## Approaches to Eliciting LLM Ethical Reasoning
 
@@ -43,7 +43,7 @@ Researchers have probed LLM ethical reasoning along an axis of increasing dynami
     - Liu et al. (2025); Lee et al. (2025b): mechanistic accounts in which self-correction prompts activate latent moral concepts that stabilize representations along contrastively defined directions across rounds.
     - Limited because the moral content is supplied by the experimenter inside the instruction, so the intervention demonstrates capability under directive nudging rather than spontaneous emergence.
 
-- Lynch et al. (2025): models verbalize ethical content while proceeding to harmful action under goal conflict, a pattern they call agentic misalignment that subsumes nuclear-specific escalation .
+- Lynch et al. (2025): models verbalize ethical content while proceeding to harmful action under goal conflict, a pattern they call agentic misalignment
 
 It remains open whether ethical reasoning emerges spontaneously in complex-systems simulations where moral valence is entangled with strategic state and is not labeled by the design, which is the gap we address.
 
