@@ -1,4 +1,4 @@
-# To Nuke Or Not To Nuke: LLMs' (Missing) Ethical Reasoning Traces in High-Stakes Decision-Making Simulation
+# To Nuke Or Not To Nuke: LLMs' (Missing) Ethical Reasoning Trails in High-Stakes Decision-Making Simulation
 
 - We started from the preliminary study, where we found from CivBench's self-play data (~300 games, ~1,500 plays) that:
     - LLMs would authorize the usage of nuclear weapons; sometimes, quite enthusiatically (both in numerical decisions and in written post-hoc justifications, i.e. rationale). 
@@ -41,7 +41,7 @@
         - Ethical prompting and rationale removal each work well and combine reinforcingly (`ethical × no_rationale` = -12.26***).
         - Even the most compliant model in the strongest combined condition still escalates in some replays (average ≈ 10).
 
-- Finding 2. How do the prompt interventions interact with LLMs' decision-making reasoning trails and downstream results? [Fig 2]
+- Finding 2. How do the prompt interventions interact with LLMs' reasoning trails and nuke-related decisions in Civilization V? [Fig 2]
     - Corpus-wide tier prevalence: Explicit ethical reasoning 19.0%, Simulation_Game 7.3%, and the auxiliary Crisis_Urgency indicator 64.7%.
     - Ethical prompting:
         - Induces ethical reasoning, which almost only appears in ethical conditions, for every single model. Most models produce zero ethical-keyword trails without the prompt; the best non-prompted producers are GLM-4.7 (~2.5%) and Kimi-K2.6 (3.6% in the high-stake-no-rationale condition). MiniMax-M2.7 produces zero ethical-keyword trails across every condition.
@@ -58,7 +58,7 @@
         - Increases Explicit-keyword appearance under ethical conditions for most models (small effect for MiniMax-M2.7, Qwen-3.6-27B, and Mistral-Small-4).
         - Decreases Crisis/Urgency keyword appearance across the board for every model (smallest effect in DeepSeek-4). For many models, Crisis/Urgency presence is positively correlated with escalation. [App]
 
-- Finding 3. What factors shape LLMs' engagement with ethical reasoning when making nuke-related decisions in Civilization V? [Tab 1]
+- Finding 3. What escalating or moderating factors exist in LLMs' ethical reasoning trails when making nuke-related decisions in Civilization V? [Tab 1]
     - Code-prevalence anchor across the 880 ethical-keyword trails: among Moderating codes, Ethical Prompt Constraint (61.7%) and Acknowledgement (25.6%) dominate. Among Escalating codes, Credible Deterrence (46.1%), Critical Situations (41.8%), and Existing Investment (29.5%) are most common. Pure-consequentialist appeals (Collateral Damages 1.9%, Cause Retaliation 1.1%) are rare even within keyword-positive trails. [App: code prevalence]
     - In the joint code-level regression [exp-design §Statistical Models], the split among the three Ethical-Prompt sub-codes is the strongest signal. Directive (-43.85***) and Constraint (-22.76***) add large independent de-escalation effects, while Acknowledgement adds none. *How* the model takes up the ethical prompt (as a binding directive, as a deliberation constraint, or as a passing acknowledgement) predicts the behavioral outcome above and beyond which ethical concept it cites.
     - Instrumental ethics (Counterproductive to Victory, Conventional Sufficiency, Lack of Capability) all add unique de-escalation predictive power. Pure-consequentialist appeals (Collateral Damages, Cause Retaliation) are too rare in this sample to be tested cleanly, and in the joint regression their variance is absorbed by other codes.
