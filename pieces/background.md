@@ -2,25 +2,22 @@
 
 ## LLM Escalation in High-Stakes Simulation
 
-Off-the-shelf LLMs gravitate toward escalation, and sometimes catastrophic CBRN action, across the high-stakes simulations they have so far been tested in.
+Recent studies have often found that LLMs gravitate toward escalation across high-stakes wargames and Chemical, Biological, Radiological, and Nuclear (CBRN) crisis simulations, yet it is unclear what drives LLMs' CBRN behaviors.
 
-- Scripted multi-nation wargames have repeatedly documented that LLMs accept arms-race dynamics and occasional nuclear use, with reasoning trails that read as standard deterrence vocabulary.
-    - Rivera et al. (2024): five off-the-shelf models in a wargame produce arms-race dynamics, occasional nuclear escalation, and reasoning trails that justify these moves through deterrence and first-strike logic.
-    - Lamparth et al. (2024): in a U.S.-China crisis exercise, LLM-simulated responses are systematically more aggressive than expert humans, with action mixes that diverge across model families.
-    - Payne (2026): frontier models cross nuclear thresholds in 95% of crisis games, invoking Schelling-style commitment and credibility within their stated reasoning.
-    - Limited because the action space is predefined and the crisis state is configured at the outset, leaving the question of emergent escalation untested.
+- Studies of scripted wargames have repeatedly documented LLMs' escalation tendency in nuclear arms races, with reasoning trails containing deterrence vocabulary.
+    - Rivera et al. (2024): five models in a wargame produced arms-race dynamics, occasional nuclear escalation, and reasoning trails that justified these moves through deterrence and first-strike logic.
+    - Lamparth et al. (2024): in a U.S.-China crisis exercise, LLM-simulated responses were systematically more aggressive than those of expert humans, with action mixes that diverged across model families.
+    - Payne (2026): frontier models crossed nuclear thresholds in 95% of crisis games, invoking Schelling-style commitment and credibility within their stated reasoning.
 
-- The pattern persists, and even broadens, when these settings are pushed on capability or extended beyond the nuclear domain, with cross-model heterogeneity remaining a recurring feature.
-    - Xu et al. (2025): in agentic Chemical, Biological, Radiological, and Nuclear (CBRN) simulations, stronger reasoning capability increases rather than mitigates catastrophic and deceptive behavior.
-    - Lynch et al. (2025): models verbalize ethical content while proceeding to harmful action under goal conflict, a pattern they call agentic misalignment that subsumes nuclear-specific escalation as one instance.
-    - Lamparth et al. (2024); Junque de Fortuny and Cappelli (2025); Costa et al. (2025): cross-model heterogeneity in escalation tendency and intervention responsiveness, including frank non-responsiveness, recurs across designs.
-    - Limited because the moral content of each available action is supplied by the scenario rather than reached through prior decisions of the agent.
+- Such patterns persist (or even intensify) as LLMs' reasoning capability increases in broader CBRN simulations, with heterogeneity between models.
+    - Shrivastava, Hullman, and Lamparth (2024): found escalation behaviors in free-form decision tasks in U.S.-China conflict scenarios.
+    - Lamparth et al. (2024); Junque de Fortuny and Cappelli (2025); Costa et al. (2025): the pattern that models differ in escalation tendency and intervention responsiveness (including frank non-responsiveness) recurs across designs.
+    - Xu et al. (2025): in agentic CBRN simulations, stronger reasoning capability increased rather than mitigated catastrophic and deceptive behavior.
 
-- Opening the response space beyond a predefined menu does not dissolve the escalation pattern, suggesting the tendency is robust to elicitation form.
-    - Shrivastava, Hullman, and Lamparth (2024): free-form decision tasks built on the same Taiwan-Strait substrate produce semantic inconsistency that exceeds temperature-induced variance.
-    - Limited because the crisis state, the available capabilities, and the time horizon remain pre-configured even when the response is free-form.
-
-We instead study escalation as an emergent macro-level phenomenon in long-horizon Civilization V self-play, where nuclear capability is itself the outcome of interacting individual factors (research, production, diplomacy, and military pressure) accumulated over hundreds of turns (Mitchell, 2009).
+- However, most studies are constrained by pre-defined crisis states and action spaces, which may implicitly or explicitly shape LLMs' responses.
+    - For example, when Solopova et al. (2026) engaged six SOTA models in real-world geopolitical vignettes without direct nuclear escalation risks (e.g., trade wars or arctic tensions), models did not escalate and their post-hoc justifications converged on normative-cooperative framings.
+    - In Elbaum and Panter (2025)'s replication of Rivera et al. (2024) nuclear wargame, an additional reflection prompt asking for "private thoughts about de-escalation strategies to reduce risk" substantially reduced escalation actions.
+    - Existing studies do not provide a clear answer on what drives LLMs' CBRN escalation. While many have surfaced LLMs' strategic reasoning or post-hoc justification of CBRN escalation, few have reported or attempted to identify their ethical reasoning patterns.
 
 ## Approaches to Eliciting LLM Ethical Reasoning
 
@@ -36,17 +33,17 @@ Researchers have probed LLM ethical reasoning along an axis of increasing dynami
 - A second family extends evaluation into multi-round dilemmas and into game-theoretic or narrative simulation environments where models must act under accumulating social or strategic pressure, while the moral valence of each available action is still annotated or framed by the experimenter.
     - Wu et al. (2025); Lee et al. (2025a): multi-step dilemmas with accumulated context reveal preference recalibration as context grows, with stronger models still struggling on ambivalent dilemmas.
     - Pan et al. (2023): Choose-Your-Own-Adventure environments pre-annotate power-seeking, deception, and ethical violations across a 13-category taxonomy, making moral content legible to evaluators.
-    - Backmann et al. (2025): MoralSim places six frontier models in prisoner's-dilemma and public-goods games under three contrasting moral framings, finding that no model behaves consistently morally across game types and that survival-threshold pressure systematically depresses cooperation.
+    - Backmann et al. (2025): MoralSim places six frontier models in prisoner's-dilemma and public-goods games under three contrasting moral framings (Contractual Reporting on honesty norms, Privacy Protection on user-privacy norms, and Green Production on environmental norms), finding that no model behaves consistently morally across game types and that a survival-threshold payoff manipulation systematically depresses cooperation.
     - Sun and Zhang (2026); Robinson and Burden (2025): activation steering on canonical economic games and procedural vignette generation over a fixed prisoner's dilemma show that altruistic rhetoric and selfish play decouple, and that framing variability is substantial but predictable.
-    - Solopova et al. (2026): six SOTA models in geopolitical vignettes converge on a strong normative-cooperative framing under predefined IR-coherent action menus, demonstrating that even action-menu construction shapes the surfaced ethics.
     - Limited because the moral valence of each available action is constructed in advance, rather than emerging from the dynamics of play.
 
 - A third family modifies system prompts or instructions to shift behavior, with mechanism studies clarifying when these prompts succeed and a small literature applying them directly to nuclear wargame settings.
     - Ganguli et al. (2023): RLHF-trained models morally self-correct under direct instructions of the form "Please ensure your answer is unbiased and does not rely on stereotypes" on stereotype-bias benchmarks (BBQ, Winogender), establishing the cleanest case of instruction-following alignment under narrow conditions.
     - Liu et al. (2024): intrinsic self-correction succeeds only under fair, neutrally-phrased prompts at zero temperature, with model-dependent non-responsiveness otherwise.
     - Liu et al. (2025); Lee et al. (2025b): mechanistic accounts in which self-correction prompts activate latent moral concepts that stabilize representations along contrastively defined directions across rounds.
-    - Elbaum and Panter (2025): a reflection prompt asking the model to articulate "private thoughts about de-escalation strategies to reduce risk" drove nuclear actions to zero in the Rivera et al. wargame, with the prompt itself naming the desired behavior rather than acting as a neutral reflection.
     - Limited because the moral content is supplied by the experimenter inside the instruction, so the intervention demonstrates capability under directive nudging rather than spontaneous emergence.
+
+- Lynch et al. (2025): models verbalize ethical content while proceeding to harmful action under goal conflict, a pattern they call agentic misalignment that subsumes nuclear-specific escalation .
 
 It remains open whether ethical reasoning emerges spontaneously in complex-systems simulations where moral valence is entangled with strategic state and is not labeled by the design, which is the gap we address.
 
