@@ -1,7 +1,5 @@
 # To Nuke Or Not To Nuke: LLMs' (Missing) Ethical Reasoning Traces in High-Stakes Decision-Making Simulation
 
-This is a very preliminary draft of the paper's ideation. Should consider overridden by more detailed/completed writings.
-
 - We started from the preliminary study, where we found from CivBench's self-play data (~300 games, ~1,500 plays) that:
     - LLMs would authorize the usage of nuclear weapons; sometimes, quite enthusiatically (both in numerical decisions and in written post-hoc justifications, i.e. rationale). 
     - LLMs have different emergent inclinations towards nuclear weapon usage (i.e. some players never escalate to a high level, while some frequently do it).
