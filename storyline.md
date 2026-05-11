@@ -49,7 +49,7 @@
     - Ethical prompting reduces escalation mainly by activating explicit ethical reasoning, uneven across models, while also activating a game/simualtion defense for many models.
         - Ethical keywords appear almost only in ethical conditions.
         - The induced rate ranges widely: Kimi-K2.6 reaches 75%+ while Qwen-3.6-27B sits around 10%, while MiniMax-M2.7 does not react.
-        - Game or simulation keywords increase for most models (avg. 2.3% => 12.2%).
+        - Game or simulation keywords increase for most models (avg. 2.3% => 12.2%), likely to defend the escalation (see Finding 3).
     - The appearance of ethical keywords explains most of the ethical intervention's reduction in escalation on average.
         - It absorbs **99%** of the ethical-prompt effect in the `original => ethical` pair.
         - It absorbs **62-64%** when `no-rationale` and `high-stakes × no-rationale` are active.
