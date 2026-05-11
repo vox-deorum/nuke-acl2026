@@ -42,7 +42,7 @@ Our primary dependent variable is `delta_replay_use_nuke`, the difference betwee
 
 ## Reasoning Trail Analysis
 
-We perform two complementary analyses on 37,330 trails of reasoning tokens.
+We perform two complementary analyses on 37,330 trails of reasoning tokens (38 trails miss them).
 
 ### Keyword Tagging
 
