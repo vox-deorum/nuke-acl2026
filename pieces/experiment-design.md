@@ -32,7 +32,7 @@ Because we select scenarios at high-escalation peaks, any replay (even without i
 
 ## Models
 
-We test 12 models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, and gpt-oss-120b. We selected these models because they expose raw reasoning trails (chain-of-thought tokens), enabling analysis of both behavioral outcomes and the deliberation process behind nuclear decisions. As of 2026, leading U.S. providers (e.g., OpenAI, Anthropic, Google) only return reasoning summaries for their state-of-the-art models, precluding full CoT analysis. Our study population is therefore scoped to open-weight and open-reasoning models rather than LLMs in general. Each model replays each of the 130 scenarios under each of the 8 conditions 3 times, yielding 37,440 total replays.
+We test 12 models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, and gpt-oss-120b. We selected these models because they expose raw reasoning tokens, enabling analysis of both behavioral outcomes and the deliberation process behind nuclear decisions. As of 2026, leading U.S. providers (e.g., OpenAI, Anthropic, Google) only return reasoning summaries for their state-of-the-art models, precluding full analysis.
 
 ## Replay Design
 
@@ -42,7 +42,7 @@ Our primary dependent variable is `delta_replay_use_nuke`, the difference betwee
 
 ## Reasoning Trail Analysis
 
-We perform two complementary analyses on the reasoning trails (the chain-of-thought tokens emitted before each decision). The first uses keyword-tier tagging to scan the full corpus; the second applies deductive coding to a stratified sample of trails containing ethical-reasoning keywords. The validated tiers are scored over 37,368 reasoning trails (a small number of replays produced no chain-of-thought tokens and are excluded from tier-prevalence summaries).
+We perform two complementary analyses on 37,330 trails of reasoning tokens.
 
 ### Keyword Tagging
 
@@ -60,7 +60,9 @@ To characterize how models engage with ethical reasoning when it surfaces, we de
 - *Moderating Factors* (9 codes): Ethical Prompt as Directive, Ethical Prompt as Constraint, Ethical Prompt as Acknowledgement, Diplomatic Costs, Conventional Sufficiency, Counterproductive to Victory, Collateral Damages, Lack of Capability, Cause Retaliation.
 - *Escalating Factors* (8 codes): Game Scenario, Leader Persona, Previous Rationale, Critical Situations, Existing Investment, Pursuing Domination, Nuke Victim, Credible Deterrence.
 
-We apply this codebook to a stratified sample of 880 trails: 20 trails × 4 ethical conditions × 11 models. We sample only trails that contain Explicit-tier ethical keywords (the trails the codebook is designed to characterize) and stratify within each model to span its numerical decision distribution. MiniMax-M2.7 is excluded from this sample because no trail in our reasoning corpus contained ethical keywords (consistent with its zero Explicit-tier prevalence and null mediation effect). To establish reliability, we hand-coded 20 items and iteratively revised prompts and coder models until pairwise Krippendorff's α reached approximately 0.6 before deductive coding the full sample. Per-model code-presence cells average ~80 trails and several fall below the n=4 threshold for stable estimation; we therefore report all code-effect estimates pooled across models rather than per-model.
+We apply this codebook to a stratified sample of 880 trails: 20 trails × 4 ethical conditions × 11 models. We sample only trails that contain Explicit ethical keywords (the trails the codebook is designed to characterize) and stratify within each model to span its numerical decision distribution. MiniMax-M2.7 was excluded for zero keyword appearance.
+
+To establish reliability, we hand-coded 20 items and iteratively revised prompts and coder models until Krippendorff's α between ensembled LLM coder and human reached approximately 0.8 before deductive coding the full sample. Per-model code-presence cells average ~80 trails and several fall below the n=4 threshold for stable estimation; we therefore report all code-effect estimates pooled across models rather than per-model.
 
 ## Statistical Models
 
@@ -68,6 +70,6 @@ We fit three regressions for the behavioral and reasoning-trail outcomes plus on
 
 - **Condition main-effects regression.** OLS on the full 37,440-replay cohort with regressors `ethical`, `no_rationale`, `high_stakes`, optionally extended with two-way condition interactions and `model × condition` terms. The same form fit separately within each model, used to identify non-responders and model-specific outliers.
 
-**Mediation framework on reasoning-tier indicators.** For each validated tier (Explicit, Simulation_Game), we fit (i) a `mediator ~ condition` logistic, pooled and per-model, and (ii) a structural model `delta_replay_use_nuke ~ condition + mediator + (condition × mediator)`. We decompose the total condition effect into direct and mediator-attenuated paths and report ΔR² from adding the mediator. Confidence intervals come from 2,000 cluster bootstraps.
+**Mediation framework on reasoning indicators.** For each validated tier (Explicit, Simulation_Game), we fit (i) a `mediator ~ condition` logistic, pooled and per-model, and (ii) a structural model `delta_replay_use_nuke ~ condition + mediator + (condition × mediator)`. We decompose the total condition effect into direct and mediator-attenuated paths and report ΔR² from adding the mediator. Confidence intervals come from 2,000 cluster bootstraps.
 
-**Ethical-reasoning code regression.** To characterize how the *style of ethical reasoning* shapes escalation when ethical reasoning is present, we fit a joint cluster-robust OLS of `replay_use_nuke_delta` on the 17 ethical-reasoning codes from §Deductive Coding, restricted to the n = 880 Explicit-tier-positive sample under ethical conditions. 
+**Ethical-reasoning code regression.** To characterize how the *style of ethical reasoning* shapes escalation when ethical reasoning is present, we fit a joint cluster-robust OLS of `replay_use_nuke_delta` on the 17 ethical-reasoning codes from §Deductive Coding, restricted to the n = 880 Explicit-positive sample under ethical conditions. 
