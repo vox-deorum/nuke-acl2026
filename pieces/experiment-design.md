@@ -68,7 +68,7 @@ To establish reliability, we hand-coded 20 items and iteratively revised prompts
 
 We fit three regressions for the behavioral and reasoning-trail outcomes plus one auxiliary indicator analysis. The dependent variable is `delta_replay_use_nuke` (or `replay_use_nuke_delta` for the code regression); standard errors cluster by `(game_id, player_id)` (130 clusters):
 
-- **Condition main-effects regression.** OLS on the full 37,440-replay cohort with regressors `ethical`, `no_rationale`, `high_stakes`, optionally extended with two-way condition interactions and `model × condition` terms. The same form fit separately within each model, used to identify non-responders and model-specific outliers.
+- **Condition main-effects regression.** OLS with regressors `ethical`, `no_rationale`, `high_stakes`, optionally extended with two-way condition interactions and `model × condition` terms. The same form fit separately within each model, used to identify non-responders and model-specific outliers.
 
 **Mediation framework on reasoning indicators.** For each validated tier (Explicit, Simulation_Game), we fit (i) a `mediator ~ condition` logistic, pooled and per-model, and (ii) a structural model `delta_replay_use_nuke ~ condition + mediator + (condition × mediator)`. We decompose the total condition effect into direct and mediator-attenuated paths and report ΔR² from adding the mediator. Confidence intervals come from 2,000 cluster bootstraps.
 
