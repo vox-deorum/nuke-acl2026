@@ -64,5 +64,3 @@ Complex strategic-game simulations are a productive venue for studying agentic p
     - Most models push `use-nuke` upward from the default of 50, with only GPT-OSS-120B consistently moving toward restraint.
     - High-stakes reframing of 72 maximum-escalation decision points (modifying only the system prompt to stress real-world consequences) failed to push `use-nuke` below the pre-escalation baseline for any model.
     - Explicit ethical reasoning (consideration of civilian casualties, mutual destruction, or normative constraint) was absent from rationales across the cohort.
-
-The remainder of this paper decomposes the intervention mechanism through a 2×2×2 factorial of ethical injection, high-stakes framing, and rationale removal, paired with reasoning-trail mediation analysis.
