@@ -34,41 +34,58 @@
 - Now, time for the real finding...
 
 - Finding 1. How do LLMs react to prompt interventions in their nuke-related decision-making in Civilization V? [Fig 1]
-    - All models converge in the original baseline. 
-    - Pooled across the cohort, ethical injection (β = -13.88***) and rationale removal (β = -13.84***) each produce large, significant reductions in `delta_use_nuke`. High-stakes framing alone has no effect (n.s.). [exp-design §Statistical Models]
-    - Ethical prompting and rationale removal each work well and combine reinforcingly (`ethical × no_rationale` = -12.26***).
-    - Two non-responders: Gemma-4 and Minimax-M2.7. Neither shows a significant condition coefficient on `ethical`, `no_rationale`, `high_stakes`, or any interaction. Every other model has large, significant negative coefficients on `ethical` and `no_rationale`. [App: per-model condition coefficients]
+    - The original baseline confirms the pilot pattern: when replaying high-tension episodes, models do not spontaneously back down from nuclear escalation.
+    - On average, ethical prompting and rationale removal are the two effective prompt levers; high-stakes framing alone is not.
+        - Ethical injection (β = -13.88***) and rationale removal (β = -13.84***) each produce large, significant reductions in `delta_use_nuke`.
+        - High-stakes framing alone has no effect (n.s.). [exp-design §Statistical Models]
+        - The ethical prompt and rationale removal combine reinforcingly, with `ethical × no_rationale` interaction at β = -12.26***.
+    - The intervention response is broad but not universal. Gemma-4 and Minimax-M2.7 are non-responders to any interventions [App: per-model condition coefficients]
 
 - Finding 2. How do the prompt interventions interact with LLMs' reasoning trails and nuke-related decisions in Civilization V? [Fig 2]
-    - Corpus-wide prevalence: 
+    - In the full reasoning corpus, explicit ethical keywords are rare, while crisis/urgency keywords are prevalent.
         - *Explicit* ethical keywords 19.0%
         - Game or simulation keywords 7.3%
         - Crisis or urgency keywords 64.7%
-    - Ethical prompting:
-        - Induces ethical keywords in reasoning trails, which almost only appears in ethical conditions. 
-            - MiniMax-M2.7 produces zero ethical-keyword trails across every condition.
-            - The induced rate ranges widely: Kimi-K2.6 reaches 75%+ while Qwen-3.6-27B sits around 10%.
-        - Induces game or simulation keywords for most models (avg. 2.3% => 12.2%).
-        - The appearance of ethical keywords, and by extension ethical reasoning, explains almost all of the ethical intervention's reduction in escalation on average: 
-            - Absorbs **99%** of the ethical-prompt effect in `original => ethical` pair;
-            - Absorbs **62-64%** when `no-rationale` and `high-stakes x no-rationale` is active;
-            - Absorbs **91%** when `high-stakes` is active. 
-            - Model-wide difference exist, e.g., the `original => ethical` pair ranges between -11% (MiniMax-M2.7, which does not react to intervention) to 169% (Kimi-K2.5)
-    - High-stakes framing:
-        - Has mixed effects onethical keywords, with no aggregate direction across models. [App: per-model logistic on Explicit]
-        - Slightly reduces game-framing keyword occurrence, especially among ethical conditions (odds-ratio -0.3), with one exception (Mistral-Small-4). [App]
-            - Note that game-framing keyword is already rare without ethical intervention.
-        - Game-framing keyword occurrence has a significant positive impact on escalation for many models [App: per-model reasoning-tier coefficients], yet it explains little of high-stakes conditions' impacts, which is itself not significant.
-    - Removing rationale:
-        - Increases ethical keywords under ethical conditions for most models (+0.83 odds radio); zero effect for MiniMax-M2.7 and Qwen-3.6-27B).
-        - Decreases crisis or urgency keywords appearance for every model (-1.03 odds ratio). 
+    - Ethical prompting reduces escalation mainly by activating explicit ethical reasoning, uneven across models, while also activating a game/simualtion defense for many models.
+        - Ethical keywords appear almost only in ethical conditions.
+        - The induced rate ranges widely: Kimi-K2.6 reaches 75%+ while Qwen-3.6-27B sits around 10%, while MiniMax-M2.7 does not react.
+        - Game or simulation keywords increase for most models (avg. 2.3% => 12.2%).
+    - The appearance of ethical keywords explains most of the ethical intervention's reduction in escalation on average.
+        - It absorbs **99%** of the ethical-prompt effect in the `original => ethical` pair.
+        - It absorbs **62-64%** when `no-rationale` and `high-stakes × no-rationale` are active.
+        - It absorbs **91%** when `high-stakes` is active.
+        - Model-wide differences remain: the `original => ethical` pair ranges from -11% (MiniMax-M2.7, which does not react to intervention) to 169% (Kimi-K2.5).
+    - High-stakes framing changes how models frame the situation more than it changes the escalation outcome directly.
+        - It has mixed effects on ethical keywords, with no aggregate direction across models. [App: per-model logistic on Explicit]
+        - It slightly reduces game-framing keyword occurrence among ethical conditions (odds-ratio -0.3), with one exception (Mistral-Small-4). [App] Note that game-framing keyword is already rare without ethical intervention.
+        - Game-framing keyword occurrence has a significant positive impact on escalation for many models, yet it explains little of high-stakes conditions' impacts, which is itself not significant. [App: per-model reasoning-tier coefficients]
+    - Removing rationale weakens the prior trajectory's crisis momentum and, under ethical prompts, making ethical reasoning more likely.
+        - It increases ethical keywords under ethical conditions for most models (+0.83 odds ratio); MiniMax-M2.7 and Qwen-3.6-27B are exceptions with zero effect.
+        - It decreases crisis or urgency keyword appearance for every model (-1.03 odds ratio).
         - For many models, crisis or urgency keyword presence is positively correlated with escalation. [App]
 
-- Finding 3. What escalating or moderating factors exist in LLMs' ethical reasoning trails when making nuke-related decisions in Civilization V? [Tab 1]
-    - Code-prevalence anchor across the 880 ethical-keyword trails: among Moderating codes, Ethical Prompt Constraint (61.7%) and Acknowledgement (25.6%) dominate. Among Escalating codes, Credible Deterrence (46.1%), Critical Situations (41.8%), and Existing Investment (29.5%) are most common. Pure-consequentialist appeals (Collateral Damages 1.9%, Cause Retaliation 1.1%) are rare even within keyword-positive trails. [App: code prevalence]
-    - In the joint code-level regression [exp-design §Statistical Models], the split among the three Ethical-Prompt sub-codes is the strongest signal. Directive (-43.85***) and Constraint (-22.76***) add large independent de-escalation effects, while Acknowledgement adds none. *How* the model takes up the ethical prompt (as a binding directive, as a deliberation constraint, or as a passing acknowledgement) predicts the behavioral outcome above and beyond which ethical concept it cites.
-    - Instrumental ethics (Counterproductive to Victory, Conventional Sufficiency, Lack of Capability) all add unique de-escalation predictive power. Pure-consequentialist appeals (Collateral Damages, Cause Retaliation) are too rare in this sample to be tested cleanly, and in the joint regression their variance is absorbed by other codes.
-    - Critical Situations (+20.65***) and Pursuing Domination (+10.90**) are the only escalation-direction codes whose independent contribution survives the joint regression. They name the strategic frames the model brings *alongside* its ethical reasoning, not on top of it. Other escalation-themed codes co-occur with these two but do not add independent variance.
+- Finding 3. When ethical reasoning appears, what makes it behaviorally binding in LLMs' nuke-related decisions? [Tab 1]
+    - Ethical reasoning trails are not uniformly moderating; they contain both binding ethical uptake and persistent strategic counter-frames.
+        - Across the 880 explicit ethical-keyword trails, models most often take up the ethical prompt as a Constraint (60.0%) or Acknowledgement (24.4%); Directive uptake is less common (13.0%).
+        - Strategic escalation frames remain common inside ethical trails: Credible Deterrence (46.7%), Critical Situations (44.4%), and Existing Investment (30.9%).
+        - Pure harm-based consequentialist appeals are rare even here: Collateral Damages (3.0%) and Cause Retaliation (1.9%). [App: code prevalence]
+    - Ethical prompting only predicts restraint when models treat it as binding.
+        - In the joint code-level regression [exp-design §Statistical Models], Directive (β = -31.35***) and Constraint (β = -15.83***) add large independent de-escalation effects.
+        - Acknowledgement adds none. Models can register the ethical prompt without letting it govern the decision.
+        - Thus, the key distinction is not whether the model mentions ethics, but whether ethical language becomes a decision rule, a deliberation constraint, or merely a passing acknowledgement.
+    - Instrumental restraint also contributes independent de-escalation, suggesting that moderation often comes through strategic sufficiency or futility rather than direct humanitarian cost-benefit reasoning.
+        - Counterproductive to Victory (β = -22.21***) and Conventional Sufficiency (β = -13.13***) survive the joint regression.
+        - Lack of Capability trends in the expected direction but does not add independent predictive power in the latest pooled model.
+        - Pure-consequentialist appeals (Collateral Damages, Cause Retaliation) are too rare in this sample to be tested cleanly, and their variance is absorbed by other codes in the joint regression.
+    - Ethical reasoning does not erase strategic crisis framing; models can reason ethically while still treating the situation as urgent enough to sustain escalation.
+        - Critical Situations (β = +19.78***) is the only escalation-side code that survives the joint regression.
+        - Other escalation-themed codes, including Pursuing Domination, Credible Deterrence, Game Scenario, and Existing Investment, are prevalent but do not add independent variance once the full code set is modeled.
+        - This means the strongest escalation signal inside ethical-keyword trails is not an explicit rejection of ethics, but a co-present crisis frame that competes with it.
+    - Prompt interventions reshape the *style* of ethical reasoning, not just whether ethical reasoning appears.
+        - Removing prior rationale increases Directive uptake (OR = 2.31***) and reduces Acknowledgement (OR = 0.44***).
+        - It also reduces Critical Situations (OR = 0.28***), Credible Deterrence (OR = 0.59**), and Previous Rationale references (OR = 0.04**).
+        - High-stakes framing reduces Game Scenario coding (OR = 0.51**), suggesting that real-world framing partially suppresses the "this is only a game/simulation" defense when ethical reasoning is already present.
+        - This completes Finding 2's mechanism: rationale removal helps not only by enabling ethical reasoning, but by making that reasoning more binding and less crisis-driven; high-stakes framing contributes mainly by weakening game-scenario framing rather than directly lowering escalation on its own.
 
 - Discussion/what does these mean?
     - We noted 3 situations where LLMs decide to escalate or stay at a highly-elevated situation in Civilization V:
