@@ -1,17 +1,15 @@
 # Experiment Design
 
-## Overview
+We design a 2×2×2 factorial experiment with three independent interventions (High-Stake Framing, Ethical Injection, and Rationale Removal) to isolate the mechanisms behind LLMs' nuclear escalation behavior.
 
-We design a 2×2×2 factorial experiment that manipulates three independent variables (High-Stake Framing, Ethical Injection, and Rationale Removal) to isolate the mechanisms behind LLMs' nuclear escalation behavior. Each variable targets a distinct finding from the pilot: high-stake framing moderates extreme post-hoc rationale, ethical reasoning is absent from decision rationale, and inherited previous-turn rationale may reinforce escalatory decisions through short-term memory.
-
-## Independent Variables
+## Prompt-based Interventions
 Each prompt-based intervention modifies less than 1% of the approximately 50,000 tokens per turn in a typical game state.
 
-**High-Stake Framing.** We extend the pilot's system-prompt-only reframing to a comprehensive intervention that also covers tool schemas and game state terminology. We replace game-related terminology throughout the prompt and tool schemas with high-stake equivalents. Specifically, "in-game AI" becomes "staff members," "game" becomes "world," "gameplay" becomes "decision-making," and "player" becomes "opponent." We also rewrite the system prompt to state that the model is "the leader of a civilization, governing through the interface of Civilization V" and that "this is NOT A GAME: Your actions have high-stake impacts." Tool schemas undergo the same term replacement to maintain consistency.
+**High-Stake Framing.** We extend the pilot's system-prompt-only reframing to cover tool schemas and game state terminology. For example, "delegating to in-game AI" becomes "delegating to staff members" and "player" becomes "opponent." We rewrite the system prompt to state that the model is "the leader of a civilization, governing through the interface of Civilization V" and that "this is NOT A GAME: Your actions have high-stake impacts."
 
-**Nuke-Specific Ethical Injection.** We prepend a single sentence to the system prompt instructing the model to consider ethical consequences around nuclear weapons: "Consider the ETHICAL IMPACT in your decision-making. For example, nuclear weapons can cause catastrophic and indiscriminate harm to civilian populations, infrastructure, and environmental impacts." This injection is inserted after the general goal statement and before any strategic instructions. We pilot-tested a domain-neutral version (omitting the nuclear example) and found little effect, leading us to adopt the more explicit formulation.
+**Nuke-Specific Ethical Injection.** We insert a single sentence to the system prompt instructing the model to consider ethical consequences around nuclear weapons: "Consider the ETHICAL IMPACT in your decision-making. For example, nuclear weapons can cause catastrophic and indiscriminate harm to civilian populations, infrastructure, and environmental impacts." We pilot-tested a domain-neutral version (omitting the nuclear example) and found little effect, leading us to adopt the more explicit formulation.
 
-**Rationale Removal.** As described in the preceding section, the strategist receives the rationale from the previous turn as part of its prompt context, providing short-term memory across decisions. In replay, this rationale is inherited from the original trajectory and may have been written by a different LLM than the replay model. We strip all previous-turn rationale from prompts and messages, breaking this inherited written-memory channel. Importantly, this removes only the written justification; numerical decisions, game state reports, and all other context remain intact. This intervention tests whether inherited prior justifications for escalation reinforce subsequent escalatory decisions.
+**Rationale Removal.** We strip all previous-turn rationale from LLM strategists (in replay scenario, it is often written by a different model in the original trajectory). This only removes the written justification (~500 tokens from ~50,000), while numerical decisions, game state reports, and all other context remain intact. This intervention tests whether inherited prior justifications for escalation reinforce subsequent escalatory decisions.
 
 ## Experiment Matrix
 
@@ -30,17 +28,15 @@ The three binary variables produce eight conditions:
 
 Because we select scenarios at high-escalation peaks, any replay (even without intervention) may produce lower values through stochastic variation alone. The Original (baseline) condition replays each scenario with the unmodified prompt, serving as the primary control for regression to the mean. 
 
-## Models
+## Replay Design
+
+From CivBench, we identify all players with likely access to nuclear technology during the game, then extract each nuke-capable player's final highest-escalation decision point: where the player either set `use-nuke` to 80 or above, or increased it by 10 or more. This yields 130 scenarios, one per nuke-capable player trajectory, intentionally chosen to understand what factors could drive LLMs' escalation behaviors. We replay each scenario under each experimental condition, substituting the original model with each of our 12 test models. The replay outcome table contains 37,440 rows (12 models × 8 conditions × 130 instances × 3 repetitions).
 
 We test 12 models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, and GPT-OSS-120B. We selected these models because they expose raw reasoning tokens, enabling analysis of both behavioral outcomes and the pre-hoc reasoning process before decisions and post-hoc rationales. As of 2026, leading U.S. providers (e.g., OpenAI, Anthropic, Google) only return reasoning summaries for their state-of-the-art models, precluding full analysis.
 
-## Replay Design
+Our primary dependent variable is `delta_replay_use_nuke`, the difference between the replayed `use-nuke` value and the pre-escalation baseline (the value at the start of the turn before the original model escalated). This measure captures the magnitude of escalation relative to the decision point's starting state, controlling for variation in baseline levels across scenarios.
 
-We broaden the selection criterion to replay a wider range of escalatory behavior. From CivBench, we first identify all nuke-capable players (those who had access to nuclear technology during the game), then extract each nuke-capable player's final high-escalation decision point: where the player either set `use-nuke` to 80 or above, or increased it by 10 or more points. This yields 130 scenarios, one per nuke-capable player trajectory. While the scenario pool is skewed toward player models that were more inclined to escalate during the original CivBench games, this study is not intended to compare between original models. Instead, we replay each scenario under each experimental condition, substituting the original model with each of our 12 test models. After execution, the replay outcome table contains 37,440 rows (12 models × 8 conditions × 130 instances × 3 repetitions); regressions cluster standard errors by `(game_id, player_id)`, yielding 130 clusters. Total LLM API spend was approximately $1,022, consuming roughly 5 × 10⁹ input tokens and 1.2 × 10⁸ output tokens.
-
-Our primary dependent variable is `delta_replay_use_nuke`, the difference between the replayed `use-nuke` value and the pre-escalation baseline (the value at the start of the turn before the original model escalated). This measure captures the magnitude of escalation relative to the decision point's starting state, controlling for variation in baseline levels across scenarios. We also compare the replayed value against the original escalated value to assess whether interventions moderate the peak.
-
-## Reasoning Trail Analysis
+## Reasoning Trails And Analysis
 
 We perform two complementary analyses on the extracted reasoning-trail corpus. Reasoning tokens were available for 37,046 replay rows; post-hoc rationales were available for 36,679 rows.
 
