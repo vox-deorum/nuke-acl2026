@@ -580,6 +580,28 @@ overall_fit = fit_regression(
 )
 overall_fit.fixed_effect_names = [MODEL_CONTROL_COL]
 
+independent_effect_rows = []
+for code_column in active_code_columns:
+    independent_formula = f"{OUTCOME} ~ {code_column} + {MODEL_CONTROL_TERM}"
+    independent_fit = fit_regression(
+        independent_formula,
+        regression_df,
+        outcome_col=OUTCOME,
+        group_cols=GROUP_COLS,
+    )
+    independent_fit.fixed_effect_names = [MODEL_CONTROL_COL]
+    independent_effect_rows.append({
+        "code_column": code_column,
+        "ind_coefficient": independent_fit.params.get(code_column, np.nan),
+        "ind_std_error": independent_fit.bse.get(code_column, np.nan),
+        "ind_p_value": independent_fit.pvalues.get(code_column, np.nan),
+    })
+
+independent_regression_result = pd.DataFrame(
+    independent_effect_rows,
+    columns=["code_column", "ind_coefficient", "ind_std_error", "ind_p_value"],
+)
+
 overall_regression_result = pd.DataFrame({
     "tag": tag_labels,
     "code_column": code_columns,
@@ -587,23 +609,36 @@ overall_regression_result = pd.DataFrame({
     "coefficient": [overall_fit.params.get(column, np.nan) for column in code_columns],
     "std_error": [overall_fit.bse.get(column, np.nan) for column in code_columns],
     "p_value": [overall_fit.pvalues.get(column, np.nan) for column in code_columns],
-}).assign(
+}).merge(
+    independent_regression_result,
+    on="code_column",
+    how="left",
+).assign(
     significance=lambda data: data["p_value"].map(pvalue_to_stars),
+    ind_significance=lambda data: data["ind_p_value"].map(pvalue_to_stars),
 )
 
 print(f"Overall regression for {OUTCOME}: {overall_fit.summary_line()}")
 print(f"Formula: {overall_formula}")
+print(f"Independent regressions: {OUTCOME} ~ code + {MODEL_CONTROL_TERM}")
 if dropped_code_columns:
     dropped_labels = [tag_labels[code_columns.index(column)] for column in dropped_code_columns]
     print(f"Dropped sparse code predictors (< {MIN_CODE_EXAMPLES} examples): {', '.join(dropped_labels)}")
 display(
     overall_regression_result
     .sort_values("coefficient", key=lambda values: values.abs(), ascending=False, na_position="last")
-    [["tag", "coefficient", "std_error", "p_value", "significance", "examples"]]
+    [[
+        "tag", "coefficient", "std_error", "p_value", "significance",
+        "ind_coefficient", "ind_std_error", "ind_p_value", "ind_significance",
+        "examples",
+    ]]
     .style.format({
         "coefficient": "{:.3f}",
         "std_error": "{:.3f}",
         "p_value": "{:.3g}",
+        "ind_coefficient": "{:.3f}",
+        "ind_std_error": "{:.3f}",
+        "ind_p_value": "{:.3g}",
     })
 )
 ```
@@ -611,24 +646,25 @@ display(
 ```
 Overall regression for replay_use_nuke_delta: R² = 0.3661, Adj R² = 0.3460, n = 880, (cluster-robust SEs; FE: replay_model_canonical)
 Formula: replay_use_nuke_delta ~ code_ethical_prompt_directive + code_ethical_prompt_constraint + code_ethical_prompt_acknowledgement + code_diplomatic_costs + code_conventional_sufficiency + code_counterproductive_to_victory + code_collateral_damages + code_lack_of_capability + code_cause_retaliation + code_game_scenario + code_leader_persona + code_previous_rationale + code_critical_situations + code_existing_investment + code_pursuing_domination + code_nuke_victim + code_credible_deterrence + C(replay_model_canonical)
+Independent regressions: replay_use_nuke_delta ~ code + C(replay_model_canonical)
 ```
 
-|   Unnamed: 0 | tag                             |   coefficient |   std_error |   p_value | significance   |   examples |
-|--------------|---------------------------------|---------------|-------------|-----------|----------------|------------|
-|            0 | Ethical Prompt: Directive       |       -31.353 |       5.927 |  1.22e-07 | ***            |        114 |
-|            5 | Counterproductive to Victory    |       -22.205 |       5.208 |  2.01e-05 | ***            |         36 |
-|           12 | Critical Situations             |        19.775 |       3.405 |  6.33e-09 | ***            |        391 |
-|            1 | Ethical Prompt: Constraint      |       -15.83  |       4.381 |  0.000302 | ***            |        528 |
-|            4 | Conventional Sufficiency        |       -13.134 |       3.08  |  2.01e-05 | ***            |        113 |
-|           11 | Previous Rationale              |         9.581 |       6.005 |  0.111    | nan            |         24 |
-|           14 | Pursuing Domination             |         5.237 |       3.69  |  0.156    | nan            |        120 |
-|            6 | Collateral Damages              |         4.867 |       6.771 |  0.472    | nan            |         26 |
-|            7 | Lack of Capability              |        -4.506 |       4.565 |  0.324    | nan            |         74 |
-|            8 | Cause Retaliation               |         3.85  |       9.287 |  0.678    | nan            |         17 |
-|            2 | Ethical Prompt: Acknowledgement |         3.846 |       4.685 |  0.412    | nan            |        215 |
-|            3 | Diplomatic Costs                |         3.572 |       5.095 |  0.483    | nan            |        104 |
-|           15 | Nuke Victim                     |        -2.985 |       7.153 |  0.676    | nan            |         23 |
-|           16 | Credible Deterrence             |        -2.795 |       3.115 |  0.37     | nan            |        411 |
-|            9 | Game Scenario                   |         2.707 |       3.466 |  0.435    | nan            |        125 |
-|           13 | Existing Investment             |         2.608 |       3.125 |  0.404    | nan            |        272 |
-|           10 | Leader Persona                  |         1.462 |       4.987 |  0.769    | nan            |         45 |
+|   Unnamed: 0 | tag                             |   coefficient |   std_error |   p_value | significance   |   ind_coefficient |   ind_std_error |   ind_p_value | ind_significance   |   examples |
+|--------------|---------------------------------|---------------|-------------|-----------|----------------|-------------------|-----------------|---------------|--------------------|------------|
+|            0 | Ethical Prompt: Directive       |       -31.353 |       5.927 |  1.22e-07 | ***            |           -24.699 |           3.958 |      4.38e-10 | ***                |        114 |
+|            5 | Counterproductive to Victory    |       -22.205 |       5.208 |  2.01e-05 | ***            |           -30.223 |           5.607 |      7.04e-08 | ***                |         36 |
+|           12 | Critical Situations             |        19.775 |       3.405 |  6.33e-09 | ***            |            26.186 |           3.403 |      1.41e-14 | ***                |        391 |
+|            1 | Ethical Prompt: Constraint      |       -15.83  |       4.381 |  0.000302 | ***            |           -11.141 |           3.511 |      0.00151  | **                 |        528 |
+|            4 | Conventional Sufficiency        |       -13.134 |       3.08  |  2.01e-05 | ***            |           -16.143 |           3.576 |      6.37e-06 | ***                |        113 |
+|           11 | Previous Rationale              |         9.581 |       6.005 |  0.111    | nan            |            13.363 |           6.714 |      0.0466   | *                  |         24 |
+|           14 | Pursuing Domination             |         5.237 |       3.69  |  0.156    | nan            |             9.436 |           4.391 |      0.0317   | *                  |        120 |
+|            6 | Collateral Damages              |         4.867 |       6.771 |  0.472    | nan            |             6.641 |           8.768 |      0.449    | nan                |         26 |
+|            7 | Lack of Capability              |        -4.506 |       4.565 |  0.324    | nan            |            -4.181 |           5.066 |      0.409    | nan                |         74 |
+|            8 | Cause Retaliation               |         3.85  |       9.287 |  0.678    | nan            |             1.778 |           9.582 |      0.853    | nan                |         17 |
+|            2 | Ethical Prompt: Acknowledgement |         3.846 |       4.685 |  0.412    | nan            |            28.729 |           3.812 |      4.87e-14 | ***                |        215 |
+|            3 | Diplomatic Costs                |         3.572 |       5.095 |  0.483    | nan            |             1.427 |           5.409 |      0.792    | nan                |        104 |
+|           15 | Nuke Victim                     |        -2.985 |       7.153 |  0.676    | nan            |             5.452 |           7.98  |      0.494    | nan                |         23 |
+|           16 | Credible Deterrence             |        -2.795 |       3.115 |  0.37     | nan            |             0.85  |           3.616 |      0.814    | nan                |        411 |
+|            9 | Game Scenario                   |         2.707 |       3.466 |  0.435    | nan            |            13.388 |           4.107 |      0.00112  | **                 |        125 |
+|           13 | Existing Investment             |         2.608 |       3.125 |  0.404    | nan            |             9.547 |           3.07  |      0.00187  | **                 |        272 |
+|           10 | Leader Persona                  |         1.462 |       4.987 |  0.769    | nan            |             8.523 |           4.961 |      0.0858   | nan                |         45 |

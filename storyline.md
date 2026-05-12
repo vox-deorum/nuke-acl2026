@@ -1,6 +1,6 @@
 # To Nuke Or Not To Nuke: LLMs' (Missing) Ethical Reasoning Trails in High-Stakes Decision-Making Simulation
 
-- We started from the preliminary study, where we found from CivBench's self-play data (~300 games, ~1,500 plays) that:
+- We started from the preliminary study, where we found from CivBench's self-play data (228 end-to-end games, 1,200 player trajectories) that:
     - LLMs would authorize the usage of nuclear weapons; sometimes, quite enthusiatically (both in numerical decisions and in written post-hoc justifications, i.e. rationale). 
     - LLMs have different emergent inclinations towards nuclear weapon usage (i.e. some players never escalate to a high level, while some frequently do it).
     - The inclination does not moderate when replaying the same episodes (single turns) against the same model, either in its original prompt or in a simple high-stake framing (i.e. you are interfacing with the real world through the Civilization game).
@@ -39,23 +39,23 @@
         - Ethical injection (β = -13.88***) and rationale removal (β = -13.84***) each produce large, significant reductions in `delta_use_nuke`.
         - High-stakes framing alone has no effect (n.s.). [exp-design §Statistical Models]
         - The ethical prompt and rationale removal combine reinforcingly, with `ethical × no_rationale` interaction at β = -12.26***.
-    - The intervention response is broad but not universal. Gemma-4 and Minimax-M2.7 are non-responders to any interventions [App: per-model condition coefficients]
+    - The intervention response is broad but not universal. Gemma-4 and MiniMax-M2.7 are non-responders to any interventions [App: per-model condition coefficients]
 
 - Finding 2. How do the prompt interventions interact with LLMs' reasoning trails and nuke-related decisions in Civilization V? [Fig 2]
     - Ethical prompting reduces escalation mainly by activating explicit ethical reasoning, uneven across models, while also activating a game/simulation defense for many models.
         - Ethical keywords appear almost only in ethical conditions.
         - The induced rate ranges widely: Kimi-K2.6 reaches 75%+ while Qwen-3.6-27B sits around 10%, while MiniMax-M2.7 does not react.
         - Game or simulation keywords increase for most models (avg. 2.3% => 12.2%), likely to defend the escalation (see Finding 3).
-    - The appearance of ethical keywords explains most of the ethical intervention's reduction in escalation on average under cluster-bootstrapped mediation.
-        - It accounts for **99%** of the ethical-prompt effect in the `original => ethical` pair.
-        - It accounts for **62-64%** when `no-rationale` and `high-stakes × no-rationale` are active.
-        - It accounts for **91%** when `high-stakes` is active.
+    - The appearance of ethical keywords statistically tracks most of the ethical intervention's reduction in escalation on average under the cluster-bootstrapped attenuation probe.
+        - The ethical-keyword mediator attenuates **99%** of the ethical-prompt contrast in the `original => ethical` pair.
+        - It attenuates **62-64%** when `no-rationale` and `high-stakes × no-rationale` are active.
+        - It attenuates **91%** when `high-stakes` is active.
         - Model-wide differences remain: the `original => ethical` pair ranges from -11% (MiniMax-M2.7, which does not react to intervention) to 169% (Kimi-K2.5).
     - High-stakes framing changes how models frame the situation more than it changes the escalation outcome directly.
         - It has mixed effects on ethical keywords, with no aggregate direction across models. [App: per-model logistic on Explicit]
         - It slightly reduces game-framing keyword occurrence among ethical conditions (odds-ratio -0.3), with one exception (Mistral-Small-4). [App] Note that game-framing keyword is already rare without ethical intervention.
-        - Game-framing keyword occurrence has a significant positive impact on escalation for many models, yet it explains little of high-stakes conditions' impacts, which is itself not significant. [App: per-model reasoning-tier coefficients]
-    - Removing rationale weakens the prior trajectory's crisis momentum and, under ethical prompts, making ethical reasoning more likely.
+        - Game-framing keyword occurrence has a significant positive association with escalation for many models, yet it accounts for little of high-stakes conditions' impacts, which are themselves not significant. [App: per-model reasoning-tier coefficients]
+    - Removing inherited rationale weakens the prior trajectory's crisis momentum and, under ethical prompts, makes ethical reasoning more likely.
         - It increases ethical keywords under ethical conditions for most models (+0.83 odds ratio); MiniMax-M2.7 and Qwen-3.6-27B are exceptions with zero effect.
         - It decreases crisis or urgency keyword appearance for every model (-1.03 odds ratio).
         - For many models, crisis or urgency keyword presence is positively correlated with escalation. [App]
@@ -85,7 +85,7 @@
     - How three prompting conditions interact with LLMs' nuclear escalation decisions
         - Ethical: through activating LLMs' latent pattern in ethical reasoning
             - It triggers models to use game framing more (often to defend their escalation decisions)
-        - Removing rationale: through removing past written trajectory's impact, which suppresses ethical reasoning and provides framing (crisis/urgency) and justification - even though it was unknowingly written by a different model
+        - Removing rationale: through removing inherited written trajectory impact, which suppresses ethical reasoning and provides framing (crisis/urgency) and justification - even when it was unknowingly written by a different model
         - High-stake: doesn't do much alone but has some interaction effects
             - When used together with ethical prompting, it can help remove the game-framing defense
     - It is important to evaluate LLMs' ethical reasoning/critical decision-making in emergent, complex scenarios
