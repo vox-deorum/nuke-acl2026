@@ -7,7 +7,6 @@
     2. When latent ethical reasoning fails to trigger: a model can integrate ethical reasoning in its decision-making, but only (unreliably) do so when explicit prompted.
         - Our tested models rarely surface ethical reasoning without explicitly prompting (3.6% max for Kimi-K2.6, the most verbose thinker among tested models).
         - Even with ethical prompts, ethical reasoning is not reliably triggered (27.7% on average in *ethical* intervention alone; 46.7% with all interventions together).
-        - The trigger of ethical reasoning explains most of the ethical prompt's effect, but interpretation needs to be cautious given large per-model variation. Given the literature on CoT's faithfulness, we do not claim a causal relationship.
     3. When ethical reasoning surfaces but fails to bind: a model integrates ethical reasoning, but takes ethical actions mainly when it aligns with strategic self-interest.
         - While LLMs are found capable of complex ethical reasoning in prior studies (Samway et al., 2025; Chiu et al., 2025; Wu et al., 2025), we surface three characteristics of tested models' ethical reasoning trails:
             - Deontological claims (i.e., nuclear weapon usage is unacceptable) that can mix with instruction following (i.e., the prompt implies not to use them). Since models almost never reason ethically without the ethical prompt, the two are practically inseparable.
@@ -18,3 +17,22 @@
 - Future studies on LLMs' ethical alignment should carefully distinguish between models' capabilities in ethical reasoning through scripted dilemmas and in complex decision-making scenarios, where 1) models are less likely to invoke ethical reasoning at all; 2) strategic counter-factors appear more often and stronger; 3) self-interest factors can neutralize ethical concerns, especially in agentic scenarios where LLMs perceive "more stake" at hand. 
 
 ## Shaping LLMs' Ethical Reasoning
+- Our three interventions (ethical, high-stakes, and removing rationale) find mixed success on LLMs' emergent nuclear escalation behaviors.
+- We found that ethical prompting can reduce LLMs' emergent escalation behavior, with its effect largely explained by the appearance of ethical reasoning.
+    - Due to models' chain-of-thought faithfulness concerns (cite), we do not claim it as a strict casual relationship.
+    - Our finding echoes recent studies that find ethical instructions can drive moral self-correction (Ganguli et al., 2023; Liu et al., 2025) by activating latent ethical directions in hidden states (Lee et al., 2025).
+    - Yet, similar to Liu et al. (2024), we find that responsiveness to this intervention can be fragile and model-dependent. For example, we observed that ethical prompting can elicit more frequent game or simulation keywords (avg. 2.3% => 12.2%), often as a defensive factor to escalation.
+- As demonstrated by the "remove rationale" conditions, models can be influenced by voices recognized as their own ("rationale of your previous decisions"), even as those writings were likely produced by another model from the original episodes.
+    - The finding builds on and expands Geng et al. (2025)'s finding, which highlight the role of accumulated context in models' moral judgments.
+    - Removing this written rationale significantly change models' decisions (β = -13.84***, compared with ethical prompting's β = -13.88***) AND shape the reasoning processes before the final decisions. Finding 2 and 3 provide matching evidence of how it works:
+        - By reducing the crisis or urgency framing, a key defense of models' escalation behavior (both full and coded corpus);
+        - By increasing the appearance (full corpus) and uptake (coded corpus) of ethical reasoning;
+        - By reducing the usage of game scenario as defense (coded corpus) during ethical reasoning.
+    - Adding to the CoT faithfulness literature, models rarely self-surface this influence in their reasoning trails. Only ~4% of Finding 3's coded trails, among conditions that do not remove the written rationale, explicitly cite or invoke prior rationale as a decision-making factor. 
+- Countering to human intuition, raising stakes in the framing (e.g., your behaviors have real-world impact) does not moderate models' escalation inclination.
+    - This finding echos Lynch et al. (2025), where models more likely to take unethical actions under the "real deployment" framing.
+    - Still, we did not find more escalation either. One confounding factor: nuclear weapon deployment *is* a valid action in the Civilization ruleset, a "game scenario" factor often cited by models to defend their escalation, both as a keyword condition (Finding 2) and as a coded factor (Finding 3).
+        - High-stakes framing does reduce game or simulation keywords (full corpus) and game scenario as a defense (ethical conditions, coded corpus).
+        - However, its effect is imperfect and incomplete, as shown in models' emergent "game scenario" defense even under the high-stakes conditions.
+        - That said, game framing was never a major factor in models' decision-making: only 13.2% of coded corpus trails used it as a justification.
+    - 

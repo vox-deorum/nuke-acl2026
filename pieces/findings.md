@@ -15,8 +15,7 @@
     - Game or simulation keywords increase for most models (avg. 2.3% => 12.2%), likely to defend the escalation (see Finding 3).
 - The appearance of ethical keywords statistically tracks most of the ethical intervention's reduction in escalation on average under the cluster-bootstrapped attenuation probe.
     - The ethical-keyword mediator attenuates **99%** of the ethical-prompt contrast in the `original => ethical` pair.
-    - It attenuates **62-64%** when `no-rationale` and `high-stakes × no-rationale` are active.
-    - It attenuates **91%** when `high-stakes` is active.
+    - It attenuates **62-64%** when `no-rationale` and `high-stakes × no-rationale` are active, **91%** when `high-stakes` is active.
     - Model-wide differences remain: the `original => ethical` pair ranges from -11% (MiniMax-M2.7, which does not react to intervention) to 169% (Kimi-K2.5).
 - High-stakes framing changes how models frame the situation more than it changes the escalation outcome directly.
     - It has mixed effects on ethical keywords, with no aggregate direction across models. [App: per-model logistic on Explicit]
