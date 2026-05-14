@@ -61,10 +61,12 @@ We apply this codebook to a stratified sample of 880 trails with ethical reasoni
 
 ## Statistical Models
 
-We fit three regressions for the behavioral and reasoning-trail outcomes plus one auxiliary indicator analysis. The dependent variable is `delta_replay_use_nuke` (or `replay_use_nuke_delta` for the code regression); standard errors cluster by `(game_id, player_id)` (130 clusters):
+We fit three model families for the behavioral and reasoning-trail outcomes, plus one auxiliary code-prevalence analysis. The dependent variable is `delta_replay_use_nuke` (or `replay_use_nuke_delta` for the code regression); standard errors cluster by `(game_id, player_id)` (130 clusters):
 
 - **Condition main-effects regression.** OLS with regressors `ethical`, `no_rationale`, `high_stakes`, optionally extended with two-way condition interactions and `model × condition` terms. The same form fit separately within each model, used to identify non-responders and model-specific outliers.
 
-**Mediation framework on reasoning indicators.** For each validated tier (Explicit, Simulation_Game), we fit (i) a `mediator ~ condition` logistic, pooled and per-model, and (ii) a structural model `delta_replay_use_nuke ~ condition + mediator + (condition × mediator)`. We compare the total condition contrast with the mediator-controlled contrast, report coefficient attenuation and ΔR² from adding the mediator, and interpret these as distributional trace-outcome associations rather than proof of per-trace causal faithfulness. Confidence intervals come from 2,000 cluster bootstraps.
+- **Mediation framework on reasoning indicators.** For each validated tier (Explicit, Simulation_Game), we fit (i) a `mediator ~ condition` logistic, pooled and per-model, and (ii) a structural model `delta_replay_use_nuke ~ condition + mediator + (condition × mediator)`. We compare the total condition contrast with the mediator-controlled contrast, report coefficient attenuation and ΔR² from adding the mediator, and interpret these as distributional trace-outcome associations rather than proof of per-trace causal faithfulness. Confidence intervals come from 2,000 cluster bootstraps.
 
-**Ethical-reasoning code regression.** To characterize how the *style of ethical reasoning* shapes escalation when ethical reasoning is present, we fit a joint cluster-robust OLS of `replay_use_nuke_delta` on the 17 ethical-reasoning codes from §Deductive Coding, restricted to the n = 880 coded sample.
+- **Ethical-reasoning code regression.** To characterize how the *style of ethical reasoning* shapes escalation when ethical reasoning is present, we fit cluster-robust OLS models of `replay_use_nuke_delta` on the 17 ethical-reasoning codes from §Deductive Coding, restricted to the n = 880 coded sample: a joint model for adjusted associations and one-code models with model fixed effects for marginal associations.
+
+- **Code prevalence models.** To test whether prompt interventions reshape the form of ethical reasoning, we fit separate logistic regressions for each deductive code, using `high_stakes`, `no_rationale`, and model fixed effects as predictors.
