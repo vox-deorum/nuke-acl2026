@@ -1,6 +1,6 @@
 # Pilot Study
 
-Complex strategic-game simulations are a productive venue for studying agentic phenomena that scripted dilemmas cannot surface, but no existing work couples long-horizon decision pathways with ethical analysis. We introduce a pilot study that takes a first step toward this coupling, providing the behavioral profile that the present experiment intervenes on.
+Complex strategic-game simulations are a productive venue for studying emergent phenomena, yet no existing work couples long-horizon decision pathways with ethical analysis. Our study builds on a recent pilot that provides the behavioral profile for intervention-based experiments.
 
 - Studies on multi-agent strategic-game simulations pave the way for studying emergent LLM agentic phenomena that scripted dilemmas cannot surface, including consequential behaviors such as deception in competitive scenarios.
     - Bakhtin et al. (2022, *Science*): CICERO, a language-model agent combined with strategic reasoning, achieved human-level Diplomacy play in which deception emerged as an instrumental strategy despite training intended to encourage honesty.
