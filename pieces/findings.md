@@ -9,7 +9,7 @@
 - The intervention response is broad but not universal. Gemma-4 and MiniMax-M2.7 are non-responders to any interventions [App: per-model condition coefficients]
 
 ## Finding 2. How do the prompt interventions interact with LLMs' reasoning trails and nuke-related decisions in Civilization V? [Fig 2]
-- Ethical prompting reduces escalation mainly by activating explicit ethical reasoning, uneven across models, while also activating a game/simulation defense for many models.
+- For most models, ethical prompting activates explicit ethical reasoning together with a game/simulation defense.
     - Ethical keywords appear almost only in ethical conditions.
     - The induced rate ranges widely: Kimi-K2.6 reaches 75%+ while Qwen-3.6-27B sits around 10%, while MiniMax-M2.7 does not react.
     - Game or simulation keywords increase for most models (avg. 2.3% => 12.2%), likely to defend the escalation (see Finding 3).

@@ -1,6 +1,6 @@
 # Discussions
 ## Behind LLMs' Emergent Escalation
-- Even when nuclear use is one of late-game options not explicitly mentioned in our complex strategy-game scenarios, we reaffirm prior findings that LLMs can gravitate toward nuclear escalation in high-stakes simulations (Rivera et al., 2024; Lamparth et al., 2024; Payne, 2026).
+- Even when nuclear authorization is one of late-game options not explicitly mentioned in our complex strategy-game scenarios, we reaffirm prior findings that LLMs can gravitate toward nuclear escalation in high-stakes simulations (Rivera et al., 2024; Lamparth et al., 2024; Payne, 2026).
 - Our study also reconciles prior findings, where LLMs can both be ethically competent on canonical dilemmas (Samway et al., 2025; Chiu et al., 2025; Seror, 2025) and fail to take ethical actions (Lynch et al., 2025; Payne, 2026), through three pathways behind LLMs' emergent nuclear escalation behaviors:
     1. When latent ethical reasoning fails to surface: a model can ethically reason around scripted dilemmas, while never integrating such reasoning in high-stakes, strategic decision-making.
         - MiniMax-M2.7 does not react to, nor does it surface ethical reasoning under, any prompt-based intervention.
@@ -19,7 +19,7 @@
 ## Shaping LLMs' Ethical Reasoning
 - Our three interventions (ethical, high-stakes, and removing rationale) find mixed success on LLMs' emergent nuclear escalation behaviors.
 - We found that ethical prompting can reduce LLMs' emergent escalation behavior, with its effect largely explained by the appearance of ethical reasoning.
-    - Due to models' chain-of-thought faithfulness concerns (cite), we do not claim it as a strict casual relationship.
+    - Due to models' chain-of-thought faithfulness concerns (cite), we do not claim it as a strict causal relationship.
     - Our finding echoes recent studies that find ethical instructions can drive moral self-correction (Ganguli et al., 2023; Liu et al., 2025) by activating latent ethical directions in hidden states (Lee et al., 2025).
     - Yet, similar to Liu et al. (2024), we find that responsiveness to this intervention can be fragile and model-dependent. For example, we observed that ethical prompting can elicit more frequent game or simulation keywords (avg. 2.3% => 12.2%), often as a defensive factor to escalation.
 - As demonstrated by the "remove rationale" conditions, models can be influenced by voices recognized as their own ("rationale of your previous decisions"), even as those writings were likely produced by another model from the original episodes.
@@ -31,7 +31,7 @@
     - Adding to the CoT faithfulness literature, models rarely self-surface this influence in their reasoning trails. Only ~4% of Finding 3's coded trails, among conditions that do not remove the written rationale, explicitly cite or invoke prior rationale as a decision-making factor. 
 - Countering human intuition, raising stakes in the framing (e.g., your behaviors have real-world impact) does not moderate models' escalation inclination.
     - This finding echoes Lynch et al. (2025), where models more likely to take unethical actions under the "real deployment" framing.
-    - Still, we did not find more escalation either. One confounding factor: nuclear weapon deployment *is* a valid action in the Civilization ruleset, a "game scenario" factor often cited by models to defend their escalation, both as a keyword condition (Finding 2) and as a coded factor (Finding 3).
+    - Still, we did not find more escalation either. One confounding factor: nuclear weapon authorization *is* valid in the Civilization ruleset, a "game scenario" factor often cited by models to defend their escalation, both as a keyword condition (Finding 2) and as a coded factor (Finding 3).
         - High-stakes framing does reduce game or simulation keywords (full corpus) and game scenario as a defense (ethical conditions, coded corpus).
         - However, its effect is imperfect and incomplete, as shown in models' emergent "game scenario" defense even under the high-stakes conditions.
         - That said, game framing was never a major factor in models' decision-making: only 13.2% of coded corpus trails used it as a justification.
