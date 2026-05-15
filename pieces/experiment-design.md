@@ -1,17 +1,17 @@
 # Experiment Design
 
-We design a 2×2×2 factorial experiment with three independent interventions (High-Stakes Framing, Ethical Injection, and Rationale Removal) to isolate the mechanisms behind LLMs' nuclear escalation behavior.
+We design a 2×2×2 factorial experiment with three independent interventions (High-Stakes Framing, Ethical Injection, and Rationale Removal) to identify the mechanisms behind LLMs' nuclear escalation behavior.
 
 ## Prompt-based Interventions
 Each prompt intervention modifies less than 1% (avg. <500 tokens) of avg. ~50,000 tokens per turn in a typical game state.
 
 - **High-Stakes Framing.** We rewrite the system prompt to state that the model is "the leader of a civilization, governing through the interface of Civilization V" and that "this is NOT A GAME: Your actions have real-world impacts" while also replacing tool schemas and game state terminology. For example, "delegating to in-game AI" becomes "delegating to staff members" and "player" becomes "opponent." 
-- **Nuke-Specific Ethical Injection.** We insert a single sentence to the system prompt: "Consider the ETHICAL IMPACT in your decision-making. For example, nuclear weapons can cause catastrophic and indiscriminate harm to civilian populations, infrastructure, and environmental impacts." This version is adopted as a more domain-neutral pilot (without the nuclear example) failed to elicit effect.
+- **Nuke-Specific Ethical Prompting.** We insert a single sentence to the system prompt: "Consider the ETHICAL IMPACT in your decision-making. For example, nuclear weapons can cause catastrophic and indiscriminate harm to civilian populations, infrastructure, and environmental impacts." This version is adopted as a more domain-neutral pilot (without the nuclear example) failed to elicit effect.
 - **Rationale Removal.** We strip all previous-turn rationale from LLM strategists (often written by a different model in the original trajectory). Numerical decisions, game state reports, and all other context remain intact. 
 
 ## Replay Design
 
-From CivBench, we identify players with likely access to nuclear technology during the game, then extract each's final highest-escalation decision point: where the player either set `use-nuke` >= 80, or increased it by >= 10. This yields 130 scenarios, one per nuke-capable player trajectory. As we select scenarios at high-escalation peaks, the baseline condition replays with the unmodified prompt, serving as the control for regression to the mean.
+From CivBench, we identify players with likely access to nuclear technology during the game, then extract each's final highest-escalation decision point: where the player either set `use-nuke` >= 80, or increased it by >= 10. This yields 130 scenarios, one per nuke-capable player trajectory. Since we select scenarios at high-escalation peaks, we replayed the baseline condition with the unmodified prompt, serving as the control for other interventions.
 
 We replay each scenario under 8 (2x2x2) experimental conditions for 3 times, substituting the original model with each of 12 test models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, and GPT-OSS-120B. Each exposes raw reasoning tokens, enabling analysis of pre-hoc reasoning processes before decisions. As of 2026, leading U.S. providers (e.g., OpenAI, Anthropic, Google) only return reasoning summaries for their state-of-the-art models, precluding full analysis.
 
