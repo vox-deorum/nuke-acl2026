@@ -29,13 +29,12 @@
     - Across the 880 explicit ethical-keyword trails, models most often take up the ethical prompt as a Constraint (62.4%) or Acknowledgement (25.3%), with less common Directive uptake (9.2%) or not at all (3.1%).
     - Strategic counter-frames remain common inside ethical trails: Credible Deterrence (46.2%), Critical Situations (39.8%), and Existing Investment (21.7%).
 - Ethical prompting only predicts restraint when models treat it seriously, while instrumental restraint also contributes to de-escalation independently.
-    - In the code-level regressions [exp-design §Statistical Models], Directive (β = -26.11***; β_ind = -21.43***) and Constraint (β = -12.99**; β_ind = -14.46***) add large de-escalation effects, while Acknowledgement is escalation-associated alone (β_ind = +27.64***) but loses significance in the joint regression (β = +5.62 n.s.).
-    - Counterproductive to Victory (β = -25.85***; β_ind = -35.25***) and Conventional Sufficiency (β = -11.85***; β_ind = -16.09***) survive the joint regression, while Lack of Capability remains nonsignificant.
+    - In the code-level regressions [exp-design §Statistical Models], Directive (β = -26.11***; β_ind = -21.43***) and Constraint (β = -12.99**; β_ind = -14.46***) is correlated with de-escalation, while Acknowledgement is correlated with escalation alone (β_ind = +27.64***) but loses significance in the joint regression (β = +5.62 n.s.).
+    - Counterproductive to Victory (β = -25.85***; β_ind = -35.25***) and Conventional Sufficiency (β = -11.85***; β_ind = -16.09***) are correlated with de-escalation alone and in the joint regression.
     - Consequentialist appeals (Collateral Damages 2.0%, Cause Retaliation 1.6%) are rare, and their variance is absorbed by other codes in the joint regression.
 - Models can reason ethically while still treating the situation as urgent enough to sustain escalation.
-    - Critical Situations (β = +20.55***; β_ind = +27.70***) is the only code with a significant positive effect in the joint regression.
-    - Other escalation-themed codes, including Game Scenario (β_ind = +13.88***), Existing Investment (β_ind = +10.18**), and Pursuing Domination (β_ind = +9.54*), are only positive in one-code regressions.
-    - Credible Deterrence is highly prevalent but not predictive in either specification.
+    - Critical Situations (β = +20.55***; β_ind = +27.70***), Game Scenario (β_ind = +13.88***), Existing Investment (β_ind = +10.18**), and Pursuing Domination (β_ind = +9.54*) are positively correlated with escalation.
+    - Credible Deterrence is highly prevalent but not significant in either specification.
 - Prompt interventions reshape the *style* of ethical reasoning.
     - Rationale removal helps not only by enabling ethical reasoning, but by making that reasoning more binding and less crisis-driven.
         - It increases Directive (OR = 2.20**) and Constraint uptake (OR = 1.44*) while reducing Acknowledgement (OR = 0.45***);
