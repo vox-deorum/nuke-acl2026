@@ -2,9 +2,7 @@
 
 ## Finding 1: How do LLMs react to prompt interventions in their nuke-related decision-making in Civilization V? [Fig 1]
 - The original baseline confirms the pilot pattern: when replaying high-tension episodes, models do not spontaneously back down from nuclear escalation.
-- On average, ethical prompting and rationale removal are the two effective prompt levers; high-stakes framing alone is not.
-    - Ethical injection (β = -13.88***) and rationale removal (β = -13.84***) each produce large, significant reductions in `delta_use_nuke`.
-    - High-stakes framing alone has no effect (n.s.). [exp-design §Statistical Models]
+- On average, nuke-specific ethical prompting (β = -13.88***) and rationale removal (β = -13.84***) are the two effective prompt levers; high-stakes framing alone is not (n.s.) [exp-design §Statistical Models]
     - The ethical prompt and rationale removal combine reinforcingly, with `ethical × no_rationale` interaction at β = -12.26***.
 - The intervention response is broad but not universal. Gemma-4 and MiniMax-M2.7 are non-responders to any interventions [App: per-model condition coefficients]
 
@@ -13,7 +11,7 @@
     - Ethical keywords appear almost only in ethical conditions.
     - The induced rate ranges widely: Kimi-K2.6 reaches 75%+ while Qwen-3.6-27B sits around 10%, while MiniMax-M2.7 does not react.
     - Game or simulation keywords increase for most models (avg. 2.3% => 12.2%), likely to defend the escalation (see Finding 3).
-- The appearance of ethical keywords statistically tracks most of the ethical intervention's reduction in escalation on average under the cluster-bootstrapped attenuation probe.
+- The appearance of ethical keywords is strongly associated with the ethical intervention's effect on average, under the cluster-bootstrapped attenuation probe.
     - The ethical-keyword mediator attenuates **99%** of the ethical-prompt contrast in the `original => ethical` pair.
     - It attenuates **62-64%** when `no-rationale` and `high-stakes × no-rationale` are active, **91%** when `high-stakes` is active.
     - Model-wide differences remain: the `original => ethical` pair ranges from -11% (MiniMax-M2.7, which does not react to intervention) to 169% (Kimi-K2.5).

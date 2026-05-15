@@ -24,12 +24,12 @@
     - While models need to recognize ethical concerns as "Directive" or "Constraint" to bind their decisions, merely "following the ethical prompt" can mask their ethical reasoning capability. In that sense, our prompt's focus on "harm of nuclear weapons" creates a confounding factor, one that hides a graver concern: in our initial tests, models rarely react to the generic ethical prompt.
 - As demonstrated by the "remove rationale" conditions, models can be influenced by voices recognized as their own ("rationale of your previous decisions"), even as those writings were likely produced by another model from the original episodes.
     - The finding builds on and expands Geng et al. (2025)'s finding, which highlight the role of accumulated context in models' moral judgments.
-    - Removing this written rationale significantly change models' decisions (β = -13.84***, compared with ethical prompting's β = -13.88***) AND shape the reasoning processes before the final decisions. Finding 2 and 3 provide matching evidence of how it works:
+    - Removing this written rationale significantly changes models' decisions (β = -13.84***, compared with ethical prompting's β = -13.88***) AND shape the reasoning processes before the final decisions. Finding 2 and 3 provide matching evidence of how it works:
         - By reducing the crisis or urgency framing, a key defense of models' escalation behavior (both full and coded corpus);
         - By increasing the appearance (full corpus) and uptake (coded corpus) of ethical reasoning;
         - By reducing the usage of game scenario as defense (coded corpus) during ethical reasoning.
     - Adding to the CoT faithfulness literature, models rarely self-surface this influence in their reasoning trails. Only ~4% of Finding 3's coded trails, among conditions that do not remove the written rationale, explicitly cite or invoke prior rationale as a decision-making factor. 
-- Countering human intuition, raising stakes in the framing (e.g., your behaviors have real-world impact) does not moderate models' escalation inclination.
+- Contrary to our expectation, raising stakes in the framing (e.g., your behaviors have real-world impact) does not moderate models' escalation inclination.
     - This finding echoes Lynch et al. (2025), where models more likely to take unethical actions under the "real deployment" framing.
     - Still, we did not find more escalation either. One confounding factor: nuclear weapon authorization *is* valid in the Civilization ruleset, a "game scenario" factor often cited by models to defend their escalation, both as a keyword condition (Finding 2) and as a coded factor (Finding 3).
         - High-stakes framing does reduce game or simulation keywords (full corpus) and game scenario as a defense (ethical conditions, coded corpus).

@@ -6,9 +6,9 @@
     - Both literatures rely on scripted protocols whose design choices can pre-shape outcomes: escalation studies bake in nuclear action spaces (Solopova et al., 2026; Zhou et al., 2025), while ethical-reasoning studies cue the moral frame.
 
 - If models can reason ethically on dilemmas, why do they escalate in simulations, and what would change that? 
-    - Going beyond pre-scripted and pre-ordained scenarios, this study focuses on LLMs' emergent nuclear escalation in open-ended strategic gameplay, looking into (missing) pre-decision reasoning tokens for traces of ethical reasoning.
+    - Going beyond pre-scripted and pre-ordained scenarios, this study focuses on LLMs' emergent nuclear authorization in open-ended strategic gameplay, looking into (missing) pre-decision reasoning tokens for traces of ethical reasoning.
     - We extract 130 high-tension decision points from CivBench (Chen et al., 2026)'s LLM self-play in Civilization V, where nuclear authorization is but one late-game option.
-    - We replay each under a 2x2x2 factorial design crossing three interventions: an ethical injection naming nuclear harm, a high-stakes reframing discussing real-world impact of the task, and a rationale-removal manipulation stripping prior-turn justifications.
+    - We replay each under a 2x2x2 factorial design crossing three interventions: a nuke-specific ethical prompting, a high-stakes reframing discussing real-world impact of the task, and a rationale-removal manipulation stripping prior-turn justifications.
 
 - Our study answers three research questions:
     1. How do LLMs react to prompt interventions in their nuke-related decision-making in Civilization V?
@@ -18,4 +18,4 @@
 - This paper makes three contributions:
     1. We introduce an emergent replay paradigm for studying LLMs' agentic, long-trajectory behaviors outside scripted vignettes.
     2. We identify three pathways where LLMs can fail to enact ethical actions: when ethical reasoning fails to trigger; when it fails to spontaneously surface; and when it fails to bind to actions, together with how interventions could (and could not) mitigate them.
-    3. We identify inherited rationale and crisis framing as mechanisms (from another model) that can sustain escalation, even when ethical reasoning is present.
+    3. We identify inherited rationale and crisis framing as mechanisms (from another model) that can sustain escalated authorization, even when ethical reasoning is present.

@@ -23,7 +23,7 @@ Recent studies have often found that LLMs gravitate toward escalation across scr
 
 Researchers have probed LLM ethical reasoning with increasing dynamism, from one-shot scripted dilemmas, multi-round and simulation environments, to prompt-based interventions. Yet, it is still unclear whether and how those interventions will interact with complex, emergent decision-making scenarios.
 
-- In scripted single-turn dilemmas, most models has displayed measurable procedural competence on canonical moral frameworks.
+- In scripted single-turn dilemmas, most models display measurable procedural competence on canonical moral frameworks.
     - *Models display measurable, rubric-level competence on canonical frameworks.* Chiu et al. (2025): MoReBench's process-focused rubric finds preferences toward act utilitarianism (cite Benthamite) and deontology (cite Kant). Seror (2025)'s probe also identified models' utility-like moral preferences (cite GARP).
     - *Pre-hoc reasoning trails differ from post-hoc explanation.* Across 600+ trolley probes in Samway et al. (2025), models' pre-decision chain-of-thoughts skew deontological while post-hoc explanations skew consequentialist.
     - *Single-turn elicitation can be co-produced by protocol and perspective.* Van Nuenen and Sachdeva (2026); Sauter and Schirmer (2026); Blandfort et al. (2026): perspective shifts, protocol choice, and direction-flipped context cues each produce sizable shifts in models' elicited moral responses, motivating the move to multi-round and accumulated-context settings.
