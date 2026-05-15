@@ -1,4 +1,6 @@
 # Experiment Design
+Appendix [X] describes reproduction of the study with links to the full reproduction dataset, experiment code, and analysis notebooks. 
+
 ## Prompt-based Interventions
 
 We design a 2×2×2 factorial experiment with three independent interventions to identify potential mechanisms behind LLMs' nuclear escalation behavior. Each prompt intervention modifies less than 1% (avg. <500 tokens) of avg. ~50,000 tokens per turn in a typical game state.
