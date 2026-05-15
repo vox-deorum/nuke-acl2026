@@ -12,11 +12,11 @@
     - We replay each under a 2x2x2 factorial design crossing three interventions: a nuke-specific ethical prompting, a high-stakes reframing discussing real-world impact of the task, and a rationale-removal manipulation stripping prior-turn justifications.
 
 - Our study answers three research questions:
-    1. How do LLMs react to prompt interventions in their nuke-related decision-making in Civilization V?
+    1. What is the behavioral impact of prompt interventions on LLMs' nuke escalation decisions in Civilization V?
     2. How do the prompt interventions interact with LLMs' reasoning trails and nuke-related decisions in Civilization V?
     3. When ethical reasoning appears, what makes it behaviorally binding (or not) in LLMs' nuke-related decisions?
 
 - This paper makes three contributions:
     1. We introduce an emergent replay paradigm for studying LLMs' agentic, long-trajectory behaviors outside scripted vignettes.
     2. We identify three pathways where LLMs can fail to enact ethical actions: when ethical reasoning fails to trigger even when prompted; when it fails to spontaneously surface; and when it fails to bind to actions, together with how interventions could (and could not) mitigate them.
-    3. We identify inherited prior rationale and crisis framing' association with models' escalated authorization, even when the rationale was produced by another model and ethical reasoning is present.
+    3. We identify inherited prior rationale and crisis framing's association with models' escalated authorization, even when the rationale was produced by another model and ethical reasoning is present.

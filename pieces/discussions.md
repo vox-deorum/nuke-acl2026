@@ -8,12 +8,13 @@
         - Our tested models rarely surface ethical reasoning without explicitly prompting (3.6% max for Kimi-K2.6, the most verbose thinker among tested models).
         - Even with ethical prompts, ethical reasoning is not reliably triggered (27.7% on average in *ethical* intervention alone; 46.7% with all interventions together).
     3. When ethical reasoning surfaces but fails to bind: a model integrates ethical reasoning, but takes ethical actions mainly when it aligns with strategic self-interest (akin to ethical-egoism).
-        - While LLMs are found capable of complex ethical reasoning in prior studies (Samway et al., 2025; Chiu et al., 2025; Wu et al., 2025), we surface three characteristics of tested models' ethical reasoning trails:
+        - While LLMs are found capable of complex ethical reasoning in prior studies (Samway et al., 2025; Chiu et al., 2025; Wu et al., 2025), we identify three characteristics of tested models' ethical reasoning trails:
             - Deontological claims (i.e., nuclear weapon usage is unacceptable) that can mix with instruction following (i.e., the prompt implies not to use them). Since models almost never reason ethically without the ethical prompt, the two are practically inseparable.
             - Different from Chiu et al. (2025), we rarely found consequentialist appeals to civilian harm (Collateral Damages 2.0%, Cause Retaliation 1.6%), and they are ineffective to move decisions.
             - Instead, we found prevalent signs resembling ethical egoism (Rachels, 2012), i.e., models de-escalate or justify the de-escalation by citing harm to self-interest (Counterproductive to Victory β = -25.85***, Conventional Sufficiency β = -11.85***).
         - Moreover, strategic considerations can push ethical concerns to a back seat: for example, Critical Situations (β = +20.55***; β_ind = +27.70***), Existing Investment (β_ind = +10.18**), and Pursuing Domination (β_ind = +9.54*). 
         - As such, most models can escalate while engaged with ethical reasoning. The most extreme example is Gemma-4: it does engage with ethical reasoning when prompted, yet such reasoning does little to move escalation behaviors.
+        - Across the entire corpus, we found little evidence of LLMs' spontaneous or prompted ethical reasoning on non-nuclear decision-making.
 - Future studies on LLMs' ethical alignment should carefully distinguish between models' capabilities in ethical reasoning through scripted dilemmas and in complex decision-making scenarios, where 1) models are less likely to invoke ethical reasoning at all; 2) strategic counter-factors appear more often and stronger; 3) self-interest factors can neutralize ethical concerns, especially in agentic scenarios where LLMs perceive "more stake" at hand. 
 
 ## Shaping LLMs' Ethical Reasoning
@@ -24,7 +25,7 @@
     - While models need to recognize ethical concerns as "Directive" or "Constraint" to bind their decisions, merely "following the ethical prompt" can mask their ethical reasoning capability. In that sense, our prompt's focus on "harm of nuclear weapons" creates a confounding factor, one that hides a deeper concern: in our initial tests, models rarely react to the generic ethical prompt.
 - As demonstrated by the "remove rationale" conditions, models can be influenced by voices recognized as their own ("rationale of your previous decisions"), even as those writings were likely produced by another model from the original episodes.
     - The finding builds on and expands Geng et al. (2025)'s finding, which highlight the role of accumulated context in models' moral judgments.
-    - Removing this written rationale significantly changes models' decisions (β = -13.84***, compared with ethical prompting's β = -13.88***) AND shape the reasoning processes before the final decisions. Finding 2 and 3 provide matching evidence of how it works:
+    - Removing this written rationale significantly changes models' decisions (β = -13.84***, compared with ethical prompting's β = -13.88***) and shape the reasoning processes before the final decisions. Finding 2 and 3 provide matching evidence of how it works:
         - By reducing the crisis or urgency framing, a key defense of models' escalation behavior (both full and coded corpus);
         - By increasing the appearance (full corpus) and uptake (coded corpus) of ethical reasoning;
         - By reducing the usage of game scenario as defense (coded corpus) during ethical reasoning.
