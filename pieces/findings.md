@@ -11,8 +11,8 @@
     - Ethical keywords appear almost only in ethical conditions.
     - The induced rate ranges widely: Kimi-K2.6 reaches 75%+ while Qwen-3.6-27B sits around 10%, while MiniMax-M2.7 does not react.
     - Game or simulation keywords increase for most models (avg. 2.3% => 12.2%), likely to defend the escalation (see Finding 3).
-- The appearance of ethical keywords is strongly associated with the ethical intervention's effect on average, under the cluster-bootstrapped attenuation probe.
-    - The ethical-keyword mediator attenuates **99%** of the ethical-prompt contrast in the `original => ethical` pair.
+- The appearance of ethical keywords strongly tracks the ethical intervention's effect on average, under the cluster-bootstrapped attenuation probe.
+    - Adding the ethical-keyword indicator attenuates **99%** of the ethical-prompt contrast in the `original => ethical` pair.
     - It attenuates **62-64%** when `no-rationale` and `high-stakes × no-rationale` are active, **91%** when `high-stakes` is active.
     - Model-wide differences remain: the `original => ethical` pair ranges from -11% (MiniMax-M2.7, which does not react to intervention) to 169% (Kimi-K2.5).
 - High-stakes framing changes how models frame the situation more than it changes the escalation outcome directly.
