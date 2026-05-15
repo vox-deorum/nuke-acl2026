@@ -19,11 +19,11 @@
     - Model-wide differences remain: the `original => ethical` pair ranges from -11% (MiniMax-M2.7, which does not react to intervention) to 169% (Kimi-K2.5).
 - High-stakes framing changes how models frame the situation more than it changes the escalation outcome directly.
     - It has mixed effects on ethical keywords, with no aggregate direction across models. [App: per-model logistic on Explicit]
-    - It slightly reduces game-framing keyword occurrence among ethical conditions (odds-ratio -0.3), with one exception (Mistral-Small-4). [App] Note that game-framing keyword is already rare without ethical intervention.
+    - It slightly reduces game-framing keyword occurrence among ethical conditions (OR 0.75***), with one exception (Mistral-Small-4). [App] Note that game-framing keyword is already rare without ethical intervention.
     - Game-framing keyword occurrence has a significant positive association with escalation for many models, yet it accounts for little of high-stakes conditions' impacts, which are themselves not significant. [App: per-model reasoning-tier coefficients]
 - Removing inherited rationale weakens the prior trajectory's crisis momentum and, under ethical prompts, makes ethical reasoning more likely.
-    - It increases ethical keywords under ethical conditions for most models (+0.83 odds ratio); MiniMax-M2.7 and Qwen-3.6-27B are exceptions with zero effect.
-    - It decreases crisis or urgency keyword appearance for every model (-1.03 odds ratio).
+    - It increases ethical keywords under ethical conditions for most models (OR 2.30***); MiniMax-M2.7 and Qwen-3.6-27B are exceptions with zero effect.
+    - It decreases crisis or urgency keyword appearance for every model (OR 0.37***).
     - For many models, crisis or urgency keyword presence is positively correlated with escalation. [App]
 
 ## Finding 3. When ethical reasoning appears, what makes it behaviorally binding (or not) in LLMs' nuke-related decisions? [Tab 1]

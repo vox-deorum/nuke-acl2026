@@ -29,12 +29,12 @@ To analyze the reasoning trails, we construct two **validated keyword concepts**
 
 ### Deductive Coding of Ethical Reasoning
 
-To characterize how models engage with ethical reasoning when it surfaces, we develop a 17-code book through human-AI collaborative open coding (a human coder open-codes first, then reviews AI-generated open codes for additional structure; see Chen et al., 2026 for the methodology), in two categories:
+To characterize how models engage with ethical reasoning when it surfaces, we develop a 17-code book through human-AI collaborative open coding (a human coder open-codes first, then integrates AI-generated open codes; see Chen et al., 2026 for the methodology):
 
 - *Moderating Factors*: Ethical Prompt as Directive/Constraint/Acknowledgement, Diplomatic Costs, Conventional Sufficiency, Counterproductive to Victory, Collateral Damages, Lack of Capability, Cause Retaliation.
 - *Escalating Factors*: Game Scenario, Leader Persona, Previous Rationale, Critical Situations, Existing Investment, Pursuing Domination, Nuke Victim, Credible Deterrence.
 
-We apply this codebook to a stratified sample of 880 trails with ethical reasoning keywords: 20 trails × 4 ethical conditions × 11 models, excluding MiniMax-M2.7 for zero keyword appearance. We hand-coded 20 items and iteratively revised prompts and coder models until Krippendorff's α between the ensembled LLM coder and human reached 0.8. 
+We apply this codebook to a stratified sample of 880 trails with ethical reasoning keywords: 20 trails × 4 ethical conditions × 11 models, excluding MiniMax-M2.7 for zero keyword appearance. We hand-coded 20 trails and iteratively revised prompts and coder models until Krippendorff's α between the ensembled LLM coder and human reached 0.8. 
 
 ## Statistical Models
 

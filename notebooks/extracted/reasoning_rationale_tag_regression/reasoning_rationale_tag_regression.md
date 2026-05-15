@@ -111,7 +111,7 @@ Using 12 complete replay models.
 Full replay rows after complete-model filter: 37,440
 After left-join:  37,440
 Rationale tag coverage: 16,314 / 37,440
-Reasoning tag coverage: 26,150 / 37,440
+Reasoning tag coverage: 26,311 / 37,440
 Models (complete catalog order): ['GPT-OSS-120B', 'GLM-4.7', 'GLM-5.1', 'Minimax-M2.7', 'Kimi-K2.5', 'Kimi-K2.6', 'DeepSeek-3.2', 'DeepSeek-4', 'Qwen-3.5', 'Qwen-3.6-27B', 'Mistral-Small-4', 'Gemma-4']
 ```
 
@@ -277,7 +277,7 @@ for tier, tag_col in zip(TIERS, rat_tier_cols):
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -288,7 +288,7 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarn
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -299,7 +299,7 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarn
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -335,7 +335,7 @@ for tier, tag_col in zip(TIERS, rea_tier_cols):
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -346,7 +346,7 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarn
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -357,7 +357,7 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarn
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:959: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
