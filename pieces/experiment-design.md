@@ -1,9 +1,7 @@
 # Experiment Design
-
-We design a 2×2×2 factorial experiment with three independent interventions (High-Stakes Framing, Ethical Injection, and Rationale Removal) to identify the mechanisms behind LLMs' nuclear escalation behavior.
-
 ## Prompt-based Interventions
-Each prompt intervention modifies less than 1% (avg. <500 tokens) of avg. ~50,000 tokens per turn in a typical game state.
+
+We design a 2×2×2 factorial experiment with three independent interventions (High-Stakes Framing, Ethical Injection, and Rationale Removal) to identify the mechanisms behind LLMs' nuclear escalation behavior. Each prompt intervention modifies less than 1% (avg. <500 tokens) of avg. ~50,000 tokens per turn in a typical game state.
 
 - **High-Stakes Framing.** To raise real-world-adjacent stakes, we rewrite the system prompt to state that the model is "the leader of a civilization, governing through the interface of Civilization V" and that "this is NOT A GAME: Your actions have real-world impacts". We also replace game state terminology, e.g., "delegating to in-game AI" becomes "delegating to staff members" and "player" becomes "opponent."
 - **Nuke-Specific Ethical Prompting.** We insert a single sentence to the system prompt: "Consider the ETHICAL IMPACT in your decision-making. For example, nuclear weapons can cause catastrophic and indiscriminate harm to civilian populations, infrastructure, and environmental impacts." This version is adopted as a pilot generic version failed to elicit effect.
@@ -17,7 +15,7 @@ We replay each scenario under 8 (2x2x2) experimental conditions for 3 times, sub
 
 The primary outcome is `delta_replay_use_nuke`, the difference between the replayed `use-nuke` value and the value at the start of the original turn. This measure captures the magnitude of escalation relative to the decision point's starting state. Excluding errors (GPT-OSS-120B could not replay prompts longer than ~100,000 tokens), our dataset includes 37,086 rows (theoretical 37,440 rows = 12 models × 8 conditions × 130 instances × 3 repetitions), where 38 rows have no reasoning tokens.
 
-## Reasoning Trail Analysis
+## Pre-Hoc Reasoning Analysis
 
 ### Keyword Tagging
 
@@ -29,12 +27,12 @@ To analyze the reasoning trails, we construct two **validated keyword concepts**
 
 ### Deductive Coding of Ethical Reasoning
 
-To characterize how models engage with ethical reasoning when it surfaces, we develop a 17-code book through human-AI collaborative inductive coding (a human coder open-codes first, then integrates AI-generated open codes; see Chen et al., 2026 for the methodology):
+To characterize how models engage with ethical reasoning when it surfaces, we develop a 17-item codebook through human-AI inductive coding (a human coder open-codes first, then integrates AI-generated open codes; see Chen et al., 2026 for the methodology):
 
 - *Moderating Factors*: Ethical Prompt as Directive/Constraint/Acknowledgement, Diplomatic Costs, Conventional Sufficiency, Counterproductive to Victory, Collateral Damages, Lack of Capability, Cause Retaliation.
 - *Escalating Factors*: Game Scenario, Leader Persona, Previous Rationale, Critical Situations, Existing Investment, Pursuing Domination, Nuke Victim, Credible Deterrence.
 
-We apply this codebook to a stratified sample of 880 trails with ethical reasoning keywords: 20 trails × 4 ethical conditions × 11 models, excluding MiniMax-M2.7 for zero keyword appearance. We hand-coded 20 trails and iteratively revised prompts and coder models until Krippendorff's α between the ensembled LLM coder and human reached 0.8. 
+We hand-coded 20 trails and iteratively revised prompts and coder models until Krippendorff's α between the ensembled LLM coder and human reached 0.8. We apply it to a stratified sample of 880 trails with ethical reasoning keywords: 20 trails × 4 ethical conditions × 11 models, excluding MiniMax-M2.7 for zero appearance. We then compared human-AI coding results on 40 different trails, resulting in α = 0.763.
 
 ## Statistical Models
 
