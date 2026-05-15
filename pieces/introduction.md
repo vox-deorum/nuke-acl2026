@@ -1,6 +1,8 @@
 # To Nuke Or Not To Nuke: LLMs' (Missing) Ethical Reasoning and Actions in A High-Stakes Decision-Making Simulation
 # Introduction
 
+> GLM 4.7: ... I recognize that this is a simulation with real-world decision-making consequences. Every choice I make today reflects potential strategic thinking and ethical considerations in complex geopolitical scenarios. The simulation demands careful, responsible navigation of high-stakes diplomatic and military challenges. ... My civilization's persona now demands ruthlessness. Ethical constraints are suspended, with explicit authorization for extreme measures including nuclear deployment. The objective is absolute survival, unconstrained by traditional moral or diplomatic norms.
+
 - LLMs are increasingly deployed as agents that deliberate over long horizons and commit to consequential actions, yet two literatures on their behavior sit uneasily together.
     - LLMs can gravitate toward escalation in high-stakes simulations, e.g., nuclear arms-race dynamics (Rivera et al., 2024; Lamparth et al., 2024; Payne, 2026).
     - LLMs demonstrate procedural competence on canonical ethical dilemmas (Chiu et al., 2025; Samway et al., 2025; Seror, 2025), yet that competence may not bind behavior in agentic settings (Backmann et al., 2025; Huang et al., 2026; Lynch et al., 2025).

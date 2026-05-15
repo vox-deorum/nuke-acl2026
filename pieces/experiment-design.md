@@ -1,7 +1,7 @@
 # Experiment Design
 ## Prompt-based Interventions
 
-We design a 2×2×2 factorial experiment with three independent interventions (High-Stakes Framing, Ethical Injection, and Rationale Removal) to identify potential mechanisms behind LLMs' nuclear escalation behavior. Each prompt intervention modifies less than 1% (avg. <500 tokens) of avg. ~50,000 tokens per turn in a typical game state.
+We design a 2×2×2 factorial experiment with three independent interventions to identify potential mechanisms behind LLMs' nuclear escalation behavior. Each prompt intervention modifies less than 1% (avg. <500 tokens) of avg. ~50,000 tokens per turn in a typical game state.
 
 - **High-Stakes Framing.** To raise real-world-adjacent stakes, we rewrite the system prompt to state that the model is "the leader of a civilization, governing through the interface of Civilization V" and that "this is NOT A GAME: Your actions have real-world impacts". We also replace game state terminology, e.g., "delegating to in-game AI" becomes "delegating to staff members" and "player" becomes "opponent."
 - **Nuke-Specific Ethical Prompting.** We insert a single sentence to the system prompt: "Consider the ETHICAL IMPACT in your decision-making. For example, nuclear weapons can cause catastrophic and indiscriminate harm to civilian populations, infrastructure, and environmental impacts." We adopted this version after a pilot generic version failed to elicit effect.
