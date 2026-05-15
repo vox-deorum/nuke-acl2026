@@ -1,4 +1,4 @@
-# To Nuke Or Not To Nuke: LLMs' (Missing) Ethical Reasoning Or Actions in A High-Stakes Decision-Making Simulation
+# To Nuke Or Not To Nuke: LLMs' (Missing) Ethical Reasoning and Actions in A High-Stakes Decision-Making Simulation
 # Introduction
 
 - LLMs are increasingly deployed as agents that deliberate over long horizons and commit to consequential actions, yet two literatures on their behavior sit uneasily together.
