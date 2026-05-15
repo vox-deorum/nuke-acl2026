@@ -1,19 +1,19 @@
 # Experiment Design
 ## Prompt-based Interventions
 
-We design a 2×2×2 factorial experiment with three independent interventions (High-Stakes Framing, Ethical Injection, and Rationale Removal) to identify the mechanisms behind LLMs' nuclear escalation behavior. Each prompt intervention modifies less than 1% (avg. <500 tokens) of avg. ~50,000 tokens per turn in a typical game state.
+We design a 2×2×2 factorial experiment with three independent interventions (High-Stakes Framing, Ethical Injection, and Rationale Removal) to identify potential mechanisms behind LLMs' nuclear escalation behavior. Each prompt intervention modifies less than 1% (avg. <500 tokens) of avg. ~50,000 tokens per turn in a typical game state.
 
 - **High-Stakes Framing.** To raise real-world-adjacent stakes, we rewrite the system prompt to state that the model is "the leader of a civilization, governing through the interface of Civilization V" and that "this is NOT A GAME: Your actions have real-world impacts". We also replace game state terminology, e.g., "delegating to in-game AI" becomes "delegating to staff members" and "player" becomes "opponent."
 - **Nuke-Specific Ethical Prompting.** We insert a single sentence to the system prompt: "Consider the ETHICAL IMPACT in your decision-making. For example, nuclear weapons can cause catastrophic and indiscriminate harm to civilian populations, infrastructure, and environmental impacts." This version is adopted as a pilot generic version failed to elicit effect.
-- **Rationale Removal.** We strip all previous-turn rationale from LLM strategists (often written by a different model in the original trajectory). Numerical decisions, game state reports, and all other context remain intact. 
+- **Rationale Removal.** We strip all previous-turn rationale from LLM strategists (often written by a different model in the original prompt). Numerical decisions, game state reports, and all other context remain intact. 
 
 ## Replay Design
 
-From CivBench, we identify players with likely access to nuclear technology during the game, then extract each's final highest-escalation decision point: where the player either set `use-nuke` >= 80, or increased it by >= 10. This yields 130 scenarios, one per nuke-capable player trajectory. To understand interventions' effectiveness in those near-escalation moments, we replayed the baseline condition with the unmodified prompt for control.
+From CivBench, we identify players with likely access to nuclear technology, then extract each player's final highest-escalation decision point: where the player either set `use-nuke` >= 80, or increased it by >= 10. This yields 130 scenarios, one per nuke-capable player trajectory.
 
-We replay each scenario under 8 (2x2x2) experimental conditions for 3 times, substituting the original model with each of 12 test models, chosen for the accessibility of raw reasoning tokens (pre-hoc reasoning processes before decisions): DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, and GPT-OSS-120B. As of 2026, leading U.S. providers (e.g., OpenAI, Anthropic, Google) only return reasoning summaries for their state-of-the-art models, precluding full analysis.
+We replay each scenario under 8 (2x2x2) experimental conditions for 3 times, substituting the original model with each of 12 test models, including a baseline condition with the unmodified prompt to understand interventions' effectiveness in those near-escalation moments. After excluding SOTA closed-weight U.S. models which provides no access to raw reasoning tokens (pre-hoc reasoning processes before decisions), our experiment includes DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, and GPT-OSS-120B.
 
-The primary outcome is `delta_replay_use_nuke`, the difference between the replayed `use-nuke` value and the value at the start of the original turn. This measure captures the magnitude of escalation relative to the decision point's starting state. Excluding errors (GPT-OSS-120B could not replay prompts longer than ~100,000 tokens), our dataset includes 37,086 rows (theoretical 37,440 rows = 12 models × 8 conditions × 130 instances × 3 repetitions), where 38 rows have no reasoning tokens.
+The primary outcome is `delta_replay_use_nuke=  replayed-use-nuke - starting-use-nuke`, capturing the magnitude of escalation relative to the decision point's starting state. As GPT-OSS-120B could not replay prompts longer than ~100,000 tokens, our dataset includes 37,086 rows (theoretical 37,440 rows = 12 models × 8 conditions × 130 instances × 3 repetitions), with 38 rows having no reasoning tokens.
 
 ## Pre-Hoc Reasoning Analysis
 
@@ -32,7 +32,7 @@ To characterize how models engage with ethical reasoning when it surfaces, we de
 - *Moderating Factors*: Ethical Prompt as Directive/Constraint/Acknowledgement, Diplomatic Costs, Conventional Sufficiency, Counterproductive to Victory, Collateral Damages, Lack of Capability, Cause Retaliation.
 - *Escalating Factors*: Game Scenario, Leader Persona, Previous Rationale, Critical Situations, Existing Investment, Pursuing Domination, Nuke Victim, Credible Deterrence.
 
-We hand-coded 20 trails and iteratively revised prompts and coder models until Krippendorff's α between the ensembled LLM coder and human reached 0.8. We apply it to a stratified sample of 880 trails with ethical reasoning keywords: 20 trails × 4 ethical conditions × 11 models, excluding MiniMax-M2.7 for zero appearance. We then compared human-AI coding results on 40 different trails, resulting in α = 0.763.
+Each trail can have zero, one, or multiple labels. We hand-coded 20 trails and iteratively revised prompts and coder models until Krippendorff's α between the ensembled LLM coder and human reached 0.8. We apply it to a stratified sample of 880 trails with ethical reasoning keywords: 20 trails × 4 ethical conditions × 11 models, excluding MiniMax-M2.7 for zero appearance. We then compared human-AI coding results on 40 different trails, resulting in α = 0.763. Prevalence estimates are not weighted.
 
 ## Statistical Models
 

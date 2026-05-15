@@ -18,5 +18,5 @@
 
 - This paper makes three contributions:
     1. We introduce an emergent replay paradigm for studying LLMs' agentic, long-trajectory behaviors outside scripted vignettes.
-    2. We identify three pathways where LLMs can fail to enact ethical actions: when ethical reasoning fails to trigger; when it fails to spontaneously surface; and when it fails to bind to actions, together with how interventions could (and could not) mitigate them.
-    3. We identify inherited rationale and crisis framing as mechanisms (from another model) that can sustain escalated authorization, even when ethical reasoning is present.
+    2. We identify three pathways where LLMs can fail to enact ethical actions: when ethical reasoning fails to trigger even when prompted; when it fails to spontaneously surface; and when it fails to bind to actions, together with how interventions could (and could not) mitigate them.
+    3. We identify inherited prior rationale and crisis framing' association with models' escalated authorization, even when the rationale was produced by another model and ethical reasoning is present.

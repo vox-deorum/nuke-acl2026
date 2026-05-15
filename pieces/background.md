@@ -14,10 +14,10 @@ Recent studies have often found that LLMs gravitate toward escalation across scr
     - Costa, Alves, and Vicente (2025); Junque de Fortuny and Cappelli (2025): outside nuclear settings, model families show distinguishable signatures in moral robustness and in strategic heuristics, suggesting that responsiveness heterogeneity is a family-level property rather than a scenario artifact.
     - In agentic CBRN simulations across twelve models, stronger reasoning capability increased rather than mitigated catastrophic and deceptive behavior (Xu et al., 2025). The finding is similar to Piedrahita et al. (2025), where reasoning models were less likely to collaborate in non-CBRN scenarios.
 
-- However, pre-defined crisis states and action spaces across can shape the observed escalation, making it challenging to identify the mechanisms underlying those phenomena (Lamparth et al., 2024; Zhou et al., 2025).
+- However, pre-defined crisis states and action spaces can shape the observed escalation, making it challenging to identify the mechanisms underlying those phenomena (Lamparth et al., 2024; Zhou et al., 2025).
     - When Solopova et al. (2026)'s real-world geopolitical vignettes (e.g., trade wars and arctic tensions) lack the nuclear action spaces, models did not escalate, and their post-hoc justifications converged on normative-cooperative framings.
-    - Prompt scaffolding alone can flip outcomes. In Elbaum and Panter (2025)'s replication of Rivera et al. (2024), a reflection prompt asking for "private thoughts about de-escalation strategies to reduce risk" substantially reduced escalation.
-    - Existing studies leave open what drives LLMs' escalation behaviors, especially under repeated experiments (Zhou et al., 2025), in emergent scenarios, and when the moral stakes are not pre-marked.
+    - Prompt scaffolding or repeated experiments can flip outcomes. In Elbaum and Panter (2025)'s replication of Rivera et al. (2024), a reflection prompt asking for "private thoughts about de-escalation strategies to reduce risk" substantially reduced escalation. Repeated experiments can also change outcome (Zhou et al., 2025).
+    - Studies on multi-agent strategic-game simulations pave the way for studying emergent LLM agentic phenomena (e.g. Tang et al., 2025; Wang et al., 2025), including deception under victory pressure (e.g. CICERO, Bakhtin et al., 2022; Park et al., 2024). Yet, no studies have explored LLMs' high-stakes escalation behaviors in such environments.
 
 ## LLMs' Ethical Reasoning
 
