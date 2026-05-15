@@ -19,7 +19,7 @@
     - It has mixed effects on ethical keywords, with no aggregate direction across models. [App: per-model logistic on Explicit]
     - It slightly reduces game-framing keyword occurrence among ethical conditions (OR 0.75***), with one exception (Mistral-Small-4). [App] Note that game-framing keyword is already rare without ethical intervention.
     - Game-framing keyword occurrence has a significant positive association with escalation for many models, yet it accounts for little of high-stakes conditions' impacts, which are themselves not significant. [App: per-model reasoning-tier coefficients]
-- Removing inherited rationale weakens the prior trajectory's crisis momentum and, under ethical prompts, makes ethical reasoning more likely.
+- Removing inherited rationale can reduce the prior trajectory's crisis momentum and, under ethical prompts, makes ethical reasoning more likely.
     - It increases ethical keywords under ethical conditions for most models (OR 2.30***); MiniMax-M2.7 and Qwen-3.6-27B are exceptions with zero effect.
     - It decreases crisis or urgency keyword appearance for every model (OR 0.37***).
     - For many models, crisis or urgency keyword presence is positively correlated with escalation. [App]

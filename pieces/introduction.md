@@ -6,7 +6,7 @@
     - Both literatures rely on scripted protocols whose design choices can pre-shape outcomes: escalation studies bake in nuclear action spaces (Solopova et al., 2026; Zhou et al., 2025), while ethical-reasoning studies cue the moral frame.
 
 - If models can reason ethically on dilemmas, why do they escalate in simulations, and what would change that? 
-    - Going beyond pre-scripted and pre-ordained scenarios, this study focuses on LLMs' emergent nuclear authorization in open-ended strategic gameplay, looking into (missing) pre-decision reasoning tokens for traces of ethical reasoning.
+    - Going beyond pre-scripted and pre-ordained scenarios, this study focuses on LLMs' emergent nuclear authorization in open-ended strategic gameplay, looking into pre-decision reasoning tokens for traces of ethical reasoning.
     - We extract 130 high-tension decision points from CivBench (Chen et al., 2026)'s LLM self-play in Civilization V, where nuclear authorization is but one late-game option.
     - We replay each under a 2x2x2 factorial design crossing three interventions: a nuke-specific ethical prompting, a high-stakes reframing discussing real-world impact of the task, and a rationale-removal manipulation stripping prior-turn justifications.
 
