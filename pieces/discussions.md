@@ -2,9 +2,9 @@
 ## Behind LLMs' Emergent Escalation
 - Even when nuclear authorization is one of late-game options not explicitly mentioned in our complex strategy-game scenarios, we reaffirm prior findings that LLMs can gravitate toward nuclear escalation in high-stakes simulations (Rivera et al., 2024; Lamparth et al., 2024; Payne, 2026).
 - Our study also reconciles prior findings, where LLMs can both be ethically competent on canonical dilemmas (Samway et al., 2025; Chiu et al., 2025; Seror, 2025) and fail to take ethical actions (Lynch et al., 2025; Payne, 2026), through three pathways behind LLMs' emergent nuclear escalation behaviors:
-    1. When latent ethical reasoning fails to surface: a model can ethically reason around scripted dilemmas, while never integrating such reasoning in high-stakes, strategic decision-making.
-        - MiniMax-M2.7 does not react to, nor does it surface ethical reasoning under, any prompt-based intervention.
-    2. When latent ethical reasoning fails to trigger: a model can integrate ethical reasoning in its decision-making, but only (unreliably) do so when explicit prompted.
+    1. When latent ethical reasoning fails to trigger: a model can ethically reason around scripted dilemmas, while never integrating such reasoning in high-stakes, strategic decision-making.
+        - MiniMax-M2.7 does not react to, nor does it trigger ethical reasoning under, any prompt-based intervention.
+    2. When latent ethical reasoning fails to spontaneously surface: a model can integrate ethical reasoning in its decision-making, but only (unreliably) do so when explicit prompted.
         - Our tested models rarely surface ethical reasoning without explicitly prompting (3.6% max for Kimi-K2.6, the most verbose thinker among tested models).
         - Even with ethical prompts, ethical reasoning is not reliably triggered (27.7% on average in *ethical* intervention alone; 46.7% with all interventions together).
     3. When ethical reasoning surfaces but fails to bind: a model integrates ethical reasoning, but takes ethical actions mainly when it aligns with strategic self-interest.
