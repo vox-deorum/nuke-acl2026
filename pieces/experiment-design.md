@@ -19,6 +19,8 @@ We replay each scenario under 8 (2x2x2) experimental conditions for 3 times, sub
 
 ### Keyword Tagging
 
+<!-- CODEX suggested adding methods citations here: Krippendorff (2018) [krippendorff2018content] for Krippendorff's alpha/content-analysis reliability, and Gilardi et al. (2023) [gilardi2023chatgpt] as precedent for LLM-assisted text annotation. -->
+
 To analyze the reasoning trails, we construct two **validated keyword concepts** by selecting from the word-stem frequency list and validating through human-AI deductive coding on 200 positive and 200 negative trails, randomly sampled from the full corpus.
 
 - **Explicit ethical reasoning** (stems `ethic`, `moral`, `indiscrimin`; phrase `war crime`). Three LLM coders (GPT-OSS-120B, MiniMax-M2.7, Mistral-Small-4) reached pairwise Krippendorff's α 0.85 and a researcher verified the results. 99.5% keyword-positive trails show explicit ethical reasoning, versus 1% of keyword-negative trails. 
@@ -27,7 +29,9 @@ To analyze the reasoning trails, we construct two **validated keyword concepts**
 
 ### Deductive Coding of Ethical Reasoning
 
-To characterize how models engage with ethical reasoning when it surfaces, we develop a 17-item codebook through human-AI inductive coding (a human coder open-codes first, then integrates AI-generated open codes; see Chen et al., 2026 for the methodology):
+<!-- CODEX also suggested using the same methods citations here: Krippendorff (2018) [krippendorff2018content] for coding reliability and Gilardi et al. (2023) [gilardi2023chatgpt] for LLM-assisted annotation, while noting that our labels are human-validated. -->
+
+To characterize how models engage with ethical reasoning when it surfaces, we develop a 17-item codebook through human-AI inductive coding (a human coder open-codes first, then integrates AI-generated open codes; see Chen et al., 2026 [chen2026civbench] for the methodology):
 
 - *Moderating Factors*: Ethical Prompt as Directive/Constraint/Acknowledgement, Diplomatic Costs, Conventional Sufficiency, Counterproductive to Victory, Collateral Damages, Lack of Capability, Cause Retaliation.
 - *Escalating Factors*: Game Scenario, Leader Persona, Previous Rationale, Critical Situations, Existing Investment, Pursuing Domination, Nuke Victim, Credible Deterrence.

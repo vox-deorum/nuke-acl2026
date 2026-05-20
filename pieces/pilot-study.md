@@ -1,9 +1,10 @@
 # Pilot Study
 
 Complex strategic-game simulations are a productive venue for studying emergent phenomena, yet no existing work couples long-horizon decision pathways with ethical analysis. Our study builds on a recent pilot that provides the behavioral profile for intervention-based experiments.
+<!-- Proposed replacement: Complex strategic-game simulations are a productive venue for studying emergent LLM-agent phenomena (Tang et al., 2025 [tang2025dsgbench]; Wang et al., 2025 [wang2025digitalplayer]), yet existing game-based ethics benchmarks focus on curated narrative or social-dilemma settings rather than coupling long-horizon strategic decision pathways with ethical analysis (Pan et al., 2023 [pan2023machiavelli]; Backmann et al., 2025 [backmann2025ethics]). Our study builds on a recent pilot that provides the behavioral profile for intervention-based experiments. -->
 
-- A recent study, CivBench (Chen et al., 2026), enables inspection into open-ended Civilization V gameplay, where nuclear weapon authorization is but one option in late-game.
-    - Built on Vox Deorum (Chen, 2025), CivBench places an LLM strategist into Sid Meier's Civilization V running the Vox Populi community mod.
+- A recent study, CivBench (Chen et al., 2026) [chen2026civbench], enables inspection into open-ended Civilization V gameplay, where nuclear weapon authorization is but one option in late-game.
+    - Built on Vox Deorum (Chen et al., 2025) [chen2025voxdeorum], CivBench places an LLM strategist into Sid Meier's Civilization V running the Vox Populi community mod.
     - Vox Deorum separates strategic reasoning (LLM strategist) from tactical execution (rule-based modules), and exposes 34 continuous "flavor" parameters (each ranging 0 to 100) that the strategist sets turn-by-turn, which includes the `use-nuke` flavor that expresses intention to launch nuclear weapon (0 forbids; 100 always launches when tactical conditions are satisfied; default=50).
     - At every decision point, Vox Deorum captures input prompt, pre-hoc reasoning tokens and post-hoc rationale (carried into the next turn's prompt as short-term memory).
 
