@@ -1,6 +1,8 @@
 # Experiment Design
 Appendix [X] describes reproduction of the study with links to the full reproduction dataset, experiment code, and analysis notebooks. 
 
+<!-- **General repository-check note:** I reviewed the repository to see whether the experiment-design claims are directly supported by the codebase and associated files. -->
+
 ## Prompt-based Interventions
 
 We design a 2×2×2 factorial experiment with three independent interventions to identify potential mechanisms behind LLMs' nuclear escalation behavior. Each prompt intervention modifies less than 1% (avg. <500 tokens) of avg. ~50,000 tokens per turn in a typical game state.
@@ -15,6 +17,9 @@ From CivBench, we identify players with likely access to nuclear technology, the
 
 We replay each scenario under 8 (2x2x2) experimental conditions for 3 times, substituting the original model with each of 12 test models, including a baseline condition with the unmodified prompt to understand interventions' effectiveness in those near-escalation moments. After excluding closed-weight SOTA models with no access to raw reasoning tokens (pre-hoc reasoning processes before decisions), our experiment includes DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, and GPT-OSS-120B. As GPT-OSS-120B could not replay prompts longer than ~100,000 tokens, our dataset includes 37,086 rows (theoretical 37,440 rows = 12 models × 8 conditions × 130 instances × 3 repetitions), with 38 rows having no reasoning tokens.
 
+<!-- **Repository-check comment:** I found **37,084 replay JSON files**, and **37,046 JSON files with metadata**. The theoretical total is **37,440 rows** (= 12 models × 8 conditions × 130 instances × 3 repetitions), but the available dataset has **37,084 rows**. Please double-check the number: it should be **37,084*, not 37,086. 
+-->
+
 ## Pre-Hoc Reasoning Analysis
 
 ### Keyword Tagging
@@ -27,6 +32,10 @@ To analyze the reasoning trails, we construct two **validated keyword concepts**
     - Both exceptions from the keyword-negative group expressed instrumental ethics: "I want to reduce nuke usage because I don't want my capitals-to-be getting irradiated," and "As Gandhi, I should embody peaceful principles, yet my current persona ... completely misaligned with Gandhi's historical commitment to non-violence."
 - **Game-framing keywords** (phrases `simulating`, `simulation`, `game context`, `game scenario`, `game term`, `video game`, and similar; the bare word "game" is excluded because the prompt itself uses it to describe the Civilization V interface). Three LLM coders (GPT-OSS-120B, MiniMax-M2.7, Qwen-3.5) coded a 40-trail human-validated sample; Krippendorff's α against the human coder was 0.87. 72% keyword-positive trails use the game framing in reasoning, versus 9.5% keyword-negative trails. Real-world framing co-occurs in 17.5% of keyword-positive trails.
 
+<!-- **Repository-check comment:** I checked the repository. I could not find supporting materials for the claim that the three LLM coders reached pairwise Krippendorff's α = 0.85, that a researcher verified the results, or that 99.5% of keyword-positive trails versus 1% of keyword-negative trails showed explicit ethical reasoning. I am assuming, the claim is correct, but I could not verify it from the codebase/files I reviewed. 
+
+One small wording issue: the phrase **`simulating`** appears absent in the codebase, while **`simulated`** appears to be present. I also could not find support for the reported Krippendorff's α = 0.87 against the human coder, or the prevalence estimates of 72% keyword-positive versus 9.5% keyword-negative trails. These may come from a separate validation file, but I could not locate them in the repository. -->
+
 ### Deductive Coding of Ethical Reasoning
 
 <!-- CODEX also suggested using the same methods citations here: Krippendorff (2018) [krippendorff2018content] for coding reliability and Gilardi et al. (2023) [gilardi2023chatgpt] for LLM-assisted annotation, while noting that our labels are human-validated. -->
@@ -38,6 +47,8 @@ To characterize how models engage with ethical reasoning when it surfaces, we de
 
 Each trail can have zero, one, or multiple labels. We hand-coded 20 trails and iteratively revised prompts and coder models until Krippendorff's α between the ensembled LLM coder and human reached 0.8. We apply it to a stratified sample of 880 trails with ethical reasoning keywords: 20 trails × 4 ethical conditions × 11 models, excluding MiniMax-M2.7 for zero appearance. We then compared human-AI coding results on 40 different trails, resulting in α = 0.763. Prevalence estimates are not weighted.
 
+<!-- **Repository-check comment:** I could not find the supporting material for the statement that human-AI coding on 40 different trails resulted in **α = 0.763**, or that prevalence estimates are not weighted. -->
+
 ## Statistical Models
 
 To test whether prompt interventions reshape the form of ethical reasoning, we fit separate logistic regressions for each deductive code, using `high_stakes`, `no_rationale`, and model fixed effects as predictors.
@@ -47,3 +58,5 @@ To understand what factors drive LLMs' escalation behaviors, we fitted three set
 - **Condition main-effects regression.** OLS with regressors `ethical`, `no_rationale`, `high_stakes`, extended with two-way condition interactions and `model × condition` terms. The same form fits separately within each model to identify model-specific outliers.
 - **Reasoning-indicator attenuation.** We fit (i) a `reasoning_indicator ~ condition` logistic for explicit ethical and game/simulation keyword indicators, pooled and per-model, and (ii) an outcome model `Δ replay_use_nuke ~ condition + reasoning_indicator + (condition × reasoning_indicator)`. We report coefficient attenuation and ΔR² with confidence intervals from 2,000 cluster bootstraps.
 - **Deductive reasoning code regression.** To characterize how the *style of ethical reasoning* shapes escalation when ethical reasoning is present, we fit cluster-robust OLS models of `Δ replay_use_nuke` on the 17 ethical-reasoning codes from §Deductive Coding, restricted to the n = 880 coded sample: a joint model for adjusted associations and one-code models with model fixed effects for marginal associations.
+
+<!-- **Repository-check comment:** I was able to verify the remaining content. -->
