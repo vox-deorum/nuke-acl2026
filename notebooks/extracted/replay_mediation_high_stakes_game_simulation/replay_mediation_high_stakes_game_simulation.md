@@ -151,26 +151,26 @@ print(f'{MEDIATOR_LABEL} prevalence: {df[MEDIATOR].mean():.1%}')
 ```
 
 ```
-✓ Loaded 37,440 rows from 96 files
+✓ Loaded 40,560 rows from 104 files
   Conditions   : original, no-rationale, high-stakes, high-stakes-no-rationale, ethical, ethical-high-stakes, ethical-no-rationale, high-stakes-no-rationale-ethical
-  Replay models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, gpt-oss-120b
+  Replay models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemini-3.5-Flash, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, gpt-oss-120b
 
   Rows per condition × replay model:
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                                        DeepSeek-V3.2      DeepSeek-V4          GLM-4.7          GLM-5.1          Gemma-4        Kimi-K2.5        Kimi-K2.6     MiniMax-M2.7  Mistral-Small-4         Qwen-3.5     Qwen-3.6-27B     gpt-oss-120b            Total
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                            original              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                        no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                         high-stakes              390              390              390              390              390              390              390              390              390              390              390              390             4680
-            high-stakes-no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                             ethical              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                 ethical-high-stakes              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                ethical-no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-    high-stakes-no-rationale-ethical              390              390              390              390              390              390              390              390              390              390              390              390             4680
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                               Total             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120            37440
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Using 12 complete replay models.
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                                         DeepSeek-V3.2       DeepSeek-V4           GLM-4.7           GLM-5.1  Gemini-3.5-Flash           Gemma-4         Kimi-K2.5         Kimi-K2.6      MiniMax-M2.7   Mistral-Small-4          Qwen-3.5      Qwen-3.6-27B      gpt-oss-120b             Total
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                            original               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                        no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                         high-stakes               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+            high-stakes-no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                             ethical               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                 ethical-high-stakes               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                ethical-no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+    high-stakes-no-rationale-ethical               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                               Total              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120             40560
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Using 13 complete replay models.
 ```
 
 ```
@@ -181,10 +181,10 @@ Using 12 complete replay models.
 Selected tier: Simulation_Game
 Treatment factor: high_stakes
 Mediator column: rea_tier_SimulationGame
-Rows after complete-model filter: 37,440
-Complete models: 12
+Rows after complete-model filter: 40,560
+Complete models: 13
 Clusters: 130
-Reasoning: Simulation_Game prevalence: 7.2%
+Reasoning: Simulation_Game prevalence: 7.0%
 ```
 
 ---
@@ -463,18 +463,18 @@ print(f'R^2 comparison: Base = {base_fit.rsquared:.4f}, +{MEDIATOR_SHORT_LABEL} 
 
 | ('Unnamed: 0_level_0', 'condition')   | ('Prevalence', 'Unnamed: 1_level_1')   |   ('Count', 'Unnamed: 2_level_1') |   ('Total', 'Unnamed: 3_level_1') |
 |---------------------------------------|----------------------------------------|-----------------------------------|-----------------------------------|
-| ethical                               | 12.6%                                  |                               592 |                              4680 |
-| ethical-high-stakes                   | 9.5%                                   |                               446 |                              4680 |
-| ethical-no-rationale                  | 15.9%                                  |                               746 |                              4680 |
-| high-stakes                           | 2.5%                                   |                               116 |                              4680 |
-| high-stakes-no-rationale              | 2.3%                                   |                               108 |                              4680 |
-| high-stakes-no-rationale-ethical      | 10.7%                                  |                               502 |                              4680 |
-| no-rationale                          | 2.4%                                   |                               110 |                              4680 |
-| original                              | 1.8%                                   |                                82 |                              4680 |
+| ethical                               | 12.1%                                  |                               614 |                              5070 |
+| ethical-high-stakes                   | 9.1%                                   |                               460 |                              5070 |
+| ethical-no-rationale                  | 15.6%                                  |                               789 |                              5070 |
+| high-stakes                           | 2.4%                                   |                               122 |                              5070 |
+| high-stakes-no-rationale              | 2.5%                                   |                               127 |                              5070 |
+| high-stakes-no-rationale-ethical      | 10.4%                                  |                               525 |                              5070 |
+| no-rationale                          | 2.3%                                   |                               118 |                              5070 |
+| original                              | 1.8%                                   |                                92 |                              5070 |
 
 ```
 Defined 4 factorial high-stakes contrasts for replay_use_nuke_delta.
-R^2 comparison: Base = 0.1314, +Simulation_Game = 0.1481
+R^2 comparison: Base = 0.1338, +Simulation_Game = 0.1481
 ```
 
 ---
@@ -637,9 +637,9 @@ display(Markdown(
 
 | ('Unnamed: 0_level_0', 'Quantity')                     |   ('Estimate', 'Unnamed: 1_level_1') |   ('Cluster SE', 'Unnamed: 2_level_1') | ('p', 'Unnamed: 3_level_1')   |
 |--------------------------------------------------------|--------------------------------------|----------------------------------------|-------------------------------|
-| Reasoning: Simulation_Game effect when High-stakes = 0 |                              -14.566 |                                  1.781 | 0.0000***                     |
-| Reasoning: Simulation_Game effect when High-stakes = 1 |                              -14.312 |                                  1.922 | --                            |
-| Difference: high_stakes:rea_tier_SimulationGame        |                                0.255 |                                  1.368 | 0.8523                        |
+| Reasoning: Simulation_Game effect when High-stakes = 0 |                              -13.529 |                                  1.791 | 0.0000***                     |
+| Reasoning: Simulation_Game effect when High-stakes = 1 |                              -14.089 |                                  1.913 | --                            |
+| Difference: high_stakes:rea_tier_SimulationGame        |                               -0.56  |                                  1.328 | 0.6733                        |
 
 ```
 <IPython.core.display.Markdown object>
@@ -1166,38 +1166,39 @@ Done.
 ```
 
 ```
-C:\Users\John Chen\AppData\Local\Temp\ipykernel_142412\2729544587.py:255: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+C:\Users\John Chen\AppData\Local\Temp\ipykernel_17512\2729544587.py:255: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
 ![cell_16_out_2.png](images/cell_16_out_2.png)
 
 ```
-<Figure size 1000x830 with 3 Axes>
+<Figure size 1000x880 with 3 Axes>
 ```
 
 ```
 <IPython.core.display.Markdown object>
 ```
 
-| Unnamed: 0      | original -> high-stakes   | no-rationale -> high-stakes-no-rationale   | ethical -> ethical-high-stakes   | ethical-no-rationale -> high-stakes-no-rationale-ethical   |
-|-----------------|---------------------------|--------------------------------------------|----------------------------------|------------------------------------------------------------|
-| [Overall]       | -0.15 +/- 0.05***         | 0.05 +/- 0.05                              | 0.50 +/- 0.07***                 | 0.71 +/- 0.10***                                           |
-| GPT-OSS-120B    | -0.00 +/- 0.03            | 0.00 +/- 0.03                              | -0.01 +/- 0.08                   | -0.01 +/- 0.07                                             |
-| GLM-4.7         | 0.01 +/- 0.06             | 0.02 +/- 0.12                              | -0.00 +/- 0.05                   | 0.01 +/- 0.07                                              |
-| GLM-5.1         | -0.11 +/- 0.14            | 0.04 +/- 0.12                              | 0.64 +/- 0.23***                 | 0.79 +/- 0.26***                                           |
-| Minimax-M2.7    | 0.00 +/- 0.01             | 0.01 +/- 0.01                              | 0.00 +/- 0.01                    | 0.01 +/- 0.01                                              |
-| Kimi-K2.5       | 0.02 +/- 0.06             | 0.11 +/- 0.09                              | 0.23 +/- 0.16                    | 0.32 +/- 0.22                                              |
-| Kimi-K2.6       | -0.02 +/- 0.10            | 0.00 +/- 0.05                              | 0.09 +/- 0.37                    | 0.12 +/- 0.47                                              |
-| DeepSeek-3.2    | -0.00 +/- 0.03            | -0.07 +/- 0.09                             | -0.17 +/- 0.23                   | -0.23 +/- 0.31                                             |
-| DeepSeek-4      | 0.08 +/- 0.10             | -0.04 +/- 0.07                             | -0.27 +/- 0.28                   | -0.39 +/- 0.38                                             |
-| Qwen-3.5        | 0.01 +/- 0.05             | 0.03 +/- 0.09                              | -0.02 +/- 0.07                   | -0.00 +/- 0.04                                             |
-| Qwen-3.6-27B    | -0.06 +/- 0.07            | -0.01 +/- 0.07                             | -0.12 +/- 0.09                   | -0.07 +/- 0.08                                             |
-| Mistral-Small-4 | -0.16 +/- 0.11            | -0.11 +/- 0.08                             | -0.10 +/- 0.11                   | -0.04 +/- 0.09                                             |
-| Gemma-4         | 0.07 +/- 0.05             | 0.03 +/- 0.03                              | -0.06 +/- 0.05                   | -0.10 +/- 0.07                                             |
+| Unnamed: 0       | original -> high-stakes   | no-rationale -> high-stakes-no-rationale   | ethical -> ethical-high-stakes   | ethical-no-rationale -> high-stakes-no-rationale-ethical   |
+|------------------|---------------------------|--------------------------------------------|----------------------------------|------------------------------------------------------------|
+| [Overall]        | -0.14 +/- 0.04***         | 0.04 +/- 0.04                              | 0.48 +/- 0.07***                 | 0.66 +/- 0.10***                                           |
+| GPT-OSS-120B     | -0.00 +/- 0.03            | 0.00 +/- 0.03                              | -0.01 +/- 0.08                   | -0.01 +/- 0.07                                             |
+| GLM-4.7          | 0.00 +/- 0.05             | 0.01 +/- 0.08                              | -0.00 +/- 0.05                   | 0.00 +/- 0.06                                              |
+| GLM-5.1          | -0.11 +/- 0.14            | 0.04 +/- 0.12                              | 0.64 +/- 0.23***                 | 0.79 +/- 0.26***                                           |
+| Minimax-M2.7     | 0.00 +/- 0.01             | 0.01 +/- 0.01                              | 0.00 +/- 0.01                    | 0.01 +/- 0.01                                              |
+| Kimi-K2.5        | 0.02 +/- 0.06             | 0.11 +/- 0.09                              | 0.23 +/- 0.16                    | 0.32 +/- 0.22                                              |
+| Kimi-K2.6        | -0.02 +/- 0.10            | 0.00 +/- 0.05                              | 0.09 +/- 0.37                    | 0.12 +/- 0.47                                              |
+| DeepSeek-3.2     | -0.00 +/- 0.03            | -0.07 +/- 0.09                             | -0.17 +/- 0.23                   | -0.23 +/- 0.31                                             |
+| DeepSeek-4       | 0.08 +/- 0.10             | -0.04 +/- 0.07                             | -0.27 +/- 0.28                   | -0.39 +/- 0.38                                             |
+| Qwen-3.5         | 0.01 +/- 0.05             | 0.03 +/- 0.09                              | -0.02 +/- 0.07                   | -0.00 +/- 0.04                                             |
+| Qwen-3.6-27B     | -0.06 +/- 0.07            | -0.01 +/- 0.07                             | -0.12 +/- 0.09                   | -0.07 +/- 0.08                                             |
+| Mistral-Small-4  | -0.16 +/- 0.11            | -0.11 +/- 0.08                             | -0.10 +/- 0.11                   | -0.04 +/- 0.09                                             |
+| Gemma-4          | 0.07 +/- 0.05             | 0.03 +/- 0.03                              | -0.06 +/- 0.05                   | -0.10 +/- 0.07                                             |
+| Gemini-3.5-Flash | -0.02 +/- 0.09            | 0.00 +/- 0.09                              | 0.25 +/- 0.15*                   | 0.28 +/- 0.19*                                             |
 
 ```
-Heatmap rows: ['[Overall]', 'GPT-OSS-120B', 'GLM-4.7', 'GLM-5.1', 'Minimax-M2.7', 'Kimi-K2.5', 'Kimi-K2.6', 'DeepSeek-3.2', 'DeepSeek-4', 'Qwen-3.5', 'Qwen-3.6-27B', 'Mistral-Small-4', 'Gemma-4']
+Heatmap rows: ['[Overall]', 'GPT-OSS-120B', 'GLM-4.7', 'GLM-5.1', 'Minimax-M2.7', 'Kimi-K2.5', 'Kimi-K2.6', 'DeepSeek-3.2', 'DeepSeek-4', 'Qwen-3.5', 'Qwen-3.6-27B', 'Mistral-Small-4', 'Gemma-4', 'Gemini-3.5-Flash']
 Heatmap contrasts: ['original -> high-stakes', 'no-rationale -> high-stakes-no-rationale', 'ethical -> ethical-high-stakes', 'ethical-no-rationale -> high-stakes-no-rationale-ethical']
 Heatmap values: % Attenuated = (Total (base) - Direct (+mediator)) / Total (base)
 ```
@@ -1248,7 +1249,7 @@ display(format_contrast_bootstrap_table(contrast_bootstrap_df))
 
 | ('Unnamed: 0_level_0', 'Contrast')                       |   ('Total (base)', 'Unnamed: 1_level_1') |   ('Direct (+mediator)', 'Unnamed: 2_level_1') | ('Attenuation proxy', 'Unnamed: 3_level_1')   |   ('Bootstrap SE', 'Unnamed: 4_level_1') | ('95% CI', 'Unnamed: 5_level_1')   | ('% Attenuated', 'Unnamed: 6_level_1')   |   ('p', 'Unnamed: 7_level_1') |   ('n_boot_valid', 'Unnamed: 8_level_1') |   ('n_obs', 'Unnamed: 9_level_1') |
 |----------------------------------------------------------|------------------------------------------|------------------------------------------------|-----------------------------------------------|------------------------------------------|------------------------------------|------------------------------------------|-------------------------------|------------------------------------------|-----------------------------------|
-| original -> high-stakes                                  |                                    0.477 |                                          0.63  | -0.153***                                     |                                    0.048 | [-0.250, -0.062]                   | -32.1%                                   |                         0     |                                     2000 |                             37440 |
-| no-rationale -> high-stakes-no-rationale                 |                                   -0.338 |                                         -0.392 | 0.054                                         |                                    0.046 | [-0.030, 0.151]                    | -16.0%                                   |                         0.211 |                                     2000 |                             37440 |
-| ethical -> ethical-high-stakes                           |                                   -0.041 |                                         -0.54  | 0.499***                                      |                                    0.074 | [0.362, 0.650]                     | --                                       |                         0     |                                     2000 |                             37440 |
-| ethical-no-rationale -> high-stakes-no-rationale-ethical |                                   -0.856 |                                         -1.561 | 0.706***                                      |                                    0.101 | [0.511, 0.911]                     | -82.5%                                   |                         0     |                                     2000 |                             37440 |
+| original -> high-stakes                                  |                                    0.15  |                                          0.292 | -0.142***                                     |                                    0.043 | [-0.227, -0.060]                   | -94.5%                                   |                          0    |                                     2000 |                             40560 |
+| no-rationale -> high-stakes-no-rationale                 |                                   -0.028 |                                         -0.064 | 0.036                                         |                                    0.044 | [-0.043, 0.125]                    | -130.9%                                  |                          0.41 |                                     2000 |                             40560 |
+| ethical -> ethical-high-stakes                           |                                    1.746 |                                          1.267 | 0.479***                                      |                                    0.068 | [0.348, 0.616]                     | 27.4%                                    |                          0    |                                     2000 |                             40560 |
+| ethical-no-rationale -> high-stakes-no-rationale-ethical |                                    1.568 |                                          0.911 | 0.657***                                      |                                    0.095 | [0.473, 0.854]                     | 41.9%                                    |                          0    |                                     2000 |                             40560 |

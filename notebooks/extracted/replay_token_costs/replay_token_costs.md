@@ -47,25 +47,25 @@ print(f"Rows with zero input_tokens: {(df['input_tokens'] == 0).sum()}")
 ```
 
 ```
-✓ Loaded 37,440 rows from 96 files
+✓ Loaded 40,560 rows from 104 files
   Conditions   : original, no-rationale, high-stakes, high-stakes-no-rationale, ethical, ethical-high-stakes, ethical-no-rationale, high-stakes-no-rationale-ethical
-  Replay models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, gpt-oss-120b
+  Replay models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemini-3.5-Flash, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, gpt-oss-120b
 
   Rows per condition × replay model:
-  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                                       DeepSeek-V3.2      DeepSeek-V4          GLM-4.7          GLM-5.1          Gemma-4        Kimi-K2.5        Kimi-K2.6     MiniMax-M2.7  Mistral-Small-4         Qwen-3.5     Qwen-3.6-27B     gpt-oss-120b            Total
-  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                           original              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                       no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                         high-stakes              390              390              390              390              390              390              390              390              390              390              390              390             4680
-            high-stakes-no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                            ethical              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                 ethical-high-stakes              390              390              390              390              390              390              390              390              390              390              390              390             4680
-               ethical-no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-    high-stakes-no-rationale-ethical              390              390              390              390              390              390              390              390              390              390              390              390             4680
-  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                              Total             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120            37440
-  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                                         DeepSeek-V3.2       DeepSeek-V4           GLM-4.7           GLM-5.1  Gemini-3.5-Flash           Gemma-4         Kimi-K2.5         Kimi-K2.6      MiniMax-M2.7   Mistral-Small-4          Qwen-3.5      Qwen-3.6-27B      gpt-oss-120b             Total
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                            original               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                        no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                         high-stakes               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+            high-stakes-no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                             ethical               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                 ethical-high-stakes               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                ethical-no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+    high-stakes-no-rationale-ethical               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                               Total              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120             40560
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Token columns present: input_tokens, reasoning_tokens, output_tokens
 Rows with any NaN tokens: 0
 Rows with zero input_tokens: 356
@@ -93,6 +93,7 @@ PRICING_PER_MILLION
  'Qwen-3.6-27B': {'input_per_million': 0.13, 'output_per_million': 0.76},
  'Mistral-Small-4': {'input_per_million': 0.15, 'output_per_million': 0.6},
  'Gemma-4': {'input_per_million': 0.13, 'output_per_million': 0.38},
+ 'Gemini-3.5-Flash': {'input_per_million': 0.75, 'output_per_million': 4.5},
  'GPT-5.4': {'input_per_million': 2.5, 'output_per_million': 15}}
 ```
 
@@ -168,204 +169,127 @@ display(summary_display)
 print(summary_display.to_markdown(index=False))
 ```
 
-|   Unnamed: 0 | Condition                        | Replay Model    |   Rows |   Total Input |   Avg. Input |   Total Output |   Avg. Output | Total Cost   | Cost Per Unit               |
+| Unnamed: 0   | Condition                        | Replay Model    | Rows   | Total Input   | Avg. Input   | Total Output   | Avg. Output   | Total Cost   | Cost Per Unit               |
 |--------------|----------------------------------|-----------------|--------|---------------|--------------|----------------|---------------|--------------|-----------------------------|
-|            0 | original                         | DeepSeek-3.2    |    390 |      20879003 |        53536 |         885504 |          2271 | $5.77        | $0.26 in / $0.38 out per 1M |
-|            1 | original                         | DeepSeek-4      |    390 |      21998413 |        56406 |        1360157 |          3488 | $10.75       | $0.43 in / $0.87 out per 1M |
-|            2 | original                         | GLM-4.7         |    390 |      21306145 |        54631 |         745496 |          1912 | $9.61        | $0.39 in / $1.75 out per 1M |
-|            3 | original                         | GLM-5.1         |    390 |      21179872 |        54307 |        2261041 |          5798 | $30.15       | $1.05 in / $3.50 out per 1M |
-|            4 | original                         | GPT-OSS-120B    |    390 |      21084339 |        54062 |         568347 |          1457 | $0.93        | $0.04 in / $0.19 out per 1M |
-|            5 | original                         | Gemma-4         |    390 |      21715142 |        55680 |         645671 |          1656 | $3.07        | $0.13 in / $0.38 out per 1M |
-|            6 | original                         | Kimi-K2.5       |    390 |      20829954 |        53410 |        1235542 |          3168 | $10.80       | $0.40 in / $2.00 out per 1M |
-|            7 | original                         | Kimi-K2.6       |    390 |      22247601 |        57045 |        4477669 |         11481 | $32.36       | $0.75 in / $3.50 out per 1M |
-|            8 | original                         | Minimax-M2.7    |    390 |      24713822 |        63369 |         524928 |          1346 | $8.04        | $0.30 in / $1.20 out per 1M |
-|            9 | original                         | Mistral-Small-4 |    390 |      21265473 |        54527 |         563663 |          1445 | $3.53        | $0.15 in / $0.60 out per 1M |
-|           10 | original                         | Qwen-3.5        |    390 |      20959841 |        53743 |         750566 |          1925 | $9.93        | $0.39 in / $2.34 out per 1M |
-|           11 | original                         | Qwen-3.6-27B    |    390 |      22248130 |        57046 |         565514 |          1450 | $3.32        | $0.13 in / $0.76 out per 1M |
-|           12 | no-rationale                     | DeepSeek-3.2    |    390 |      20358440 |        52201 |        1022276 |          2621 | $5.68        | $0.26 in / $0.38 out per 1M |
-|           13 | no-rationale                     | DeepSeek-4      |    390 |      20666061 |        52990 |        1243676 |          3189 | $10.07       | $0.43 in / $0.87 out per 1M |
-|           14 | no-rationale                     | GLM-4.7         |    390 |      20684453 |        53037 |         666706 |          1710 | $9.23        | $0.39 in / $1.75 out per 1M |
-|           15 | no-rationale                     | GLM-5.1         |    390 |      20654291 |        52960 |        1659174 |          4254 | $27.49       | $1.05 in / $3.50 out per 1M |
-|           16 | no-rationale                     | GPT-OSS-120B    |    390 |      20979424 |        53793 |         630739 |          1617 | $0.94        | $0.04 in / $0.19 out per 1M |
-|           17 | no-rationale                     | Gemma-4         |    390 |      21210855 |        54387 |         616752 |          1581 | $2.99        | $0.13 in / $0.38 out per 1M |
-|           18 | no-rationale                     | Kimi-K2.5       |    390 |      20308710 |        52074 |        1195461 |          3065 | $10.51       | $0.40 in / $2.00 out per 1M |
-|           19 | no-rationale                     | Kimi-K2.6       |    390 |      20623693 |        52881 |        3972919 |         10187 | $29.37       | $0.75 in / $3.50 out per 1M |
-|           20 | no-rationale                     | Minimax-M2.7    |    390 |      26358029 |        67585 |         707113 |          1813 | $8.76        | $0.30 in / $1.20 out per 1M |
-|           21 | no-rationale                     | Mistral-Small-4 |    390 |      20820730 |        53386 |         585077 |          1500 | $3.47        | $0.15 in / $0.60 out per 1M |
-|           22 | no-rationale                     | Qwen-3.5        |    390 |      20775694 |        53271 |         834142 |          2139 | $10.05       | $0.39 in / $2.34 out per 1M |
-|           23 | no-rationale                     | Qwen-3.6-27B    |    390 |      20650522 |        52950 |         487614 |          1250 | $3.06        | $0.13 in / $0.76 out per 1M |
-|           24 | high-stakes                      | DeepSeek-3.2    |    390 |      21322181 |        54672 |         846481 |          2170 | $5.87        | $0.26 in / $0.38 out per 1M |
-|           25 | high-stakes                      | DeepSeek-4      |    390 |      22334926 |        57269 |        1405310 |          3603 | $10.94       | $0.43 in / $0.87 out per 1M |
-|           26 | high-stakes                      | GLM-4.7         |    390 |      21931409 |        56234 |         729075 |          1869 | $9.83        | $0.39 in / $1.75 out per 1M |
-|           27 | high-stakes                      | GLM-5.1         |    390 |      21532339 |        55211 |        2222103 |          5698 | $30.39       | $1.05 in / $3.50 out per 1M |
-|           28 | high-stakes                      | GPT-OSS-120B    |    390 |      20794378 |        53319 |         588214 |          1508 | $0.92        | $0.04 in / $0.19 out per 1M |
-|           29 | high-stakes                      | Gemma-4         |    390 |      21346560 |        54735 |         682236 |          1749 | $3.03        | $0.13 in / $0.38 out per 1M |
-|           30 | high-stakes                      | Kimi-K2.5       |    390 |      20915655 |        53630 |        1357069 |          3480 | $11.08       | $0.40 in / $2.00 out per 1M |
-|           31 | high-stakes                      | Kimi-K2.6       |    390 |      22861769 |        58620 |        4844465 |         12422 | $34.10       | $0.75 in / $3.50 out per 1M |
-|           32 | high-stakes                      | Minimax-M2.7    |    390 |      24597425 |        63070 |         523373 |          1342 | $8.01        | $0.30 in / $1.20 out per 1M |
-|           33 | high-stakes                      | Mistral-Small-4 |    390 |      21504196 |        55139 |         713628 |          1830 | $3.65        | $0.15 in / $0.60 out per 1M |
-|           34 | high-stakes                      | Qwen-3.5        |    390 |      34056759 |        87325 |         971748 |          2492 | $15.56       | $0.39 in / $2.34 out per 1M |
-|           35 | high-stakes                      | Qwen-3.6-27B    |    390 |      21675678 |        55579 |         680320 |          1744 | $3.33        | $0.13 in / $0.76 out per 1M |
-|           36 | high-stakes-no-rationale         | DeepSeek-3.2    |    390 |      20609816 |        52846 |         962915 |          2469 | $5.72        | $0.26 in / $0.38 out per 1M |
-|           37 | high-stakes-no-rationale         | DeepSeek-4      |    390 |      20774325 |        53268 |        1291929 |          3313 | $10.16       | $0.43 in / $0.87 out per 1M |
-|           38 | high-stakes-no-rationale         | GLM-4.7         |    390 |       5992825 |        15366 |         187583 |           481 | $2.67        | $0.39 in / $1.75 out per 1M |
-|           39 | high-stakes-no-rationale         | GLM-5.1         |    390 |      20826458 |        53401 |        1766367 |          4529 | $28.05       | $1.05 in / $3.50 out per 1M |
-|           40 | high-stakes-no-rationale         | GPT-OSS-120B    |    390 |      20475931 |        52502 |         661072 |          1695 | $0.92        | $0.04 in / $0.19 out per 1M |
-|           41 | high-stakes-no-rationale         | Gemma-4         |    390 |      20669018 |        52997 |         654623 |          1679 | $2.94        | $0.13 in / $0.38 out per 1M |
-|           42 | high-stakes-no-rationale         | Kimi-K2.5       |    390 |      20392176 |        52288 |        1353340 |          3470 | $10.86       | $0.40 in / $2.00 out per 1M |
-|           43 | high-stakes-no-rationale         | Kimi-K2.6       |    390 |      20678485 |        53022 |        4084785 |         10474 | $29.81       | $0.75 in / $3.50 out per 1M |
-|           44 | high-stakes-no-rationale         | Minimax-M2.7    |    390 |      29137867 |        74712 |         542346 |          1391 | $9.39        | $0.30 in / $1.20 out per 1M |
-|           45 | high-stakes-no-rationale         | Mistral-Small-4 |    390 |      21064516 |        54012 |         737493 |          1891 | $3.60        | $0.15 in / $0.60 out per 1M |
-|           46 | high-stakes-no-rationale         | Qwen-3.5        |    390 |      31284957 |        80218 |         989436 |          2537 | $14.52       | $0.39 in / $2.34 out per 1M |
-|           47 | high-stakes-no-rationale         | Qwen-3.6-27B    |    390 |      21853480 |        56035 |         552105 |          1416 | $3.26        | $0.13 in / $0.76 out per 1M |
-|           48 | ethical                          | DeepSeek-3.2    |    390 |      21197247 |        54352 |         932489 |          2391 | $5.87        | $0.26 in / $0.38 out per 1M |
-|           49 | ethical                          | DeepSeek-4      |    390 |      21293051 |        54598 |        1366313 |          3503 | $10.45       | $0.43 in / $0.87 out per 1M |
-|           50 | ethical                          | GLM-4.7         |    390 |      21621063 |        55439 |         742213 |          1903 | $9.73        | $0.39 in / $1.75 out per 1M |
-|           51 | ethical                          | GLM-5.1         |    390 |      21126758 |        54171 |        2291235 |          5875 | $30.20       | $1.05 in / $3.50 out per 1M |
-|           52 | ethical                          | GPT-OSS-120B    |    390 |      21114190 |        54139 |         609656 |          1563 | $0.94        | $0.04 in / $0.19 out per 1M |
-|           53 | ethical                          | Gemma-4         |    390 |      23427512 |        60071 |         694395 |          1780 | $3.31        | $0.13 in / $0.38 out per 1M |
-|           54 | ethical                          | Kimi-K2.5       |    390 |      21434596 |        54961 |        1243565 |          3189 | $11.06       | $0.40 in / $2.00 out per 1M |
-|           55 | ethical                          | Kimi-K2.6       |    390 |      21115905 |        54143 |        4272884 |         10956 | $30.79       | $0.75 in / $3.50 out per 1M |
-|           56 | ethical                          | Minimax-M2.7    |    390 |      24475410 |        62757 |         525054 |          1346 | $7.97        | $0.30 in / $1.20 out per 1M |
-|           57 | ethical                          | Mistral-Small-4 |    390 |      21250869 |        54489 |         567357 |          1455 | $3.53        | $0.15 in / $0.60 out per 1M |
-|           58 | ethical                          | Qwen-3.5        |    390 |      22362279 |        57339 |         769718 |          1974 | $10.52       | $0.39 in / $2.34 out per 1M |
-|           59 | ethical                          | Qwen-3.6-27B    |    390 |      21166633 |        54273 |         579953 |          1487 | $3.19        | $0.13 in / $0.76 out per 1M |
-|           60 | ethical-high-stakes              | DeepSeek-3.2    |    390 |      21108428 |        54124 |         933542 |          2394 | $5.84        | $0.26 in / $0.38 out per 1M |
-|           61 | ethical-high-stakes              | DeepSeek-4      |    390 |      21065405 |        54014 |        1413953 |          3626 | $10.39       | $0.43 in / $0.87 out per 1M |
-|           62 | ethical-high-stakes              | GLM-4.7         |    390 |      22223282 |        56983 |         745214 |          1911 | $9.97        | $0.39 in / $1.75 out per 1M |
-|           63 | ethical-high-stakes              | GLM-5.1         |    390 |      21926379 |        56221 |        2295281 |          5885 | $31.06       | $1.05 in / $3.50 out per 1M |
-|           64 | ethical-high-stakes              | GPT-OSS-120B    |    390 |      20879994 |        53538 |         592824 |          1520 | $0.93        | $0.04 in / $0.19 out per 1M |
-|           65 | ethical-high-stakes              | Gemma-4         |    390 |      21925238 |        56219 |         690199 |          1770 | $3.11        | $0.13 in / $0.38 out per 1M |
-|           66 | ethical-high-stakes              | Kimi-K2.5       |    390 |      20853156 |        53470 |        1444400 |          3704 | $11.23       | $0.40 in / $2.00 out per 1M |
-|           67 | ethical-high-stakes              | Kimi-K2.6       |    390 |      22331104 |        57259 |        4401229 |         11285 | $32.15       | $0.75 in / $3.50 out per 1M |
-|           68 | ethical-high-stakes              | Minimax-M2.7    |    390 |      24808240 |        63611 |         653096 |          1675 | $8.23        | $0.30 in / $1.20 out per 1M |
-|           69 | ethical-high-stakes              | Mistral-Small-4 |    390 |      20991136 |        53823 |         726536 |          1863 | $3.58        | $0.15 in / $0.60 out per 1M |
-|           70 | ethical-high-stakes              | Qwen-3.5        |    390 |      27898254 |        71534 |         785362 |          2014 | $12.72       | $0.39 in / $2.34 out per 1M |
-|           71 | ethical-high-stakes              | Qwen-3.6-27B    |    390 |      21377903 |        54815 |         754901 |          1936 | $3.35        | $0.13 in / $0.76 out per 1M |
-|           72 | ethical-no-rationale             | DeepSeek-3.2    |    390 |      20387110 |        52275 |         991090 |          2541 | $5.68        | $0.26 in / $0.38 out per 1M |
-|           73 | ethical-no-rationale             | DeepSeek-4      |    390 |      20772023 |        53262 |        1234301 |          3165 | $10.11       | $0.43 in / $0.87 out per 1M |
-|           74 | ethical-no-rationale             | GLM-4.7         |    390 |      20975191 |        53783 |         712645 |          1827 | $9.43        | $0.39 in / $1.75 out per 1M |
-|           75 | ethical-no-rationale             | GLM-5.1         |    390 |      20693615 |        53061 |        1726075 |          4426 | $27.77       | $1.05 in / $3.50 out per 1M |
-|           76 | ethical-no-rationale             | GPT-OSS-120B    |    390 |      20392693 |        52289 |         642261 |          1647 | $0.92        | $0.04 in / $0.19 out per 1M |
-|           77 | ethical-no-rationale             | Gemma-4         |    390 |      21137458 |        54199 |         648369 |          1662 | $2.99        | $0.13 in / $0.38 out per 1M |
-|           78 | ethical-no-rationale             | Kimi-K2.5       |    390 |      20323140 |        52111 |        1304013 |          3344 | $10.74       | $0.40 in / $2.00 out per 1M |
-|           79 | ethical-no-rationale             | Kimi-K2.6       |    390 |      22052772 |        56546 |        4034487 |         10345 | $30.66       | $0.75 in / $3.50 out per 1M |
-|           80 | ethical-no-rationale             | Minimax-M2.7    |    390 |      26392273 |        67672 |         517009 |          1326 | $8.54        | $0.30 in / $1.20 out per 1M |
-|           81 | ethical-no-rationale             | Mistral-Small-4 |    390 |      20711800 |        53107 |         642773 |          1648 | $3.49        | $0.15 in / $0.60 out per 1M |
-|           82 | ethical-no-rationale             | Qwen-3.5        |    390 |      25397783 |        65123 |         826522 |          2119 | $11.84       | $0.39 in / $2.34 out per 1M |
-|           83 | ethical-no-rationale             | Qwen-3.6-27B    |    390 |      21399467 |        54870 |         506660 |          1299 | $3.17        | $0.13 in / $0.76 out per 1M |
-|           84 | high-stakes-no-rationale-ethical | DeepSeek-3.2    |    390 |      20655922 |        52964 |         955949 |          2451 | $5.73        | $0.26 in / $0.38 out per 1M |
-|           85 | high-stakes-no-rationale-ethical | DeepSeek-4      |    390 |      21100037 |        54103 |        1274664 |          3268 | $10.29       | $0.43 in / $0.87 out per 1M |
-|           86 | high-stakes-no-rationale-ethical | GLM-4.7         |    390 |      20782453 |        53288 |         719001 |          1844 | $9.36        | $0.39 in / $1.75 out per 1M |
-|           87 | high-stakes-no-rationale-ethical | GLM-5.1         |    390 |      20839201 |        53434 |        1818881 |          4664 | $28.25       | $1.05 in / $3.50 out per 1M |
-|           88 | high-stakes-no-rationale-ethical | GPT-OSS-120B    |    390 |      20701879 |        53082 |         691426 |          1773 | $0.94        | $0.04 in / $0.19 out per 1M |
-|           89 | high-stakes-no-rationale-ethical | Gemma-4         |    390 |      20367609 |        52225 |         677697 |          1738 | $2.91        | $0.13 in / $0.38 out per 1M |
-|           90 | high-stakes-no-rationale-ethical | Kimi-K2.5       |    390 |      20406606 |        52325 |        1341507 |          3440 | $10.85       | $0.40 in / $2.00 out per 1M |
-|           91 | high-stakes-no-rationale-ethical | Kimi-K2.6       |    390 |      22349164 |        57306 |        4168846 |         10689 | $31.35       | $0.75 in / $3.50 out per 1M |
-|           92 | high-stakes-no-rationale-ethical | Minimax-M2.7    |    390 |      29147132 |        74736 |         540071 |          1385 | $9.39        | $0.30 in / $1.20 out per 1M |
-|           93 | high-stakes-no-rationale-ethical | Mistral-Small-4 |    390 |      20496619 |        52555 |         770283 |          1975 | $3.54        | $0.15 in / $0.60 out per 1M |
-|           94 | high-stakes-no-rationale-ethical | Qwen-3.5        |    390 |      25662733 |        65802 |         820672 |          2104 | $11.93       | $0.39 in / $2.34 out per 1M |
-|           95 | high-stakes-no-rationale-ethical | Qwen-3.6-27B    |    390 |      21019784 |        53897 |         579872 |          1487 | $3.17        | $0.13 in / $0.76 out per 1M |
+| 0            | original                         | DeepSeek-3.2    | 390    | 20879003      | 53536        | 885504         | 2271          | $5.77        | $0.26 in / $0.38 out per 1M |
+| 1            | original                         | DeepSeek-4      | 390    | 21998413      | 56406        | 1360157        | 3488          | $10.75       | $0.43 in / $0.87 out per 1M |
+| 2            | original                         | GLM-4.7         | 390    | 21306145      | 54631        | 745496         | 1912          | $9.61        | $0.39 in / $1.75 out per 1M |
+| 3            | original                         | GLM-5.1         | 390    | 21179872      | 54307        | 2261041        | 5798          | $30.15       | $1.05 in / $3.50 out per 1M |
+| 4            | original                         | GPT-OSS-120B    | 390    | 21084339      | 54062        | 568347         | 1457          | $0.93        | $0.04 in / $0.19 out per 1M |
+| ...          | ...                              | ...             | ...    | ...           | ...          | ...            | ...           | ...          | ...                         |
+| 99           | high-stakes-no-rationale-ethical | Kimi-K2.6       | 390    | 22349164      | 57306        | 4168846        | 10689         | $31.35       | $0.75 in / $3.50 out per 1M |
+| 100          | high-stakes-no-rationale-ethical | Minimax-M2.7    | 390    | 29147132      | 74736        | 540071         | 1385          | $9.39        | $0.30 in / $1.20 out per 1M |
+| 101          | high-stakes-no-rationale-ethical | Mistral-Small-4 | 390    | 20496619      | 52555        | 770283         | 1975          | $3.54        | $0.15 in / $0.60 out per 1M |
+| 102          | high-stakes-no-rationale-ethical | Qwen-3.5        | 390    | 25662733      | 65802        | 820672         | 2104          | $11.93       | $0.39 in / $2.34 out per 1M |
+| 103          | high-stakes-no-rationale-ethical | Qwen-3.6-27B    | 390    | 21019784      | 53897        | 579872         | 1487          | $3.17        | $0.13 in / $0.76 out per 1M |
 
 ```
-| Condition                       | Replay Model    |   Rows | Total Input   | Avg. Input   | Total Output   | Avg. Output   | Total Cost   | Cost Per Unit               |
-|:--------------------------------|:----------------|-------:|:--------------|:-------------|:---------------|:--------------|:-------------|:----------------------------|
-| original                        | DeepSeek-3.2    |    390 | 20,879,003    | 53,536       | 885,504        | 2,271         | $5.77        | $0.26 in / $0.38 out per 1M |
-| original                        | DeepSeek-4      |    390 | 21,998,413    | 56,406       | 1,360,157      | 3,488         | $10.75       | $0.43 in / $0.87 out per 1M |
-| original                        | GLM-4.7         |    390 | 21,306,145    | 54,631       | 745,496        | 1,912         | $9.61        | $0.39 in / $1.75 out per 1M |
-| original                        | GLM-5.1         |    390 | 21,179,872    | 54,307       | 2,261,041      | 5,798         | $30.15       | $1.05 in / $3.50 out per 1M |
-| original                        | GPT-OSS-120B    |    390 | 21,084,339    | 54,062       | 568,347        | 1,457         | $0.93        | $0.04 in / $0.19 out per 1M |
-| original                        | Gemma-4         |    390 | 21,715,142    | 55,680       | 645,671        | 1,656         | $3.07        | $0.13 in / $0.38 out per 1M |
-| original                        | Kimi-K2.5       |    390 | 20,829,954    | 53,410       | 1,235,542      | 3,168         | $10.80       | $0.40 in / $2.00 out per 1M |
-| original                        | Kimi-K2.6       |    390 | 22,247,601    | 57,045       | 4,477,669      | 11,481        | $32.36       | $0.75 in / $3.50 out per 1M |
-| original                        | Minimax-M2.7    |    390 | 24,713,822    | 63,369       | 524,928        | 1,346         | $8.04        | $0.30 in / $1.20 out per 1M |
-| original                        | Mistral-Small-4 |    390 | 21,265,473    | 54,527       | 563,663        | 1,445         | $3.53        | $0.15 in / $0.60 out per 1M |
-| original                        | Qwen-3.5        |    390 | 20,959,841    | 53,743       | 750,566        | 1,925         | $9.93        | $0.39 in / $2.34 out per 1M |
-| original                        | Qwen-3.6-27B    |    390 | 22,248,130    | 57,046       | 565,514        | 1,450         | $3.32        | $0.13 in / $0.76 out per 1M |
-| no-rationale                    | DeepSeek-3.2    |    390 | 20,358,440    | 52,201       | 1,022,276      | 2,621         | $5.68        | $0.26 in / $0.38 out per 1M |
-| no-rationale                    | DeepSeek-4      |    390 | 20,666,061    | 52,990       | 1,243,676      | 3,189         | $10.07       | $0.43 in / $0.87 out per 1M |
-| no-rationale                    | GLM-4.7         |    390 | 20,684,453    | 53,037       | 666,706        | 1,710         | $9.23        | $0.39 in / $1.75 out per 1M |
-| no-rationale                    | GLM-5.1         |    390 | 20,654,291    | 52,960       | 1,659,174      | 4,254         | $27.49       | $1.05 in / $3.50 out per 1M |
-| no-rationale                    | GPT-OSS-120B    |    390 | 20,979,424    | 53,793       | 630,739        | 1,617         | $0.94        | $0.04 in / $0.19 out per 1M |
-| no-rationale                    | Gemma-4         |    390 | 21,210,855    | 54,387       | 616,752        | 1,581         | $2.99        | $0.13 in / $0.38 out per 1M |
-| no-rationale                    | Kimi-K2.5       |    390 | 20,308,710    | 52,074       | 1,195,461      | 3,065         | $10.51       | $0.40 in / $2.00 out per 1M |
-| no-rationale                    | Kimi-K2.6       |    390 | 20,623,693    | 52,881       | 3,972,919      | 10,187        | $29.37       | $0.75 in / $3.50 out per 1M |
-| no-rationale                    | Minimax-M2.7    |    390 | 26,358,029    | 67,585       | 707,113        | 1,813         | $8.76        | $0.30 in / $1.20 out per 1M |
-| no-rationale                    | Mistral-Small-4 |    390 | 20,820,730    | 53,386       | 585,077        | 1,500         | $3.47        | $0.15 in / $0.60 out per 1M |
-| no-rationale                    | Qwen-3.5        |    390 | 20,775,694    | 53,271       | 834,142        | 2,139         | $10.05       | $0.39 in / $2.34 out per 1M |
-| no-rationale                    | Qwen-3.6-27B    |    390 | 20,650,522    | 52,950       | 487,614        | 1,250         | $3.06        | $0.13 in / $0.76 out per 1M |
-| high-stakes                      | DeepSeek-3.2    |    390 | 21,322,181    | 54,672       | 846,481        | 2,170         | $5.87        | $0.26 in / $0.38 out per 1M |
-| high-stakes                      | DeepSeek-4      |    390 | 22,334,926    | 57,269       | 1,405,310      | 3,603         | $10.94       | $0.43 in / $0.87 out per 1M |
-| high-stakes                      | GLM-4.7         |    390 | 21,931,409    | 56,234       | 729,075        | 1,869         | $9.83        | $0.39 in / $1.75 out per 1M |
-| high-stakes                      | GLM-5.1         |    390 | 21,532,339    | 55,211       | 2,222,103      | 5,698         | $30.39       | $1.05 in / $3.50 out per 1M |
-| high-stakes                      | GPT-OSS-120B    |    390 | 20,794,378    | 53,319       | 588,214        | 1,508         | $0.92        | $0.04 in / $0.19 out per 1M |
-| high-stakes                      | Gemma-4         |    390 | 21,346,560    | 54,735       | 682,236        | 1,749         | $3.03        | $0.13 in / $0.38 out per 1M |
-| high-stakes                      | Kimi-K2.5       |    390 | 20,915,655    | 53,630       | 1,357,069      | 3,480         | $11.08       | $0.40 in / $2.00 out per 1M |
-| high-stakes                      | Kimi-K2.6       |    390 | 22,861,769    | 58,620       | 4,844,465      | 12,422        | $34.10       | $0.75 in / $3.50 out per 1M |
-| high-stakes                      | Minimax-M2.7    |    390 | 24,597,425    | 63,070       | 523,373        | 1,342         | $8.01        | $0.30 in / $1.20 out per 1M |
-| high-stakes                      | Mistral-Small-4 |    390 | 21,504,196    | 55,139       | 713,628        | 1,830         | $3.65        | $0.15 in / $0.60 out per 1M |
-| high-stakes                      | Qwen-3.5        |    390 | 34,056,759    | 87,325       | 971,748        | 2,492         | $15.56       | $0.39 in / $2.34 out per 1M |
-| high-stakes                      | Qwen-3.6-27B    |    390 | 21,675,678    | 55,579       | 680,320        | 1,744         | $3.33        | $0.13 in / $0.76 out per 1M |
-| high-stakes-no-rationale         | DeepSeek-3.2    |    390 | 20,609,816    | 52,846       | 962,915        | 2,469         | $5.72        | $0.26 in / $0.38 out per 1M |
-| high-stakes-no-rationale         | DeepSeek-4      |    390 | 20,774,325    | 53,268       | 1,291,929      | 3,313         | $10.16       | $0.43 in / $0.87 out per 1M |
-| high-stakes-no-rationale         | GLM-4.7         |    390 | 5,992,825     | 15,366       | 187,583        | 481           | $2.67        | $0.39 in / $1.75 out per 1M |
-| high-stakes-no-rationale         | GLM-5.1         |    390 | 20,826,458    | 53,401       | 1,766,367      | 4,529         | $28.05       | $1.05 in / $3.50 out per 1M |
-| high-stakes-no-rationale         | GPT-OSS-120B    |    390 | 20,475,931    | 52,502       | 661,072        | 1,695         | $0.92        | $0.04 in / $0.19 out per 1M |
-| high-stakes-no-rationale         | Gemma-4         |    390 | 20,669,018    | 52,997       | 654,623        | 1,679         | $2.94        | $0.13 in / $0.38 out per 1M |
-| high-stakes-no-rationale         | Kimi-K2.5       |    390 | 20,392,176    | 52,288       | 1,353,340      | 3,470         | $10.86       | $0.40 in / $2.00 out per 1M |
-| high-stakes-no-rationale         | Kimi-K2.6       |    390 | 20,678,485    | 53,022       | 4,084,785      | 10,474        | $29.81       | $0.75 in / $3.50 out per 1M |
-| high-stakes-no-rationale         | Minimax-M2.7    |    390 | 29,137,867    | 74,712       | 542,346        | 1,391         | $9.39        | $0.30 in / $1.20 out per 1M |
-| high-stakes-no-rationale         | Mistral-Small-4 |    390 | 21,064,516    | 54,012       | 737,493        | 1,891         | $3.60        | $0.15 in / $0.60 out per 1M |
-| high-stakes-no-rationale         | Qwen-3.5        |    390 | 31,284,957    | 80,218       | 989,436        | 2,537         | $14.52       | $0.39 in / $2.34 out per 1M |
-| high-stakes-no-rationale         | Qwen-3.6-27B    |    390 | 21,853,480    | 56,035       | 552,105        | 1,416         | $3.26        | $0.13 in / $0.76 out per 1M |
-| ethical                         | DeepSeek-3.2    |    390 | 21,197,247    | 54,352       | 932,489        | 2,391         | $5.87        | $0.26 in / $0.38 out per 1M |
-| ethical                         | DeepSeek-4      |    390 | 21,293,051    | 54,598       | 1,366,313      | 3,503         | $10.45       | $0.43 in / $0.87 out per 1M |
-| ethical                         | GLM-4.7         |    390 | 21,621,063    | 55,439       | 742,213        | 1,903         | $9.73        | $0.39 in / $1.75 out per 1M |
-| ethical                         | GLM-5.1         |    390 | 21,126,758    | 54,171       | 2,291,235      | 5,875         | $30.20       | $1.05 in / $3.50 out per 1M |
-| ethical                         | GPT-OSS-120B    |    390 | 21,114,190    | 54,139       | 609,656        | 1,563         | $0.94        | $0.04 in / $0.19 out per 1M |
-| ethical                         | Gemma-4         |    390 | 23,427,512    | 60,071       | 694,395        | 1,780         | $3.31        | $0.13 in / $0.38 out per 1M |
-| ethical                         | Kimi-K2.5       |    390 | 21,434,596    | 54,961       | 1,243,565      | 3,189         | $11.06       | $0.40 in / $2.00 out per 1M |
-| ethical                         | Kimi-K2.6       |    390 | 21,115,905    | 54,143       | 4,272,884      | 10,956        | $30.79       | $0.75 in / $3.50 out per 1M |
-| ethical                         | Minimax-M2.7    |    390 | 24,475,410    | 62,757       | 525,054        | 1,346         | $7.97        | $0.30 in / $1.20 out per 1M |
-| ethical                         | Mistral-Small-4 |    390 | 21,250,869    | 54,489       | 567,357        | 1,455         | $3.53        | $0.15 in / $0.60 out per 1M |
-| ethical                         | Qwen-3.5        |    390 | 22,362,279    | 57,339       | 769,718        | 1,974         | $10.52       | $0.39 in / $2.34 out per 1M |
-| ethical                         | Qwen-3.6-27B    |    390 | 21,166,633    | 54,273       | 579,953        | 1,487         | $3.19        | $0.13 in / $0.76 out per 1M |
-| ethical-high-stakes              | DeepSeek-3.2    |    390 | 21,108,428    | 54,124       | 933,542        | 2,394         | $5.84        | $0.26 in / $0.38 out per 1M |
-| ethical-high-stakes              | DeepSeek-4      |    390 | 21,065,405    | 54,014       | 1,413,953      | 3,626         | $10.39       | $0.43 in / $0.87 out per 1M |
-| ethical-high-stakes              | GLM-4.7         |    390 | 22,223,282    | 56,983       | 745,214        | 1,911         | $9.97        | $0.39 in / $1.75 out per 1M |
-| ethical-high-stakes              | GLM-5.1         |    390 | 21,926,379    | 56,221       | 2,295,281      | 5,885         | $31.06       | $1.05 in / $3.50 out per 1M |
-| ethical-high-stakes              | GPT-OSS-120B    |    390 | 20,879,994    | 53,538       | 592,824        | 1,520         | $0.93        | $0.04 in / $0.19 out per 1M |
-| ethical-high-stakes              | Gemma-4         |    390 | 21,925,238    | 56,219       | 690,199        | 1,770         | $3.11        | $0.13 in / $0.38 out per 1M |
-| ethical-high-stakes              | Kimi-K2.5       |    390 | 20,853,156    | 53,470       | 1,444,400      | 3,704         | $11.23       | $0.40 in / $2.00 out per 1M |
-| ethical-high-stakes              | Kimi-K2.6       |    390 | 22,331,104    | 57,259       | 4,401,229      | 11,285        | $32.15       | $0.75 in / $3.50 out per 1M |
-| ethical-high-stakes              | Minimax-M2.7    |    390 | 24,808,240    | 63,611       | 653,096        | 1,675         | $8.23        | $0.30 in / $1.20 out per 1M |
-| ethical-high-stakes              | Mistral-Small-4 |    390 | 20,991,136    | 53,823       | 726,536        | 1,863         | $3.58        | $0.15 in / $0.60 out per 1M |
-| ethical-high-stakes              | Qwen-3.5        |    390 | 27,898,254    | 71,534       | 785,362        | 2,014         | $12.72       | $0.39 in / $2.34 out per 1M |
-| ethical-high-stakes              | Qwen-3.6-27B    |    390 | 21,377,903    | 54,815       | 754,901        | 1,936         | $3.35        | $0.13 in / $0.76 out per 1M |
-| ethical-no-rationale            | DeepSeek-3.2    |    390 | 20,387,110    | 52,275       | 991,090        | 2,541         | $5.68        | $0.26 in / $0.38 out per 1M |
-| ethical-no-rationale            | DeepSeek-4      |    390 | 20,772,023    | 53,262       | 1,234,301      | 3,165         | $10.11       | $0.43 in / $0.87 out per 1M |
-| ethical-no-rationale            | GLM-4.7         |    390 | 20,975,191    | 53,783       | 712,645        | 1,827         | $9.43        | $0.39 in / $1.75 out per 1M |
-| ethical-no-rationale            | GLM-5.1         |    390 | 20,693,615    | 53,061       | 1,726,075      | 4,426         | $27.77       | $1.05 in / $3.50 out per 1M |
-| ethical-no-rationale            | GPT-OSS-120B    |    390 | 20,392,693    | 52,289       | 642,261        | 1,647         | $0.92        | $0.04 in / $0.19 out per 1M |
-| ethical-no-rationale            | Gemma-4         |    390 | 21,137,458    | 54,199       | 648,369        | 1,662         | $2.99        | $0.13 in / $0.38 out per 1M |
-| ethical-no-rationale            | Kimi-K2.5       |    390 | 20,323,140    | 52,111       | 1,304,013      | 3,344         | $10.74       | $0.40 in / $2.00 out per 1M |
-| ethical-no-rationale            | Kimi-K2.6       |    390 | 22,052,772    | 56,546       | 4,034,487      | 10,345        | $30.66       | $0.75 in / $3.50 out per 1M |
-| ethical-no-rationale            | Minimax-M2.7    |    390 | 26,392,273    | 67,672       | 517,009        | 1,326         | $8.54        | $0.30 in / $1.20 out per 1M |
-| ethical-no-rationale            | Mistral-Small-4 |    390 | 20,711,800    | 53,107       | 642,773        | 1,648         | $3.49        | $0.15 in / $0.60 out per 1M |
-| ethical-no-rationale            | Qwen-3.5        |    390 | 25,397,783    | 65,123       | 826,522        | 2,119         | $11.84       | $0.39 in / $2.34 out per 1M |
-| ethical-no-rationale            | Qwen-3.6-27B    |    390 | 21,399,467    | 54,870       | 506,660        | 1,299         | $3.17        | $0.13 in / $0.76 out per 1M |
-| high-stakes-no-rationale-ethical | DeepSeek-3.2    |    390 | 20,655,922    | 52,964       | 955,949        | 2,451         | $5.73        | $0.26 in / $0.38 out per 1M |
-| high-stakes-no-rationale-ethical | DeepSeek-4      |    390 | 21,100,037    | 54,103       | 1,274,664      | 3,268         | $10.29       | $0.43 in / $0.87 out per 1M |
-| high-stakes-no-rationale-ethical | GLM-4.7         |    390 | 20,782,453    | 53,288       | 719,001        | 1,844         | $9.36        | $0.39 in / $1.75 out per 1M |
-| high-stakes-no-rationale-ethical | GLM-5.1         |    390 | 20,839,201    | 53,434       | 1,818,881      | 4,664         | $28.25       | $1.05 in / $3.50 out per 1M |
-| high-stakes-no-rationale-ethical | GPT-OSS-120B    |    390 | 20,701,879    | 53,082       | 691,426        | 1,773         | $0.94        | $0.04 in / $0.19 out per 1M |
-| high-stakes-no-rationale-ethical | Gemma-4         |    390 | 20,367,609    | 52,225       | 677,697        | 1,738         | $2.91        | $0.13 in / $0.38 out per 1M |
-| high-stakes-no-rationale-ethical | Kimi-K2.5       |    390 | 20,406,606    | 52,325       | 1,341,507      | 3,440         | $10.85       | $0.40 in / $2.00 out per 1M |
-| high-stakes-no-rationale-ethical | Kimi-K2.6       |    390 | 22,349,164    | 57,306       | 4,168,846      | 10,689        | $31.35       | $0.75 in / $3.50 out per 1M |
-| high-stakes-no-rationale-ethical | Minimax-M2.7    |    390 | 29,147,132    | 74,736       | 540,071        | 1,385         | $9.39        | $0.30 in / $1.20 out per 1M |
-| high-stakes-no-rationale-ethical | Mistral-Small-4 |    390 | 20,496,619    | 52,555       | 770,283        | 1,975         | $3.54        | $0.15 in / $0.60 out per 1M |
-| high-stakes-no-rationale-ethical | Qwen-3.5        |    390 | 25,662,733    | 65,802       | 820,672        | 2,104         | $11.93       | $0.39 in / $2.34 out per 1M |
-| high-stakes-no-rationale-ethical | Qwen-3.6-27B    |    390 | 21,019,784    | 53,897       | 579,872        | 1,487         | $3.17        | $0.13 in / $0.76 out per 1M |
+| Condition                        | Replay Model     |   Rows | Total Input   | Avg. Input   | Total Output   | Avg. Output   | Total Cost   | Cost Per Unit               |
+|:---------------------------------|:-----------------|-------:|:--------------|:-------------|:---------------|:--------------|:-------------|:----------------------------|
+| original                         | DeepSeek-3.2     |    390 | 20,879,003    | 53,536       | 885,504        | 2,271         | $5.77        | $0.26 in / $0.38 out per 1M |
+| original                         | DeepSeek-4       |    390 | 21,998,413    | 56,406       | 1,360,157      | 3,488         | $10.75       | $0.43 in / $0.87 out per 1M |
+| original                         | GLM-4.7          |    390 | 21,306,145    | 54,631       | 745,496        | 1,912         | $9.61        | $0.39 in / $1.75 out per 1M |
+| original                         | GLM-5.1          |    390 | 21,179,872    | 54,307       | 2,261,041      | 5,798         | $30.15       | $1.05 in / $3.50 out per 1M |
+| original                         | GPT-OSS-120B     |    390 | 21,084,339    | 54,062       | 568,347        | 1,457         | $0.93        | $0.04 in / $0.19 out per 1M |
+| original                         | Gemini-3.5-Flash |    390 | 24,455,479    | 62,706       | 3,156,131      | 8,093         | $32.54       | $0.75 in / $4.50 out per 1M |
+| original                         | Gemma-4          |    390 | 21,715,142    | 55,680       | 645,671        | 1,656         | $3.07        | $0.13 in / $0.38 out per 1M |
+| original                         | Kimi-K2.5        |    390 | 20,829,954    | 53,410       | 1,235,542      | 3,168         | $10.80       | $0.40 in / $2.00 out per 1M |
+| original                         | Kimi-K2.6        |    390 | 22,247,601    | 57,045       | 4,477,669      | 11,481        | $32.36       | $0.75 in / $3.50 out per 1M |
+| original                         | Minimax-M2.7     |    390 | 24,713,822    | 63,369       | 524,928        | 1,346         | $8.04        | $0.30 in / $1.20 out per 1M |
+| original                         | Mistral-Small-4  |    390 | 21,265,473    | 54,527       | 563,663        | 1,445         | $3.53        | $0.15 in / $0.60 out per 1M |
+| original                         | Qwen-3.5         |    390 | 20,959,841    | 53,743       | 750,566        | 1,925         | $9.93        | $0.39 in / $2.34 out per 1M |
+| original                         | Qwen-3.6-27B     |    390 | 22,248,130    | 57,046       | 565,514        | 1,450         | $3.32        | $0.13 in / $0.76 out per 1M |
+| no-rationale                     | DeepSeek-3.2     |    390 | 20,358,440    | 52,201       | 1,022,276      | 2,621         | $5.68        | $0.26 in / $0.38 out per 1M |
+| no-rationale                     | DeepSeek-4       |    390 | 20,666,061    | 52,990       | 1,243,676      | 3,189         | $10.07       | $0.43 in / $0.87 out per 1M |
+| no-rationale                     | GLM-4.7          |    390 | 20,684,453    | 53,037       | 666,706        | 1,710         | $9.23        | $0.39 in / $1.75 out per 1M |
+| no-rationale                     | GLM-5.1          |    390 | 20,654,291    | 52,960       | 1,659,174      | 4,254         | $27.49       | $1.05 in / $3.50 out per 1M |
+| no-rationale                     | GPT-OSS-120B     |    390 | 20,979,424    | 53,793       | 630,739        | 1,617         | $0.94        | $0.04 in / $0.19 out per 1M |
+| no-rationale                     | Gemini-3.5-Flash |    390 | 23,991,621    | 61,517       | 2,666,631      | 6,838         | $29.99       | $0.75 in / $4.50 out per 1M |
+| no-rationale                     | Gemma-4          |    390 | 21,210,855    | 54,387       | 616,752        | 1,581         | $2.99        | $0.13 in / $0.38 out per 1M |
+| no-rationale                     | Kimi-K2.5        |    390 | 20,308,710    | 52,074       | 1,195,461      | 3,065         | $10.51       | $0.40 in / $2.00 out per 1M |
+| no-rationale                     | Kimi-K2.6        |    390 | 20,623,693    | 52,881       | 3,972,919      | 10,187        | $29.37       | $0.75 in / $3.50 out per 1M |
+| no-rationale                     | Minimax-M2.7     |    390 | 26,358,029    | 67,585       | 707,113        | 1,813         | $8.76        | $0.30 in / $1.20 out per 1M |
+| no-rationale                     | Mistral-Small-4  |    390 | 20,820,730    | 53,386       | 585,077        | 1,500         | $3.47        | $0.15 in / $0.60 out per 1M |
+| no-rationale                     | Qwen-3.5         |    390 | 20,775,694    | 53,271       | 834,142        | 2,139         | $10.05       | $0.39 in / $2.34 out per 1M |
+| no-rationale                     | Qwen-3.6-27B     |    390 | 20,650,522    | 52,950       | 487,614        | 1,250         | $3.06        | $0.13 in / $0.76 out per 1M |
+| high-stakes                      | DeepSeek-3.2     |    390 | 21,322,181    | 54,672       | 846,481        | 2,170         | $5.87        | $0.26 in / $0.38 out per 1M |
+| high-stakes                      | DeepSeek-4       |    390 | 22,334,926    | 57,269       | 1,405,310      | 3,603         | $10.94       | $0.43 in / $0.87 out per 1M |
+| high-stakes                      | GLM-4.7          |    390 | 21,931,409    | 56,234       | 729,075        | 1,869         | $9.83        | $0.39 in / $1.75 out per 1M |
+| high-stakes                      | GLM-5.1          |    390 | 21,532,339    | 55,211       | 2,222,103      | 5,698         | $30.39       | $1.05 in / $3.50 out per 1M |
+| high-stakes                      | GPT-OSS-120B     |    390 | 20,794,378    | 53,319       | 588,214        | 1,508         | $0.92        | $0.04 in / $0.19 out per 1M |
+| high-stakes                      | Gemini-3.5-Flash |    390 | 25,360,791    | 65,028       | 3,345,690      | 8,579         | $34.08       | $0.75 in / $4.50 out per 1M |
+| high-stakes                      | Gemma-4          |    390 | 21,346,560    | 54,735       | 682,236        | 1,749         | $3.03        | $0.13 in / $0.38 out per 1M |
+| high-stakes                      | Kimi-K2.5        |    390 | 20,915,655    | 53,630       | 1,357,069      | 3,480         | $11.08       | $0.40 in / $2.00 out per 1M |
+| high-stakes                      | Kimi-K2.6        |    390 | 22,861,769    | 58,620       | 4,844,465      | 12,422        | $34.10       | $0.75 in / $3.50 out per 1M |
+| high-stakes                      | Minimax-M2.7     |    390 | 24,597,425    | 63,070       | 523,373        | 1,342         | $8.01        | $0.30 in / $1.20 out per 1M |
+| high-stakes                      | Mistral-Small-4  |    390 | 21,504,196    | 55,139       | 713,628        | 1,830         | $3.65        | $0.15 in / $0.60 out per 1M |
+| high-stakes                      | Qwen-3.5         |    390 | 34,056,759    | 87,325       | 971,748        | 2,492         | $15.56       | $0.39 in / $2.34 out per 1M |
+| high-stakes                      | Qwen-3.6-27B     |    390 | 21,675,678    | 55,579       | 680,320        | 1,744         | $3.33        | $0.13 in / $0.76 out per 1M |
+| high-stakes-no-rationale         | DeepSeek-3.2     |    390 | 20,609,816    | 52,846       | 962,915        | 2,469         | $5.72        | $0.26 in / $0.38 out per 1M |
+| high-stakes-no-rationale         | DeepSeek-4       |    390 | 20,774,325    | 53,268       | 1,291,929      | 3,313         | $10.16       | $0.43 in / $0.87 out per 1M |
+| high-stakes-no-rationale         | GLM-4.7          |    390 | 5,992,825     | 15,366       | 187,583        | 481           | $2.67        | $0.39 in / $1.75 out per 1M |
+| high-stakes-no-rationale         | GLM-5.1          |    390 | 20,826,458    | 53,401       | 1,766,367      | 4,529         | $28.05       | $1.05 in / $3.50 out per 1M |
+| high-stakes-no-rationale         | GPT-OSS-120B     |    390 | 20,475,931    | 52,502       | 661,072        | 1,695         | $0.92        | $0.04 in / $0.19 out per 1M |
+| high-stakes-no-rationale         | Gemini-3.5-Flash |    390 | 25,936,053    | 66,503       | 2,812,415      | 7,211         | $32.11       | $0.75 in / $4.50 out per 1M |
+| high-stakes-no-rationale         | Gemma-4          |    390 | 20,669,018    | 52,997       | 654,623        | 1,679         | $2.94        | $0.13 in / $0.38 out per 1M |
+| high-stakes-no-rationale         | Kimi-K2.5        |    390 | 20,392,176    | 52,288       | 1,353,340      | 3,470         | $10.86       | $0.40 in / $2.00 out per 1M |
+| high-stakes-no-rationale         | Kimi-K2.6        |    390 | 20,678,485    | 53,022       | 4,084,785      | 10,474        | $29.81       | $0.75 in / $3.50 out per 1M |
+| high-stakes-no-rationale         | Minimax-M2.7     |    390 | 29,137,867    | 74,712       | 542,346        | 1,391         | $9.39        | $0.30 in / $1.20 out per 1M |
+| high-stakes-no-rationale         | Mistral-Small-4  |    390 | 21,064,516    | 54,012       | 737,493        | 1,891         | $3.60        | $0.15 in / $0.60 out per 1M |
+| high-stakes-no-rationale         | Qwen-3.5         |    390 | 31,284,957    | 80,218       | 989,436        | 2,537         | $14.52       | $0.39 in / $2.34 out per 1M |
+| high-stakes-no-rationale         | Qwen-3.6-27B     |    390 | 21,853,480    | 56,035       | 552,105        | 1,416         | $3.26        | $0.13 in / $0.76 out per 1M |
+| ethical                          | DeepSeek-3.2     |    390 | 21,197,247    | 54,352       | 932,489        | 2,391         | $5.87        | $0.26 in / $0.38 out per 1M |
+| ethical                          | DeepSeek-4       |    390 | 21,293,051    | 54,598       | 1,366,313      | 3,503         | $10.45       | $0.43 in / $0.87 out per 1M |
+| ethical                          | GLM-4.7          |    390 | 21,621,063    | 55,439       | 742,213        | 1,903         | $9.73        | $0.39 in / $1.75 out per 1M |
+| ethical                          | GLM-5.1          |    390 | 21,126,758    | 54,171       | 2,291,235      | 5,875         | $30.20       | $1.05 in / $3.50 out per 1M |
+| ethical                          | GPT-OSS-120B     |    390 | 21,114,190    | 54,139       | 609,656        | 1,563         | $0.94        | $0.04 in / $0.19 out per 1M |
+| ethical                          | Gemini-3.5-Flash |    390 | 23,344,055    | 59,857       | 3,139,522      | 8,050         | $31.64       | $0.75 in / $4.50 out per 1M |
+| ethical                          | Gemma-4          |    390 | 23,427,512    | 60,071       | 694,395        | 1,780         | $3.31        | $0.13 in / $0.38 out per 1M |
+| ethical                          | Kimi-K2.5        |    390 | 21,434,596    | 54,961       | 1,243,565      | 3,189         | $11.06       | $0.40 in / $2.00 out per 1M |
+| ethical                          | Kimi-K2.6        |    390 | 21,115,905    | 54,143       | 4,272,884      | 10,956        | $30.79       | $0.75 in / $3.50 out per 1M |
+| ethical                          | Minimax-M2.7     |    390 | 24,475,410    | 62,757       | 525,054        | 1,346         | $7.97        | $0.30 in / $1.20 out per 1M |
+| ethical                          | Mistral-Small-4  |    390 | 21,250,869    | 54,489       | 567,357        | 1,455         | $3.53        | $0.15 in / $0.60 out per 1M |
+| ethical                          | Qwen-3.5         |    390 | 22,362,279    | 57,339       | 769,718        | 1,974         | $10.52       | $0.39 in / $2.34 out per 1M |
+| ethical                          | Qwen-3.6-27B     |    390 | 21,166,633    | 54,273       | 579,953        | 1,487         | $3.19        | $0.13 in / $0.76 out per 1M |
+| ethical-high-stakes              | DeepSeek-3.2     |    390 | 21,108,428    | 54,124       | 933,542        | 2,394         | $5.84        | $0.26 in / $0.38 out per 1M |
+| ethical-high-stakes              | DeepSeek-4       |    390 | 21,065,405    | 54,014       | 1,413,953      | 3,626         | $10.39       | $0.43 in / $0.87 out per 1M |
+| ethical-high-stakes              | GLM-4.7          |    390 | 22,223,282    | 56,983       | 745,214        | 1,911         | $9.97        | $0.39 in / $1.75 out per 1M |
+| ethical-high-stakes              | GLM-5.1          |    390 | 21,926,379    | 56,221       | 2,295,281      | 5,885         | $31.06       | $1.05 in / $3.50 out per 1M |
+| ethical-high-stakes              | GPT-OSS-120B     |    390 | 20,879,994    | 53,538       | 592,824        | 1,520         | $0.93        | $0.04 in / $0.19 out per 1M |
+| ethical-high-stakes              | Gemini-3.5-Flash |    390 | 24,710,581    | 63,360       | 3,467,749      | 8,892         | $34.14       | $0.75 in / $4.50 out per 1M |
+| ethical-high-stakes              | Gemma-4          |    390 | 21,925,238    | 56,219       | 690,199        | 1,770         | $3.11        | $0.13 in / $0.38 out per 1M |
+| ethical-high-stakes              | Kimi-K2.5        |    390 | 20,853,156    | 53,470       | 1,444,400      | 3,704         | $11.23       | $0.40 in / $2.00 out per 1M |
+| ethical-high-stakes              | Kimi-K2.6        |    390 | 22,331,104    | 57,259       | 4,401,229      | 11,285        | $32.15       | $0.75 in / $3.50 out per 1M |
+| ethical-high-stakes              | Minimax-M2.7     |    390 | 24,808,240    | 63,611       | 653,096        | 1,675         | $8.23        | $0.30 in / $1.20 out per 1M |
+| ethical-high-stakes              | Mistral-Small-4  |    390 | 20,991,136    | 53,823       | 726,536        | 1,863         | $3.58        | $0.15 in / $0.60 out per 1M |
+| ethical-high-stakes              | Qwen-3.5         |    390 | 27,898,254    | 71,534       | 785,362        | 2,014         | $12.72       | $0.39 in / $2.34 out per 1M |
+| ethical-high-stakes              | Qwen-3.6-27B     |    390 | 21,377,903    | 54,815       | 754,901        | 1,936         | $3.35        | $0.13 in / $0.76 out per 1M |
+| ethical-no-rationale             | DeepSeek-3.2     |    390 | 20,387,110    | 52,275       | 991,090        | 2,541         | $5.68        | $0.26 in / $0.38 out per 1M |
+| ethical-no-rationale             | DeepSeek-4       |    390 | 20,772,023    | 53,262       | 1,234,301      | 3,165         | $10.11       | $0.43 in / $0.87 out per 1M |
+| ethical-no-rationale             | GLM-4.7          |    390 | 20,975,191    | 53,783       | 712,645        | 1,827         | $9.43        | $0.39 in / $1.75 out per 1M |
+| ethical-no-rationale             | GLM-5.1          |    390 | 20,693,615    | 53,061       | 1,726,075      | 4,426         | $27.77       | $1.05 in / $3.50 out per 1M |
+| ethical-no-rationale             | GPT-OSS-120B     |    390 | 20,392,693    | 52,289       | 642,261        | 1,647         | $0.92        | $0.04 in / $0.19 out per 1M |
+| ethical-no-rationale             | Gemini-3.5-Flash |    390 | 23,713,697    | 60,804       | 2,612,489      | 6,699         | $29.54       | $0.75 in / $4.50 out per 1M |
+| ethical-no-rationale             | Gemma-4          |    390 | 21,137,458    | 54,199       | 648,369        | 1,662         | $2.99        | $0.13 in / $0.38 out per 1M |
+| ethical-no-rationale             | Kimi-K2.5        |    390 | 20,323,140    | 52,111       | 1,304,013      | 3,344         | $10.74       | $0.40 in / $2.00 out per 1M |
+| ethical-no-rationale             | Kimi-K2.6        |    390 | 22,052,772    | 56,546       | 4,034,487      | 10,345        | $30.66       | $0.75 in / $3.50 out per 1M |
+| ethical-no-rationale             | Minimax-M2.7     |    390 | 26,392,273    | 67,672       | 517,009        | 1,326         | $8.54        | $0.30 in / $1.20 out per 1M |
+| ethical-no-rationale             | Mistral-Small-4  |    390 | 20,711,800    | 53,107       | 642,773        | 1,648         | $3.49        | $0.15 in / $0.60 out per 1M |
+| ethical-no-rationale             | Qwen-3.5         |    390 | 25,397,783    | 65,123       | 826,522        | 2,119         | $11.84       | $0.39 in / $2.34 out per 1M |
+| ethical-no-rationale             | Qwen-3.6-27B     |    390 | 21,399,467    | 54,870       | 506,660        | 1,299         | $3.17        | $0.13 in / $0.76 out per 1M |
+| high-stakes-no-rationale-ethical | DeepSeek-3.2     |    390 | 20,655,922    | 52,964       | 955,949        | 2,451         | $5.73        | $0.26 in / $0.38 out per 1M |
+| high-stakes-no-rationale-ethical | DeepSeek-4       |    390 | 21,100,037    | 54,103       | 1,274,664      | 3,268         | $10.29       | $0.43 in / $0.87 out per 1M |
+| high-stakes-no-rationale-ethical | GLM-4.7          |    390 | 20,782,453    | 53,288       | 719,001        | 1,844         | $9.36        | $0.39 in / $1.75 out per 1M |
+| high-stakes-no-rationale-ethical | GLM-5.1          |    390 | 20,839,201    | 53,434       | 1,818,881      | 4,664         | $28.25       | $1.05 in / $3.50 out per 1M |
+| high-stakes-no-rationale-ethical | GPT-OSS-120B     |    390 | 20,701,879    | 53,082       | 691,426        | 1,773         | $0.94        | $0.04 in / $0.19 out per 1M |
+| high-stakes-no-rationale-ethical | Gemini-3.5-Flash |    390 | 28,033,679    | 71,881       | 2,813,357      | 7,214         | $33.69       | $0.75 in / $4.50 out per 1M |
+| high-stakes-no-rationale-ethical | Gemma-4          |    390 | 20,367,609    | 52,225       | 677,697        | 1,738         | $2.91        | $0.13 in / $0.38 out per 1M |
+| high-stakes-no-rationale-ethical | Kimi-K2.5        |    390 | 20,406,606    | 52,325       | 1,341,507      | 3,440         | $10.85       | $0.40 in / $2.00 out per 1M |
+| high-stakes-no-rationale-ethical | Kimi-K2.6        |    390 | 22,349,164    | 57,306       | 4,168,846      | 10,689        | $31.35       | $0.75 in / $3.50 out per 1M |
+| high-stakes-no-rationale-ethical | Minimax-M2.7     |    390 | 29,147,132    | 74,736       | 540,071        | 1,385         | $9.39        | $0.30 in / $1.20 out per 1M |
+| high-stakes-no-rationale-ethical | Mistral-Small-4  |    390 | 20,496,619    | 52,555       | 770,283        | 1,975         | $3.54        | $0.15 in / $0.60 out per 1M |
+| high-stakes-no-rationale-ethical | Qwen-3.5         |    390 | 25,662,733    | 65,802       | 820,672        | 2,104         | $11.93       | $0.39 in / $2.34 out per 1M |
+| high-stakes-no-rationale-ethical | Qwen-3.6-27B     |    390 | 21,019,784    | 53,897       | 579,872        | 1,487         | $3.17        | $0.13 in / $0.76 out per 1M |
 ```
 
 ---
@@ -410,36 +334,38 @@ overall_total = summary['Total Cost'].sum()
 print(f"\nOverall Total Cost: {format_currency(overall_total)}")
 ```
 
-|   Unnamed: 0 | Replay Model    |   Rows |   Conditions |   Total Input |   Avg. Input |   Total Output |   Avg. Output | Total Cost   | Cost Per Unit               |
-|--------------|-----------------|--------|--------------|---------------|--------------|----------------|---------------|--------------|-----------------------------|
-|            0 | DeepSeek-3.2    |   3120 |            8 |     166518147 |        53371 |        7530246 |          2414 | $46.16       | $0.26 in / $0.38 out per 1M |
-|            1 | DeepSeek-4      |   3120 |            8 |     170004241 |        54489 |       10590303 |          3394 | $83.17       | $0.43 in / $0.87 out per 1M |
-|            2 | GLM-4.7         |   3120 |            8 |     155516821 |        49845 |        5247933 |          1682 | $69.84       | $0.39 in / $1.75 out per 1M |
-|            3 | GLM-5.1         |   3120 |            8 |     168778913 |        54096 |       16040157 |          5141 | $233.36      | $1.05 in / $3.50 out per 1M |
-|            4 | GPT-OSS-120B    |   3120 |            8 |     166422828 |        53341 |        4984539 |          1598 | $7.44        | $0.04 in / $0.19 out per 1M |
-|            5 | Gemma-4         |   3120 |            8 |     171799392 |        55064 |        5309942 |          1702 | $24.35       | $0.13 in / $0.38 out per 1M |
-|            6 | Kimi-K2.5       |   3120 |            8 |     165463993 |        53033 |       10474897 |          3357 | $87.14       | $0.40 in / $2.00 out per 1M |
-|            7 | Kimi-K2.6       |   3120 |            8 |     174260493 |        55853 |       34257284 |         10980 | $250.60      | $0.75 in / $3.50 out per 1M |
-|            8 | Minimax-M2.7    |   3120 |            8 |     209630198 |        67189 |        4532990 |          1453 | $68.33       | $0.30 in / $1.20 out per 1M |
-|            9 | Mistral-Small-4 |   3120 |            8 |     168105339 |        53880 |        5306810 |          1701 | $28.40       | $0.15 in / $0.60 out per 1M |
-|           10 | Qwen-3.5        |   3120 |            8 |     208398300 |        66794 |        6748166 |          2163 | $97.07       | $0.39 in / $2.34 out per 1M |
-|           11 | Qwen-3.6-27B    |   3120 |            8 |     171391597 |        54933 |        4706939 |          1509 | $25.86       | $0.13 in / $0.76 out per 1M |
+|   Unnamed: 0 | Replay Model     |   Rows |   Conditions |   Total Input |   Avg. Input |   Total Output |   Avg. Output | Total Cost   | Cost Per Unit               |
+|--------------|------------------|--------|--------------|---------------|--------------|----------------|---------------|--------------|-----------------------------|
+|            0 | DeepSeek-3.2     |   3120 |            8 |     166518147 |        53371 |        7530246 |          2414 | $46.16       | $0.26 in / $0.38 out per 1M |
+|            1 | DeepSeek-4       |   3120 |            8 |     170004241 |        54489 |       10590303 |          3394 | $83.17       | $0.43 in / $0.87 out per 1M |
+|            2 | GLM-4.7          |   3120 |            8 |     155516821 |        49845 |        5247933 |          1682 | $69.84       | $0.39 in / $1.75 out per 1M |
+|            3 | GLM-5.1          |   3120 |            8 |     168778913 |        54096 |       16040157 |          5141 | $233.36      | $1.05 in / $3.50 out per 1M |
+|            4 | GPT-OSS-120B     |   3120 |            8 |     166422828 |        53341 |        4984539 |          1598 | $7.44        | $0.04 in / $0.19 out per 1M |
+|            5 | Gemini-3.5-Flash |   3120 |            8 |     199545956 |        63957 |       24013984 |          7697 | $257.72      | $0.75 in / $4.50 out per 1M |
+|            6 | Gemma-4          |   3120 |            8 |     171799392 |        55064 |        5309942 |          1702 | $24.35       | $0.13 in / $0.38 out per 1M |
+|            7 | Kimi-K2.5        |   3120 |            8 |     165463993 |        53033 |       10474897 |          3357 | $87.14       | $0.40 in / $2.00 out per 1M |
+|            8 | Kimi-K2.6        |   3120 |            8 |     174260493 |        55853 |       34257284 |         10980 | $250.60      | $0.75 in / $3.50 out per 1M |
+|            9 | Minimax-M2.7     |   3120 |            8 |     209630198 |        67189 |        4532990 |          1453 | $68.33       | $0.30 in / $1.20 out per 1M |
+|           10 | Mistral-Small-4  |   3120 |            8 |     168105339 |        53880 |        5306810 |          1701 | $28.40       | $0.15 in / $0.60 out per 1M |
+|           11 | Qwen-3.5         |   3120 |            8 |     208398300 |        66794 |        6748166 |          2163 | $97.07       | $0.39 in / $2.34 out per 1M |
+|           12 | Qwen-3.6-27B     |   3120 |            8 |     171391597 |        54933 |        4706939 |          1509 | $25.86       | $0.13 in / $0.76 out per 1M |
 
 ```
-| Replay Model    | Rows   |   Conditions | Total Input   | Avg. Input   | Total Output   | Avg. Output   | Total Cost   | Cost Per Unit               |
-|:----------------|:-------|-------------:|:--------------|:-------------|:---------------|:--------------|:-------------|:----------------------------|
-| DeepSeek-3.2    | 3,120  |            8 | 166,518,147   | 53,371       | 7,530,246      | 2,414         | $46.16       | $0.26 in / $0.38 out per 1M |
-| DeepSeek-4      | 3,120  |            8 | 170,004,241   | 54,489       | 10,590,303     | 3,394         | $83.17       | $0.43 in / $0.87 out per 1M |
-| GLM-4.7         | 3,120  |            8 | 155,516,821   | 49,845       | 5,247,933      | 1,682         | $69.84       | $0.39 in / $1.75 out per 1M |
-| GLM-5.1         | 3,120  |            8 | 168,778,913   | 54,096       | 16,040,157     | 5,141         | $233.36      | $1.05 in / $3.50 out per 1M |
-| GPT-OSS-120B    | 3,120  |            8 | 166,422,828   | 53,341       | 4,984,539      | 1,598         | $7.44        | $0.04 in / $0.19 out per 1M |
-| Gemma-4         | 3,120  |            8 | 171,799,392   | 55,064       | 5,309,942      | 1,702         | $24.35       | $0.13 in / $0.38 out per 1M |
-| Kimi-K2.5       | 3,120  |            8 | 165,463,993   | 53,033       | 10,474,897     | 3,357         | $87.14       | $0.40 in / $2.00 out per 1M |
-| Kimi-K2.6       | 3,120  |            8 | 174,260,493   | 55,853       | 34,257,284     | 10,980        | $250.60      | $0.75 in / $3.50 out per 1M |
-| Minimax-M2.7    | 3,120  |            8 | 209,630,198   | 67,189       | 4,532,990      | 1,453         | $68.33       | $0.30 in / $1.20 out per 1M |
-| Mistral-Small-4 | 3,120  |            8 | 168,105,339   | 53,880       | 5,306,810      | 1,701         | $28.40       | $0.15 in / $0.60 out per 1M |
-| Qwen-3.5        | 3,120  |            8 | 208,398,300   | 66,794       | 6,748,166      | 2,163         | $97.07       | $0.39 in / $2.34 out per 1M |
-| Qwen-3.6-27B    | 3,120  |            8 | 171,391,597   | 54,933       | 4,706,939      | 1,509         | $25.86       | $0.13 in / $0.76 out per 1M |
+| Replay Model     | Rows   |   Conditions | Total Input   | Avg. Input   | Total Output   | Avg. Output   | Total Cost   | Cost Per Unit               |
+|:-----------------|:-------|-------------:|:--------------|:-------------|:---------------|:--------------|:-------------|:----------------------------|
+| DeepSeek-3.2     | 3,120  |            8 | 166,518,147   | 53,371       | 7,530,246      | 2,414         | $46.16       | $0.26 in / $0.38 out per 1M |
+| DeepSeek-4       | 3,120  |            8 | 170,004,241   | 54,489       | 10,590,303     | 3,394         | $83.17       | $0.43 in / $0.87 out per 1M |
+| GLM-4.7          | 3,120  |            8 | 155,516,821   | 49,845       | 5,247,933      | 1,682         | $69.84       | $0.39 in / $1.75 out per 1M |
+| GLM-5.1          | 3,120  |            8 | 168,778,913   | 54,096       | 16,040,157     | 5,141         | $233.36      | $1.05 in / $3.50 out per 1M |
+| GPT-OSS-120B     | 3,120  |            8 | 166,422,828   | 53,341       | 4,984,539      | 1,598         | $7.44        | $0.04 in / $0.19 out per 1M |
+| Gemini-3.5-Flash | 3,120  |            8 | 199,545,956   | 63,957       | 24,013,984     | 7,697         | $257.72      | $0.75 in / $4.50 out per 1M |
+| Gemma-4          | 3,120  |            8 | 171,799,392   | 55,064       | 5,309,942      | 1,702         | $24.35       | $0.13 in / $0.38 out per 1M |
+| Kimi-K2.5        | 3,120  |            8 | 165,463,993   | 53,033       | 10,474,897     | 3,357         | $87.14       | $0.40 in / $2.00 out per 1M |
+| Kimi-K2.6        | 3,120  |            8 | 174,260,493   | 55,853       | 34,257,284     | 10,980        | $250.60      | $0.75 in / $3.50 out per 1M |
+| Minimax-M2.7     | 3,120  |            8 | 209,630,198   | 67,189       | 4,532,990      | 1,453         | $68.33       | $0.30 in / $1.20 out per 1M |
+| Mistral-Small-4  | 3,120  |            8 | 168,105,339   | 53,880       | 5,306,810      | 1,701         | $28.40       | $0.15 in / $0.60 out per 1M |
+| Qwen-3.5         | 3,120  |            8 | 208,398,300   | 66,794       | 6,748,166      | 2,163         | $97.07       | $0.39 in / $2.34 out per 1M |
+| Qwen-3.6-27B     | 3,120  |            8 | 171,391,597   | 54,933       | 4,706,939      | 1,509         | $25.86       | $0.13 in / $0.76 out per 1M |
 
-Overall Total Cost: $1,021.69
+Overall Total Cost: $1,279.41
 ```

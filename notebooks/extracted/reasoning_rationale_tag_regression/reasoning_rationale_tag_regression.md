@@ -88,31 +88,31 @@ print(f'Models (complete catalog order): {MODEL_ORDER}')
 ```
 
 ```
-✓ Loaded 37,440 rows from 96 files
+✓ Loaded 40,560 rows from 104 files
   Conditions   : original, no-rationale, high-stakes, high-stakes-no-rationale, ethical, ethical-high-stakes, ethical-no-rationale, high-stakes-no-rationale-ethical
-  Replay models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, gpt-oss-120b
+  Replay models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemini-3.5-Flash, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, gpt-oss-120b
 
   Rows per condition × replay model:
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                                        DeepSeek-V3.2      DeepSeek-V4          GLM-4.7          GLM-5.1          Gemma-4        Kimi-K2.5        Kimi-K2.6     MiniMax-M2.7  Mistral-Small-4         Qwen-3.5     Qwen-3.6-27B     gpt-oss-120b            Total
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                            original              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                        no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                         high-stakes              390              390              390              390              390              390              390              390              390              390              390              390             4680
-            high-stakes-no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                             ethical              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                 ethical-high-stakes              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                ethical-no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-    high-stakes-no-rationale-ethical              390              390              390              390              390              390              390              390              390              390              390              390             4680
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                               Total             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120            37440
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Using 12 complete replay models.
-Full replay rows after complete-model filter: 37,440
-After left-join:  37,440
-Rationale tag coverage: 16,314 / 37,440
-Reasoning tag coverage: 26,311 / 37,440
-Models (complete catalog order): ['GPT-OSS-120B', 'GLM-4.7', 'GLM-5.1', 'Minimax-M2.7', 'Kimi-K2.5', 'Kimi-K2.6', 'DeepSeek-3.2', 'DeepSeek-4', 'Qwen-3.5', 'Qwen-3.6-27B', 'Mistral-Small-4', 'Gemma-4']
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                                         DeepSeek-V3.2       DeepSeek-V4           GLM-4.7           GLM-5.1  Gemini-3.5-Flash           Gemma-4         Kimi-K2.5         Kimi-K2.6      MiniMax-M2.7   Mistral-Small-4          Qwen-3.5      Qwen-3.6-27B      gpt-oss-120b             Total
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                            original               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                        no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                         high-stakes               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+            high-stakes-no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                             ethical               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                 ethical-high-stakes               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                ethical-no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+    high-stakes-no-rationale-ethical               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                               Total              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120             40560
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Using 13 complete replay models.
+Full replay rows after complete-model filter: 40,560
+After left-join:  40,560
+Rationale tag coverage: 17,523 / 40,560
+Reasoning tag coverage: 28,850 / 40,560
+Models (complete catalog order): ['GPT-OSS-120B', 'GLM-4.7', 'GLM-5.1', 'Minimax-M2.7', 'Kimi-K2.5', 'Kimi-K2.6', 'DeepSeek-3.2', 'DeepSeek-4', 'Qwen-3.5', 'Qwen-3.6-27B', 'Mistral-Small-4', 'Gemma-4', 'Gemini-3.5-Flash']
 ```
 
 ---
@@ -170,7 +170,7 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarn
 ![cell_05_out_2.png](images/cell_05_out_2.png)
 
 ```
-<Figure size 1000x760 with 4 Axes>
+<Figure size 1000x805 with 4 Axes>
 ```
 
 ```
@@ -185,7 +185,7 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarn
 ![cell_05_out_5.png](images/cell_05_out_5.png)
 
 ```
-<Figure size 1000x760 with 4 Axes>
+<Figure size 1000x805 with 4 Axes>
 ```
 
 ```
@@ -200,7 +200,7 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarn
 ![cell_05_out_8.png](images/cell_05_out_8.png)
 
 ```
-<Figure size 1000x760 with 4 Axes>
+<Figure size 1000x805 with 4 Axes>
 ```
 
 ---
@@ -247,7 +247,7 @@ print(f'Conditions: {sorted(ethical_merged["condition"].unique())}')
 ```
 
 ```
-Ethical subset: 18,720 rows
+Ethical subset: 20,280 rows
 Conditions: ['ethical', 'ethical-high-stakes', 'ethical-no-rationale', 'high-stakes-no-rationale-ethical']
 ```
 
@@ -284,7 +284,7 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarn
 ![cell_08_out_2.png](images/cell_08_out_2.png)
 
 ```
-<Figure size 840x804 with 4 Axes>
+<Figure size 840x852 with 4 Axes>
 ```
 
 ```
@@ -295,7 +295,7 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarn
 ![cell_08_out_4.png](images/cell_08_out_4.png)
 
 ```
-<Figure size 1010x804 with 4 Axes>
+<Figure size 1010x852 with 4 Axes>
 ```
 
 ```
@@ -306,7 +306,7 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarn
 ![cell_08_out_6.png](images/cell_08_out_6.png)
 
 ```
-<Figure size 1010x804 with 4 Axes>
+<Figure size 1010x852 with 4 Axes>
 ```
 
 ---
@@ -342,7 +342,7 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarn
 ![cell_09_out_2.png](images/cell_09_out_2.png)
 
 ```
-<Figure size 840x804 with 4 Axes>
+<Figure size 840x852 with 4 Axes>
 ```
 
 ```
@@ -353,7 +353,7 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarn
 ![cell_09_out_4.png](images/cell_09_out_4.png)
 
 ```
-<Figure size 1010x804 with 4 Axes>
+<Figure size 1010x852 with 4 Axes>
 ```
 
 ```
@@ -364,5 +364,5 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarn
 ![cell_09_out_6.png](images/cell_09_out_6.png)
 
 ```
-<Figure size 1010x804 with 4 Axes>
+<Figure size 1010x852 with 4 Axes>
 ```

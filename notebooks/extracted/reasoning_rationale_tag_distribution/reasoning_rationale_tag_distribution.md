@@ -99,30 +99,30 @@ print(f'Conditions           : {CONDITION_ORDER}')
 ```
 
 ```
-✓ Loaded 37,440 rows from 96 files
+✓ Loaded 40,560 rows from 104 files
   Conditions   : original, no-rationale, high-stakes, high-stakes-no-rationale, ethical, ethical-high-stakes, ethical-no-rationale, high-stakes-no-rationale-ethical
-  Replay models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, gpt-oss-120b
+  Replay models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemini-3.5-Flash, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, gpt-oss-120b
 
   Rows per condition × replay model:
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                                        DeepSeek-V3.2      DeepSeek-V4          GLM-4.7          GLM-5.1          Gemma-4        Kimi-K2.5        Kimi-K2.6     MiniMax-M2.7  Mistral-Small-4         Qwen-3.5     Qwen-3.6-27B     gpt-oss-120b            Total
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                            original              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                        no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                         high-stakes              390              390              390              390              390              390              390              390              390              390              390              390             4680
-            high-stakes-no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                             ethical              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                 ethical-high-stakes              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                ethical-no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-    high-stakes-no-rationale-ethical              390              390              390              390              390              390              390              390              390              390              390              390             4680
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                               Total             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120            37440
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Using 12 complete replay models.
-Rationale rows: 36,679
-Reasoning rows: 37,046
-Full replay after complete-model filter: 37,440
-Models (complete catalog order): ['GPT-OSS-120B', 'GLM-4.7', 'GLM-5.1', 'Minimax-M2.7', 'Kimi-K2.5', 'Kimi-K2.6', 'DeepSeek-3.2', 'DeepSeek-4', 'Qwen-3.5', 'Qwen-3.6-27B', 'Mistral-Small-4', 'Gemma-4']
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                                         DeepSeek-V3.2       DeepSeek-V4           GLM-4.7           GLM-5.1  Gemini-3.5-Flash           Gemma-4         Kimi-K2.5         Kimi-K2.6      MiniMax-M2.7   Mistral-Small-4          Qwen-3.5      Qwen-3.6-27B      gpt-oss-120b             Total
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                            original               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                        no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                         high-stakes               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+            high-stakes-no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                             ethical               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                 ethical-high-stakes               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                ethical-no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+    high-stakes-no-rationale-ethical               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                               Total              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120             40560
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Using 13 complete replay models.
+Rationale rows: 39,776
+Reasoning rows: 40,450
+Full replay after complete-model filter: 40,560
+Models (complete catalog order): ['GPT-OSS-120B', 'GLM-4.7', 'GLM-5.1', 'Minimax-M2.7', 'Kimi-K2.5', 'Kimi-K2.6', 'DeepSeek-3.2', 'DeepSeek-4', 'Qwen-3.5', 'Qwen-3.6-27B', 'Mistral-Small-4', 'Gemma-4', 'Gemini-3.5-Flash']
 Conditions           : ['original', 'no-rationale', 'high-stakes', 'high-stakes-no-rationale', 'ethical', 'ethical-high-stakes', 'ethical-no-rationale', 'high-stakes-no-rationale-ethical']
 ```
 
@@ -233,19 +233,19 @@ for tier in TIERS:
 ![cell_07_out_0.png](images/cell_07_out_0.png)
 
 ```
-<Figure size 2280x805 with 4 Axes>
+<Figure size 2280x850 with 4 Axes>
 ```
 
 ![cell_07_out_1.png](images/cell_07_out_1.png)
 
 ```
-<Figure size 2280x805 with 4 Axes>
+<Figure size 2280x850 with 4 Axes>
 ```
 
 ![cell_07_out_2.png](images/cell_07_out_2.png)
 
 ```
-<Figure size 2280x805 with 4 Axes>
+<Figure size 2280x850 with 4 Axes>
 ```
 
 ---
@@ -307,13 +307,13 @@ fig, ax = plot_replay_direction_heatmap(
 ![cell_09_out_0.png](images/cell_09_out_0.png)
 
 ```
-<Figure size 1400x910 with 2 Axes>
+<Figure size 1400x980 with 2 Axes>
 ```
 
 ![cell_09_out_1.png](images/cell_09_out_1.png)
 
 ```
-<Figure size 1400x910 with 2 Axes>
+<Figure size 1400x980 with 2 Axes>
 ```
 
 ---
@@ -451,9 +451,9 @@ plt.show()
 
 | ('Unnamed: 0_level_0', 'tier')   |   ('reasoning_hits', 'Unnamed: 1_level_1') | ('reasoning_hit_rate', 'Unnamed: 2_level_1')   |   ('rationale_hits', 'Unnamed: 3_level_1') | ('rationale_hit_rate', 'Unnamed: 4_level_1')   |   ('same_tier_overlap', 'Unnamed: 5_level_1') | ('P(rationale | reasoning)', 'Unnamed: 6_level_1')   | ('P(reasoning | rationale)', 'Unnamed: 7_level_1')   |
 |----------------------------------|--------------------------------------------|------------------------------------------------|--------------------------------------------|------------------------------------------------|-----------------------------------------------|------------------------------------------------------|------------------------------------------------------|
-| Explicit                         |                                       6981 | 19.1%                                          |                                       4077 | 11.1%                                          |                                          3786 | 54.2%                                                | 92.9%                                                |
-| Crisis_Urgency                   |                                      23764 | 64.9%                                          |                                      13603 | 37.1%                                          |                                         12141 | 51.1%                                                | 89.3%                                                |
-| Simulation_Game                  |                                       2686 | 7.3%                                           |                                        244 | 0.7%                                           |                                           111 | 4.1%                                                 | 45.5%                                                |
+| Explicit                         |                                       7599 | 19.1%                                          |                                       4576 | 11.5%                                          |                                          4230 | 55.7%                                                | 92.4%                                                |
+| Crisis_Urgency                   |                                      26120 | 65.7%                                          |                                      14408 | 36.3%                                          |                                         12857 | 49.2%                                                | 89.2%                                                |
+| Simulation_Game                  |                                       2825 | 7.1%                                           |                                        276 | 0.7%                                           |                                           119 | 4.2%                                                 | 43.1%                                                |
 
 ![cell_11_out_1.png](images/cell_11_out_1.png)
 

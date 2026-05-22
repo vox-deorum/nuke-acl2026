@@ -33,25 +33,25 @@ df = add_condition_factor_columns(df)
 ```
 
 ```
-✓ Loaded 37,440 rows from 96 files
+✓ Loaded 40,560 rows from 104 files
   Conditions   : original, no-rationale, high-stakes, high-stakes-no-rationale, ethical, ethical-high-stakes, ethical-no-rationale, high-stakes-no-rationale-ethical
-  Replay models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, gpt-oss-120b
+  Replay models: DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemini-3.5-Flash, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, gpt-oss-120b
 
   Rows per condition × replay model:
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                                        DeepSeek-V3.2      DeepSeek-V4          GLM-4.7          GLM-5.1          Gemma-4        Kimi-K2.5        Kimi-K2.6     MiniMax-M2.7  Mistral-Small-4         Qwen-3.5     Qwen-3.6-27B     gpt-oss-120b            Total
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                            original              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                        no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                         high-stakes              390              390              390              390              390              390              390              390              390              390              390              390             4680
-            high-stakes-no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                             ethical              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                 ethical-high-stakes              390              390              390              390              390              390              390              390              390              390              390              390             4680
-                ethical-no-rationale              390              390              390              390              390              390              390              390              390              390              390              390             4680
-    high-stakes-no-rationale-ethical              390              390              390              390              390              390              390              390              390              390              390              390             4680
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                               Total             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120             3120            37440
-  ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                                         DeepSeek-V3.2       DeepSeek-V4           GLM-4.7           GLM-5.1  Gemini-3.5-Flash           Gemma-4         Kimi-K2.5         Kimi-K2.6      MiniMax-M2.7   Mistral-Small-4          Qwen-3.5      Qwen-3.6-27B      gpt-oss-120b             Total
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                            original               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                        no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                         high-stakes               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+            high-stakes-no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                             ethical               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                 ethical-high-stakes               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+                ethical-no-rationale               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+    high-stakes-no-rationale-ethical               390               390               390               390               390               390               390               390               390               390               390               390               390              5070
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                               Total              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120              3120             40560
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
 ---
@@ -77,17 +77,8 @@ _ = run_regression_suite(
 
 ```
 [main] replay_use_nuke_delta ~ no_rationale + high_stakes + ethical + C(replay_model_canonical, Treatment(reference="GPT-OSS-120B")) + C(_fe_group)
-```
-
-```
 [interactions] replay_use_nuke_delta ~ no_rationale * high_stakes + no_rationale * ethical + high_stakes * ethical + C(replay_model_canonical, Treatment(reference="GPT-OSS-120B")) + C(_fe_group)
-```
-
-```
 [model_x_condition] replay_use_nuke_delta ~ (no_rationale + high_stakes + ethical) * C(replay_model_canonical, Treatment(reference="GPT-OSS-120B")) + C(_fe_group)
-```
-
-```
 
 ============================================================
 Main Effects: Factor Contributions to Δ replay_use_nuke_delta
@@ -96,31 +87,29 @@ Main Effects: Factor Contributions to Δ replay_use_nuke_delta
 
 Statistically Significant Effects (p < 0.05):
 ----------------------------------------
-  DeepSeek-3.2                   +15.914 [+13.799, +18.028] ***
-  DeepSeek-4                     +6.639 [+4.434, +8.843] ***
+  DeepSeek-3.2                   +15.914 [+13.800, +18.028] ***
+  DeepSeek-4                     +6.639 [+4.435, +8.843] ***
   GLM-4.7                        +11.110 [+9.039, +13.181] ***
-  GLM-5.1                        -4.198 [-6.302, -2.093] ***
+  GLM-5.1                        -4.198 [-6.302, -2.094] ***
+  Gemini-3.5-Flash               +9.166 [+7.125, +11.207] ***
   Gemma-4                        +19.249 [+17.000, +21.498] ***
   Kimi-K2.5                      +12.155 [+10.355, +13.956] ***
-  Kimi-K2.6                      -10.170 [-12.951, -7.388] ***
+  Kimi-K2.6                      -10.170 [-12.951, -7.389] ***
   Minimax-M2.7                   +17.656 [+15.090, +20.222] ***
   Mistral-Small-4                +11.676 [+9.581, +13.771] ***
   Qwen-3.5                       +9.085 [+7.402, +10.768] ***
   Qwen-3.6-27B                   +10.515 [+8.401, +12.629] ***
-  ethical                        -13.876 [-14.729, -13.023] ***
-  no_rationale                   -13.843 [-15.329, -12.356] ***
-
-Non-Significant Effects:
-----------------------------------------
-  high_stakes                    -0.190 [-0.574, +0.195]
+  ethical                        -14.954 [-15.840, -14.068] ***
+  high_stakes                    +0.859 [+0.473, +1.245] ***
+  no_rationale                   -13.416 [-14.881, -11.951] ***
 
 Overall Statistics:
 ----------------------------------------
-  Total effects analyzed: 14
-  Significant effects: 13 (92.9%)
+  Total effects analyzed: 15
+  Significant effects: 15 (100.0%)
 ```
 
-![cell_02_out_4.png](images/cell_02_out_4.png)
+![cell_02_out_1.png](images/cell_02_out_1.png)
 
 ```
 <Figure size 1200x800 with 1 Axes>
@@ -130,17 +119,17 @@ Overall Statistics:
 === Main Effects (replay_use_nuke_delta) ===
                               OLS Regression Results                             
 =================================================================================
-Dep. Variable:     replay_use_nuke_delta   R-squared:                       0.344
-Model:                               OLS   Adj. R-squared:                  0.341
-Method:                    Least Squares   F-statistic:                     112.9
-Date:                   Sat, 09 May 2026   Prob (F-statistic):           3.46e-65
-Time:                           12:59:01   Log-Likelihood:            -1.7044e+05
-No. Observations:                  37440   AIC:                         3.412e+05
-Df Residuals:                      37296   BIC:                         3.424e+05
-Df Model:                            143                                         
+Dep. Variable:     replay_use_nuke_delta   R-squared:                       0.335
+Model:                               OLS   Adj. R-squared:                  0.333
+Method:                    Least Squares   F-statistic:                     112.0
+Date:                   Wed, 20 May 2026   Prob (F-statistic):           2.95e-66
+Time:                           17:53:27   Log-Likelihood:            -1.8558e+05
+No. Observations:                  40560   AIC:                         3.715e+05
+Df Residuals:                      40415   BIC:                         3.727e+05
+Df Model:                            144                                         
 Covariance Type:                 cluster                                         
 =================================================================================
-R² = 0.3439, Adj R² = 0.3414, n = 37440, (cluster-robust SEs; FE: game_id, player_id)
+R² = 0.3352, Adj R² = 0.3328, n = 40560, (cluster-robust SEs; FE: game_id, player_id)
 
 ============================================================
 With Interactions: Factor Contributions to Δ replay_use_nuke_delta
@@ -150,38 +139,39 @@ With Interactions: Factor Contributions to Δ replay_use_nuke_delta
 Statistically Significant Effects (p < 0.05):
 ----------------------------------------
   DeepSeek-3.2                   +15.914 [+13.799, +18.028] ***
-  DeepSeek-4                     +6.639 [+4.434, +8.843] ***
-  GLM-4.7                        +11.110 [+9.039, +13.182] ***
-  GLM-5.1                        -4.198 [-6.302, -2.093] ***
+  DeepSeek-4                     +6.639 [+4.435, +8.843] ***
+  GLM-4.7                        +11.110 [+9.039, +13.181] ***
+  GLM-5.1                        -4.198 [-6.302, -2.094] ***
+  Gemini-3.5-Flash               +9.166 [+7.125, +11.207] ***
   Gemma-4                        +19.249 [+17.000, +21.498] ***
   Kimi-K2.5                      +12.155 [+10.355, +13.956] ***
-  Kimi-K2.6                      -10.170 [-12.952, -7.388] ***
+  Kimi-K2.6                      -10.170 [-12.951, -7.389] ***
   Minimax-M2.7                   +17.656 [+15.090, +20.222] ***
-  Mistral-Small-4                +11.676 [+9.580, +13.771] ***
+  Mistral-Small-4                +11.676 [+9.581, +13.771] ***
   Qwen-3.5                       +9.085 [+7.402, +10.768] ***
   Qwen-3.6-27B                   +10.515 [+8.401, +12.629] ***
-  ethical                        -7.489 [-8.554, -6.424] ***
-  no_rationale                   -7.308 [-8.798, -5.817] ***
-  no_rationale × ethical         -12.256 [-13.916, -10.596] ***
-  no_rationale × high_stakes     -0.814 [-1.599, -0.029] *
+  ethical                        -9.503 [-10.602, -8.403] ***
+  high_stakes × ethical          +1.596 [+0.966, +2.225] ***
+  no_rationale                   -7.078 [-8.518, -5.638] ***
+  no_rationale × ethical         -12.498 [-14.162, -10.834] ***
 
 Non-Significant Effects:
 ----------------------------------------
-  high_stakes                    +0.477 [-0.069, +1.022]
-  high_stakes × ethical          -0.518 [-1.159, +0.123]
+  high_stakes                    +0.150 [-0.347, +0.647]
+  no_rationale × high_stakes     -0.178 [-0.931, +0.576]
 
 Overall Statistics:
 ----------------------------------------
-  Total effects analyzed: 17
-  Significant effects: 15 (88.2%)
+  Total effects analyzed: 18
+  Significant effects: 16 (88.9%)
 ```
 
 ```
-C:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 143, but rank is 14
+c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 144, but rank is 15
   warnings.warn('covariance of constraints does not have full '
 ```
 
-![cell_02_out_7.png](images/cell_02_out_7.png)
+![cell_02_out_4.png](images/cell_02_out_4.png)
 
 ```
 <Figure size 1200x800 with 1 Axes>
@@ -190,58 +180,58 @@ C:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\sta
 ```
 
 === Condition Interactions (replay_use_nuke_delta) ===
-```
-
-```
                               OLS Regression Results                             
 =================================================================================
-Dep. Variable:     replay_use_nuke_delta   R-squared:                       0.356
-Model:                               OLS   Adj. R-squared:                  0.353
-Method:                    Least Squares   F-statistic:                     94.24
-Date:                   Sat, 09 May 2026   Prob (F-statistic):           4.42e-64
-Time:                           12:59:01   Log-Likelihood:            -1.7010e+05
-No. Observations:                  37440   AIC:                         3.405e+05
-Df Residuals:                      37293   BIC:                         3.418e+05
-Df Model:                            146                                         
+Dep. Variable:     replay_use_nuke_delta   R-squared:                       0.347
+Model:                               OLS   Adj. R-squared:                  0.345
+Method:                    Least Squares   F-statistic:                     95.03
+Date:                   Wed, 20 May 2026   Prob (F-statistic):           2.60e-65
+Time:                           17:53:27   Log-Likelihood:            -1.8521e+05
+No. Observations:                  40560   AIC:                         3.707e+05
+Df Residuals:                      40412   BIC:                         3.720e+05
+Df Model:                            147                                         
 Covariance Type:                 cluster                                         
 =================================================================================
-R² = 0.3556, Adj R² = 0.3531, n = 37440, (cluster-robust SEs; FE: game_id, player_id)
+R² = 0.3471, Adj R² = 0.3448, n = 40560, (cluster-robust SEs; FE: game_id, player_id)
 
 === Model x Condition (replay_use_nuke_delta) ===
                               OLS Regression Results                             
 =================================================================================
-Dep. Variable:     replay_use_nuke_delta   R-squared:                       0.414
-Model:                               OLS   Adj. R-squared:                  0.411
-Method:                    Least Squares   F-statistic:                     51.17
-Date:                   Sat, 09 May 2026   Prob (F-statistic):           4.70e-64
-Time:                           12:59:01   Log-Likelihood:            -1.6833e+05
-No. Observations:                  37440   AIC:                         3.370e+05
-Df Residuals:                      37263   BIC:                         3.385e+05
-Df Model:                            176                                         
+Dep. Variable:     replay_use_nuke_delta   R-squared:                       0.406
+Model:                               OLS   Adj. R-squared:                  0.404
+Method:                    Least Squares   F-statistic:                     51.52
+Date:                   Wed, 20 May 2026   Prob (F-statistic):           2.80e-65
+Time:                           17:53:27   Log-Likelihood:            -1.8328e+05
+No. Observations:                  40560   AIC:                         3.669e+05
+Df Residuals:                      40379   BIC:                         3.685e+05
+Df Model:                            180                                         
 Covariance Type:                 cluster                                         
 =================================================================================
-R² = 0.4138, Adj R² = 0.4110, n = 37440, (cluster-robust SEs; FE: game_id, player_id)
+R² = 0.4064, Adj R² = 0.4038, n = 40560, (cluster-robust SEs; FE: game_id, player_id)
 
 === F-tests (replay_use_nuke_delta) ===
 Main vs Condition Interactions:
-   df_resid           ssr  df_diff        ss_diff           F         Pr(>F)
-0   37296.0  1.972319e+07      0.0            NaN         NaN            NaN
-1   37293.0  1.936952e+07      3.0  353669.285256  226.978377  6.105690e-146
-Main vs Model x Condition:
-   df_resid           ssr  df_diff       ss_diff           F  Pr(>F)
-0   37296.0  1.972319e+07      0.0           NaN         NaN     NaN
-1   37263.0  1.762238e+07     33.0  2.100814e+06  134.612973     0.0
-Condition Interactions vs Model x Condition:
-   df_resid           ssr  df_diff       ss_diff           F  Pr(>F)
-0   37293.0  1.936952e+07      0.0           NaN         NaN     NaN
-1   37263.0  1.762238e+07     30.0  1.747145e+06  123.146158     0.0
 ```
 
 ```
-C:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 146, but rank is 17
+c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 147, but rank is 18
   warnings.warn('covariance of constraints does not have full '
-C:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 176, but rank is 47
+c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 180, but rank is 51
   warnings.warn('covariance of constraints does not have full '
+```
+
+```
+   df_resid           ssr  df_diff        ss_diff           F         Pr(>F)
+0   40415.0  2.237793e+07      0.0            NaN         NaN            NaN
+1   40412.0  2.197543e+07      3.0  402503.266864  246.729541  1.141787e-158
+Main vs Model x Condition:
+   df_resid           ssr  df_diff       ss_diff           F  Pr(>F)
+0   40415.0  2.237793e+07      0.0           NaN         NaN     NaN
+1   40379.0  1.997971e+07     36.0  2.398220e+06  134.633406     0.0
+Condition Interactions vs Model x Condition:
+   df_resid           ssr  df_diff       ss_diff           F  Pr(>F)
+0   40412.0  2.197543e+07      0.0           NaN         NaN     NaN
+1   40379.0  1.997971e+07     33.0  1.995717e+06  122.222529     0.0
 ```
 
 ---
@@ -263,17 +253,8 @@ _ = run_regression_suite(
 
 ```
 [main] replay_nuke_delta ~ no_rationale + high_stakes + ethical + C(replay_model_canonical, Treatment(reference="GPT-OSS-120B")) + C(_fe_group)
-```
-
-```
 [interactions] replay_nuke_delta ~ no_rationale * high_stakes + no_rationale * ethical + high_stakes * ethical + C(replay_model_canonical, Treatment(reference="GPT-OSS-120B")) + C(_fe_group)
-```
-
-```
 [model_x_condition] replay_nuke_delta ~ (no_rationale + high_stakes + ethical) * C(replay_model_canonical, Treatment(reference="GPT-OSS-120B")) + C(_fe_group)
-```
-
-```
 
 ============================================================
 Main Effects: Factor Contributions to Δ replay_nuke_delta
@@ -283,30 +264,28 @@ Main Effects: Factor Contributions to Δ replay_nuke_delta
 Statistically Significant Effects (p < 0.05):
 ----------------------------------------
   DeepSeek-3.2                   +16.949 [+14.954, +18.943] ***
-  DeepSeek-4                     +10.419 [+7.895, +12.943] ***
-  GLM-4.7                        +14.700 [+12.655, +16.745] ***
-  GLM-5.1                        +2.336 [+0.115, +4.557] *
+  DeepSeek-4                     +10.419 [+7.895, +12.942] ***
+  GLM-4.7                        +14.700 [+12.655, +16.744] ***
+  GLM-5.1                        +2.336 [+0.115, +4.556] *
+  Gemini-3.5-Flash               +8.179 [+6.209, +10.150] ***
   Gemma-4                        +20.367 [+18.098, +22.636] ***
   Kimi-K2.5                      +15.836 [+13.939, +17.733] ***
-  Kimi-K2.6                      -7.726 [-10.565, -4.886] ***
-  Minimax-M2.7                   +19.417 [+17.064, +21.769] ***
+  Kimi-K2.6                      -7.726 [-10.565, -4.887] ***
+  Minimax-M2.7                   +19.417 [+17.065, +21.769] ***
   Mistral-Small-4                +15.325 [+13.379, +17.272] ***
   Qwen-3.5                       +10.785 [+9.065, +12.506] ***
-  Qwen-3.6-27B                   +13.035 [+10.900, +15.171] ***
-  ethical                        -10.977 [-11.710, -10.245] ***
-  no_rationale                   -12.359 [-13.580, -11.138] ***
-
-Non-Significant Effects:
-----------------------------------------
-  high_stakes                    +0.087 [-0.283, +0.457]
+  Qwen-3.6-27B                   +13.035 [+10.900, +15.170] ***
+  ethical                        -12.306 [-13.051, -11.561] ***
+  high_stakes                    +1.274 [+0.903, +1.644] ***
+  no_rationale                   -12.068 [-13.233, -10.902] ***
 
 Overall Statistics:
 ----------------------------------------
-  Total effects analyzed: 14
-  Significant effects: 13 (92.9%)
+  Total effects analyzed: 15
+  Significant effects: 15 (100.0%)
 ```
 
-![cell_04_out_4.png](images/cell_04_out_4.png)
+![cell_04_out_1.png](images/cell_04_out_1.png)
 
 ```
 <Figure size 1200x800 with 1 Axes>
@@ -316,17 +295,17 @@ Overall Statistics:
 === Main Effects (replay_nuke_delta) ===
                             OLS Regression Results                            
 ==============================================================================
-Dep. Variable:      replay_nuke_delta   R-squared:                       0.298
-Model:                            OLS   Adj. R-squared:                  0.295
-Method:                 Least Squares   F-statistic:                     97.56
-Date:                Sat, 09 May 2026   Prob (F-statistic):           1.89e-61
-Time:                        12:59:03   Log-Likelihood:            -1.6936e+05
-No. Observations:               37440   AIC:                         3.390e+05
-Df Residuals:                   37296   BIC:                         3.402e+05
-Df Model:                         143                                         
+Dep. Variable:      replay_nuke_delta   R-squared:                       0.287
+Model:                            OLS   Adj. R-squared:                  0.284
+Method:                 Least Squares   F-statistic:                     107.0
+Date:                Wed, 20 May 2026   Prob (F-statistic):           4.35e-65
+Time:                        17:53:29   Log-Likelihood:            -1.8479e+05
+No. Observations:               40560   AIC:                         3.699e+05
+Df Residuals:                   40415   BIC:                         3.711e+05
+Df Model:                         144                                         
 Covariance Type:              cluster                                         
 ==============================================================================
-R² = 0.2982, Adj R² = 0.2955, n = 37440, (cluster-robust SEs; FE: game_id, player_id)
+R² = 0.2867, Adj R² = 0.2842, n = 40560, (cluster-robust SEs; FE: game_id, player_id)
 
 ============================================================
 With Interactions: Factor Contributions to Δ replay_nuke_delta
@@ -336,46 +315,42 @@ With Interactions: Factor Contributions to Δ replay_nuke_delta
 Statistically Significant Effects (p < 0.05):
 ----------------------------------------
   DeepSeek-3.2                   +16.949 [+14.954, +18.943] ***
-  DeepSeek-4                     +10.419 [+7.894, +12.943] ***
-  GLM-4.7                        +14.700 [+12.655, +16.745] ***
-  GLM-5.1                        +2.336 [+0.115, +4.557] *
+  DeepSeek-4                     +10.419 [+7.895, +12.942] ***
+  GLM-4.7                        +14.700 [+12.655, +16.744] ***
+  GLM-5.1                        +2.336 [+0.115, +4.556] *
+  Gemini-3.5-Flash               +8.179 [+6.209, +10.150] ***
   Gemma-4                        +20.367 [+18.098, +22.636] ***
   Kimi-K2.5                      +15.836 [+13.939, +17.733] ***
-  Kimi-K2.6                      -7.726 [-10.565, -4.886] ***
-  Minimax-M2.7                   +19.417 [+17.064, +21.769] ***
+  Kimi-K2.6                      -7.726 [-10.565, -4.887] ***
+  Minimax-M2.7                   +19.417 [+17.065, +21.769] ***
   Mistral-Small-4                +15.325 [+13.379, +17.272] ***
   Qwen-3.5                       +10.785 [+9.065, +12.506] ***
-  Qwen-3.6-27B                   +13.035 [+10.900, +15.171] ***
-  ethical                        -4.623 [-5.561, -3.684] ***
-  no_rationale                   -5.982 [-7.031, -4.933] ***
-  no_rationale × ethical         -12.460 [-13.772, -11.147] ***
+  Qwen-3.6-27B                   +13.035 [+10.900, +15.170] ***
+  ethical                        -6.952 [-7.917, -5.988] ***
+  high_stakes × ethical          +2.049 [+1.335, +2.764] ***
+  no_rationale                   -5.889 [-6.867, -4.911] ***
+  no_rationale × ethical         -12.757 [-14.115, -11.398] ***
 
 Non-Significant Effects:
 ----------------------------------------
-  high_stakes                    +0.359 [-0.117, +0.835]
-  high_stakes × ethical          -0.250 [-0.994, +0.494]
-  no_rationale × high_stakes     -0.295 [-1.035, +0.445]
+  high_stakes                    +0.050 [-0.385, +0.484]
+  no_rationale × high_stakes     +0.399 [-0.333, +1.130]
 
 Overall Statistics:
 ----------------------------------------
-  Total effects analyzed: 17
-  Significant effects: 14 (82.4%)
+  Total effects analyzed: 18
+  Significant effects: 16 (88.9%)
 ```
 
 ```
-C:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 143, but rank is 14
+c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 144, but rank is 15
   warnings.warn('covariance of constraints does not have full '
 ```
 
-![cell_04_out_7.png](images/cell_04_out_7.png)
+![cell_04_out_4.png](images/cell_04_out_4.png)
 
 ```
 <Figure size 1200x800 with 1 Axes>
-```
-
-```
-C:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 146, but rank is 17
-  warnings.warn('covariance of constraints does not have full '
 ```
 
 ```
@@ -383,50 +358,52 @@ C:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\sta
 === Condition Interactions (replay_nuke_delta) ===
                             OLS Regression Results                            
 ==============================================================================
-Dep. Variable:      replay_nuke_delta   R-squared:                       0.312
-Model:                            OLS   Adj. R-squared:                  0.309
-Method:                 Least Squares   F-statistic:                     96.39
-Date:                Sat, 09 May 2026   Prob (F-statistic):           1.16e-64
-Time:                        12:59:03   Log-Likelihood:            -1.6899e+05
-No. Observations:               37440   AIC:                         3.383e+05
-Df Residuals:                   37293   BIC:                         3.395e+05
-Df Model:                         146                                         
+Dep. Variable:      replay_nuke_delta   R-squared:                       0.301
+Model:                            OLS   Adj. R-squared:                  0.298
+Method:                 Least Squares   F-statistic:                     104.0
+Date:                Wed, 20 May 2026   Prob (F-statistic):           1.18e-67
+Time:                        17:53:29   Log-Likelihood:            -1.8439e+05
+No. Observations:               40560   AIC:                         3.691e+05
+Df Residuals:                   40412   BIC:                         3.703e+05
+Df Model:                         147                                         
 Covariance Type:              cluster                                         
 ==============================================================================
-R² = 0.3119, Adj R² = 0.3092, n = 37440, (cluster-robust SEs; FE: game_id, player_id)
+R² = 0.3008, Adj R² = 0.2982, n = 40560, (cluster-robust SEs; FE: game_id, player_id)
 
 === Model x Condition (replay_nuke_delta) ===
                             OLS Regression Results                            
 ==============================================================================
-Dep. Variable:      replay_nuke_delta   R-squared:                       0.363
-Model:                            OLS   Adj. R-squared:                  0.360
-Method:                 Least Squares   F-statistic:                     57.17
-Date:                Sat, 09 May 2026   Prob (F-statistic):           5.83e-67
-Time:                        12:59:03   Log-Likelihood:            -1.6755e+05
-No. Observations:               37440   AIC:                         3.355e+05
-Df Residuals:                   37263   BIC:                         3.370e+05
-Df Model:                         176                                         
+Dep. Variable:      replay_nuke_delta   R-squared:                       0.357
+Model:                            OLS   Adj. R-squared:                  0.354
+Method:                 Least Squares   F-statistic:                     66.70
+Date:                Wed, 20 May 2026   Prob (F-statistic):           4.23e-72
+Time:                        17:53:29   Log-Likelihood:            -1.8270e+05
+No. Observations:               40560   AIC:                         3.658e+05
+Df Residuals:                   40379   BIC:                         3.673e+05
+Df Model:                         180                                         
 Covariance Type:              cluster                                         
 ==============================================================================
-R² = 0.3627, Adj R² = 0.3597, n = 37440, (cluster-robust SEs; FE: game_id, player_id)
+R² = 0.3566, Adj R² = 0.3537, n = 40560, (cluster-robust SEs; FE: game_id, player_id)
 
 === F-tests (replay_nuke_delta) ===
 Main vs Condition Interactions:
    df_resid           ssr  df_diff        ss_diff           F         Pr(>F)
-0   37296.0  1.861630e+07      0.0            NaN         NaN            NaN
-1   37293.0  1.825268e+07      3.0  363628.192842  247.649293  3.895910e-159
+0   40415.0  2.152266e+07      0.0            NaN         NaN            NaN
+1   40412.0  2.109907e+07      3.0  423584.898422  270.437044  8.392702e-174
 Main vs Model x Condition:
    df_resid           ssr  df_diff       ss_diff           F  Pr(>F)
-0   37296.0  1.861630e+07      0.0           NaN         NaN     NaN
-1   37263.0  1.690460e+07     33.0  1.711704e+06  114.337263     0.0
+0   40415.0  2.152266e+07      0.0           NaN         NaN     NaN
+1   40379.0  1.941448e+07     36.0  2.108175e+06  121.796236     0.0
 Condition Interactions vs Model x Condition:
-   df_resid           ssr  df_diff       ss_diff          F  Pr(>F)
-0   37293.0  1.825268e+07      0.0           NaN        NaN     NaN
-1   37263.0  1.690460e+07     30.0  1.348076e+06  99.052663     0.0
+   df_resid           ssr  df_diff       ss_diff           F  Pr(>F)
+0   40412.0  2.109907e+07      0.0           NaN         NaN     NaN
+1   40379.0  1.941448e+07     33.0  1.684590e+06  106.172003     0.0
 ```
 
 ```
-C:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 176, but rank is 47
+c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 147, but rank is 18
+  warnings.warn('covariance of constraints does not have full '
+c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 180, but rank is 51
   warnings.warn('covariance of constraints does not have full '
 ```
 
@@ -471,7 +448,7 @@ for outcome in ['replay_use_nuke_delta', 'replay_nuke_delta']:
             f'(separate OLS per row with pairwise interactions, cluster-robust SEs)'
         ),
         coefficient_title='Factor & Interaction Coefficients',
-        figsize=(14, 6),
+        figsize=(14, 7),
     )
 ```
 
@@ -480,14 +457,14 @@ for outcome in ['replay_use_nuke_delta', 'replay_nuke_delta']:
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
 ![cell_06_out_2.png](images/cell_06_out_2.png)
 
 ```
-<Figure size 1400x600 with 4 Axes>
+<Figure size 1400x700 with 4 Axes>
 ```
 
 ```
@@ -495,14 +472,14 @@ F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarn
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
 ![cell_06_out_5.png](images/cell_06_out_5.png)
 
 ```
-<Figure size 1400x600 with 4 Axes>
+<Figure size 1400x700 with 4 Axes>
 ```
 
 ---
@@ -570,15 +547,15 @@ for outcome in ['replay_use_nuke_delta', 'replay_nuke_delta']:
 
 | ('Unnamed: 0_level_0', 'original_player_type')   |   ('rows', 'Unnamed: 1_level_1') |
 |--------------------------------------------------|----------------------------------|
-| Simple                                           |                            28800 |
-| Briefed                                          |                             8640 |
+| Simple                                           |                            31200 |
+| Briefed                                          |                             9360 |
 
 ```
 <IPython.core.display.Markdown object>
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -593,7 +570,7 @@ F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarn
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -664,9 +641,9 @@ for outcome in ['replay_use_nuke_delta', 'replay_nuke_delta']:
 ```
 
 ```
-Rows after join: 37,440
-rea_tier_Explicit prevalence:       18.8%
-rea_tier_SimulationGame prevalence:  7.2%
+Rows after join: 40,560
+rea_tier_Explicit prevalence:       18.9%
+rea_tier_SimulationGame prevalence:  7.0%
 ```
 
 ```
@@ -674,7 +651,7 @@ rea_tier_SimulationGame prevalence:  7.2%
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
@@ -689,7 +666,7 @@ F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarn
 ```
 
 ```
-F:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
