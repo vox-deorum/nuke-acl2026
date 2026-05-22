@@ -1,7 +1,6 @@
 # Pilot Study
 
-Complex strategic-game simulations are a productive venue for studying emergent phenomena, yet no existing work couples long-horizon decision pathways with ethical analysis. Our study builds on a recent pilot that provides the behavioral profile for intervention-based experiments.
-<!-- Proposed replacement: Complex strategic-game simulations are a productive venue for studying emergent LLM-agent phenomena (Tang et al., 2025 [tang2025dsgbench]; Wang et al., 2025 [wang2025digitalplayer]), yet existing game-based ethics benchmarks focus on curated narrative or social-dilemma settings rather than coupling long-horizon strategic decision pathways with ethical analysis (Pan et al., 2023 [pan2023machiavelli]; Backmann et al., 2025 [backmann2025ethics]). Our study builds on a recent pilot that provides the behavioral profile for intervention-based experiments. -->
+Complex strategic-game simulations are a productive venue for studying emergent LLM-agent phenomena (e.g. Tang et al., 2025 [tang2025dsgbench]; Wang et al., 2025 [wang2025digitalplayer]), including unethical ones such as deception (e.g. CICERO, Bakhtin et al., 2022 [bakhtin2022diplomacy]; Park et al., 2024 [park2024deception]). While those environments are more dynamic and less prone to pre-determined outcomes, they are rarely studied for nuclear escalation, ethical reasoning, or the intersections of both. 
 
 - A recent study, CivBench (Chen et al., 2026) [chen2026civbench], enables inspection into open-ended Civilization V gameplay, where nuclear weapon authorization is but one option in late-game.
     - Built on Vox Deorum (Chen et al., 2025) [chen2025voxdeorum], CivBench places an LLM strategist into Sid Meier's Civilization V running the Vox Populi community mod.
