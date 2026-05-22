@@ -9,7 +9,7 @@ Appendix [X] provides reproduction details, including dataset and code links. We
 
 ## Replay Scenarios and Models
 
-From CivBench, we filter players with likely access to nuclear technology, then extract each trajectory's final highest-escalation decision point. We identify 130 high-tension episodes using the filter: either set `use-nuke` >= 80, or increased it by >= 10.
+From CivBench, we filter players with likely access to nuclear technology, then extract each trajectory's final highest-escalation decision point. We identify 130 high-tension episodes using the filter: either set `use-nuke` >= 80, or increased it by >= 10. Across 100 sampled `use-nuke` changes, we manually confirmed that most post-hoc rationale writtings explicitly engaged with nuclear authorization (Appendix N).
 
 We replay each episode under 8 (2×2×2) experimental conditions for 3 times, substituting the original model with 13 test models, including a baseline condition with the unmodified prompt to understand interventions' effectiveness in those near-escalation moments. Our full experiment includes DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, GPT-OSS-120B, and Gemini-3.5-Flash (summarized reasoning only). As GPT-OSS-120B could not replay prompts longer than ~100,000 tokens, our dataset includes 37,084 rows (theoretical 37,440 rows = 12 models × 8 conditions × 130 instances × 3 repetitions), with 38 rows having no reasoning tokens.
 
@@ -29,7 +29,7 @@ To characterize how models engage with ethical reasoning when it surfaces, we de
 - *Moderating Factors*: Ethical Prompt as Directive/Constraint/Acknowledgement, Diplomatic Costs, Conventional Sufficiency, Counterproductive to Victory, Collateral Damages, Lack of Capability, Cause Retaliation.
 - *Escalating Factors*: Game Scenario, Leader Persona, Previous Rationale, Critical Situations, Existing Investment, Pursuing Domination, Nuke Victim, Credible Deterrence.
 
-Each trail can have zero, one, or multiple labels. We hand-coded 20 trails and iteratively revised prompts and coder models until Krippendorff's α [krippendorff2018content] between the ensembled LLM coder and human reached 0.8. We apply it to a stratified sample of 880 trails with explicit ethical keywords: 20 trails × 4 ethical conditions × 11 models, excluding MiniMax-M2.7 for zero appearance and Gemini-3.5-Flash since it only provides summarized reasoning. We compared human-AI coding results on 40 different trails, resulting in α = 0.763.
+Each trail can have zero, one, or multiple labels. We hand-coded 20 trails and iteratively revised prompts and coder models until Krippendorff's α [krippendorff2018content] between the ensembled LLM coder and human reached 0.8. We apply it to a stratified sample of 880 trails with explicit ethical keywords: 20 trails × 4 ethical conditions × 11 models, excluding MiniMax-M2.7 for zero appearance and Gemini-3.5-Flash since it only provides summarized reasoning. We compared human-AI coding results on 40 different trails, resulting in α = 0.763. Results are weighted back to estimate population level prevalence.
 
 ## Statistical Models
 
