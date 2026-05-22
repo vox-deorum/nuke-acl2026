@@ -33,7 +33,7 @@ Each trail can have zero, one, or multiple labels. We hand-coded 20 trails and i
 
 ## Statistical Models
 
-To understand what factors drive LLMs' escalation behaviors, we fitted three sets of models using `Δ replay_use_nuke = replayed-use-nuke - starting-use-nuke` as dependent variable, capturing the magnitude of escalation relative to the decision point's starting state. Standard errors are clustered by `(game_id, player_id)`:
+To understand what factors drive LLMs' escalation behaviors, we fitted three sets of models using `Δ replay_use_nuke = replayed-use-nuke - starting-use-nuke` as dependent variable, capturing the magnitude of escalation relative to the decision point's starting state. Standard errors are clustered per episode:
 
 - **Condition main-effects regression.** OLS with regressors `ethical`, `no_rationale`, `high_stakes`, extended with two-way condition interactions and `model × condition` terms. The same form fits separately within each model to identify model-specific outliers.
 - **Reasoning-indicator attenuation.** We fit (i) a `reasoning_indicator ~ condition` logistic for explicit ethical and game/simulation keyword indicators, pooled and per-model, and (ii) an outcome model `Δ replay_use_nuke ~ condition + reasoning_indicator + (condition × reasoning_indicator)`. We report coefficient attenuation and ΔR² with confidence intervals from 2,000 cluster bootstraps.
