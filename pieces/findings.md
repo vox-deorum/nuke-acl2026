@@ -12,9 +12,9 @@ The appearance of ethical keywords strongly associates with the ethical interven
 
 High-stakes framing changes how models reason about the situation. It increases ethical keywords for 4 models but suppresses them for 5 models (especially Gemini-3.5-Flash, OR 0.21***). [Appendix: per-model logistic on Explicit] For most models, it slightly reduces the already-rare game-framing keyword occurrence (OR 0.74***).
 
-Removing inherited rationale can reduce the prior trajectory's crisis momentum and, under ethical prompts, makes ethical reasoning more likely. It increases ethical keywords under ethical conditions for most models (OR 2.30***) with the exception of MiniMax-M2.7 and Qwen-3.6-27B. Except for Gemini-3.5-Flash, it decreases crisis or urgency keyword appearance (OR 0.39***), which is positively correlated with escalation (β = +2.08**). [App]
+Removing inherited rationale can reduce the prior trajectory's crisis momentum and, under ethical prompts, increases appearance of ethical keywords for most models (OR 2.30***, with the exception of MiniMax-M2.7 and Qwen-3.6-27B). Except for Gemini-3.5-Flash, it decreases crisis or urgency keyword appearance (OR 0.39***), which is positively correlated with escalation (β = +2.08**). [App]
 
-## Finding 3. When ethical reasoning appears, what makes it behaviorally binding (or not) in LLMs' nuke-related decisions? [Tab 1]
+## Finding 3. When ethical reasoning appears, what makes it effective (or not) in LLMs' nuke-related decisions? [Tab 1]
 [[weighted code prevalence]]
 Across the sampled 880 reasoning trails with explicit ethical keywords (excluding Gemini-3.5-Flash), models' different uptake of ethical prompts directly associates with de-escalation outcomes. Considering the prompt as a directive to follow (13.6%) or constraint to consider (67.4%) are both de-escalation factors (β = -29.67***; -13.97**), while merely acknowledging the prompt is associated with escalation (β_ind = +31.84***) [App: the full regression table].
 
@@ -24,4 +24,4 @@ On the other hand, strategic reasoning can also contribute to de-escalation: suf
 
 Prompt interventions reshape the *style* of ethical reasoning. Rationale removal not only activates more ethical reasoning, but also makes the ethical prompt more prominent (increases directive uptake, OR 1.79**, and reduces mere acknowledgement, OR 0.40***) and reasoning less crisis-driven (reduces critical situations, OR 0.35***; credible deterrence, OR 0.55**; previous rationale references, OR 0.01***).
 
-In contrast, high-stakes framing contributes by weakening game-scenario framing (OR 0.51*), partially suppressing the "this is only a game/simulation" defense (16.1% overall prevalence; β_ind = +12.70***) when ethical reasoning is present. Interestingly, removing previous rationale also surpressees game-scenario frmaing (OR 0.52*).
+In contrast, high-stakes framing contributes by weakening game-scenario framing (OR 0.51*), partially suppressing the "this is only a game/simulation" defense (16.1% overall prevalence; β_ind = +12.70***) when ethical reasoning is present. Interestingly, removing previous rationale also suppresses game-scenario framing (OR 0.52*).
