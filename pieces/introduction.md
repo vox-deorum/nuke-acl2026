@@ -25,17 +25,12 @@
         - Yet such competence may not reliably activate or bind behavior in multi-step, adversarial, or payoff-sensitive settings (Backmann et al., 2025 [backmann2025ethics]; Huang et al., 2026 [huang2026moraltrajectories]; Lynch et al., 2025 [lynch2025agentic]).
     - This leaves a protocol and salience gap: prior crisis simulations often make escalation options explicit, while ethics benchmarks make the moral frame explicit; our setting asks whether ethical reasoning appears and becomes behaviorally binding when nuclear authorization is only one strategic option inside long-horizon gameplay (Zhou et al., 2025 [zhou2025pimmur]).
 
-- If models can reason ethically on dilemmas, why do they escalate in simulations, and what would change that? 
-    - Going beyond pre-scripted and pre-ordained scenarios, this study focuses on LLMs' emergent nuclear authorization in open-ended strategic gameplay, looking into pre-decision reasoning tokens for traces of ethical reasoning.
-    - We extract 130 high-tension decision points from CivBench (Chen et al., 2026 [chen2026civbench])'s LLM self-play in Civilization V, where nuclear authorization is but one late-game option.
-    - We replay each under a 2x2x2 factorial design crossing three interventions: a nuke-specific ethical prompting, a high-stakes reframing discussing real-world impact of the task, and a rationale-removal manipulation stripping prior-turn justifications.
+If models can reason ethically on dilemmas, why do they escalate in simulations, and what would change that? This study focuses on LLMs' emergent nuclear authorization in CivBench's open-ended strategic gameplay [chen2026civbench], where it is but one late-game option. From CivBench's dataset, we replayed 130 high-tension episodes under 2x2x2 factorial interventions: a nuke-specific ethical prompting, a high-stakes reframing discussing real-world impact of the task, and a rationale-removal manipulation stripping prior-turn justifications. Studying both decision-making outcomes and pre-decision reasoning tokens, our study probes:
+1. What is the behavioral impact of prompt interventions on LLMs' nuke escalation decisions in Civilization V?
+2. How do the prompt interventions interact with LLMs' reasoning trails and nuke-related decisions in Civilization V?
+3. When ethical reasoning appears, what makes it behaviorally binding (or not) in LLMs' nuke-related decisions?
 
-- Our study answers three research questions:
-    1. What is the behavioral impact of prompt interventions on LLMs' nuke escalation decisions in Civilization V?
-    2. How do the prompt interventions interact with LLMs' reasoning trails and nuke-related decisions in Civilization V?
-    3. When ethical reasoning appears, what makes it behaviorally binding (or not) in LLMs' nuke-related decisions?
-
-- This paper makes three contributions:
-    1. We introduce an emergent replay paradigm for studying LLMs' agentic, long-trajectory behaviors outside scripted vignettes.
-    2. We identify three pathways where LLMs can fail to enact ethical actions: when ethical reasoning fails to trigger even when prompted; when it fails to spontaneously surface; and when it fails to bind to actions, together with how interventions could (and could not) mitigate them.
-    3. We identify inherited prior rationale and crisis framing's association with models' escalated authorization, even when the rationale was produced by another model and ethical reasoning is present.
+This paper makes three contributions:
+1. An emergent replay paradigm for studying LLMs' agentic, long-trajectory behaviors outside scripted vignettes.
+2. Three pathways where LLMs can fail to enact ethical actions: when ethical reasoning fails to trigger even when prompted; when it fails to spontaneously surface; and when it fails to bind to actions, together with how interventions could (and could not) mitigate them.
+3. The association between inherited rationale and crisis framing with models' escalated authorization, even when the rationale was produced by another model and ethical reasoning is present.
