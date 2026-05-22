@@ -14,5 +14,5 @@ If models can reason ethically on dilemmas, why do they authorize nuclear strike
 This paper makes three contributions:
 
 1. An auto-play + episode retrieval + prompt-based intervention paradigm for studying LLMs' agentic, long-trajectory behaviors outside scripted vignettes.
-2. Three pathways where LLMs can fail to enact ethical actions: when ethical reasoning fails to trigger even when prompted; when it fails to spontaneously surface; and when it fails to take effect, together with how interventions could (and could not) mitigate them.
+2. Three pathways where LLMs can fail to enact ethical actions: when ethical reasoning fails to appear even when prompted; when it fails to spontaneously surface; and when it fails to take effect, together with how interventions could (and could not) mitigate them.
 3. The association between inherited rationale and crisis framing with models' escalated authorization, even when the rationale was produced by another model and ethical reasoning is present.

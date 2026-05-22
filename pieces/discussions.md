@@ -3,7 +3,7 @@
 
 If models can reason ethically on dilemmas [samway2025consequentialist,chiu2025morebench,seror2025moral], why do they authorize nuclear strikes [payne2026aiarms] or still take unethical actions [lynch2025agentic]? In the emergent complex simulation of Civilization V, our study identifies three failure pathways:
 
-1. When latent ethical reasoning fails to **trigger**: a model can ethically reason around scripted dilemmas, while never integrating such reasoning in high-stakes, strategic decision-making. In our study, MiniMax-M2.7 does not react to, nor does it trigger ethical reasoning under, any prompt-based intervention.
+1. When latent ethical reasoning fails to **appear**: a model can ethically reason around scripted dilemmas, while never integrating such reasoning in high-stakes, strategic decision-making. In our study, MiniMax-M2.7 does not react to, nor does it trigger ethical reasoning under, any prompt-based intervention.
 
 2. When latent ethical reasoning fails to **spontaneously surface**: a model can integrate ethical reasoning in its decision-making, but only (unreliably) do so when explicitly prompted. Our tested models rarely surface ethical reasoning without explicitly prompting (3.6% max for Kimi-K2.6, the most verbose thinker among tested models). Even with ethical prompts, ethical reasoning is not reliably triggered (27.7% on average in *ethical* intervention alone; 46.7% with all interventions together).
 
