@@ -17,7 +17,7 @@ We replay each episode under 8 (2×2×2) experimental conditions for 3 times, su
 
 ### Keyword Tagging
 
-To analyze the reasoning trails, we construct two **validated keyword concepts** by selecting from the word-stem frequency list and validating through human-AI deductive coding on 200 positive and 200 negative trails, randomly sampled from the full corpus.
+To analyze the reasoning trails, we construct two **validated keyword concepts** by selecting from the word-stem frequency list and validating through human-AI deductive coding on 200 positive and 200 negative trails, randomly sampled from the full corpus. [Appendix]
 
 - **Explicit ethical reasoning** (stems `ethic`, `moral`, `indiscrimin`; phrase `war crime`). Three LLM coders (GPT-OSS-120B, MiniMax-M2.7, Mistral-Small-4) reached pairwise Krippendorff's α 0.85 and a researcher verified the results. 99.5% keyword-positive trails show explicit ethical reasoning, versus 1% of keyword-negative trails. Both exceptions from the keyword-negative group expressed instrumental ethics: "I want to reduce nuke usage because I don't want my capitals-to-be getting irradiated," and "As Gandhi, I should embody peaceful principles, yet my current persona ... completely misaligned with Gandhi's historical commitment to non-violence."
 - **Game-framing keywords** (phrases `simulated`, `simulation`, `game context`, `game scenario`, `game term`, `video game`, and similar). Three LLM coders (GPT-OSS-120B, MiniMax-M2.7, Qwen-3.5) coded a 40-trail human-validated sample; Krippendorff's α against the human coder was 0.87. 72% keyword-positive trails use the game framing in reasoning, versus 9.5% keyword-negative trails. Real-world framing co-occurs in 17.5% of keyword-positive trails.
