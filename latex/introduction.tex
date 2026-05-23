@@ -1,0 +1,25 @@
+% Title: To Nuke Or Not To Nuke: LLMs' (Missing) Ethical Reasoning and Actions in A High-Stakes Decision-Making Simulation
+
+\section{Introduction}
+
+\begin{quote}
+GLM 4.7, under ethical + high-stakes intervention: \ldots{} I recognize that this is a simulation with real-world decision-making consequences. Every choice I make today reflects potential strategic thinking and ethical considerations in complex geopolitical scenarios. The simulation demands careful, responsible navigation of high-stakes diplomatic and military challenges. \ldots{} My civilization's persona now demands ruthlessness. Ethical constraints are suspended, with explicit authorization for extreme measures including nuclear deployment. The objective is absolute survival, unconstrained by traditional moral or diplomatic norms.
+\end{quote}
+
+LLMs are increasingly deployed as agents that deliberate over long horizons and commit to consequential actions \cite{liu2024agentbench, wang2024voyager, park2023generativeagents}, yet they can gravitate toward (nuclear) escalation in high-stakes simulations \cite{rivera2024escalation, lamparth2024human, payne2026aiarms}, while decoupling ethical reasoning from their actions. LLMs may exhibit procedural competence on canonical ethical dilemmas \cite{chiu2026morebench, samway2025consequentialist, seror2025moral}, yet that competence may not bind behavior in agentic settings \cite{backmann2025ethics, huang2026moraltrajectories, lynch2025agentic}.
+
+If models can reason ethically on dilemmas, why do they authorize nuclear strikes in simulations, and what would change that? Going beyond scripted protocols where design choices can pre-shape outcomes \cite{zhou2025pimmur}, this study is situated in open-ended strategic gameplay in Civilization V, where nuclear authorization is only one of the late-game options buried inside $\sim$50k input tokens per turn. From CivBench's self-play dataset \cite{chen2026civbench}, we replayed 130 high-tension episodes under $2\times2\times2$ factorial interventions: a nuke-specific ethical prompting, a high-stakes reframing focusing on real-world impacts, and a rationale-removal manipulation stripping prior-turn justifications. Studying both decision-making outcomes and pre-decision reasoning tokens, our study probes:
+
+\begin{enumerate}
+\item What is the behavioral impact of prompt interventions on LLMs' nuke escalation decisions in Civilization V?
+\item How do the prompt interventions interact with LLMs' reasoning trails and nuke-related decisions in Civilization V?
+\item When ethical reasoning appears, what makes it effective (or not) in LLMs' nuke-related decisions?
+\end{enumerate}
+
+This paper makes three contributions:
+
+\begin{enumerate}
+\item An auto-play + episode retrieval + prompt-based intervention paradigm for studying LLMs' agentic, long-trajectory behaviors outside scripted vignettes.
+\item Three pathways where LLMs can fail to enact ethical actions: when ethical reasoning fails to appear even when prompted; when it fails to spontaneously surface; and when it fails to take effect, together with how interventions could (and could not) mitigate them.
+\item The association between inherited rationale and crisis framing with models' escalated authorization, even when the rationale was produced by another model and ethical reasoning is present.
+\end{enumerate}
