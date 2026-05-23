@@ -1,0 +1,46 @@
+\documentclass[11pt]{article}
+
+% Change "review" to "final" for camera-ready, or "preprint" for a
+% non-anonymous version with page numbers.
+\usepackage[review]{acl}
+
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Section files currently refer to figures relative to latex/.
+\graphicspath{{./}{latex/}}
+
+\title{To Nuke or Not To Nuke: LLMs' (Missing) Ethical Reasoning and Actions in a High-Stakes Decision-Making Simulation}
+
+\author{Anonymous ACL submission}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Large language models increasingly act as agents in long-horizon environments where their choices can appear strategically coherent yet ethically unstable. We study nuclear authorization behavior in Civilization V by replaying 130 high-tension episodes from CivBench under a $2 \times 2 \times 2$ factorial intervention design: nuke-specific ethical prompting, high-stakes reframing, and removal of inherited rationales. Across 13 contemporary models, ethical prompting and rationale removal reduce escalation on average, but neither reliably prevents nuclear authorization. By analyzing pre-decision reasoning trails, we identify three failure pathways: ethical reasoning fails to appear, fails to surface without explicit prompting, or surfaces but is overridden by strategic pressure. The results suggest that prompt-level interventions can shape model reasoning, but current agentic systems remain unreliable in high-stakes strategic decision settings.
+\end{abstract}
+
+\input{latex/introduction}
+\input{latex/background}
+\input{latex/pilot-study}
+\input{latex/experiment-design}
+\input{latex/findings}
+\input{latex/discussions}
+\input{latex/limitations}
+
+\bibliographystyle{acl_natbib}
+\bibliography{literature/references}
+
+\appendix
+\input{appendicies/use_nuke_change_rationales}
+
+\end{document}
