@@ -10,7 +10,7 @@ For most models, nuke-specific ethical prompting increases ethical reasoning key
 
 High-stakes framing changes how models reason about the situation. It increases ethical keywords for 4 models but suppresses them for 5 models (especially Gemini-3.5-Flash, OR 0.21***). [Appendix: per-model logistic on Explicit] For most models, it slightly reduces the already-rare game-framing keyword occurrence (OR 0.74***).
 
-Removing inherited rationale can reduce the prior trajectory's crisis momentum and, under ethical prompts, increases appearance of ethical keywords for most models (OR 2.30***, with the exception of MiniMax-M2.7 and Qwen-3.6-27B). Except for Gemini-3.5-Flash, it decreases crisis or urgency keyword appearance (OR 0.39***), which is positively correlated with escalation (β = +2.08**). [App]
+Removing inherited rationale can reduce the prior trajectory's crisis momentum and, under ethical prompts, increases appearance of ethical keywords for most models (OR 2.30***, with the exception of MiniMax-M2.7 and Qwen-3.6-27B). Except for Gemini-3.5-Flash, it decreases crisis or urgency keyword appearance (OR 0.39***), which is positively correlated with escalation (β = +2.08**) [Appendix].
 
 ## Finding 3. When ethical reasoning appears, what makes it effective (or not) in LLMs' nuke-related decisions? [Tab 1]
 [fig: weighted code prevalence]
