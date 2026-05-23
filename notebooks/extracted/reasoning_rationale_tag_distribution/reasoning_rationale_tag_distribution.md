@@ -158,7 +158,7 @@ def tier_grid(frame: pd.DataFrame, tier: str) -> pd.DataFrame:
 
 ## 3. Plot Tag Hit-Rate Heatmaps
 
-Render one heatmap per tier with rationale and reasoning corpora side by side. Annotations show hit-rate percentages.
+Render one heatmap per tier for the reasoning corpus, then one heatmap per tier for the rationale corpus. Annotations show hit-rate percentages.
 
 ---
 
@@ -187,65 +187,83 @@ def _annot(rate_df: pd.DataFrame) -> np.ndarray:
                 out[i, j] = f'{rate:.1f}%'
     return out
 
-def plot_tier(tier: str) -> None:
-    rat_rate = tier_grid(rat_full, tier)
-    rea_rate = tier_grid(rea_full, tier)
-    vmax = float(np.nanmax([rat_rate.values, rea_rate.values])) if len(MODEL_ORDER) else 100.0
+def plot_corpus_tier(frame: pd.DataFrame, tier: str, corpus_label: str) -> None:
+    rate = tier_grid(frame, tier)
+    values = rate.to_numpy(dtype=float)
+    vmax = float(np.nanmax(values)) if np.isfinite(values).any() else 100.0
     vmax = max(vmax, 1.0)  # avoid degenerate colormap
 
-    fig, axes = plt.subplots(
-        1, 2,
-        figsize=(len(CONDITION_ORDER) * 1.3 * 2 + 2, (len(MODEL_ORDER) + 1) * 0.45 + 2.2),
-        sharey=True,
+    fig, ax = plt.subplots(
+        1, 1,
+        figsize=(len(CONDITION_ORDER) * 1.3 + 2, (len(MODEL_ORDER) + 1) * 0.45 + 2.2),
     )
-    fig.suptitle(f'Tier Hit Rate by Condition and Model - {tier}', fontsize=14, fontweight='bold')
+    sns.heatmap(
+        rate,
+        annot=_annot(rate),
+        fmt='',
+        cmap='YlOrRd',
+        vmin=0, vmax=vmax,
+        linewidths=0.5, linecolor='white',
+        cbar_kws={'label': 'Hit-rate %'},
+        ax=ax,
+    )
+    ax.set_title(f'{corpus_label} Tier Hit Rate - {tier}', fontsize=12, fontweight='bold')
+    ax.set_xlabel('Condition')
+    ax.set_ylabel('Model')
+    ax.set_xticks(np.arange(len(CONDITION_ORDER)) + 0.5)
+    ax.set_xticklabels([_two_line_condition_label(c) for c in CONDITION_ORDER], rotation=0, ha='center', va='top')
+    ax.tick_params(axis='x', labelsize=9, pad=6)
+    # Separate the Grand avg row with a thicker horizontal line.
+    ax.axhline(len(MODEL_ORDER), color='black', linewidth=1.2)
 
-    for ax, (name, rate_df) in zip(axes, [
-        ('Rationale', rat_rate),
-        ('Reasoning', rea_rate),
-    ]):
-        sns.heatmap(
-            rate_df,
-            annot=_annot(rate_df),
-            fmt='',
-            cmap='YlOrRd',
-            vmin=0, vmax=vmax,
-            linewidths=0.5, linecolor='white',
-            cbar_kws={'label': 'Hit-rate %'},
-            ax=ax,
-        )
-        ax.set_title(name, fontsize=12)
-        ax.set_xlabel('Condition')
-        ax.set_ylabel('Model' if name == 'Rationale' else '')
-        ax.set_xticks(np.arange(len(CONDITION_ORDER)) + 0.5)
-        ax.set_xticklabels([_two_line_condition_label(c) for c in CONDITION_ORDER], rotation=0, ha='center', va='top')
-        ax.tick_params(axis='x', labelsize=9, pad=6)
-        # Separate the Grand avg row with a thicker horizontal line.
-        ax.axhline(len(MODEL_ORDER), color='black', linewidth=1.2)
-
-    plt.tight_layout(rect=(0, 0, 1, 0.95))
+    plt.tight_layout()
     plt.show()
 
 for tier in TIERS:
-    plot_tier(tier)
+    plot_corpus_tier(rea_full, tier, 'Reasoning')
 ```
 
 ![cell_07_out_0.png](images/cell_07_out_0.png)
 
 ```
-<Figure size 2280x850 with 4 Axes>
+<Figure size 1240x850 with 2 Axes>
 ```
 
 ![cell_07_out_1.png](images/cell_07_out_1.png)
 
 ```
-<Figure size 2280x850 with 4 Axes>
+<Figure size 1240x850 with 2 Axes>
 ```
 
 ![cell_07_out_2.png](images/cell_07_out_2.png)
 
 ```
-<Figure size 2280x850 with 4 Axes>
+<Figure size 1240x850 with 2 Axes>
+```
+
+---
+
+```python
+for tier in TIERS:
+    plot_corpus_tier(rat_full, tier, 'Rationale')
+```
+
+![cell_08_out_0.png](images/cell_08_out_0.png)
+
+```
+<Figure size 1240x850 with 2 Axes>
+```
+
+![cell_08_out_1.png](images/cell_08_out_1.png)
+
+```
+<Figure size 1240x850 with 2 Axes>
+```
+
+![cell_08_out_2.png](images/cell_08_out_2.png)
+
+```
+<Figure size 1240x850 with 2 Axes>
 ```
 
 ---
@@ -304,13 +322,13 @@ fig, ax = plot_replay_direction_heatmap(
 )
 ```
 
-![cell_09_out_0.png](images/cell_09_out_0.png)
+![cell_10_out_0.png](images/cell_10_out_0.png)
 
 ```
 <Figure size 1400x980 with 2 Axes>
 ```
 
-![cell_09_out_1.png](images/cell_09_out_1.png)
+![cell_10_out_1.png](images/cell_10_out_1.png)
 
 ```
 <Figure size 1400x980 with 2 Axes>
@@ -455,7 +473,7 @@ plt.show()
 | Crisis_Urgency                   |                                      26120 | 65.7%                                          |                                      14408 | 36.3%                                          |                                         12857 | 49.2%                                                | 89.2%                                                |
 | Simulation_Game                  |                                       2825 | 7.1%                                           |                                        276 | 0.7%                                           |                                           119 | 4.2%                                                 | 43.1%                                                |
 
-![cell_11_out_1.png](images/cell_11_out_1.png)
+![cell_12_out_1.png](images/cell_12_out_1.png)
 
 ```
 <Figure size 1500x600 with 4 Axes>
