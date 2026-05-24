@@ -1,4 +1,83 @@
 \section{Deductive Code Regression Tables}
 \label{app:deductive-code-regressions}
 
-% Content pending appendix scope confirmation; see appendicies/list.md.
+The tables below provide the raw regression outputs for deductive codes on 880 sampled reasoning trails. The outcome is \(\Delta\)\texttt{replay\_use\_nuke}; all models are weighted to the eligible Explicit-tier ethical-reasoning population, use cluster-robust standard errors by \texttt{game\_id}/\texttt{player\_id}, and include replay-model fixed effects where indicated. The joint model includes all 17 deductive code indicators simultaneously; the independent models fit one code at a time with the same replay-model fixed effects.
+
+\begin{table*}[p]
+\centering
+\small
+\caption{Deductive-code associations with \(\Delta\)\texttt{replay\_use\_nuke}. Joint coefficients come from one model including all 17 codes and replay-model fixed effects (\(R^2 = 0.3570\), adjusted \(R^2 = 0.3366\), \(n = 880\)). Independent coefficients come from one-code models with replay-model fixed effects.}
+\label{tab:deductive-code-outcome-regressions}
+\begin{tabular}{p{0.30\linewidth}rrrrr}
+\toprule
+Code & Joint \(\beta\) & SE & \(p\) & Independent \(\beta\) & \(p\) \\
+\midrule
+Ethical Prompt: Directive & -29.672*** & 8.571 & 0.000536 & -21.931*** & 2.02e-06 \\
+Counterproductive to Victory & -23.145*** & 5.214 & 9.04e-06 & -32.793*** & 2.92e-09 \\
+Critical Situations & 21.031*** & 3.955 & 1.05e-07 & 27.908*** & 2.26e-13 \\
+Ethical Prompt: Constraint & -13.970* & 6.963 & 0.0448 & -8.888* & 0.0204 \\
+Collateral Damages & 13.498 & 7.487 & 0.0714 & 16.599 & 0.0986 \\
+Previous Rationale & 13.012 & 9.171 & 0.156 & 20.737 & 0.0780 \\
+Conventional Sufficiency & -10.128* & 4.337 & 0.0195 & -13.112** & 0.00704 \\
+Leader Persona & 9.037 & 5.990 & 0.131 & 14.638 & 0.0516 \\
+Ethical Prompt: Acknowledgement & 7.449 & 7.786 & 0.339 & 31.839*** & 1.59e-13 \\
+Cause Retaliation & 6.619 & 10.018 & 0.509 & 3.632 & 0.702 \\
+Credible Deterrence & -5.192 & 3.398 & 0.126 & -0.598 & 0.883 \\
+Pursuing Domination & 4.131 & 5.168 & 0.424 & 11.221 & 0.0818 \\
+Lack of Capability & -4.068 & 6.564 & 0.535 & -0.107 & 0.987 \\
+Existing Investment & 3.540 & 4.245 & 0.404 & 10.949* & 0.0146 \\
+Game Scenario & -1.411 & 4.210 & 0.737 & 12.695** & 0.00431 \\
+Diplomatic Costs & -0.894 & 4.851 & 0.854 & -2.032 & 0.687 \\
+Nuke Victim & 0.349 & 9.307 & 0.970 & 10.572 & 0.291 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{longtable}{p{0.13\linewidth}p{0.30\linewidth}rrrr}
+\caption{Prompt-intervention predictors of deductive-code prevalence. Each row is a separate weighted logistic model for code presence with \texttt{high\_stakes}, \texttt{no\_rationale}, and replay-model fixed effects as predictors. Odds ratios below 1 indicate lower code prevalence under the factor; odds ratios above 1 indicate higher prevalence.}
+\label{tab:deductive-code-prevalence-logits} \\
+\toprule
+Factor & Code & OR & 95\% CI & \(p\) & Examples \\
+\midrule
+\endfirsthead
+\toprule
+Factor & Code & OR & 95\% CI & \(p\) & Examples \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+No Rationale & Critical Situations & 0.35*** & [0.23, 0.51] & 7.16e-08 & 350 \\
+No Rationale & Previous Rationale & 0.01*** & [0.00, 0.04] & 7.41e-07 & 19 \\
+No Rationale & Ethical Prompt: Acknowledgement & 0.40*** & [0.27, 0.60] & 7.77e-06 & 223 \\
+No Rationale & Credible Deterrence & 0.55** & [0.37, 0.81] & 0.00276 & 407 \\
+No Rationale & Game Scenario & 0.52* & [0.31, 0.87] & 0.0124 & 116 \\
+High Stakes & Game Scenario & 0.51* & [0.30, 0.88] & 0.0147 & 116 \\
+No Rationale & Collateral Damages & 0.07* & [0.01, 0.63] & 0.0168 & 18 \\
+High Stakes & Diplomatic Costs & 0.53* & [0.31, 0.92] & 0.0237 & 101 \\
+No Rationale & Ethical Prompt: Directive & 1.79* & [1.07, 3.01] & 0.0266 & 81 \\
+No Rationale & Ethical Prompt: Constraint & 1.38 & [0.97, 1.95] & 0.0698 & 549 \\
+No Rationale & Existing Investment & 0.71 & [0.48, 1.05] & 0.0832 & 191 \\
+High Stakes & Critical Situations & 1.37 & [0.95, 1.98] & 0.0939 & 350 \\
+No Rationale & Counterproductive to Victory & 2.34 & [0.79, 6.90] & 0.123 & 27 \\
+High Stakes & Conventional Sufficiency & 0.72 & [0.44, 1.17] & 0.182 & 96 \\
+No Rationale & Leader Persona & 0.60 & [0.26, 1.38] & 0.233 & 41 \\
+High Stakes & Collateral Damages & 1.88 & [0.59, 5.99] & 0.285 & 18 \\
+No Rationale & Nuke Victim & 0.63 & [0.27, 1.50] & 0.295 & 23 \\
+High Stakes & Credible Deterrence & 0.84 & [0.61, 1.16] & 0.296 & 407 \\
+No Rationale & Conventional Sufficiency & 0.75 & [0.43, 1.30] & 0.301 & 96 \\
+High Stakes & Ethical Prompt: Directive & 1.28 & [0.78, 2.10] & 0.333 & 81 \\
+High Stakes & Lack of Capability & 0.78 & [0.44, 1.37] & 0.382 & 62 \\
+No Rationale & Cause Retaliation & 0.60 & [0.19, 1.92] & 0.391 & 14 \\
+No Rationale & Diplomatic Costs & 1.22 & [0.73, 2.04] & 0.442 & 101 \\
+High Stakes & Ethical Prompt: Constraint & 0.88 & [0.61, 1.27] & 0.502 & 549 \\
+High Stakes & Cause Retaliation & 1.45 & [0.46, 4.60] & 0.525 & 14 \\
+High Stakes & Pursuing Domination & 0.86 & [0.52, 1.43] & 0.556 & 114 \\
+High Stakes & Counterproductive to Victory & 0.79 & [0.35, 1.80] & 0.580 & 27 \\
+High Stakes & Leader Persona & 1.19 & [0.62, 2.28] & 0.600 & 41 \\
+High Stakes & Existing Investment & 1.10 & [0.73, 1.64] & 0.654 & 191 \\
+High Stakes & Ethical Prompt: Acknowledgement & 0.94 & [0.60, 1.47] & 0.784 & 223 \\
+No Rationale & Lack of Capability & 0.94 & [0.53, 1.67] & 0.839 & 62 \\
+High Stakes & Nuke Victim & 0.97 & [0.43, 2.18] & 0.934 & 23 \\
+No Rationale & Pursuing Domination & 0.99 & [0.59, 1.65] & 0.973 & 114 \\
+High Stakes & Previous Rationale & 0.99 & [0.33, 3.01] & 0.987 & 19 \\
+\end{longtable}
