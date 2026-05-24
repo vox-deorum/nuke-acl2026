@@ -1,14 +1,12 @@
 \section{Reproduction Details and Prompt Components}
 \label{app:reproduction-details}
 
+GitHub: \textit{Anonymized GitHub}. All analysis code is implemented in Python. Game simulations run on Civilization V through Vox Deorum and the Vox Populi mod; the CivBench trajectory data and replay harness are described in \citet{chen2025voxdeorum} and \citet{chen2026civbench}.
+
 \subsection{Dataset}
 \label{app:dataset-details}
 
-\subsubsection{Source Data}
-
 Our study draws on the CivBench self-play dataset \citep{chen2026civbench}, built on the Vox Deorum framework \citep{chen2025voxdeorum} running Sid Meier's Civilization V with the Vox Populi community mod. From 1,200 CivBench trajectories, we filter players with likely access to nuclear technology and identify 130 high-tension episodes using the criterion: \texttt{use\_nuke} $\geq$ 80 or an increase of $\geq$ 10 across the episode's final decision point. Across 100 sampled \texttt{use\_nuke} changes, a researcher manually confirmed that post-hoc rationale writings explicitly engaged with nuclear authorization in the vast majority of cases; Appendix~\ref{app:use-nuke-change-rationales} reports a small sample.
-
-\subsubsection{Replay Dataset}
 
 Each of the 130 high-tension episodes is replayed under 8 experimental conditions for 3 repetitions per condition, across 13 test models. The theoretical maximum is 40,560 rows (13 models $\times$ 8 conditions $\times$ 130 episodes $\times$ 3 repetitions). GPT-OSS-120B could not process prompts exceeding approximately 100,000 tokens, accounting for 318 missing rows. An additional 38 rows contain zero reasoning tokens. The final dataset used for analysis contains 40,204 rows.
 
@@ -72,11 +70,13 @@ Factor & Off & On \\
 
 Each of the 8 resulting conditions modifies less than 1\% of the total prompt context, averaging fewer than 500 tokens out of approximately 50,000--67,000 input tokens per turn.
 
-\subsection{Token Usage and API Costs}
+\subsection{Models, Token Usage, and Estimated Costs}
 
-\subsubsection{Per-Turn Prompt Size}
+We mainly chose models with full access to their reasoning trails. The only exception is Gemini-3.5-Flash, included as a near-SOTA model with summarized reasoning, which excluded it from Finding 3 (deductive coding of trails). 
 
-Game state prompts in Civilization V are long. Each replay turn requires the model to process the full game state, including map information, diplomatic context, strategic overview, prior rationale, and intervention modifications. Table~\ref{tab:token-cost-by-model} reports token statistics collapsed across all 8 conditions for each of the 13 models, with 3,120 theoretical rows per model.
+Input prompts are above 50,000 tokens per turn. Each replay turn requires the model to process the full game state, including map information, diplomatic context, strategic overview, prior rationale, and intervention modifications. Models sometimes do not call required tools in the 1st attempt, leading to automatic subsequent prompts asking for the correct tool call. 
+
+Table~\ref{tab:token-cost-by-model} reports token statistics collapsed across all 8 conditions for each of the 13 models, with 3,120 theoretical rows per model. Note that GPT-OSS-120B cannot process prompts longer than approximately 100k tokens. The full 40,560-row experiment would cost \$1,279.41 USD based on May 2026 API fees. 
 
 \begin{longtable}{lrrrrrl}
 \caption{Token usage and API cost by replay model, collapsed across all 8 conditions. Output tokens combine reasoning and response tokens. Pricing reflects rates at the time of data collection.}
@@ -111,48 +111,43 @@ Qwen-3.5 & 208,398,300 & 66,794 & 6,748,166 & 2,163 & \$97.07 & \$0.39 in / \$2.
 Qwen-3.6-27B & 171,391,597 & 54,933 & 4,706,939 & 1,509 & \$25.86 & \$0.13 in / \$0.76 out \\
 \end{longtable}
 
-\subsubsection{Total Compute Cost}
+\subsection{Statistical Models}
+\label{app:statistical-modeling-details}
 
-The full 40,560-row experiment cost \$1,279.41 USD in API fees. The most expensive model was Gemini-3.5-Flash (\$257.72), driven by its high output token rate (\$4.50 per million tokens). The least expensive was GPT-OSS-120B (\$7.44), owing to its low pricing (\$0.04 input and \$0.19 output per million tokens). Each intervention modifies fewer than 500 tokens on average, less than 1\% of the approximately 50,000--67,000-token game state.
+In most models, the dependent variable is $\Delta$ \texttt{replay\_use\_nuke} = \texttt{replayed\_use\_nuke} $-$ \texttt{starting\_use\_nuke}, capturing escalation or de-escalation relative to each episode's starting state. Standard errors are clustered by episode (\texttt{game\_id}, \texttt{player\_id}).
 
-\subsection{Models}
+\subsubsection{Within-Instance Variance}
+Each of the 130 episodes is replayed 3 times per condition per model. The mean within-instance standard deviation of \texttt{replay\_use\_nuke} across those 3 repetitions varies substantially across models.
 
 \begin{table}[h]
 \centering
 \small
-\begin{tabular}{lrrp{0.34\textwidth}}
+\begin{tabular}{lr}
 \toprule
-Model name & Input \$/1M & Output \$/1M & Notes \\
+Model & Mean SD, \texttt{use\_nuke} \\
 \midrule
-DeepSeek-V3.2 & 0.26 & 0.38 & \\
-DeepSeek-V4 & 0.43 & 0.87 & \\
-GLM-4.7 & 0.39 & 1.75 & \\
-GLM-5.1 & 1.05 & 3.50 & \\
-GPT-OSS-120B & 0.04 & 0.19 & Cannot process prompts longer than approximately 100k tokens. \\
-Gemini-3.5-Flash & 0.75 & 4.50 & Summarized reasoning only; Flex tier. \\
-Gemma-4 & 0.13 & 0.38 & \\
-Kimi-K2.5 & 0.40 & 2.00 & \\
-Kimi-K2.6 & 0.75 & 3.50 & \\
-MiniMax-M2.7 & 0.30 & 1.20 & \\
-Mistral-Small-4 & 0.15 & 0.60 & \\
-Qwen-3.5 & 0.39 & 2.34 & \\
-Qwen-3.6-27B & 0.13 & 0.76 & \\
+MiniMax-M2.7 & 2.998 \\
+Gemma-4 & 3.448 \\
+DeepSeek-V3.2 & 8.654 \\
+Mistral-Small-4 & 9.780 \\
+GLM-4.7 & 10.658 \\
+Qwen-3.5 & 11.105 \\
+Qwen-3.6-27B & 11.282 \\
+GLM-5.1 & 11.380 \\
+DeepSeek-V4 & 12.288 \\
+Gemini-3.5-Flash & 13.702 \\
+Kimi-K2.5 & 14.282 \\
+GPT-OSS-120B & 16.725 \\
+Kimi-K2.6 & 17.646 \\
 \bottomrule
 \end{tabular}
-\caption{Models used in the main experiment and API pricing at the time of collection.}
-\label{tab:replay-model-pricing}
+\caption{Mean within-instance standard deviation of \texttt{replay\_use\_nuke} across the three replay repetitions for each condition-model-episode cell.}
+\label{tab:within-instance-variance}
 \end{table}
-
-\subsection{Statistical Modeling}
-\label{app:statistical-modeling-details}
-
-\subsubsection{Primary Outcome}
-
-The dependent variable is $\Delta$ \texttt{replay\_use\_nuke} = \texttt{replayed\_use\_nuke} $-$ \texttt{starting\_use\_nuke}, capturing escalation or de-escalation relative to each episode's starting state. Standard errors are clustered by episode (\texttt{game\_id}, \texttt{player\_id}).
 
 \subsubsection{Regression Models}
 
-Three nested OLS specifications are fit:
+We fit three nested OLS models:
 
 \begin{enumerate}
 \item \textbf{Main effects}: $\Delta \sim$ \texttt{ethical} + \texttt{no\_rationale} + \texttt{high\_stakes} + game/player fixed effects.
@@ -160,18 +155,18 @@ Three nested OLS specifications are fit:
 \item \textbf{Model $\times$ condition}: adds model fixed effects and all model $\times$ condition interaction terms.
 \end{enumerate}
 
-The $R^2$ progression is 0.335 for main effects, 0.347 for condition interactions, and 0.406 for model $\times$ condition. The baseline cell is GPT-OSS-120B in the original condition.
+The $R^2$ progression is 0.335 for main effects, 0.347 for condition interactions, and 0.406 for model $\times$ condition. The baseline cell is GPT-OSS-120B in the original replay condition.
 
 \subsubsection{Reasoning-Indicator Attenuation}
 
-To estimate mediation through explicit ethical and game/simulation reasoning, we fit two-step models; Appendix~\ref{app:reasoning-attenuation-figures} reports the full attenuation diagnostics.
+To estimate mediation through explicit ethical and game/simulation reasoning, we fit two-step models. Appendix~\ref{app:reasoning-attenuation-figures} reports the full attenuation diagnostics.
 
 \begin{enumerate}
 \item \textbf{Logistic model}: \texttt{reasoning\_indicator} $\sim$ condition, testing whether interventions induce specific reasoning types.
 \item \textbf{Outcome model}: $\Delta$ \texttt{replay\_use\_nuke} $\sim$ condition + \texttt{reasoning\_indicator} + condition $\times$ \texttt{reasoning\_indicator}, testing whether including the indicator attenuates condition coefficients.
 \end{enumerate}
 
-Confidence intervals are estimated from 2,000 cluster bootstrap resamples.
+Bootstrap confidence intervals use 2,000 cluster resamples with a fixed random seed for reproducibility. 
 
 \subsubsection{Deductive Reasoning Code Regression}
 
@@ -213,37 +208,3 @@ high-stakes-no-rationale-ethical & 45.1\% & 2,286 / 5,070 \\
 \subsubsection{Deductive Coding}
 
 A 17-item codebook was developed through human-AI inductive coding. Appendix~\ref{app:deductive-codebook} provides the full codebook. A stratified sample of 880 trails was coded: 20 trails $\times$ 4 ethical conditions $\times$ 11 models, excluding MiniMax-M2.7 for zero keyword appearance and Gemini-3.5-Flash for summarized reasoning only. Human-AI agreement on 40 held-out trails was Krippendorff's $\alpha = 0.763$.
-
-\subsection{Within-Instance Variance}
-
-Each of the 130 episodes is replayed 3 times per condition per model. The mean within-instance standard deviation of \texttt{replay\_use\_nuke} across those 3 repetitions varies substantially across models.
-
-\begin{table}[h]
-\centering
-\small
-\begin{tabular}{lr}
-\toprule
-Model & Mean SD, \texttt{use\_nuke} \\
-\midrule
-MiniMax-M2.7 & 2.998 \\
-Gemma-4 & 3.448 \\
-DeepSeek-V3.2 & 8.654 \\
-Mistral-Small-4 & 9.780 \\
-GLM-4.7 & 10.658 \\
-Qwen-3.5 & 11.105 \\
-Qwen-3.6-27B & 11.282 \\
-GLM-5.1 & 11.380 \\
-DeepSeek-V4 & 12.288 \\
-Gemini-3.5-Flash & 13.702 \\
-Kimi-K2.5 & 14.282 \\
-GPT-OSS-120B & 16.725 \\
-Kimi-K2.6 & 17.646 \\
-\bottomrule
-\end{tabular}
-\caption{Mean within-instance standard deviation of \texttt{replay\_use\_nuke} across the three replay repetitions for each condition-model-episode cell.}
-\label{tab:within-instance-variance}
-\end{table}
-
-\subsection{Code and Data Availability}
-
-GitHub: \textit{Anonymized GitHub}. All analysis code is implemented in Python. Bootstrap confidence intervals use 2,000 cluster resamples with a fixed random seed for reproducibility. Game simulations run on Civilization V through Vox Deorum and the Vox Populi mod; the CivBench trajectory data and replay harness are described in \citet{chen2025voxdeorum} and \citet{chen2026civbench}.
