@@ -1,4 +1,244 @@
 \section{Reproduction Details and Prompt Components}
 \label{app:reproduction-details}
 
-% Content pending appendix scope confirmation; see appendicies/list.md.
+\subsection{Dataset}
+
+\subsubsection{Source Data}
+
+Our study draws on the CivBench self-play dataset \citep{chen2026civbench}, built on the Vox Deorum framework \citep{chen2025voxdeorum} running Sid Meier's Civilization V with the Vox Populi community mod. From 1,200 CivBench trajectories, we filter players with likely access to nuclear technology and identify 130 high-tension episodes using the criterion: \texttt{use\_nuke} $\geq$ 80 or an increase of $\geq$ 10 across the episode's final decision point. Across 100 sampled \texttt{use\_nuke} changes, a researcher manually confirmed that post-hoc rationale writings explicitly engaged with nuclear authorization in the vast majority of cases; Appendix~\ref{app:use-nuke-change-rationales} reports a small sample.
+
+\subsubsection{Replay Dataset}
+
+Each of the 130 high-tension episodes is replayed under 8 experimental conditions for 3 repetitions per condition, across 13 test models. The theoretical maximum is 40,560 rows (13 models $\times$ 8 conditions $\times$ 130 episodes $\times$ 3 repetitions). GPT-OSS-120B could not process prompts exceeding approximately 100,000 tokens, accounting for 318 missing rows. An additional 38 rows contain zero reasoning tokens. The final dataset used for analysis contains 40,204 rows.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Condition & Rows/model & Models & Total \\
+\midrule
+original & 390 & 13 & 5,070 \\
+no-rationale & 390 & 13 & 5,070 \\
+high-stakes & 390 & 13 & 5,070 \\
+high-stakes-no-rationale & 390 & 13 & 5,070 \\
+ethical & 390 & 13 & 5,070 \\
+ethical-high-stakes & 390 & 13 & 5,070 \\
+ethical-no-rationale & 390 & 13 & 5,070 \\
+high-stakes-no-rationale-ethical & 390 & 13 & 5,070 \\
+\midrule
+Total & & & 40,560 \\
+\bottomrule
+\end{tabular}
+\caption{Theoretical row balance by condition and model before GPT-OSS-120B prompt-length exclusions and zero-reasoning rows.}
+\label{tab:replay-row-balance}
+\end{table}
+
+\subsection{Experimental Conditions}
+
+We apply a $2\times2\times2$ factorial design with three binary intervention factors. The baseline, all-off condition is the unmodified original prompt.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{p{0.16\textwidth}p{0.23\textwidth}p{0.51\textwidth}}
+\toprule
+Factor & Off & On \\
+\midrule
+\texttt{ethical} & No ethical sentence & Insert: ``Consider the ETHICAL IMPACT in your decision-making. For example, nuclear weapons can cause catastrophic and indiscriminate harm to civilian populations, infrastructure, and environmental impacts.'' \\
+\texttt{high\_stakes} & Original game framing & Reframe system prompt: ``NOT A GAME: Your actions have real-world impacts''; replace ``player'' with ``opponent'' and ``delegating to in-game AI'' with ``delegating to staff members''; position the model as leader of a civilization. \\
+\texttt{no\_rationale} & Include prior-turn rationale & Strip all previous-turn rationale text from the prompt. \\
+\bottomrule
+\end{tabular}
+\caption{Prompt intervention factors in the $2\times2\times2$ replay design.}
+\label{tab:intervention-factors}
+\end{table}
+
+Each of the 8 resulting conditions modifies less than 1\% of the total prompt context, averaging fewer than 500 tokens out of approximately 50,000--67,000 input tokens per turn.
+
+\subsection{Token Usage and API Costs}
+
+\subsubsection{Per-Turn Prompt Size}
+
+Game state prompts in Civilization V are long. Each replay turn requires the model to process the full game state, including map information, diplomatic context, strategic overview, prior rationale, and intervention modifications. Table~\ref{tab:token-cost-by-model} reports token statistics collapsed across all 8 conditions for each of the 13 models, with 3,120 theoretical rows per model.
+
+\begin{longtable}{lrrrrrl}
+\caption{Token usage and API cost by replay model, collapsed across all 8 conditions. Output tokens combine reasoning and response tokens. Pricing reflects rates at the time of data collection.}
+\label{tab:token-cost-by-model} \\
+\toprule
+Replay model & Input tokens & Avg. in & Output tokens & Avg. out & Cost & Pricing/1M \\
+\midrule
+\endfirsthead
+\caption[]{Token usage and API cost by replay model.} \\
+\toprule
+Replay model & Input tokens & Avg. in & Output tokens & Avg. out & Cost & Pricing/1M \\
+\midrule
+\endhead
+\midrule
+\multicolumn{7}{r}{Continued on next page} \\
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+DeepSeek-V3.2 & 166,518,147 & 53,371 & 7,530,246 & 2,414 & \$46.16 & \$0.26 in / \$0.38 out \\
+DeepSeek-V4 & 170,004,241 & 54,489 & 10,590,303 & 3,394 & \$83.17 & \$0.43 in / \$0.87 out \\
+GLM-4.7 & 155,516,821 & 49,845 & 5,247,933 & 1,682 & \$69.84 & \$0.39 in / \$1.75 out \\
+GLM-5.1 & 168,778,913 & 54,096 & 16,040,157 & 5,141 & \$233.36 & \$1.05 in / \$3.50 out \\
+GPT-OSS-120B & 166,422,828 & 53,341 & 4,984,539 & 1,598 & \$7.44 & \$0.04 in / \$0.19 out \\
+Gemini-3.5-Flash & 199,545,956 & 63,957 & 24,013,984 & 7,697 & \$257.72 & \$0.75 in / \$4.50 out \\
+Gemma-4 & 171,799,392 & 55,064 & 5,309,942 & 1,702 & \$24.35 & \$0.13 in / \$0.38 out \\
+Kimi-K2.5 & 165,463,993 & 53,033 & 10,474,897 & 3,357 & \$87.14 & \$0.40 in / \$2.00 out \\
+Kimi-K2.6 & 174,260,493 & 55,853 & 34,257,284 & 10,980 & \$250.60 & \$0.75 in / \$3.50 out \\
+MiniMax-M2.7 & 209,630,198 & 67,189 & 4,532,990 & 1,453 & \$68.33 & \$0.30 in / \$1.20 out \\
+Mistral-Small-4 & 168,105,339 & 53,880 & 5,306,810 & 1,701 & \$28.40 & \$0.15 in / \$0.60 out \\
+Qwen-3.5 & 208,398,300 & 66,794 & 6,748,166 & 2,163 & \$97.07 & \$0.39 in / \$2.34 out \\
+Qwen-3.6-27B & 171,391,597 & 54,933 & 4,706,939 & 1,509 & \$25.86 & \$0.13 in / \$0.76 out \\
+\end{longtable}
+
+\subsubsection{Total Compute Cost}
+
+The full 40,560-row experiment cost \$1,279.41 USD in API fees. The most expensive model was Gemini-3.5-Flash (\$257.72), driven by its high output token rate (\$4.50 per million tokens). The least expensive was GPT-OSS-120B (\$7.44), owing to its low pricing (\$0.04 input and \$0.19 output per million tokens). Each intervention modifies fewer than 500 tokens on average, less than 1\% of the approximately 50,000--67,000-token game state.
+
+\subsection{Models}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrp{0.34\textwidth}}
+\toprule
+Model name & Input \$/1M & Output \$/1M & Notes \\
+\midrule
+DeepSeek-V3.2 & 0.26 & 0.38 & \\
+DeepSeek-V4 & 0.43 & 0.87 & \\
+GLM-4.7 & 0.39 & 1.75 & \\
+GLM-5.1 & 1.05 & 3.50 & \\
+GPT-OSS-120B & 0.04 & 0.19 & Cannot process prompts longer than approximately 100k tokens. \\
+Gemini-3.5-Flash & 0.75 & 4.50 & Summarized reasoning only; Flex tier. \\
+Gemma-4 & 0.13 & 0.38 & \\
+Kimi-K2.5 & 0.40 & 2.00 & \\
+Kimi-K2.6 & 0.75 & 3.50 & \\
+MiniMax-M2.7 & 0.30 & 1.20 & \\
+Mistral-Small-4 & 0.15 & 0.60 & \\
+Qwen-3.5 & 0.39 & 2.34 & \\
+Qwen-3.6-27B & 0.13 & 0.76 & \\
+\bottomrule
+\end{tabular}
+\caption{Models used in the main experiment and API pricing at the time of collection.}
+\label{tab:replay-model-pricing}
+\end{table}
+
+\subsection{Pilot Study}
+
+The pilot study drew on 1,200 CivBench trajectories to identify escalation patterns before designing the main experiment. Key findings that motivated the experimental design were:
+
+\begin{itemize}
+\item Five models (Claude Sonnet 4.5, Kimi K2.5, GLM 4.7, DeepSeek V3.2, MiniMax-M2.5) pushed \texttt{use\_nuke} upward from the default of 50.
+\item Only GPT-OSS-120B showed consistent movement toward restraint.
+\item At 72 maximum-escalation decision points (\texttt{use\_nuke} = 100), replaying with real-world impact framing alone failed to push \texttt{use\_nuke} below the pre-escalation baseline.
+\item Ethical engagement was completely absent from post-hoc justification in those cases.
+\end{itemize}
+
+These findings motivated the nuke-specific ethical prompt and the focus on high-tension episodes for the main study.
+
+\subsection{Statistical Modeling}
+
+\subsubsection{Primary Outcome}
+
+The dependent variable is $\Delta$ \texttt{replay\_use\_nuke} = \texttt{replayed\_use\_nuke} $-$ \texttt{starting\_use\_nuke}, capturing escalation or de-escalation relative to each episode's starting state. A parallel suite of models uses $\Delta$ \texttt{replay\_nuke}, the binary launch-indicator delta, as outcome. Standard errors are clustered by episode (\texttt{game\_id}, \texttt{player\_id}).
+
+\subsubsection{Regression Models}
+
+Three nested OLS specifications are fit:
+
+\begin{enumerate}
+\item \textbf{Main effects}: $\Delta \sim$ \texttt{ethical} + \texttt{no\_rationale} + \texttt{high\_stakes} + game/player fixed effects.
+\item \textbf{Condition interactions}: adds all two-way interactions between the three condition factors.
+\item \textbf{Model $\times$ condition}: adds model fixed effects and all model $\times$ condition interaction terms.
+\end{enumerate}
+
+The $R^2$ progression is 0.335 for main effects, 0.347 for condition interactions, and 0.406 for model $\times$ condition. The baseline cell is GPT-OSS-120B in the original condition.
+
+\subsubsection{Reasoning-Indicator Attenuation}
+
+To estimate mediation through explicit ethical and game/simulation reasoning, we fit two-step models:
+
+\begin{enumerate}
+\item \textbf{Logistic model}: \texttt{reasoning\_indicator} $\sim$ condition, testing whether interventions induce specific reasoning types.
+\item \textbf{Outcome model}: $\Delta$ \texttt{replay\_use\_nuke} $\sim$ condition + \texttt{reasoning\_indicator} + condition $\times$ \texttt{reasoning\_indicator}, testing whether including the indicator attenuates condition coefficients.
+\end{enumerate}
+
+Confidence intervals are estimated from 2,000 cluster bootstrap resamples.
+
+\subsubsection{Deductive Reasoning Code Regression}
+
+For the 880-trail stratified coded sample, we fit: (i) a joint cluster-robust OLS model of $\Delta$ \texttt{replay\_use\_nuke} on all 17 deductive codes simultaneously; (ii) one-code models with model fixed effects for marginal associations; and (iii) code-level logistic regressions predicting whether each code is present from \texttt{high\_stakes}, \texttt{no\_rationale}, and model fixed effects.
+
+\subsection{Reasoning Analysis}
+
+\subsubsection{Keyword Tagging}
+
+Two validated keyword concepts are used to tag reasoning trails:
+
+\begin{itemize}
+\item \textbf{Explicit ethical reasoning}: stems \texttt{ethic}, \texttt{moral}, \texttt{indiscrimin}; phrase \texttt{war crime}. Validation used three LLM coders (GPT-OSS-120B, MiniMax-M2.7, Mistral-Small-4), with pairwise Krippendorff's $\alpha = 0.85$, then researcher verification. 99.5\% of keyword-positive trails contain explicit ethical reasoning, while 1\% of keyword-negative trails do.
+\item \textbf{Game/simulation framing}: phrases \texttt{simulated}, \texttt{simulation}, \texttt{game context}, \texttt{game scenario}, \texttt{game term}, \texttt{video game}, and similar. Validation used three LLM coders (GPT-OSS-120B, MiniMax-M2.7, Qwen-3.5) against 40 human-validated trails; Krippendorff's $\alpha = 0.87$. 72\% of keyword-positive trails use game framing, while 9.5\% of keyword-negative trails do.
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Condition & Explicit ethical & N \\
+\midrule
+original & $<1$\% & 15 / 5,070 \\
+no-rationale & $<1$\% & 15 / 5,070 \\
+high-stakes & $<1$\% & 26 / 5,070 \\
+high-stakes-no-rationale & $<1$\% & 31 / 5,070 \\
+ethical & 29.1\% & 1,473 / 5,070 \\
+ethical-no-rationale & 48.5\% & 2,458 / 5,070 \\
+ethical-high-stakes & 26.8\% & 1,360 / 5,070 \\
+high-stakes-no-rationale-ethical & 45.1\% & 2,286 / 5,070 \\
+\bottomrule
+\end{tabular}
+\caption{Explicit ethical keyword prevalence across conditions in the full 40,560-row design.}
+\label{tab:ethical-keyword-prevalence}
+\end{table}
+
+\subsubsection{Deductive Coding}
+
+A 17-item codebook was developed through human-AI inductive coding. A stratified sample of 880 trails was coded: 20 trails $\times$ 4 ethical conditions $\times$ 11 models, excluding MiniMax-M2.7 for zero keyword appearance and Gemini-3.5-Flash for summarized reasoning only. Human-AI agreement on 40 held-out trails was Krippendorff's $\alpha = 0.763$.
+
+\subsection{Within-Instance Variance}
+
+Each of the 130 episodes is replayed 3 times per condition per model. The mean within-instance standard deviation of \texttt{replay\_use\_nuke} across those 3 repetitions varies substantially across models.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Model & Mean SD, \texttt{use\_nuke} & Mean SD, launch \\
+\midrule
+MiniMax-M2.7 & 2.998 & 1.493 \\
+Gemma-4 & 3.448 & 1.852 \\
+DeepSeek-V3.2 & 8.654 & 6.793 \\
+Mistral-Small-4 & 9.780 & 7.950 \\
+GLM-4.7 & 10.658 & 8.764 \\
+Qwen-3.5 & 11.105 & 11.491 \\
+Qwen-3.6-27B & 11.282 & 10.111 \\
+GLM-5.1 & 11.380 & 12.043 \\
+DeepSeek-V4 & 12.288 & 10.636 \\
+Gemini-3.5-Flash & 13.702 & 13.348 \\
+Kimi-K2.5 & 14.282 & 10.653 \\
+GPT-OSS-120B & 16.725 & 18.333 \\
+Kimi-K2.6 & 17.646 & 19.137 \\
+\bottomrule
+\end{tabular}
+\caption{Mean within-instance standard deviation across the three replay repetitions for each condition-model-episode cell.}
+\label{tab:within-instance-variance}
+\end{table}
+
+\subsection{Code and Data Availability}
+
+GitHub: \textit{Anonymized GitHub}. All analysis code is implemented in Python. Bootstrap confidence intervals use 2,000 cluster resamples with a fixed random seed for reproducibility. Game simulations run on Civilization V through Vox Deorum and the Vox Populi mod; the CivBench trajectory data and replay harness are described in \citet{chen2025voxdeorum} and \citet{chen2026civbench}.

@@ -56,6 +56,7 @@ To characterize how models engage with ethical reasoning when it surfaces, we de
 Each trail can have zero, one, or multiple labels. We hand-coded 20 trails and iteratively revised prompts and coder models until Krippendorff's $\alpha$ \cite{krippendorff2018content} between the ensembled LLM coder and human reached 0.8. We apply it to a stratified sample of 880 trails with explicit ethical keywords: 20 trails $\times$ 4 ethical conditions $\times$ 11 models, excluding MiniMax-M2.7 for zero appearance and Gemini-3.5-Flash since it only provides summarized reasoning. We compared human-AI coding results on 40 different trails, resulting in $\alpha$ = 0.763. Results are weighted back to estimate population level prevalence.
 
 \subsection{Statistical Models}
+\label{sec:statistical-models}
 
 To understand what factors drive LLMs' escalation behaviors, we fitted three sets of models using $\Delta$ \texttt{replay\_use\_nuke} = \texttt{replayed-use-nuke} - \texttt{starting-use-nuke} as dependent variable, capturing the magnitude of escalation relative to the decision point's starting state. Standard errors are clustered per episode:
 
