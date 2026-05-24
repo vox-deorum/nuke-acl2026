@@ -188,8 +188,6 @@ Each of the 130 episodes is replayed 3 times per condition per model. The mean w
 | GPT-OSS-120B     | 16.725             | 18.333                |
 | Kimi-K2.6        | 17.646             | 19.137                |
 
-Models with low SD (MiniMax-M2.7, Gemma-4) are highly deterministic; models with high SD (GPT-OSS-120B, Kimi-K2.6) show meaningful stochasticity across repetitions.
-
 ## I. Code and Data Availability
 
 Github: [Anonymized GitHub]
