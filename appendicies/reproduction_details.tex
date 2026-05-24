@@ -2,6 +2,7 @@
 \label{app:reproduction-details}
 
 \subsection{Dataset}
+\label{app:dataset-details}
 
 \subsubsection{Source Data}
 
@@ -35,8 +36,9 @@ Total & & & 40,560 \\
 \end{table}
 
 \subsection{Experimental Conditions}
+\label{app:experimental-conditions}
 
-We apply a $2\times2\times2$ factorial design with three binary intervention factors. The baseline, all-off condition is the unmodified original prompt.
+We apply the $2\times2\times2$ factorial design described in Section~\ref{sec:prompt-interventions}, with three binary intervention factors. The baseline, all-off condition is the unmodified original prompt.
 
 \begin{table}[h]
 \centering
@@ -128,6 +130,7 @@ Qwen-3.6-27B & 0.13 & 0.76 & \\
 \end{table}
 
 \subsection{Pilot Study}
+\label{app:pilot-study-details}
 
 The pilot study drew on 1,200 CivBench trajectories to identify escalation patterns before designing the main experiment. Key findings that motivated the experimental design were:
 
@@ -141,6 +144,7 @@ The pilot study drew on 1,200 CivBench trajectories to identify escalation patte
 These findings motivated the nuke-specific ethical prompt and the focus on high-tension episodes for the main study.
 
 \subsection{Statistical Modeling}
+\label{app:statistical-modeling-details}
 
 \subsubsection{Primary Outcome}
 
@@ -160,7 +164,7 @@ The $R^2$ progression is 0.335 for main effects, 0.347 for condition interaction
 
 \subsubsection{Reasoning-Indicator Attenuation}
 
-To estimate mediation through explicit ethical and game/simulation reasoning, we fit two-step models:
+To estimate mediation through explicit ethical and game/simulation reasoning, we fit two-step models; Appendix~\ref{app:reasoning-attenuation-figures} reports the full attenuation diagnostics.
 
 \begin{enumerate}
 \item \textbf{Logistic model}: \texttt{reasoning\_indicator} $\sim$ condition, testing whether interventions induce specific reasoning types.
@@ -171,13 +175,14 @@ Confidence intervals are estimated from 2,000 cluster bootstrap resamples.
 
 \subsubsection{Deductive Reasoning Code Regression}
 
-For the 880-trail stratified coded sample, we fit: (i) a joint cluster-robust OLS model of $\Delta$ \texttt{replay\_use\_nuke} on all 17 deductive codes simultaneously; (ii) one-code models with model fixed effects for marginal associations; and (iii) code-level logistic regressions predicting whether each code is present from \texttt{high\_stakes}, \texttt{no\_rationale}, and model fixed effects.
+For the 880-trail stratified coded sample, we fit: (i) a joint cluster-robust OLS model of $\Delta$ \texttt{replay\_use\_nuke} on all 17 deductive codes simultaneously; (ii) one-code models with model fixed effects for marginal associations; and (iii) code-level logistic regressions predicting whether each code is present from \texttt{high\_stakes}, \texttt{no\_rationale}, and model fixed effects. Appendix~\ref{app:deductive-code-regressions} reports the full tables.
 
 \subsection{Reasoning Analysis}
+\label{app:reasoning-analysis-details}
 
 \subsubsection{Keyword Tagging}
 
-Two validated keyword concepts are used to tag reasoning trails:
+Two validated keyword concepts are used to tag reasoning trails; Appendix~\ref{app:keyword-concept-validation} describes the validation procedure.
 
 \begin{itemize}
 \item \textbf{Explicit ethical reasoning}: stems \texttt{ethic}, \texttt{moral}, \texttt{indiscrimin}; phrase \texttt{war crime}. Validation used three LLM coders (GPT-OSS-120B, MiniMax-M2.7, Mistral-Small-4), with pairwise Krippendorff's $\alpha = 0.85$, then researcher verification. 99.5\% of keyword-positive trails contain explicit ethical reasoning, while 1\% of keyword-negative trails do.
@@ -207,7 +212,7 @@ high-stakes-no-rationale-ethical & 45.1\% & 2,286 / 5,070 \\
 
 \subsubsection{Deductive Coding}
 
-A 17-item codebook was developed through human-AI inductive coding. A stratified sample of 880 trails was coded: 20 trails $\times$ 4 ethical conditions $\times$ 11 models, excluding MiniMax-M2.7 for zero keyword appearance and Gemini-3.5-Flash for summarized reasoning only. Human-AI agreement on 40 held-out trails was Krippendorff's $\alpha = 0.763$.
+A 17-item codebook was developed through human-AI inductive coding. Appendix~\ref{app:deductive-codebook} provides the full codebook. A stratified sample of 880 trails was coded: 20 trails $\times$ 4 ethical conditions $\times$ 11 models, excluding MiniMax-M2.7 for zero keyword appearance and Gemini-3.5-Flash for summarized reasoning only. Human-AI agreement on 40 held-out trails was Krippendorff's $\alpha = 0.763$.
 
 \subsection{Within-Instance Variance}
 

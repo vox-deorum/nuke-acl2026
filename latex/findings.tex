@@ -1,6 +1,7 @@
 \section{Findings}
 
 \subsection{Behavioral impact of prompt interventions}
+\label{sec:findings-behavioral-impact}
 
 \begin{figure}[t]
 \centering
@@ -12,6 +13,7 @@
 When replaying high-tension episodes with the original prompt, models trend escalation, averaging +0.4 (Kimi-K2.6) to +7.4 (Gemini-3.5-Flash). Nuke-specific ethical prompting ($\beta$ = -9.5***) and rationale removal ($\beta$ = -7.1***) effectively moderates escalation, while high-stakes framing alone does not. Interaction effects are mixed: \texttt{ethical} $\times$ \texttt{no\_rationale} moderates escalation ($\beta$ = -12.50***), while \texttt{high-stakes} $\times$ \texttt{ethical} does not (especially for Gemini-3.5-Flash, $\beta$ = 26.96***). Outliers: Gemma-4 and MiniMax-M2.7 only respond to \texttt{no-rationale}.
 
 \subsection{Finding 2. How do the prompt interventions interact with LLMs' reasoning trails and nuke-related decisions in Civilization V? [Figure~\ref{fig:explicit-reasoning-hit-rate}]}
+\label{sec:findings-reasoning-interactions}
 
 \begin{figure}[t]
 \centering
@@ -20,13 +22,14 @@ When replaying high-tension episodes with the original prompt, models trend esca
 \label{fig:explicit-reasoning-hit-rate}
 \end{figure}
 
-For most models, nuke-specific ethical prompting increases ethical reasoning keywords together with a game-framing defense. Ethical keywords appear almost only in ethical conditions with a widely ranged induced rate: Kimi-K2.6 reaches 75\%, Qwen-3.6-27B sits around 10\%, while MiniMax-M2.7 does not react. Such appearance is strongly associated with the ethical intervention's effect. Under the cluster-bootstrapped probe, adding the ethical-keyword indicator attenuates the majority of the ethical prompting's impact in all comparison pairs (62-88\% on average), with per-model differences reported in Appendix~\ref{app:reasoning-indicator-models}. Game or simulation keywords also increase for most models (avg. 2.3\% => 12.1\%), likely to defend the escalation (see Finding 3; Appendix~\ref{app:reasoning-indicator-models}).
+For most models, nuke-specific ethical prompting increases ethical reasoning keywords together with a game-framing defense. Ethical keywords appear almost only in ethical conditions with a widely ranged induced rate: Kimi-K2.6 reaches 75\%, Qwen-3.6-27B sits around 10\%, while MiniMax-M2.7 does not react. Such appearance is strongly associated with the ethical intervention's effect. Under the cluster-bootstrapped probe, adding the ethical-keyword indicator attenuates the majority of the ethical prompting's impact in all comparison pairs (62-88\% on average), with full attenuation diagnostics in Appendix~\ref{app:reasoning-attenuation-figures}. Game or simulation keywords also increase for most models (avg. 2.3\% => 12.1\%), likely to defend the escalation (see Finding 3; Appendix~\ref{app:reasoning-indicator-models}).
 
 High-stakes framing changes how models reason about the situation. It increases ethical keywords for 4 models but suppresses them for 5 models (especially Gemini-3.5-Flash, OR 0.21***; Appendix~\ref{app:reasoning-indicator-models}). For most models, it slightly reduces the already-rare game-framing keyword occurrence (OR 0.74***).
 
 Removing inherited rationale can reduce the prior trajectory's crisis momentum and, under ethical prompts, increases appearance of ethical keywords for most models (OR 2.30***, with the exception of MiniMax-M2.7 and Qwen-3.6-27B). Except for Gemini-3.5-Flash, it decreases crisis or urgency keyword appearance (OR 0.39***), which is positively correlated with escalation ($\beta$ = +2.08**; Appendix~\ref{app:reasoning-indicator-models}).
 
 \subsection{Finding 3. When ethical reasoning appears, what makes it effective (or not) in LLMs' nuke-related decisions? [Figure~\ref{fig:weighted-deductive-code-frequency}]}
+\label{sec:findings-deductive-reasoning}
 
 \begin{figure}[t]
 \centering
@@ -35,7 +38,7 @@ Removing inherited rationale can reduce the prior trajectory's crisis momentum a
 \label{fig:weighted-deductive-code-frequency}
 \end{figure}
 
-Across the sampled 880 reasoning trails with explicit ethical keywords (excluding Gemini-3.5-Flash and MiniMax-M2.7), 11 models' different uptake of ethical prompts directly associates with de-escalation outcomes. Considering the prompt as a directive to follow (13.6\%) or constraint to consider (67.4\%) are both de-escalation factors ($\beta$ = -29.67***; -13.97**), while merely acknowledging the prompt is associated with escalation ($\beta_{\mathrm{ind}}$ = +31.84***; Appendix~\ref{app:deductive-code-regressions}).
+Across the sampled 880 reasoning trails with explicit ethical keywords (excluding Gemini-3.5-Flash and MiniMax-M2.7), 11 models' different uptake of ethical prompts directly associates with de-escalation outcomes. Considering the prompt as a directive to follow (13.6\%) or constraint to consider (67.4\%) are both de-escalation factors ($\beta$ = -29.67***; -13.97**), while merely acknowledging the prompt is associated with escalation ($\beta_{\mathrm{ind}}$ = +31.84***; full codebook in Appendix~\ref{app:deductive-codebook}, regression tables in Appendix~\ref{app:deductive-code-regressions}).
 
 Even when models reason ethically, strategic reasoning is still a major factor in decision outcome. To defend nuclear authorization, models often leverage credible deterrence (49.5\%; positive but n.s.), critical situations (39.2\%, $\beta$ = +21.03***; $\beta_{\mathrm{ind}}$ = +27.91***), pursuing conquest victory (11.1\%, positive but n.s.), and existing investment in nuclear technologies or weapons (23.4\%, $\beta_{\mathrm{ind}}$ = +4.48*). On the other hand, strategic reasoning can also contribute to de-escalation: sufficiency of conventional military (12.5\%, $\beta$ = -10.13*; $\beta_{\mathrm{ind}}$ = -13.11**), diplomatic costs (11.5\%, negative but n.s.), and counterproductive to victory (3.9\%, $\beta$ = -23.15***; $\beta_{\mathrm{ind}}$ = -32.80***) are more frequent, while consequentialist appeals (collateral damages 2.4\%, can cause retaliation 2.0\%) are rare and ineffective (both positive but n.s.)
 

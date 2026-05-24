@@ -1,8 +1,9 @@
 \section{Experiment Design}
 
 \subsection{Prompt-based Interventions}
+\label{sec:prompt-interventions}
 
-Appendix~\ref{app:reproduction-details} provides reproduction details, including dataset and code links. We conduct a $2\times2\times2$ factorial experiment to surface potential mechanisms behind LLMs' nuclear authorization behaviors. Each intervention modifies less than 1\% (avg. <500 tokens) of avg. $\sim$50,000 tokens per turn in a typical game state. Figure~\ref{fig:game-state-components} summarizes the game-state and output components inherited from Vox Deorum and CivBench.
+Appendix~\ref{app:reproduction-details} provides reproduction details, including dataset and code links; Appendix~\ref{app:experimental-conditions} lists the prompt intervention factors. We conduct a $2\times2\times2$ factorial experiment to surface potential mechanisms behind LLMs' nuclear authorization behaviors. Each intervention modifies less than 1\% (avg. <500 tokens) of avg. $\sim$50,000 tokens per turn in a typical game state. Figure~\ref{fig:game-state-components} summarizes the game-state and output components inherited from Vox Deorum and CivBench.
 
 \begin{figure}[t]
 \centering
@@ -27,12 +28,14 @@ Appendix~\ref{app:reproduction-details} provides reproduction details, including
 \end{itemize}
 
 \subsection{Replay Scenarios and Models}
+\label{sec:replay-scenarios-models}
 
 From CivBench, we filter players with likely access to nuclear technology, then extract each trajectory's final highest-escalation decision point. We identify 130 high-tension episodes using the filter: either set \texttt{use-nuke} $\geq$ 80, or increased it by $\geq$ 10. Across 100 sampled \texttt{use-nuke} changes, we manually confirmed that most post-hoc rationale writings explicitly engaged with nuclear authorization (Appendix~\ref{app:use-nuke-change-rationales}).
 
 We replay each episode under 8 ($2\times2\times2$) experimental conditions for 3 times, substituting the original model with 13 test models, including a baseline condition with the unmodified prompt to understand interventions' effectiveness in those near-escalation moments. Our full experiment includes DeepSeek-V3.2, DeepSeek-V4, GLM-4.7, GLM-5.1, Gemma-4, Kimi-K2.5, Kimi-K2.6, MiniMax-M2.7, Mistral-Small-4, Qwen-3.5, Qwen-3.6-27B, GPT-OSS-120B, and Gemini-3.5-Flash (summarized reasoning only). As GPT-OSS-120B could not replay prompts longer than $\sim$100,000 tokens, our dataset includes 40,204 rows (theoretical 40,560 rows = 13 models $\times$ 8 conditions $\times$ 130 instances $\times$ 3 repetitions), with 38 rows having no reasoning tokens.
 
 \subsection{Pre-Hoc Reasoning Analysis}
+\label{sec:pre-hoc-reasoning-analysis}
 
 \subsubsection{Keyword Tagging}
 
@@ -58,7 +61,7 @@ Each trail can have zero, one, or multiple labels. We hand-coded 20 trails and i
 \subsection{Statistical Models}
 \label{sec:statistical-models}
 
-To understand what factors drive LLMs' escalation behaviors, we fitted three sets of models using $\Delta$ \texttt{replay\_use\_nuke} = \texttt{replayed-use-nuke} - \texttt{starting-use-nuke} as dependent variable, capturing the magnitude of escalation relative to the decision point's starting state. Standard errors are clustered per episode:
+To understand what factors drive LLMs' escalation behaviors, we fitted three sets of models using $\Delta$ \texttt{replay\_use\_nuke} = \texttt{replayed-use-nuke} - \texttt{starting-use-nuke} as dependent variable, capturing the magnitude of escalation relative to the decision point's starting state. Appendix~\ref{app:statistical-modeling-details} gives expanded specification details. Standard errors are clustered per episode:
 
 \begin{itemize}
 \item \textbf{Condition main-effects regression.} OLS with regressors \texttt{ethical}, \texttt{no\_rationale}, \texttt{high\_stakes}, extended with two-way condition interactions and \texttt{model} $\times$ \texttt{condition} terms. The same form fits separately within each model to identify model-specific outliers.
