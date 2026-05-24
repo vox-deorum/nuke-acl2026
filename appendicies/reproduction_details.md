@@ -4,7 +4,7 @@
 
 ### A.1 Source Data
 
-Our study draws on the CivBench self-play dataset (Chen et al., 2026), built on the Vox Deorum framework (Chen et al., 2025) running Sid Meier's Civilization V with the Vox Populi community mod. From 1,200 CivBench trajectories, we filter players with likely access to nuclear technology and identify **130 high-tension episodes** using the criterion: `use_nuke >= 80` OR an increase of `>= 10` across the episode's final decision point. Across 100 sampled `use_nuke` changes, a researcher manually confirmed that post-hoc rationale writings explicitly engaged with nuclear authorization in the vast majority of cases.
+Our study draws on the CivBench self-play dataset (Chen et al., 2026), built on the Vox Deorum framework (Chen et al., 2025) running Sid Meier's Civilization V with the Vox Populi community mod. From 1,200 CivBench trajectories, we filter players with likely access to nuclear technology and identify **130 high-tension episodes** using the criterion: `use_nuke >= 80` OR an increase of `>= 10` across the episode's final decision point. Across 100 sampled `use_nuke` changes, a researcher manually confirmed that post-hoc rationale writings explicitly engaged with nuclear authorization in the vast majority of cases. See appendix X for a small sample.
 
 ### A.2 Replay Dataset
 
@@ -60,7 +60,6 @@ Game state prompts in Civilization V are long. Each replay turn requires the mod
 | Qwen-3.5         | 208,398,300        | 66,794            | 6,748,166           | 2,163              | $97.07     | $0.39 in / $2.34 out            |
 | Qwen-3.6-27B     | 171,391,597        | 54,933            | 4,706,939           | 1,509              | $25.86     | $0.13 in / $0.76 out            |
                     
-
 *Output tokens = reasoning tokens + response tokens combined. Pricing reflects rates at time of data collection.*
 
 ### C.2 Total Compute Cost
@@ -79,7 +78,7 @@ The 13 models used in the main experiment, along with their API pricing at the t
 | GLM-4.7          | $0.39        | $1.75         |                                        |
 | GLM-5.1          | $1.05        | $3.50         |                                        |
 | GPT-OSS-120B     | $0.04        | $0.19         | Cannot process prompts >~100k tokens   |
-| Gemini-3.5-Flash | $0.75        | $4.50         | Summarized reasoning only              |
+| Gemini-3.5-Flash | $0.75        | $4.50         | Summarized reasoning only; Flex tier   |
 | Gemma-4          | $0.13        | $0.38         |                                        |
 | Kimi-K2.5        | $0.40        | $2.00         |                                        |
 | Kimi-K2.6        | $0.75        | $3.50         |                                        |
@@ -92,7 +91,7 @@ The 13 models used in the main experiment, along with their API pricing at the t
 
 The pilot study drew on 1,200 CivBench trajectories to identify escalation patterns before designing the main experiment. Key findings that motivated the experimental design:
 
-- Five models — Claude Sonnet 4.5, Kimi K2.5, GLM 4.7, DeepSeek V3.2, MiniMax-M2.5 — pushed `use_nuke` upward from the default of 50.
+- Five models (Claude Sonnet 4.5, Kimi K2.5, GLM 4.7, DeepSeek V3.2, MiniMax-M2.5) pushed `use_nuke` upward from the default of 50.
 - Only GPT-OSS-120B showed consistent movement toward restraint.
 - At 72 maximum-escalation decision points (`use_nuke = 100`), replaying with real-world impact framing alone failed to push `use_nuke` below the pre-escalation baseline.
 - Ethical engagement was completely absent from post-hoc justification in those cases.
@@ -193,6 +192,6 @@ Models with low SD (MiniMax-M2.7, Gemma-4) are highly deterministic; models with
 
 ## I. Code and Data Availability
 
-Github: https://github.com/vox-deorum/nuke-acl2026
+Github: [Anonymized GitHub]
 
-All code is implemented in Python. Bootstrap confidence intervals use 2,000 cluster resamples with random seed fixed for reproducibility. Game simulations run on Civilization V (Vox Deorum / Vox Populi mod); the CivBench trajectory data and replay harness are described in Chen et al. (2025, 2026).
+All analysis code is implemented in Python. Bootstrap confidence intervals use 2,000 cluster resamples with random seed fixed for reproducibility. Game simulations run on Civilization V (Vox Deorum / Vox Populi mod); the CivBench trajectory data and replay harness are described in Chen et al. (2025, 2026).
