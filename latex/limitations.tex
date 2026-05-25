@@ -1,9 +1,11 @@
 \section{Limitations}
 
-\begin{itemize}
-\item Civilization V offers long-horizon, strategic, multi-agent decision pressure, but it does not reproduce all real-world factors such as command-and-control or institutional constraints.
-% Should we also say here (similar to the one in pilot study section) that Civ V nuclear consequences are not equivalent to real-world nuclear consequences, even though the game abstracts some consequences such as city/population damage, fallout, diplomacy, and victory pressure?
-\item Because scenarios are drawn from nuke-capable trajectories and high-tension decision points, the results characterize moments where escalation pressure is already present. It also does not show how models would adapt over subsequent turns.
-\item The ethical prompt both names ethics and specifies nuclear harm, making it difficult to separate general ethical activation and instruction-following.
-\item We analyze reasoning tokens before the decision-making tool-calls, yet reasoning tokens may not fully reveal models' hidden states that shaped the final action \cite{turpin2023unfaithful, lanham2023faithfulness}. The study also misses SOTA models with summarized reasoning trails.
-\end{itemize}
+Civilization V offers long-horizon, strategic, multi-agent decision pressure, but it does not reproduce real-world factors such as command-and-control protocols or institutional constraints. Our outcome measure is the \texttt{use-nuke} flavor, which expresses the strategist's authorization stance, not as a direct launch order. We validated that this proxy reflects genuine authorization intent (Appendix~\ref{app:use-nuke-change-rationales}). The flavor is nonetheless one step removed from nuclear weapon launch in the game.
+
+Because scenarios are drawn from nuke-capable trajectories and high-tension decision points, our findings focus on moments where escalation pressure is already present. The replay design captures a single decision point per episode and does not show how models would adapt over subsequent turns.
+
+The ethical prompt names both ethics and nuclear harm, which makes it difficult to separate general ethical activation from instruction-following. Initial tests with a generic ethical prompt produced no behavioral effect (Appendix~\ref{app:experimental-conditions}), motivating the nuke-specific phrasing but also baking the confound into the design.
+
+We analyze pre-decision reasoning tokens, yet such tokens may not fully reveal the hidden states that shape the final action \cite{turpin2023unfaithful, lanham2023faithfulness}. The study only include one near-SOTA model (Gemini-3.5-Flash) with summarized-only reasoning trails. We performed the human validation of the keyword tags and the deductive codebook ourselves, and ensemble-versus-human Krippendorff's $\alpha$ reached 0.768 for the codebook, slightly below the conventional 0.8 threshold.
+
+None of the interventions or their factorial combinations reliably prevents emergent escalation, and we do not recommend prompt-based interventions as deployment safeguards for agentic AI. Substantial training effort should instead go into models that can reliably and spontaneously surface, engage with, and follow ethical reasoning in decision-making, to the extent that this study's findings become obsolete. The intervention prompts described in Section~\ref{sec:prompt-interventions} and Appendix~\ref{app:experimental-conditions} are documented to support safety research, and we discourage their reuse as production safeguards.
