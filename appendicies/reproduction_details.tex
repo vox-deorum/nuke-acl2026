@@ -243,7 +243,7 @@ To validate the ensemble against a human coder, a researcher coded a held-out sa
 
 \subsubsection{Sample Weighting}
 
-To converse computation costs, we only code a stratified sub-sample of 880 reasoning trails, focusing on paragraphs where ethical keywords appear and +/- 2 neighboring paragraphs. To recover population-level prevalence estimates from the sub-sample, we attach inverse-probability sample weights that anchor each coded trail back to the eligible population.
+To conserve computation costs, we only code a stratified sub-sample of 880 reasoning trails, focusing on paragraphs where ethical keywords appear and +/- 2 neighboring paragraphs. To recover population-level prevalence estimates from the sub-sample, we attach inverse-probability sample weights that anchor each coded trail back to the eligible population.
 
 The eligible population is defined as all replay rows that satisfy three conditions: the experimental condition is one of the four ethical conditions (\texttt{ethical}, \texttt{ethical-high-stakes}, \texttt{ethical-no-rationale}, or \texttt{high-stakes-no-rationale-ethical}), the explicit ethical keyword tier is positive, and the replay model is not Gemini-3.5-Flash. This frame contains 6,956 rows, distributed across 44 strata defined by the cross of the 4 ethical conditions and 11 models. We exclude MiniMax-M2.7 from the model list because it produced zero keyword-positive trails, and Gemini-3.5-Flash because its API exposes summarized reasoning only.
 
