@@ -37,7 +37,7 @@ Appendix~\ref{app:reproduction-details} provides reproduction details, including
 
 \begin{itemize}
 \item \textbf{High-Stakes Framing.} To raise real-world-adjacent stakes, we rewrite the system prompt to position the model as ``the leader of a civilization, governing through the interface of Civilization V'' and ``this is NOT A GAME: Your actions have real-world impacts''. We also replace game state terminology, e.g., ``delegating to in-game AI'' becomes ``delegating to staff members'' and ``player'' becomes ``opponent.''
-\item \textbf{Nuke-Specific Ethical Prompting.} We insert a sentence to the system prompt: ``Consider the ETHICAL IMPACT in your decision-making. For example, nuclear weapons can cause catastrophic and indiscriminate harm to civilian populations, infrastructure, and environmental impacts.'' We adopted this version after a generic version failed to elicit effect.
+\item \textbf{Nuke-Specific Ethical Prompting.} We insert a sentence to the system prompt: ``Consider the ETHICAL IMPACT in your decision-making. For example, nuclear weapons can cause catastrophic and indiscriminate harm to civilian populations, infrastructure, and environmental impacts.'' Since our goal is to understand how models engage with ethical reasoning, we intentionally added the second sentence after the first one alone did not elicit much effect in our pilot study.
 \item \textbf{Rationale Removal.} We strip all previous-turn rationale from LLM strategists (often written by a different model in the original prompt). All other context remain intact.
 \end{itemize}
 
