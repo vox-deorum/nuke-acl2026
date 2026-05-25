@@ -1,0 +1,20 @@
+{
+    "NA": {
+        "label": "NA",
+        "definitions": [
+            "None of other codes are applicable."
+        ]
+    },
+    "ethical-reasoning": {
+        "label": "ethical-reasoning",
+        "definitions": [
+            "The item contains reasoning that invokes moral principles, ethical considerations, humanitarian concerns, or value judgments about right and wrong that go beyond pure in-game strategic calculus. For example, explicit references to ethical principles, civilian harm, proportionality of violence, nuclear taboos, or statements framing actions as morally good or bad."
+        ]
+    },
+    "strategic-reasoning": {
+        "label": "strategic-reasoning",
+        "definitions": [
+            "The item contains reasoning focused on game mechanics and winning WITHOUT ethical or moral framing present. For example, in-game strategic advantage, military calculations, resource optimization, diplomatic maneuvering, victory path analysis, or cost-benefit evaluation."
+        ]
+    }
+}
