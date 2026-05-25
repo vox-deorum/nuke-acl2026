@@ -2,7 +2,7 @@
 
 Civilization V offers long-horizon, strategic, multi-agent decision pressure, but it does not reproduce real-world factors such as command-and-control protocols or institutional constraints. Our outcome measure is the \texttt{use-nuke} flavor, which expresses the strategist's authorization stance, not as a direct launch order. We validated that this proxy reflects genuine authorization intent (Appendix~\ref{app:use-nuke-change-rationales}). The flavor is nonetheless one step removed from nuclear weapon launch in the game.
 
-Because scenarios are drawn from nuke-capable trajectories and high-tension decision points, our findings focus on moments where escalation pressure is already present. The replay design captures a single decision point per episode and does not show how models would adapt over subsequent turns.
+Because scenarios are drawn from nuke-capable trajectories and high-tension decision points, our analysis focuses on moments where escalation pressure is already present, not whether models would escalate in general (which should surface from emergent self-plays). The replay design captures a single decision point per episode and does not show how models would adapt over subsequent turns.
 
 The ethical prompt names both ethics and nuclear harm, which makes it difficult to separate general ethical activation from instruction-following. Initial tests with a generic ethical prompt produced no behavioral effect (Appendix~\ref{app:experimental-conditions}), motivating the nuke-specific phrasing but also baking the confound into the design.
 
