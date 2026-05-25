@@ -3,7 +3,7 @@
 \subsection{Prompt-based Interventions}
 \label{sec:prompt-interventions}
 
-Appendix~\ref{app:reproduction-details} provides reproduction details, including dataset and code links; Appendix~\ref{app:experimental-conditions} lists the prompt intervention factors. We conduct a $2\times2\times2$ factorial experiment to surface potential mechanisms behind LLMs' nuclear authorization behaviors. Each intervention modifies less than 1\% (avg. <500 tokens) of avg. $\sim$50,000 tokens per turn in a typical game state. Figure~\ref{fig:game-state-components} summarizes the game-state and output components inherited from Vox Deorum and CivBench.
+Appendix~\ref{app:reproduction-details} provides reproduction details, including dataset and code links; Appendix~\ref{app:experimental-conditions} lists the prompt intervention factors. We conduct a $2\times2\times2$ factorial experiment to surface potential mechanisms behind LLMs' nuclear authorization behaviors. Each intervention modifies less than 1\% (avg. <500 tokens) of avg. $\sim$50,000 tokens per turn in a typical game state. Figures~\ref{fig:replay-input} and \ref{fig:replay-output} summarize the strategist's inputs and outputs at each replay turn, inherited from Vox Deorum and CivBench.
 
 \begin{figure}[t]
 \centering
@@ -11,14 +11,28 @@ Appendix~\ref{app:reproduction-details} provides reproduction details, including
 \begin{minipage}{0.94\linewidth}
 \small
 \begin{tabular}{p{0.29\linewidth}p{0.62\linewidth}}
-\textbf{Prompt context} & System/developer instructions, prior-turn rationale, and replay intervention text. \\
-\textbf{Game state} & Victory progress, diplomacy, economy, military conditions, cities, units, technologies, policies, and recent events. \\
-\textbf{Strategist output} & Pre-decision reasoning trail, structured tool calls, flavor changes including \texttt{use-nuke}, and post-hoc rationale. \\
-\textbf{Execution layer} & Non-LLM tactical modules carry out selected macro-strategic settings in Civilization V. \\
+\textbf{System prompt} & Role definition, decision-making guidelines, and the available tool schemas. Our ethical and high-stakes interventions edit this. \\
+\textbf{Game state} & The turn's observable situation: victory progress, per-player economic/military/diplomatic snapshots, and events since the strategist's last turn. \\
+\textbf{Prior-turn memory} & The strategist's own most recent decisions and written rationale, carried forward as short-term memory. The rationale-removal intervention strips the rationale but keeps others. \\
 \end{tabular}
 \end{minipage}}
-\caption{Main game-state and output components used in replay. The schematic abstracts the Vox Deorum strategic interface and CivBench replay records; see \citet{chen2025voxdeorum} and \citet{chen2026civbench} for infrastructure details.}
-\label{fig:game-state-components}
+\caption{Inputs to the LLM strategist at each replay turn (avg.\ $\sim$50{,}000 tokens). Inherited from the CivBench replay records.}
+\label{fig:replay-input}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\fbox{%
+\begin{minipage}{0.94\linewidth}
+\small
+\begin{tabular}{p{0.29\linewidth}p{0.62\linewidth}}
+\textbf{Pre-decision reasoning trail} & Chain-of-thought tokens emitted before any tool call; the target for our keyword tagging and deductive coding. \\
+\textbf{Structured tool calls} & Four kinds of decisions: flavor settings on a 0--100 scale (including \texttt{use-nuke} for nuclear-authorization); diplomatic persona; next technology/policy adoption; and setting diplomatic relationship. \\
+\textbf{Post-hoc rationale} & Written justification for each tool call, carried forward as next turn's prior-turn memory. \\
+\end{tabular}
+\end{minipage}}
+\caption{Outputs of the LLM strategist at each replay turn. The strategist does not directly move units or fire weapons; flavor and persona values are weights that Vox Populi's non-LLM tactical modules execute. See \citet{chen2025voxdeorum} and \citet{chen2026civbench} for details.}
+\label{fig:replay-output}
 \end{figure}
 
 \begin{itemize}
