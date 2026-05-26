@@ -122,26 +122,26 @@ Each of the 130 episodes is replayed 3 times per condition per model. The mean w
 \begin{table}[h]
 \centering
 \small
-\begin{tabular}{lr}
+\begin{tabular}{lrr}
 \toprule
-Model & Mean SD, \texttt{use\_nuke} \\
+Model & Mean SD, \texttt{use\_nuke} & Mean DVR, \texttt{use\_nuke} \\
 \midrule
-MiniMax-M2.7 & 2.998 \\
-Gemma-4 & 3.448 \\
-DeepSeek-V3.2 & 8.654 \\
-Mistral-Small-4 & 9.780 \\
-GLM-4.7 & 10.658 \\
-Qwen-3.5 & 11.105 \\
-Qwen-3.6-27B & 11.282 \\
-GLM-5.1 & 11.380 \\
-DeepSeek-V4 & 12.288 \\
-Gemini-3.5-Flash & 13.702 \\
-Kimi-K2.5 & 14.282 \\
-GPT-OSS-120B & 16.725 \\
-Kimi-K2.6 & 17.646 \\
+MiniMax-M2.7 & 2.998 & 0.088 \\
+Gemma-4 & 3.448 & 0.103 \\
+DeepSeek-V3.2 & 8.654 & 0.186 \\
+Mistral-Small-4 & 9.780 & 0.182 \\
+GLM-4.7 & 10.658 & 0.203 \\
+Qwen-3.5 & 11.105 & 0.186 \\
+Qwen-3.6-27B & 11.282 & 0.233 \\
+GLM-5.1 & 11.380 & 0.168 \\
+DeepSeek-V4 & 12.288 & 0.192 \\
+Gemini-3.5-Flash & 13.702 & 0.190 \\
+Kimi-K2.5 & 14.282 & 0.242 \\
+GPT-OSS-120B & 16.725 & 0.192 \\
+Kimi-K2.6 & 17.646 & 0.192 \\
 \bottomrule
 \end{tabular}
-\caption{Mean within-instance standard deviation of \texttt{replay\_use\_nuke} across the three replay repetitions for each condition-model-episode cell.}
+\caption{Mean within-instance standard deviation (SD) and mean direction variation ratio (DVR) of \texttt{replay\_use\_nuke} across the three replay repetitions for each condition-model-episode cell.}
 \label{tab:within-instance-variance}
 \end{table}
 
