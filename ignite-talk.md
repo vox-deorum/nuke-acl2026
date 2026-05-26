@@ -1,6 +1,8 @@
-# What Should We Teach/Learn When AI Gets the Driver Seat?
+# What Should We Teach or Learn, When AI Gets the Driver Seat?
 
-1. Title: “What Should We Teach/Learn When AI Gets the Driver Seat?”
+As AI systems move from generating answers to pursuing goals, using tools, and making decisions over time, AI literacy must shift too. Agentic AI may demonstrate ethical competence when answering questions, yet fail to act ethically in consequential environments. Drawing on my recent study of AI agents playing Civilization V and authorizing nuclear strikes, this talk asks how we should design learning activities for a world where AI is increasingly, and prematurely, being placed in the driver’s seat.
+
+1. Title: “What Should We Teach or Learn, When AI Gets the Driver Seat?”
 
 2. What We Teach Now: AI literacy often means prompts, hallucinations, bias, authorship, and evaluation.
 
@@ -30,12 +32,12 @@
 
 15. The GLM-4.7 Quote, part II
 
-16. Ethical reasoning can fail in three ways: it may not surface, may not appear when prompted, or may appear but not govern action.
+16. Ethical reasoning can fail in three ways: it may not surface, may not appear when prompted, or may appear but lose to what the environment rewards.
 
-17. What does it mean for AI literacy? When we evaluate human learning, we need to evaluate human learners in action
+17. What does it mean for AI literacy? When we evaluate human learning, we need to evaluate human learners in action.
 
-18. When we teach learners about agentic AI, learners need to evaluate AI models in action.
+18. When we teach learners about agentic AI, we want them to evaluate AI models in action.
 
-19. To reflect on the assumptions embedded in the action system. In Civilization, each game has only one winner.
+19. We also want them to reflect on the assumptions embedded in the environment. In Civilization, each game has only one winner, and models act accordingly.
 
-20. What would AI do if the game is not zero-sum, if everyone can win together?
+20. What would AI do if we can design a different environment? Not zero-sum, everyone can win together?
