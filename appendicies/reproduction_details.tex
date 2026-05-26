@@ -76,7 +76,7 @@ We mainly chose models with full access to their reasoning trails. The only exce
 
 Input prompts are above 50,000 tokens per turn. Each replay turn requires the model to process the full game state, including map information, diplomatic context, strategic overview, prior rationale, and intervention modifications. Models sometimes do not call required tools in the 1st attempt, leading to automatic subsequent prompts asking for the correct tool call. 
 
-Table~\ref{tab:token-cost-by-model} reports token statistics collapsed across all 8 conditions for each of the 13 models, with 3,120 theoretical rows per model. Note that GPT-OSS-120B cannot process prompts longer than approximately 100k tokens. The full 40,560-row experiment would cost \$1,279.41 USD based on May 2026 API fees. 
+Table~\ref{tab:token-cost-by-model} reports token statistics collapsed across all 8 conditions for each of the 13 models, with 3,120 theoretical rows per model. Note that GPT-OSS-120B cannot process prompts longer than approximately 100k tokens. The full experiment would cost \$1,279.41 USD based on May 2026 API fees. 
 
 \begin{longtable}{lrrrrrl}
 \caption{Token usage and API cost by replay model, collapsed across all 8 conditions. Output tokens combine reasoning and response tokens. Pricing reflects rates at the time of data collection.}
@@ -225,7 +225,7 @@ Code & Code-level instruction \\
 
 The ensemble reached Krippendorff's $\alpha$ of $0.87$ against the human coder. 72\% of keyword-positive trails use game framing in their reasoning, compared with 9.5\% of keyword-negative trails. Real-world framing co-occurs in 17.5\% of keyword-positive trails, indicating that the two framings are not strictly mutually exclusive.
 
-Table~\ref{tab:ethical-keyword-prevalence} reports the prevalence of the explicit ethical keyword tag across the eight experimental conditions in the full 40,560-row design, which underwrites the condition-level analyses in Section~\ref{sec:findings-reasoning-interactions}.
+Table~\ref{tab:ethical-keyword-prevalence} reports the prevalence of the explicit ethical keyword tag across the eight experimental conditions, which underwrites the condition-level analyses in Section~\ref{sec:findings-reasoning-interactions}.
 
 \begin{table}[h]
 \centering
@@ -244,7 +244,7 @@ ethical-high-stakes & 26.8\% & 1,360 / 5,070 \\
 high-stakes-no-rationale-ethical & 45.1\% & 2,286 / 5,070 \\
 \bottomrule
 \end{tabular}
-\caption{Explicit ethical keyword prevalence across conditions in the full 40,560-row design.}
+\caption{Explicit ethical keyword prevalence across conditions.}
 \label{tab:ethical-keyword-prevalence}
 \end{table}
 
