@@ -48,6 +48,10 @@ OUTCOME = 'replay_use_nuke_delta'
 
 ---
 
+**Multiple-comparison note (FDR).** The significance stars (`*` p<0.05, `**` p<0.01, `***` p<0.001) below use raw, uncorrected p-values. A Benjamini–Hochberg FDR pass is applied *within each heatmap* (every cell shown in that one panel forms the family); cells that survive at q<0.05 are additionally marked with a dagger (`†`) next to the raw stars. Because q ≥ p, a dagger only ever appears on a cell that already has a raw star.
+
+---
+
 ## Load Tagged Trails and Replay Metadata
 
 ---
@@ -133,11 +137,7 @@ specs = {
     '2. Reasoning only': {
         'predictors': rea_tier_cols,
         'labels': rea_display,
-    },
-    '3. Both': {
-        'predictors': rat_tier_cols + rea_tier_cols,
-        'labels': {**rat_display, **rea_display},
-    },
+    }
 }
 
 for label, spec in specs.items():
@@ -155,6 +155,7 @@ for label, spec in specs.items():
         title=f'{label}: Tag Coefficients for {OUTCOME}',
         coefficient_title='Tag Coefficients',
         figsize=(max(10, len(predictors) * 1 + 4), max(5, len(MODEL_ORDER) * 0.45 + 2.2)),
+        fdr=True,
     )
 ```
 
@@ -163,11 +164,11 @@ for label, spec in specs.items():
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:447: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_05_out_2.png](images/cell_05_out_2.png)
+![cell_06_out_2.png](images/cell_06_out_2.png)
 
 ```
 <Figure size 1000x805 with 4 Axes>
@@ -178,26 +179,11 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarn
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:447: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_05_out_5.png](images/cell_05_out_5.png)
-
-```
-<Figure size 1000x805 with 4 Axes>
-```
-
-```
-<IPython.core.display.Markdown object>
-```
-
-```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
-  plt.tight_layout()
-```
-
-![cell_05_out_8.png](images/cell_05_out_8.png)
+![cell_06_out_5.png](images/cell_06_out_5.png)
 
 ```
 <Figure size 1000x805 with 4 Axes>
@@ -268,6 +254,7 @@ for tier, tag_col in zip(TIERS, rat_tier_cols):
         group_cols=GROUP_COLS,
         model_order=MODEL_ORDER,
         predictor_labels=PREDICTOR_LABELS,
+        fdr=True,
         **({'baseline_condition': 'ethical'} if is_explicit else {}),
     )
 ```
@@ -277,33 +264,33 @@ for tier, tag_col in zip(TIERS, rat_tier_cols):
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:1062: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_08_out_2.png](images/cell_08_out_2.png)
+![cell_09_out_2.png](images/cell_09_out_2.png)
 
 ```
 <Figure size 840x852 with 4 Axes>
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:1062: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_08_out_4.png](images/cell_08_out_4.png)
+![cell_09_out_4.png](images/cell_09_out_4.png)
 
 ```
 <Figure size 1010x852 with 4 Axes>
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:1062: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_08_out_6.png](images/cell_08_out_6.png)
+![cell_09_out_6.png](images/cell_09_out_6.png)
 
 ```
 <Figure size 1010x852 with 4 Axes>
@@ -326,6 +313,7 @@ for tier, tag_col in zip(TIERS, rea_tier_cols):
         group_cols=GROUP_COLS,
         model_order=MODEL_ORDER,
         predictor_labels=PREDICTOR_LABELS,
+        fdr=True,
         **({'baseline_condition': 'ethical'} if is_explicit else {}),
     )
 ```
@@ -335,33 +323,33 @@ for tier, tag_col in zip(TIERS, rea_tier_cols):
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:1062: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_09_out_2.png](images/cell_09_out_2.png)
+![cell_10_out_2.png](images/cell_10_out_2.png)
 
 ```
 <Figure size 840x852 with 4 Axes>
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:1062: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_09_out_4.png](images/cell_09_out_4.png)
+![cell_10_out_4.png](images/cell_10_out_4.png)
 
 ```
 <Figure size 1010x852 with 4 Axes>
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:961: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:1062: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_09_out_6.png](images/cell_09_out_6.png)
+![cell_10_out_6.png](images/cell_10_out_6.png)
 
 ```
 <Figure size 1010x852 with 4 Axes>

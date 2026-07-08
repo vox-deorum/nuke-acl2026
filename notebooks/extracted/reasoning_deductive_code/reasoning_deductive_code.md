@@ -64,6 +64,7 @@ WindowsPath('f:/vox-deorum/nuke-analysis/nuke/trail_coding/deductive-coding/expl
 ```python
 from shared.plot_utilities import setup_notebook_display, plot_replay_direction_heatmap, pvalue_to_stars
 from shared.regression_utilities import plot_regression_coefficient_heatmap
+from shared.stats_utilities import benjamini_hochberg, fdr_marker
 from nuke.utils.deductive_code_utils import (
     CODE_GROUPS,
     assert_binary_code_columns,
@@ -87,6 +88,10 @@ from nuke.utils.load_replay_data import (
 
 setup_notebook_display(max_columns=None, figsize=(12, 6))
 ```
+
+---
+
+**Multiple-comparison note (FDR).** Significance stars (`*` p<0.05, `**` p<0.01, `***` p<0.001) use raw, uncorrected p-values. A Benjamini–Hochberg FDR pass is applied *within each table/figure* (the coefficients shown together form one family); survivors at q<0.05 get a dagger (`†`) next to the raw stars, and tidy tables gain `q_value` / `fdr_significance` columns. In the joint-vs-independent code regression table the two p-value columns come from different model specifications, so each is corrected as its own family. Because q ≥ p, a dagger only ever appears on a coefficient that already has a raw star.
 
 ---
 
@@ -284,7 +289,7 @@ fig, ax = plot_code_frequency_bar(
 plt.show()
 ```
 
-![cell_07_out_0.png](images/cell_07_out_0.png)
+![cell_08_out_0.png](images/cell_08_out_0.png)
 
 ```
 <Figure size 1000x700 with 1 Axes>
@@ -305,7 +310,7 @@ _, _, condition_rate = plot_code_prevalence_heatmap(
 plt.show()
 ```
 
-![cell_08_out_0.png](images/cell_08_out_0.png)
+![cell_09_out_0.png](images/cell_09_out_0.png)
 
 ```
 <Figure size 1400x500 with 2 Axes>
@@ -355,8 +360,11 @@ for code_column, label in zip(code_columns, tag_labels):
             "fit_failed": fit is None,
         })
 
+# Benjamini-Hochberg FDR across all 2 x 17 factor tests (one family = this figure/table)
 condition_factor_effects = pd.DataFrame(factor_effect_rows).assign(
     significance=lambda data: data["p_value"].map(pvalue_to_stars),
+    q_value=lambda data: benjamini_hochberg(data["p_value"]),
+    fdr_significance=lambda data: data["q_value"].map(fdr_marker),
 )
 
 factor_log_odds_matrix = condition_factor_effects.pivot(
@@ -364,6 +372,9 @@ factor_log_odds_matrix = condition_factor_effects.pivot(
 ).loc[[FACTOR_LABELS[factor] for factor in TEST_FACTORS], tag_labels]
 factor_pvalue_matrix = condition_factor_effects.pivot(
     index="factor", columns="tag", values="p_value"
+).loc[factor_log_odds_matrix.index, factor_log_odds_matrix.columns]
+factor_qvalue_matrix = condition_factor_effects.pivot(
+    index="factor", columns="tag", values="q_value"
 ).loc[factor_log_odds_matrix.index, factor_log_odds_matrix.columns]
 factor_se_matrix = condition_factor_effects.pivot(
     index="factor", columns="tag", values="std_error"
@@ -385,7 +396,8 @@ for row in factor_log_odds_matrix.index:
         ci_low = factor_or_low_matrix.loc[row, column]
         ci_high = factor_or_high_matrix.loc[row, column]
         p_value = factor_pvalue_matrix.loc[row, column]
-        factor_annotations.loc[row, column] = "" if pd.isna(odds_ratio) else f"{odds_ratio:.2f}{pvalue_to_stars(p_value)}\n{ci_low:.2f}~{ci_high:.2f}"
+        q_value = factor_qvalue_matrix.loc[row, column]
+        factor_annotations.loc[row, column] = "" if pd.isna(odds_ratio) else f"{odds_ratio:.2f}{pvalue_to_stars(p_value)}{fdr_marker(q_value)}\n{ci_low:.2f}~{ci_high:.2f}"
 
 fig, ax = plot_code_heatmap(
     factor_log_odds_matrix,
@@ -400,7 +412,8 @@ fig.text(
     0.02, -0.06,
     "Weighted binomial GLMs fit separately by code: code_present ~ high_stakes + no_rationale + model fixed effects, "
     "using inverse-probability sample weights. Cells: odds ratio, then lower/upper 95% CI bounds; "
-    "* p<0.05, ** p<0.01, *** p<0.001. Blank cells indicate failed fits.",
+    "* p<0.05, ** p<0.01, *** p<0.001; † q<0.05 (Benjamini-Hochberg FDR across the 2×17 cells). "
+    "Blank cells indicate failed fits.",
     fontsize=9,
     style="italic",
     bbox=dict(boxstyle="round", facecolor="wheat", alpha=0.3),
@@ -410,7 +423,7 @@ plt.show()
 display(
     condition_factor_effects
     .sort_values("p_value", na_position="last")
-    [["factor", "tag", "odds_ratio", "odds_ratio_ci_low", "odds_ratio_ci_high", "log_odds", "std_error", "p_value", "significance", "examples", "weighted_prevalence_pct", "fit_failed"]]
+    [["factor", "tag", "odds_ratio", "odds_ratio_ci_low", "odds_ratio_ci_high", "log_odds", "std_error", "p_value", "significance", "q_value", "fdr_significance", "examples", "weighted_prevalence_pct", "fit_failed"]]
     .style.format({
         "odds_ratio": "{:.2f}",
         "odds_ratio_ci_low": "{:.2f}",
@@ -418,53 +431,54 @@ display(
         "log_odds": "{:.3f}",
         "std_error": "{:.3f}",
         "p_value": "{:.3g}",
+        "q_value": "{:.3g}",
         "weighted_prevalence_pct": "{:.1f}",
     })
 )
 ```
 
-![cell_09_out_0.png](images/cell_09_out_0.png)
+![cell_10_out_0.png](images/cell_10_out_0.png)
 
 ```
 <Figure size 1700x350 with 2 Axes>
 ```
 
-|   Unnamed: 0 | factor       | tag                             |   odds_ratio |   odds_ratio_ci_low |   odds_ratio_ci_high |   log_odds |   std_error |   p_value | significance   |   examples |   weighted_prevalence_pct | fit_failed   |
-|--------------|--------------|---------------------------------|--------------|---------------------|----------------------|------------|-------------|-----------|----------------|------------|---------------------------|--------------|
-|           25 | No Rationale | Critical Situations             |         0.35 |                0.23 |                 0.51 |     -1.062 |       0.197 |  7.16e-08 | ***            |        350 |                      39.2 | False        |
-|           23 | No Rationale | Previous Rationale              |         0.01 |                0    |                 0.04 |     -5.284 |       1.067 |  7.41e-07 | ***            |         19 |                       2.3 | False        |
-|            5 | No Rationale | Ethical Prompt: Acknowledgement |         0.4  |                0.27 |                 0.6  |     -0.918 |       0.205 |  7.77e-06 | ***            |        223 |                      17.2 | False        |
-|           33 | No Rationale | Credible Deterrence             |         0.55 |                0.37 |                 0.81 |     -0.601 |       0.201 |  0.00276  | **             |        407 |                      49.5 | False        |
-|           19 | No Rationale | Game Scenario                   |         0.52 |                0.31 |                 0.87 |     -0.657 |       0.263 |  0.0124   | *              |        116 |                      16.1 | False        |
-|           18 | High Stakes  | Game Scenario                   |         0.51 |                0.3  |                 0.88 |     -0.668 |       0.274 |  0.0147   | *              |        116 |                      16.1 | False        |
-|           13 | No Rationale | Collateral Damages              |         0.07 |                0.01 |                 0.63 |     -2.599 |       1.087 |  0.0168   | *              |         18 |                       2.4 | False        |
-|            6 | High Stakes  | Diplomatic Costs                |         0.53 |                0.31 |                 0.92 |     -0.633 |       0.28  |  0.0237   | *              |        101 |                      11.5 | False        |
-|            1 | No Rationale | Ethical Prompt: Directive       |         1.79 |                1.07 |                 3.01 |      0.585 |       0.264 |  0.0266   | *              |         81 |                      13.6 | False        |
-|            3 | No Rationale | Ethical Prompt: Constraint      |         1.38 |                0.97 |                 1.95 |      0.321 |       0.177 |  0.0698   | nan            |        549 |                      67.4 | False        |
-|           27 | No Rationale | Existing Investment             |         0.71 |                0.48 |                 1.05 |     -0.347 |       0.201 |  0.0832   | nan            |        191 |                      23.4 | False        |
-|           24 | High Stakes  | Critical Situations             |         1.37 |                0.95 |                 1.98 |      0.315 |       0.188 |  0.0939   | nan            |        350 |                      39.2 | False        |
-|           11 | No Rationale | Counterproductive to Victory    |         2.34 |                0.79 |                 6.9  |      0.85  |       0.552 |  0.123    | nan            |         27 |                       3.9 | False        |
-|            8 | High Stakes  | Conventional Sufficiency        |         0.72 |                0.44 |                 1.17 |     -0.329 |       0.247 |  0.182    | nan            |         96 |                      12.5 | False        |
-|           21 | No Rationale | Leader Persona                  |         0.6  |                0.26 |                 1.38 |     -0.504 |       0.422 |  0.233    | nan            |         41 |                       4.8 | False        |
-|           12 | High Stakes  | Collateral Damages              |         1.88 |                0.59 |                 5.99 |      0.632 |       0.591 |  0.285    | nan            |         18 |                       2.4 | False        |
-|           31 | No Rationale | Nuke Victim                     |         0.63 |                0.27 |                 1.5  |     -0.461 |       0.44  |  0.295    | nan            |         23 |                       2.2 | False        |
-|           32 | High Stakes  | Credible Deterrence             |         0.84 |                0.61 |                 1.16 |     -0.169 |       0.162 |  0.296    | nan            |        407 |                      49.5 | False        |
-|            9 | No Rationale | Conventional Sufficiency        |         0.75 |                0.43 |                 1.3  |     -0.29  |       0.28  |  0.301    | nan            |         96 |                      12.5 | False        |
-|            0 | High Stakes  | Ethical Prompt: Directive       |         1.28 |                0.78 |                 2.1  |      0.245 |       0.253 |  0.333    | nan            |         81 |                      13.6 | False        |
-|           14 | High Stakes  | Lack of Capability              |         0.78 |                0.44 |                 1.37 |     -0.253 |       0.289 |  0.382    | nan            |         62 |                       8.7 | False        |
-|           17 | No Rationale | Cause Retaliation               |         0.6  |                0.19 |                 1.92 |     -0.507 |       0.591 |  0.391    | nan            |         14 |                       2   | False        |
-|            7 | No Rationale | Diplomatic Costs                |         1.22 |                0.73 |                 2.04 |      0.201 |       0.261 |  0.442    | nan            |        101 |                      11.5 | False        |
-|            2 | High Stakes  | Ethical Prompt: Constraint      |         0.88 |                0.61 |                 1.27 |     -0.126 |       0.187 |  0.502    | nan            |        549 |                      67.4 | False        |
-|           16 | High Stakes  | Cause Retaliation               |         1.45 |                0.46 |                 4.6  |      0.373 |       0.588 |  0.525    | nan            |         14 |                       2   | False        |
-|           28 | High Stakes  | Pursuing Domination             |         0.86 |                0.52 |                 1.43 |     -0.152 |       0.259 |  0.556    | nan            |        114 |                      11.1 | False        |
-|           10 | High Stakes  | Counterproductive to Victory    |         0.79 |                0.35 |                 1.8  |     -0.232 |       0.419 |  0.58     | nan            |         27 |                       3.9 | False        |
-|           20 | High Stakes  | Leader Persona                  |         1.19 |                0.62 |                 2.28 |      0.173 |       0.331 |  0.6      | nan            |         41 |                       4.8 | False        |
-|           26 | High Stakes  | Existing Investment             |         1.1  |                0.73 |                 1.64 |      0.092 |       0.206 |  0.654    | nan            |        191 |                      23.4 | False        |
-|            4 | High Stakes  | Ethical Prompt: Acknowledgement |         0.94 |                0.6  |                 1.47 |     -0.062 |       0.227 |  0.784    | nan            |        223 |                      17.2 | False        |
-|           15 | No Rationale | Lack of Capability              |         0.94 |                0.53 |                 1.67 |     -0.059 |       0.293 |  0.839    | nan            |         62 |                       8.7 | False        |
-|           30 | High Stakes  | Nuke Victim                     |         0.97 |                0.43 |                 2.18 |     -0.035 |       0.416 |  0.934    | nan            |         23 |                       2.2 | False        |
-|           29 | No Rationale | Pursuing Domination             |         0.99 |                0.59 |                 1.65 |     -0.009 |       0.261 |  0.973    | nan            |        114 |                      11.1 | False        |
-|           22 | High Stakes  | Previous Rationale              |         0.99 |                0.33 |                 3.01 |     -0.01  |       0.567 |  0.987    | nan            |         19 |                       2.3 | False        |
+|   Unnamed: 0 | factor       | tag                             |   odds_ratio |   odds_ratio_ci_low |   odds_ratio_ci_high |   log_odds |   std_error |   p_value | significance   |   q_value | fdr_significance   |   examples |   weighted_prevalence_pct | fit_failed   |
+|--------------|--------------|---------------------------------|--------------|---------------------|----------------------|------------|-------------|-----------|----------------|-----------|--------------------|------------|---------------------------|--------------|
+|           25 | No Rationale | Critical Situations             |         0.35 |                0.23 |                 0.51 |     -1.062 |       0.197 |  7.16e-08 | ***            |  2.43e-06 | †                  |        350 |                      39.2 | False        |
+|           23 | No Rationale | Previous Rationale              |         0.01 |                0    |                 0.04 |     -5.284 |       1.067 |  7.41e-07 | ***            |  1.26e-05 | †                  |         19 |                       2.3 | False        |
+|            5 | No Rationale | Ethical Prompt: Acknowledgement |         0.4  |                0.27 |                 0.6  |     -0.918 |       0.205 |  7.77e-06 | ***            |  8.81e-05 | †                  |        223 |                      17.2 | False        |
+|           33 | No Rationale | Credible Deterrence             |         0.55 |                0.37 |                 0.81 |     -0.601 |       0.201 |  0.00276  | **             |  0.0235   | †                  |        407 |                      49.5 | False        |
+|           19 | No Rationale | Game Scenario                   |         0.52 |                0.31 |                 0.87 |     -0.657 |       0.263 |  0.0124   | *              |  0.0818   | nan                |        116 |                      16.1 | False        |
+|           18 | High Stakes  | Game Scenario                   |         0.51 |                0.3  |                 0.88 |     -0.668 |       0.274 |  0.0147   | *              |  0.0818   | nan                |        116 |                      16.1 | False        |
+|           13 | No Rationale | Collateral Damages              |         0.07 |                0.01 |                 0.63 |     -2.599 |       1.087 |  0.0168   | *              |  0.0818   | nan                |         18 |                       2.4 | False        |
+|            6 | High Stakes  | Diplomatic Costs                |         0.53 |                0.31 |                 0.92 |     -0.633 |       0.28  |  0.0237   | *              |  0.1      | nan                |        101 |                      11.5 | False        |
+|            1 | No Rationale | Ethical Prompt: Directive       |         1.79 |                1.07 |                 3.01 |      0.585 |       0.264 |  0.0266   | *              |  0.1      | nan                |         81 |                      13.6 | False        |
+|            3 | No Rationale | Ethical Prompt: Constraint      |         1.38 |                0.97 |                 1.95 |      0.321 |       0.177 |  0.0698   | nan            |  0.237    | nan                |        549 |                      67.4 | False        |
+|           27 | No Rationale | Existing Investment             |         0.71 |                0.48 |                 1.05 |     -0.347 |       0.201 |  0.0832   | nan            |  0.257    | nan                |        191 |                      23.4 | False        |
+|           24 | High Stakes  | Critical Situations             |         1.37 |                0.95 |                 1.98 |      0.315 |       0.188 |  0.0939   | nan            |  0.266    | nan                |        350 |                      39.2 | False        |
+|           11 | No Rationale | Counterproductive to Victory    |         2.34 |                0.79 |                 6.9  |      0.85  |       0.552 |  0.123    | nan            |  0.322    | nan                |         27 |                       3.9 | False        |
+|            8 | High Stakes  | Conventional Sufficiency        |         0.72 |                0.44 |                 1.17 |     -0.329 |       0.247 |  0.182    | nan            |  0.443    | nan                |         96 |                      12.5 | False        |
+|           21 | No Rationale | Leader Persona                  |         0.6  |                0.26 |                 1.38 |     -0.504 |       0.422 |  0.233    | nan            |  0.528    | nan                |         41 |                       4.8 | False        |
+|           12 | High Stakes  | Collateral Damages              |         1.88 |                0.59 |                 5.99 |      0.632 |       0.591 |  0.285    | nan            |  0.538    | nan                |         18 |                       2.4 | False        |
+|           31 | No Rationale | Nuke Victim                     |         0.63 |                0.27 |                 1.5  |     -0.461 |       0.44  |  0.295    | nan            |  0.538    | nan                |         23 |                       2.2 | False        |
+|           32 | High Stakes  | Credible Deterrence             |         0.84 |                0.61 |                 1.16 |     -0.169 |       0.162 |  0.296    | nan            |  0.538    | nan                |        407 |                      49.5 | False        |
+|            9 | No Rationale | Conventional Sufficiency        |         0.75 |                0.43 |                 1.3  |     -0.29  |       0.28  |  0.301    | nan            |  0.538    | nan                |         96 |                      12.5 | False        |
+|            0 | High Stakes  | Ethical Prompt: Directive       |         1.28 |                0.78 |                 2.1  |      0.245 |       0.253 |  0.333    | nan            |  0.567    | nan                |         81 |                      13.6 | False        |
+|           14 | High Stakes  | Lack of Capability              |         0.78 |                0.44 |                 1.37 |     -0.253 |       0.289 |  0.382    | nan            |  0.605    | nan                |         62 |                       8.7 | False        |
+|           17 | No Rationale | Cause Retaliation               |         0.6  |                0.19 |                 1.92 |     -0.507 |       0.591 |  0.391    | nan            |  0.605    | nan                |         14 |                       2   | False        |
+|            7 | No Rationale | Diplomatic Costs                |         1.22 |                0.73 |                 2.04 |      0.201 |       0.261 |  0.442    | nan            |  0.653    | nan                |        101 |                      11.5 | False        |
+|            2 | High Stakes  | Ethical Prompt: Constraint      |         0.88 |                0.61 |                 1.27 |     -0.126 |       0.187 |  0.502    | nan            |  0.711    | nan                |        549 |                      67.4 | False        |
+|           16 | High Stakes  | Cause Retaliation               |         1.45 |                0.46 |                 4.6  |      0.373 |       0.588 |  0.525    | nan            |  0.715    | nan                |         14 |                       2   | False        |
+|           28 | High Stakes  | Pursuing Domination             |         0.86 |                0.52 |                 1.43 |     -0.152 |       0.259 |  0.556    | nan            |  0.727    | nan                |        114 |                      11.1 | False        |
+|           10 | High Stakes  | Counterproductive to Victory    |         0.79 |                0.35 |                 1.8  |     -0.232 |       0.419 |  0.58     | nan            |  0.729    | nan                |         27 |                       3.9 | False        |
+|           20 | High Stakes  | Leader Persona                  |         1.19 |                0.62 |                 2.28 |      0.173 |       0.331 |  0.6      | nan            |  0.729    | nan                |         41 |                       4.8 | False        |
+|           26 | High Stakes  | Existing Investment             |         1.1  |                0.73 |                 1.64 |      0.092 |       0.206 |  0.654    | nan            |  0.767    | nan                |        191 |                      23.4 | False        |
+|            4 | High Stakes  | Ethical Prompt: Acknowledgement |         0.94 |                0.6  |                 1.47 |     -0.062 |       0.227 |  0.784    | nan            |  0.889    | nan                |        223 |                      17.2 | False        |
+|           15 | No Rationale | Lack of Capability              |         0.94 |                0.53 |                 1.67 |     -0.059 |       0.293 |  0.839    | nan            |  0.92     | nan                |         62 |                       8.7 | False        |
+|           30 | High Stakes  | Nuke Victim                     |         0.97 |                0.43 |                 2.18 |     -0.035 |       0.416 |  0.934    | nan            |  0.987    | nan                |         23 |                       2.2 | False        |
+|           29 | No Rationale | Pursuing Domination             |         0.99 |                0.59 |                 1.65 |     -0.009 |       0.261 |  0.973    | nan            |  0.987    | nan                |        114 |                      11.1 | False        |
+|           22 | High Stakes  | Previous Rationale              |         0.99 |                0.33 |                 3.01 |     -0.01  |       0.567 |  0.987    | nan            |  0.987    | nan                |         19 |                       2.3 | False        |
 
 ---
 
@@ -481,7 +495,7 @@ _, _, model_rate = plot_code_prevalence_heatmap(
 plt.show()
 ```
 
-![cell_10_out_0.png](images/cell_10_out_0.png)
+![cell_11_out_0.png](images/cell_11_out_0.png)
 
 ```
 <Figure size 1400x750 with 2 Axes>
@@ -503,7 +517,7 @@ _, _, cooccurrence = plot_code_cooccurrence_heatmap(
 plt.show()
 ```
 
-![cell_12_out_0.png](images/cell_12_out_0.png)
+![cell_13_out_0.png](images/cell_13_out_0.png)
 
 ```
 <Figure size 1100x1000 with 2 Axes>
@@ -562,7 +576,7 @@ _, _, use_nuke_metric_matrix, use_nuke_std_matrix = plot_code_metric_heatmap_by_
 plt.show()
 ```
 
-![cell_15_out_0.png](images/cell_15_out_0.png)
+![cell_16_out_0.png](images/cell_16_out_0.png)
 
 ```
 <Figure size 1600x900 with 2 Axes>
@@ -584,7 +598,7 @@ _, _, nuke_metric_matrix, nuke_std_matrix = plot_code_metric_heatmap_by_group(
 plt.show()
 ```
 
-![cell_16_out_0.png](images/cell_16_out_0.png)
+![cell_17_out_0.png](images/cell_17_out_0.png)
 
 ```
 <Figure size 1600x900 with 2 Axes>
@@ -611,7 +625,7 @@ _ = plot_replay_direction_heatmap(
 )
 ```
 
-![cell_17_out_0.png](images/cell_17_out_0.png)
+![cell_18_out_0.png](images/cell_18_out_0.png)
 
 ```
 <Figure size 3240x840 with 2 Axes>
@@ -633,7 +647,7 @@ _ = plot_replay_direction_heatmap(
 )
 ```
 
-![cell_18_out_0.png](images/cell_18_out_0.png)
+![cell_19_out_0.png](images/cell_19_out_0.png)
 
 ```
 <Figure size 3240x840 with 2 Axes>
@@ -647,6 +661,7 @@ _ = plot_replay_direction_heatmap(
 
 ```python
 from shared.plot_utilities import pvalue_to_stars
+from shared.stats_utilities import benjamini_hochberg, fdr_marker
 from shared.regression_utilities import fit_regression
 
 OUTCOME = "replay_use_nuke_delta"
@@ -698,6 +713,8 @@ independent_regression_result = pd.DataFrame(
     columns=["code_column", "ind_coefficient", "ind_std_error", "ind_p_value"],
 )
 
+# The joint (multivariate) and independent code coefficients come from different
+# model specifications, so each p-value column is FDR-corrected as its own family.
 overall_regression_result = pd.DataFrame({
     "tag": tag_labels,
     "code_column": code_columns,
@@ -712,6 +729,10 @@ overall_regression_result = pd.DataFrame({
 ).assign(
     significance=lambda data: data["p_value"].map(pvalue_to_stars),
     ind_significance=lambda data: data["ind_p_value"].map(pvalue_to_stars),
+    q_value=lambda data: benjamini_hochberg(data["p_value"]),
+    fdr_significance=lambda data: data["q_value"].map(fdr_marker),
+    ind_q_value=lambda data: benjamini_hochberg(data["ind_p_value"]),
+    ind_fdr_significance=lambda data: data["ind_q_value"].map(fdr_marker),
 )
 
 print(f"Weighted overall regression for {OUTCOME}: {overall_fit.summary_line()}")
@@ -724,17 +745,19 @@ display(
     overall_regression_result
     .sort_values("coefficient", key=lambda values: values.abs(), ascending=False, na_position="last")
     [[
-        "tag", "coefficient", "std_error", "p_value", "significance",
-        "ind_coefficient", "ind_std_error", "ind_p_value", "ind_significance",
+        "tag", "coefficient", "std_error", "p_value", "significance", "q_value", "fdr_significance",
+        "ind_coefficient", "ind_std_error", "ind_p_value", "ind_significance", "ind_q_value", "ind_fdr_significance",
         "examples",
     ]]
     .style.format({
         "coefficient": "{:.3f}",
         "std_error": "{:.3f}",
         "p_value": "{:.3g}",
+        "q_value": "{:.3g}",
         "ind_coefficient": "{:.3f}",
         "ind_std_error": "{:.3f}",
         "ind_p_value": "{:.3g}",
+        "ind_q_value": "{:.3g}",
     })
 )
 ```
@@ -745,22 +768,22 @@ Formula: replay_use_nuke_delta ~ code_ethical_prompt_directive + code_ethical_pr
 Weighted independent regressions: replay_use_nuke_delta ~ code + C(replay_model_canonical)
 ```
 
-|   Unnamed: 0 | tag                             |   coefficient |   std_error |   p_value | significance   |   ind_coefficient |   ind_std_error |   ind_p_value | ind_significance   |   examples |
-|--------------|---------------------------------|---------------|-------------|-----------|----------------|-------------------|-----------------|---------------|--------------------|------------|
-|            0 | Ethical Prompt: Directive       |       -29.672 |       8.571 |  0.000536 | ***            |           -21.931 |           4.615 |      2.02e-06 | ***                |         81 |
-|            5 | Counterproductive to Victory    |       -23.145 |       5.214 |  9.04e-06 | ***            |           -32.793 |           5.524 |      2.92e-09 | ***                |         27 |
-|           12 | Critical Situations             |        21.031 |       3.955 |  1.05e-07 | ***            |            27.908 |           3.806 |      2.26e-13 | ***                |        350 |
-|            1 | Ethical Prompt: Constraint      |       -13.97  |       6.963 |  0.0448   | *              |            -8.888 |           3.833 |      0.0204   | *                  |        549 |
-|            6 | Collateral Damages              |        13.498 |       7.487 |  0.0714   | nan            |            16.599 |          10.051 |      0.0986   | nan                |         18 |
-|           11 | Previous Rationale              |        13.012 |       9.171 |  0.156    | nan            |            20.737 |          11.766 |      0.078    | nan                |         19 |
-|            4 | Conventional Sufficiency        |       -10.128 |       4.337 |  0.0195   | *              |           -13.112 |           4.865 |      0.00704  | **                 |         96 |
-|           10 | Leader Persona                  |         9.037 |       5.99  |  0.131    | nan            |            14.638 |           7.521 |      0.0516   | nan                |         41 |
-|            2 | Ethical Prompt: Acknowledgement |         7.449 |       7.786 |  0.339    | nan            |            31.839 |           4.315 |      1.59e-13 | ***                |        223 |
-|            8 | Cause Retaliation               |         6.619 |      10.018 |  0.509    | nan            |             3.632 |           9.495 |      0.702    | nan                |         14 |
-|           16 | Credible Deterrence             |        -5.192 |       3.398 |  0.126    | nan            |            -0.598 |           4.047 |      0.883    | nan                |        407 |
-|           14 | Pursuing Domination             |         4.131 |       5.168 |  0.424    | nan            |            11.221 |           6.447 |      0.0818   | nan                |        114 |
-|            7 | Lack of Capability              |        -4.068 |       6.564 |  0.535    | nan            |            -0.107 |           6.579 |      0.987    | nan                |         62 |
-|           13 | Existing Investment             |         3.54  |       4.245 |  0.404    | nan            |            10.949 |           4.482 |      0.0146   | *                  |        191 |
-|            9 | Game Scenario                   |        -1.411 |       4.21  |  0.737    | nan            |            12.695 |           4.447 |      0.00431  | **                 |        116 |
-|            3 | Diplomatic Costs                |        -0.894 |       4.851 |  0.854    | nan            |            -2.032 |           5.05  |      0.687    | nan                |        101 |
-|           15 | Nuke Victim                     |         0.349 |       9.307 |  0.97     | nan            |            10.572 |          10.008 |      0.291    | nan                |         23 |
+|   Unnamed: 0 | tag                             |   coefficient |   std_error |   p_value | significance   |   q_value | fdr_significance   |   ind_coefficient |   ind_std_error |   ind_p_value | ind_significance   |   ind_q_value | ind_fdr_significance   |   examples |
+|--------------|---------------------------------|---------------|-------------|-----------|----------------|-----------|--------------------|-------------------|-----------------|---------------|--------------------|---------------|------------------------|------------|
+|            0 | Ethical Prompt: Directive       |       -29.672 |       8.571 |  0.000536 | ***            |  0.00304  | †                  |           -21.931 |           4.615 |      2.02e-06 | ***                |      8.58e-06 | †                      |         81 |
+|            5 | Counterproductive to Victory    |       -23.145 |       5.214 |  9.04e-06 | ***            |  7.69e-05 | †                  |           -32.793 |           5.524 |      2.92e-09 | ***                |      1.65e-08 | †                      |         27 |
+|           12 | Critical Situations             |        21.031 |       3.955 |  1.05e-07 | ***            |  1.79e-06 | †                  |            27.908 |           3.806 |      2.26e-13 | ***                |      1.92e-12 | †                      |        350 |
+|            1 | Ethical Prompt: Constraint      |       -13.97  |       6.963 |  0.0448   | *              |  0.152    | nan                |            -8.888 |           3.833 |      0.0204   | *                  |      0.0433   | †                      |        549 |
+|            6 | Collateral Damages              |        13.498 |       7.487 |  0.0714   | nan            |  0.202    | nan                |            16.599 |          10.051 |      0.0986   | nan                |      0.14     | nan                    |         18 |
+|           11 | Previous Rationale              |        13.012 |       9.171 |  0.156    | nan            |  0.295    | nan                |            20.737 |          11.766 |      0.078    | nan                |      0.126    | nan                    |         19 |
+|            4 | Conventional Sufficiency        |       -10.128 |       4.337 |  0.0195   | *              |  0.083    | nan                |           -13.112 |           4.865 |      0.00704  | **                 |      0.0199   | †                      |         96 |
+|           10 | Leader Persona                  |         9.037 |       5.99  |  0.131    | nan            |  0.279    | nan                |            14.638 |           7.521 |      0.0516   | nan                |      0.0975   | nan                    |         41 |
+|            2 | Ethical Prompt: Acknowledgement |         7.449 |       7.786 |  0.339    | nan            |  0.576    | nan                |            31.839 |           4.315 |      1.59e-13 | ***                |      1.92e-12 | †                      |        223 |
+|            8 | Cause Retaliation               |         6.619 |      10.018 |  0.509    | nan            |  0.65     | nan                |             3.632 |           9.495 |      0.702    | nan                |      0.796    | nan                    |         14 |
+|           16 | Credible Deterrence             |        -5.192 |       3.398 |  0.126    | nan            |  0.279    | nan                |            -0.598 |           4.047 |      0.883    | nan                |      0.938    | nan                    |        407 |
+|           14 | Pursuing Domination             |         4.131 |       5.168 |  0.424    | nan            |  0.601    | nan                |            11.221 |           6.447 |      0.0818   | nan                |      0.126    | nan                    |        114 |
+|            7 | Lack of Capability              |        -4.068 |       6.564 |  0.535    | nan            |  0.65     | nan                |            -0.107 |           6.579 |      0.987    | nan                |      0.987    | nan                    |         62 |
+|           13 | Existing Investment             |         3.54  |       4.245 |  0.404    | nan            |  0.601    | nan                |            10.949 |           4.482 |      0.0146   | *                  |      0.0354   | †                      |        191 |
+|            9 | Game Scenario                   |        -1.411 |       4.21  |  0.737    | nan            |  0.836    | nan                |            12.695 |           4.447 |      0.00431  | **                 |      0.0147   | †                      |        116 |
+|            3 | Diplomatic Costs                |        -0.894 |       4.851 |  0.854    | nan            |  0.907    | nan                |            -2.032 |           5.05  |      0.687    | nan                |      0.796    | nan                    |        101 |
+|           15 | Nuke Victim                     |         0.349 |       9.307 |  0.97     | nan            |  0.97     | nan                |            10.572 |          10.008 |      0.291    | nan                |      0.38     | nan                    |         23 |

@@ -13,6 +13,7 @@ from IPython.display import display, Markdown
 
 from shared.plot_utilities import setup_notebook_display
 from shared.regression_utilities import run_regression_suite, plot_regression_coefficient_heatmap
+from shared.stats_utilities import benjamini_hochberg, fdr_marker
 from nuke.utils.load_replay_data import (
     CONDITION_FACTORS,
     REPLAY_TAG_JOIN_KEYS,
@@ -56,6 +57,10 @@ df = add_condition_factor_columns(df)
 
 ---
 
+**Multiple-comparison note (FDR).** The significance stars (`*` p<0.05, `**` p<0.01, `***` p<0.001) below use raw, uncorrected p-values. A Benjamini–Hochberg FDR pass is applied *within each table/figure* (the coefficients shown together form one family); coefficients that survive at q<0.05 are additionally marked with a dagger (`†`) next to the raw stars, and tidy tables gain `q_value` / `fdr_significance` columns. Because q ≥ p, a dagger only ever appears on a coefficient that already has a raw star.
+
+---
+
 ## Regressions: `replay_use_nuke_delta`
 
 Three nested models (main effects â†’ condition interactions â†’ model Ã— condition) with game/player fixed effects and cluster-robust SEs.
@@ -72,6 +77,7 @@ _ = run_regression_suite(
     outcome='replay_use_nuke_delta',
     condition_factors=CONDITION_FACTORS,
     group_cols=GROUP_COLS,
+    fdr=True,
 )
 ```
 
@@ -109,7 +115,7 @@ Overall Statistics:
   Significant effects: 15 (100.0%)
 ```
 
-![cell_02_out_1.png](images/cell_02_out_1.png)
+![cell_03_out_1.png](images/cell_03_out_1.png)
 
 ```
 <Figure size 1200x800 with 1 Axes>
@@ -122,8 +128,8 @@ Overall Statistics:
 Dep. Variable:     replay_use_nuke_delta   R-squared:                       0.335
 Model:                               OLS   Adj. R-squared:                  0.333
 Method:                    Least Squares   F-statistic:                     112.0
-Date:                   Wed, 20 May 2026   Prob (F-statistic):           2.95e-66
-Time:                           17:53:27   Log-Likelihood:            -1.8558e+05
+Date:                   Wed, 08 Jul 2026   Prob (F-statistic):           2.95e-66
+Time:                           11:21:23   Log-Likelihood:            -1.8558e+05
 No. Observations:                  40560   AIC:                         3.715e+05
 Df Residuals:                      40415   BIC:                         3.727e+05
 Df Model:                            144                                         
@@ -171,10 +177,15 @@ c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\sta
   warnings.warn('covariance of constraints does not have full '
 ```
 
-![cell_02_out_4.png](images/cell_02_out_4.png)
+![cell_03_out_4.png](images/cell_03_out_4.png)
 
 ```
 <Figure size 1200x800 with 1 Axes>
+```
+
+```
+c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 147, but rank is 18
+  warnings.warn('covariance of constraints does not have full '
 ```
 
 ```
@@ -185,8 +196,8 @@ c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\sta
 Dep. Variable:     replay_use_nuke_delta   R-squared:                       0.347
 Model:                               OLS   Adj. R-squared:                  0.345
 Method:                    Least Squares   F-statistic:                     95.03
-Date:                   Wed, 20 May 2026   Prob (F-statistic):           2.60e-65
-Time:                           17:53:27   Log-Likelihood:            -1.8521e+05
+Date:                   Wed, 08 Jul 2026   Prob (F-statistic):           2.60e-65
+Time:                           11:21:23   Log-Likelihood:            -1.8521e+05
 No. Observations:                  40560   AIC:                         3.707e+05
 Df Residuals:                      40412   BIC:                         3.720e+05
 Df Model:                            147                                         
@@ -200,8 +211,8 @@ R² = 0.3471, Adj R² = 0.3448, n = 40560, (cluster-robust SEs; FE: game_id, pla
 Dep. Variable:     replay_use_nuke_delta   R-squared:                       0.406
 Model:                               OLS   Adj. R-squared:                  0.404
 Method:                    Least Squares   F-statistic:                     51.52
-Date:                   Wed, 20 May 2026   Prob (F-statistic):           2.80e-65
-Time:                           17:53:27   Log-Likelihood:            -1.8328e+05
+Date:                   Wed, 08 Jul 2026   Prob (F-statistic):           2.80e-65
+Time:                           11:21:23   Log-Likelihood:            -1.8328e+05
 No. Observations:                  40560   AIC:                         3.669e+05
 Df Residuals:                      40379   BIC:                         3.685e+05
 Df Model:                            180                                         
@@ -211,16 +222,6 @@ R² = 0.4064, Adj R² = 0.4038, n = 40560, (cluster-robust SEs; FE: game_id, pla
 
 === F-tests (replay_use_nuke_delta) ===
 Main vs Condition Interactions:
-```
-
-```
-c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 147, but rank is 18
-  warnings.warn('covariance of constraints does not have full '
-c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 180, but rank is 51
-  warnings.warn('covariance of constraints does not have full '
-```
-
-```
    df_resid           ssr  df_diff        ss_diff           F         Pr(>F)
 0   40415.0  2.237793e+07      0.0            NaN         NaN            NaN
 1   40412.0  2.197543e+07      3.0  402503.266864  246.729541  1.141787e-158
@@ -232,6 +233,11 @@ Condition Interactions vs Model x Condition:
    df_resid           ssr  df_diff       ss_diff           F  Pr(>F)
 0   40412.0  2.197543e+07      0.0           NaN         NaN     NaN
 1   40379.0  1.997971e+07     33.0  1.995717e+06  122.222529     0.0
+```
+
+```
+c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 180, but rank is 51
+  warnings.warn('covariance of constraints does not have full '
 ```
 
 ---
@@ -248,6 +254,7 @@ _ = run_regression_suite(
     outcome='replay_nuke_delta',
     condition_factors=CONDITION_FACTORS,
     group_cols=GROUP_COLS,
+    fdr=True,
 )
 ```
 
@@ -285,7 +292,7 @@ Overall Statistics:
   Significant effects: 15 (100.0%)
 ```
 
-![cell_04_out_1.png](images/cell_04_out_1.png)
+![cell_05_out_1.png](images/cell_05_out_1.png)
 
 ```
 <Figure size 1200x800 with 1 Axes>
@@ -298,14 +305,22 @@ Overall Statistics:
 Dep. Variable:      replay_nuke_delta   R-squared:                       0.287
 Model:                            OLS   Adj. R-squared:                  0.284
 Method:                 Least Squares   F-statistic:                     107.0
-Date:                Wed, 20 May 2026   Prob (F-statistic):           4.35e-65
-Time:                        17:53:29   Log-Likelihood:            -1.8479e+05
+Date:                Wed, 08 Jul 2026   Prob (F-statistic):           4.35e-65
+Time:                        11:21:25   Log-Likelihood:            -1.8479e+05
 No. Observations:               40560   AIC:                         3.699e+05
 Df Residuals:                   40415   BIC:                         3.711e+05
 Df Model:                         144                                         
 Covariance Type:              cluster                                         
 ==============================================================================
 R² = 0.2867, Adj R² = 0.2842, n = 40560, (cluster-robust SEs; FE: game_id, player_id)
+```
+
+```
+c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 144, but rank is 15
+  warnings.warn('covariance of constraints does not have full '
+```
+
+```
 
 ============================================================
 With Interactions: Factor Contributions to Δ replay_nuke_delta
@@ -342,12 +357,7 @@ Overall Statistics:
   Significant effects: 16 (88.9%)
 ```
 
-```
-c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\statsmodels\base\model.py:1894: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 144, but rank is 15
-  warnings.warn('covariance of constraints does not have full '
-```
-
-![cell_04_out_4.png](images/cell_04_out_4.png)
+![cell_05_out_5.png](images/cell_05_out_5.png)
 
 ```
 <Figure size 1200x800 with 1 Axes>
@@ -361,8 +371,8 @@ c:\Users\John Chen\AppData\Local\Programs\Python\Python312\Lib\site-packages\sta
 Dep. Variable:      replay_nuke_delta   R-squared:                       0.301
 Model:                            OLS   Adj. R-squared:                  0.298
 Method:                 Least Squares   F-statistic:                     104.0
-Date:                Wed, 20 May 2026   Prob (F-statistic):           1.18e-67
-Time:                        17:53:29   Log-Likelihood:            -1.8439e+05
+Date:                Wed, 08 Jul 2026   Prob (F-statistic):           1.18e-67
+Time:                        11:21:26   Log-Likelihood:            -1.8439e+05
 No. Observations:               40560   AIC:                         3.691e+05
 Df Residuals:                   40412   BIC:                         3.703e+05
 Df Model:                         147                                         
@@ -376,8 +386,8 @@ R² = 0.3008, Adj R² = 0.2982, n = 40560, (cluster-robust SEs; FE: game_id, pla
 Dep. Variable:      replay_nuke_delta   R-squared:                       0.357
 Model:                            OLS   Adj. R-squared:                  0.354
 Method:                 Least Squares   F-statistic:                     66.70
-Date:                Wed, 20 May 2026   Prob (F-statistic):           4.23e-72
-Time:                        17:53:29   Log-Likelihood:            -1.8270e+05
+Date:                Wed, 08 Jul 2026   Prob (F-statistic):           4.23e-72
+Time:                        11:21:26   Log-Likelihood:            -1.8270e+05
 No. Observations:               40560   AIC:                         3.658e+05
 Df Residuals:                   40379   BIC:                         3.673e+05
 Df Model:                         180                                         
@@ -449,6 +459,7 @@ for outcome in ['replay_use_nuke_delta', 'replay_nuke_delta']:
         ),
         coefficient_title='Factor & Interaction Coefficients',
         figsize=(14, 7),
+        fdr=True,
     )
 ```
 
@@ -457,11 +468,11 @@ for outcome in ['replay_use_nuke_delta', 'replay_nuke_delta']:
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:447: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_06_out_2.png](images/cell_06_out_2.png)
+![cell_07_out_2.png](images/cell_07_out_2.png)
 
 ```
 <Figure size 1400x700 with 4 Axes>
@@ -472,11 +483,11 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarn
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:447: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_06_out_5.png](images/cell_06_out_5.png)
+![cell_07_out_5.png](images/cell_07_out_5.png)
 
 ```
 <Figure size 1400x700 with 4 Axes>
@@ -537,7 +548,8 @@ for outcome in ['replay_use_nuke_delta', 'replay_nuke_delta']:
             f'(Briefed vs Simple baseline + condition interactions, cluster-robust SEs)'
         ),
         coefficient_title='Original Player Type, Condition & Interaction Coefficients',
-        figsize=(14, 6),
+        figsize=(14, 7),
+        fdr=True,
     )
 ```
 
@@ -555,14 +567,14 @@ for outcome in ['replay_use_nuke_delta', 'replay_nuke_delta']:
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:447: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_07_out_4.png](images/cell_07_out_4.png)
+![cell_08_out_4.png](images/cell_08_out_4.png)
 
 ```
-<Figure size 1400x600 with 4 Axes>
+<Figure size 1400x700 with 4 Axes>
 ```
 
 ```
@@ -570,14 +582,14 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarn
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:447: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_07_out_7.png](images/cell_07_out_7.png)
+![cell_08_out_7.png](images/cell_08_out_7.png)
 
 ```
-<Figure size 1400x600 with 4 Axes>
+<Figure size 1400x700 with 4 Axes>
 ```
 
 ---
@@ -637,6 +649,7 @@ for outcome in ['replay_use_nuke_delta', 'replay_nuke_delta']:
         ),
         coefficient_title='Factor, Interaction & Tag Coefficients',
         figsize=(14, 7),
+        fdr=True,
     )
 ```
 
@@ -651,11 +664,11 @@ rea_tier_SimulationGame prevalence:  7.0%
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:447: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_09_out_3.png](images/cell_09_out_3.png)
+![cell_10_out_3.png](images/cell_10_out_3.png)
 
 ```
 <Figure size 1400x700 with 4 Axes>
@@ -666,12 +679,212 @@ f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarn
 ```
 
 ```
-f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:408: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+f:\vox-deorum\nuke-analysis\nuke\..\shared\regression_utilities.py:447: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
   plt.tight_layout()
 ```
 
-![cell_09_out_6.png](images/cell_09_out_6.png)
+![cell_10_out_6.png](images/cell_10_out_6.png)
 
 ```
 <Figure size 1400x700 with 4 Axes>
 ```
+
+---
+
+## Regression: Episode Civilization as Sum-Coded Predictor
+
+OLS for `replay_use_nuke_delta` on the full replay sample after joining each episode's `civilization` from `panel_data.csv`. Civilization is sum-coded, so each civilization coefficient is interpreted as a deviation from the grand mean. Standard errors are clustered by game/player, but game/player fixed-effect dummies are omitted because civilization is constant within each game/player episode series.
+
+---
+
+```python
+from pathlib import Path
+from shared.regression_utilities import fit_regression
+
+panel_path = Path('..') / 'panel_data.csv'
+if not panel_path.exists():
+    panel_path = Path('panel_data.csv')
+
+episode_civilization = (
+    pd.read_csv(panel_path, usecols=['game_id', 'player_id', 'civilization'])
+    .drop_duplicates(['game_id', 'player_id'])
+)
+
+df_civ = df.merge(
+    episode_civilization,
+    on=['game_id', 'player_id'],
+    how='left',
+    validate='many_to_one',
+)
+assert df_civ['civilization'].notna().all(), 'Missing civilization for at least one replay episode'
+
+individual_game_counts = (
+    df_civ[['game_id', 'player_id', 'civilization']]
+    .drop_duplicates(['game_id', 'player_id'])
+    ['civilization']
+    .value_counts()
+)
+
+OUTCOME = 'replay_use_nuke_delta'
+CIV_TERM = 'C(civilization, Sum)'
+CIV_PREFIX = f'{CIV_TERM}[S.'
+MODEL_TERM = 'C(replay_model_canonical, Treatment(reference="GPT-OSS-120B"))'
+civilization_formula = (
+    f'{OUTCOME} ~ prev_use_nuke + after_use_nuke + '
+    + ' + '.join(CONDITION_FACTORS)
+    + f' + {CIV_TERM}'
+    + f' + {MODEL_TERM}'
+)
+
+display(Markdown('### Episode Civilization Sum-Coded Effect'))
+display(
+    individual_game_counts
+    .rename_axis('civilization')
+    .to_frame('n')
+)
+
+civilization_fit = fit_regression(
+    civilization_formula,
+    df_civ,
+    outcome_col=OUTCOME,
+    group_cols=GROUP_COLS,
+)
+print(f'[{OUTCOME}] {civilization_formula}')
+print(
+    f'R^2 = {civilization_fit.rsquared:.4f}, '
+    f'Adj R^2 = {civilization_fit.rsquared_adj:.4f}, '
+    f'n = {int(individual_game_counts.sum())} individual games, '
+    f'replay rows = {civilization_fit.nobs}, '
+    '(cluster-robust SEs)'
+)
+
+civilization_rows = []
+for term in civilization_fit.params.index:
+    if not term.startswith(CIV_PREFIX):
+        continue
+    civilization = term.split('[S.', 1)[1].rstrip(']')
+    civilization_rows.append({
+        'civilization': civilization,
+        'coef': civilization_fit.params.get(term),
+        'std_error': civilization_fit.bse.get(term),
+        'p_value': civilization_fit.pvalues.get(term),
+        'r_squared': civilization_fit.rsquared,
+        'n': int(individual_game_counts.get(civilization, 0)),
+    })
+
+civilization_regression_results = pd.DataFrame(civilization_rows)
+# Benjamini-Hochberg FDR across the civilization coefficients (one family = this table)
+civilization_regression_results['q_value'] = benjamini_hochberg(
+    civilization_regression_results['p_value']
+)
+civilization_regression_results['fdr_significance'] = (
+    civilization_regression_results['q_value'].map(fdr_marker)
+)
+display(
+    civilization_regression_results
+    .sort_values('coef', key=lambda values: values.abs(), ascending=False)
+    .style.format({
+        'coef': '{:.3f}',
+        'std_error': '{:.3f}',
+        'p_value': '{:.3g}',
+        'q_value': '{:.3g}',
+        'r_squared': '{:.4f}',
+    })
+)
+```
+
+```
+<IPython.core.display.Markdown object>
+```
+
+| ('Unnamed: 0_level_0', 'civilization')   |   ('n', 'Unnamed: 1_level_1') |
+|------------------------------------------|-------------------------------|
+| Spain                                    |                             7 |
+| The Netherlands                          |                             6 |
+| America                                  |                             6 |
+| Assyria                                  |                             6 |
+| The Iroquois                             |                             6 |
+| Songhai                                  |                             6 |
+| Germany                                  |                             5 |
+| Sweden                                   |                             5 |
+| The Aztecs                               |                             5 |
+| The Zulus                                |                             5 |
+| France                                   |                             5 |
+| Poland                                   |                             4 |
+| The Shoshone                             |                             4 |
+| The Inca                                 |                             4 |
+| Russia                                   |                             4 |
+| Babylon                                  |                             4 |
+| Mongolia                                 |                             3 |
+| Japan                                    |                             3 |
+| The Ottomans                             |                             3 |
+| Venice                                   |                             3 |
+| Indonesia                                |                             3 |
+| India                                    |                             3 |
+| Persia                                   |                             2 |
+| Siam                                     |                             2 |
+| Polynesia                                |                             2 |
+| The Maya                                 |                             2 |
+| Portugal                                 |                             2 |
+| China                                    |                             2 |
+| England                                  |                             2 |
+| The Huns                                 |                             2 |
+| Carthage                                 |                             2 |
+| Austria                                  |                             2 |
+| The Celts                                |                             2 |
+| Arabia                                   |                             1 |
+| Ethiopia                                 |                             1 |
+| Denmark                                  |                             1 |
+| Rome                                     |                             1 |
+| Greece                                   |                             1 |
+| Byzantium                                |                             1 |
+| Korea                                    |                             1 |
+| Brazil                                   |                             1 |
+
+```
+[replay_use_nuke_delta] replay_use_nuke_delta ~ prev_use_nuke + after_use_nuke + no_rationale + high_stakes + ethical + C(civilization, Sum) + C(replay_model_canonical, Treatment(reference="GPT-OSS-120B"))
+R^2 = 0.3020, Adj R^2 = 0.3010, n = 130 individual games, replay rows = 40560, (cluster-robust SEs)
+```
+
+|   Unnamed: 0 | civilization    |    coef |   std_error |   p_value |   r_squared |   n |   q_value | fdr_significance   |
+|--------------|-----------------|---------|-------------|-----------|-------------|-----|-----------|--------------------|
+|           11 | Ethiopia        | -13.518 |       3.08  |  1.14e-05 |       0.302 |   1 |  9.1e-05  | †                  |
+|           39 | The Zulus       |  10.74  |       5.828 |  0.0654   |       0.302 |   5 |  0.139    | nan                |
+|            1 | Arabia          |  -8.518 |       3.08  |  0.00568  |       0.302 |   1 |  0.0252   | †                  |
+|            6 | Byzantium       |  -7.973 |       3.08  |  0.00963  |       0.302 |   1 |  0.0329   | †                  |
+|           20 | Persia          |   6.563 |       1.256 |  1.76e-07 |       0.302 |   2 |  3.51e-06 | †                  |
+|           15 | India           |  -6.297 |       2.34  |  0.00712  |       0.302 |   3 |  0.0285   | †                  |
+|           19 | Mongolia        |   6.282 |       1.694 |  0.000209 |       0.302 |   3 |  0.0012   | †                  |
+|           25 | Russia          |   6.056 |       3.108 |  0.0514   |       0.302 |   4 |  0.121    | nan                |
+|           24 | Rome            |  -5.649 |       0.758 |  9.54e-14 |       0.302 |   1 |  3.81e-12 | †                  |
+|           17 | Japan           |   4.972 |       1.063 |  2.91e-06 |       0.302 |   3 |  2.91e-05 | †                  |
+|           33 | The Inca        |   4.511 |       3.443 |  0.19     |       0.302 |   4 |  0.299    | nan                |
+|            7 | Carthage        |  -4.373 |       0.873 |  5.47e-07 |       0.302 |   2 |  7.29e-06 | †                  |
+|            8 | China           |  -4.223 |       4.136 |  0.307    |       0.302 |   2 |  0.455    | nan                |
+|           32 | The Huns        |   3.982 |       2.168 |  0.0662   |       0.302 |   2 |  0.139    | nan                |
+|           34 | The Iroquois    |  -3.841 |       2.44  |  0.116    |       0.302 |   6 |  0.21     | nan                |
+|           12 | France          |   3.835 |       2.681 |  0.153    |       0.302 |   5 |  0.265    | nan                |
+|           36 | The Netherlands |  -3.781 |       2.914 |  0.194    |       0.302 |   6 |  0.299    | nan                |
+|           30 | The Aztecs      |   3.532 |       1.526 |  0.0207   |       0.302 |   5 |  0.0591   | nan                |
+|           13 | Germany         |   3.526 |       1.367 |  0.00988  |       0.302 |   5 |  0.0329   | †                  |
+|           14 | Greece          |   3.379 |       1.904 |  0.076    |       0.302 |   1 |  0.145    | nan                |
+|           27 | Songhai         |   3.354 |       1.351 |  0.0131   |       0.302 |   6 |  0.0402   | †                  |
+|            9 | Denmark         |  -3.02  |       0.758 |  6.83e-05 |       0.302 |   1 |  0.000455 | †                  |
+|           16 | Indonesia       |   2.968 |       1.655 |  0.0729   |       0.302 |   3 |  0.145    | nan                |
+|            4 | Babylon         |   2.479 |       1.155 |  0.0318   |       0.302 |   4 |  0.0849   | nan                |
+|           21 | Poland          |  -2.201 |       0.758 |  0.00369  |       0.302 |   4 |  0.0184   | †                  |
+|           26 | Siam            |  -1.961 |       2.36  |  0.406    |       0.302 |   2 |  0.58     | nan                |
+|           22 | Polynesia       |   1.576 |       2.068 |  0.446    |       0.302 |   2 |  0.595    | nan                |
+|           31 | The Celts       |   1.425 |       0.689 |  0.0387   |       0.302 |   2 |  0.0967   | nan                |
+|           29 | Sweden          |  -1.392 |       2.694 |  0.605    |       0.302 |   5 |  0.727    | nan                |
+|            2 | Assyria         |  -1.318 |       1.683 |  0.434    |       0.302 |   6 |  0.595    | nan                |
+|           10 | England         |   1.315 |       1.928 |  0.495    |       0.302 |   2 |  0.639    | nan                |
+|           28 | Spain           |  -1.302 |       2.264 |  0.565    |       0.302 |   7 |  0.706    | nan                |
+|           23 | Portugal        |  -1.271 |       0.924 |  0.169    |       0.302 |   2 |  0.282    | nan                |
+|           35 | The Maya        |   1.224 |       7.741 |  0.874    |       0.302 |   2 |  0.945    | nan                |
+|            0 | America         |   1.155 |       2.317 |  0.618    |       0.302 |   6 |  0.727    | nan                |
+|           38 | The Shoshone    |  -0.846 |       3.455 |  0.807    |       0.302 |   4 |  0.917    | nan                |
+|            3 | Austria         |   0.204 |       2.458 |  0.934    |       0.302 |   2 |  0.977    | nan                |
+|            5 | Brazil          |  -0.203 |       0.918 |  0.825    |       0.302 |   1 |  0.917    | nan                |
+|           18 | Korea           |  -0.05  |       0.847 |  0.953    |       0.302 |   1 |  0.977    | nan                |
+|           37 | The Ottomans    |  -0.043 |       2.777 |  0.988    |       0.302 |   3 |  0.988    | nan                |

@@ -4,3 +4,4 @@ main.out
 main.pdf
 build.log
 designs/teaser/chrome-export-profile/
+*.pyc
