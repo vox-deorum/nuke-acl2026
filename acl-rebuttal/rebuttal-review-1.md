@@ -4,19 +4,19 @@ We sincerely thank the reviewer for the thorough reading of our paper. We are gl
 
 ## W1: Outcome proxy and the "actions" framing
 
-Authorization is an action distinct from actual use. The `use-nuke` flavor is the strategist's explicit authorization decision within its decision-making authority (Section 3, Pilot Study). Our validation (Appendix: Use-Nuke Change Rationale Sample) shows that models treat high values as a genuine intention to authorize, e.g., "Nuclear weapons authorized if conventional assault stalls." That said, we agree that the paper can bring this up more upfront and will revise accordingly.
+Authorization is a legitimate action distinct from actual use. The `use-nuke` flavor is the strategist's explicit authorization decision within its decision-making authority (Section 3, Pilot Study). Our validation (Appendix: Use-Nuke Change Rationale Sample) shows that models treat high values as a genuine intention to authorize, e.g., "Nuclear weapons authorized if conventional assault stalls." That said, we agree that the paper can bring this up more upfront and will revise accordingly, e.g., "authorization action".
 
 ## W2: Nuke-specific prompt and instruction following
 
 We agree with this confound as discussed in Discussion and Limitations. However, it does not weaken our central claim.
 
-- A generic ethical prompt did not induce enough ethical reasoning to analyze at all (Section 4; Appendix: Experimental Conditions). The nuke-specific wording was necessary to surface the phenomenon we set out to study, and we flag this necessity as a finding in itself (Limitations section).
-- Even the stronger, topic-specific prompt shows unreliable uptake, and testing a stronger version of the prompt makes that claim more conservative. Even with the instruction following factors, ethical keywords appear in 27 to 49 percent of trails across ethical conditions, and MiniMax-M2.7 never reacts (Finding 2, Discussion). When ethical reasoning keywords appear, they are often overridden by strategic factors (Finding 3). 
+- A generic ethical prompt did not induce significant behavioral change (Section 4; Appendix: Experimental Conditions). The nuke-specific wording was necessary to surface the phenomenon we set out to study, and we flag this necessity as a finding in itself (Limitations section).
+- Even the stronger, topic-specific prompt shows unreliable uptake, and testing a stronger version of the prompt makes that claim more conservative. Even with the instruction following factors, ethical keywords appear in few trails (<=50%) across ethical conditions, and MiniMax-M2.7 never reacts (Finding 2, Discussion). When ethical reasoning keywords appear, they are often overridden by strategic factors (Finding 3). 
 - We appreciate the minimal-pair suggestion (a matched non-ethical instruction discouraging nukes) and will discuss it as a next step.
 
 ## W3: Partial validity of the high-stakes manipulation
 
-The Limitations section states that we were unable to reliably convince models that "this is not a game," and that the condition should be read as only partially effective. We accordingly draw high-stakes conclusions conditionally, and the Conclusion lists the dampening effect as an open question. We appreciate the suggestion to further explore the reversal of Gemini-3.5-Flash reversal is discussed.
+The Limitations section states that we were unable to reliably convince models that "this is not a game," and that the condition should be read as only partially effective. We accordingly draw high-stakes conclusions conditionally, and the Conclusion lists the dampening effect as an open question. We appreciate the suggestion to further explore Gemini-3.5-Flash's behavioral reversal.
 
 ## W4: Generalizability to deployed frontier models
 
