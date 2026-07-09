@@ -18,7 +18,9 @@ We appreciate the minimal-pair suggestion (a matched non-ethical instruction dis
 
 ## W3: Partial validity of the high-stakes manipulation
 
-The Limitations section states that we were unable to reliably convince models that "this is not a game," and that the condition should be read as only partially effective. We accordingly draw high-stakes conclusions conditionally, and the Conclusion lists the dampening effect as an open question. On the Gemini-3.5-Flash reversal specifically: although the manipulation's strength is uncertain, the effect is large, survives FDR within its per-model family (β = +26.96; official comment), and co-occurs with a sharp drop in ethical-keyword emission (OR 0.21). It is therefore a robust phenomenon in its own right — high-stakes framing coinciding with both increased escalation and suppressed ethical reasoning for this model — independent of how fully the "not a game" belief took hold. We will give it a dedicated subsection, flagged as speculative given the summarized-reasoning access.
+The Limitations section states that we were unable to reliably convince models that "this is not a game," and that the condition should be read as only partially effective. We accordingly draw high-stakes conclusions conditionally, and the Conclusion lists the dampening effect as an open question.
+
+Interestingly, the uncertain strength of the high-stakes manipulation (almost certainly lower than 100%) strengthens the Gemini-3.5-Flash's reversal effect, which survives FDR within its per-model family (β = +26.96; official comment), and co-occurs with a sharp drop in ethical-keyword emission (OR 0.21).
 
 ## W4: Generalizability to deployed frontier models
 
