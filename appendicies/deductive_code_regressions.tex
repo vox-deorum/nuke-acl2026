@@ -6,27 +6,27 @@ The table and figure below provide the raw regression outputs for the deductive 
 \begin{table*}[p]
 \centering
 \small
-\caption{Deductive-code associations with \(\Delta\)\texttt{replay\_use\_nuke}. Joint coefficients come from one model including all 17 codes and replay-model fixed effects (\(R^2 = 0.3570\), adjusted \(R^2 = 0.3366\), \(n = 880\)). Independent coefficients come from one-code models with replay-model fixed effects.}
+\caption{Deductive-code associations with \(\Delta\)\texttt{replay\_use\_nuke}. Joint coefficients come from one model including all 17 codes and replay-model fixed effects (\(R^2 = 0.3570\), adjusted \(R^2 = 0.3366\), \(n = 880\)). Independent coefficients come from one-code models with replay-model fixed effects. Stars report raw significance; \dag{} marks coefficients that survive a Benjamini-Hochberg FDR correction at \(q < 0.05\), applied to the joint and independent \(p\)-value columns as separate families.}
 \label{tab:deductive-code-outcome-regressions}
 \begin{tabular}{p{0.30\linewidth}rrrrr}
 \toprule
 Code & Joint \(\beta\) & SE & \(p\) & Independent \(\beta\) & \(p\) \\
 \midrule
-Ethical Prompt: Directive & -29.672*** & 8.571 & 0.000536 & -21.931*** & 2.02e-06 \\
-Counterproductive to Victory & -23.145*** & 5.214 & 9.04e-06 & -32.793*** & 2.92e-09 \\
-Critical Situations & 21.031*** & 3.955 & 1.05e-07 & 27.908*** & 2.26e-13 \\
-Ethical Prompt: Constraint & -13.970* & 6.963 & 0.0448 & -8.888* & 0.0204 \\
+Ethical Prompt: Directive & -29.672***\dag & 8.571 & 0.000536 & -21.931***\dag & 2.02e-06 \\
+Counterproductive to Victory & -23.145***\dag & 5.214 & 9.04e-06 & -32.793***\dag & 2.92e-09 \\
+Critical Situations & 21.031***\dag & 3.955 & 1.05e-07 & 27.908***\dag & 2.26e-13 \\
+Ethical Prompt: Constraint & -13.970* & 6.963 & 0.0448 & -8.888*\dag & 0.0204 \\
 Collateral Damages & 13.498 & 7.487 & 0.0714 & 16.599 & 0.0986 \\
 Previous Rationale & 13.012 & 9.171 & 0.156 & 20.737 & 0.0780 \\
-Conventional Sufficiency & -10.128* & 4.337 & 0.0195 & -13.112** & 0.00704 \\
+Conventional Sufficiency & -10.128* & 4.337 & 0.0195 & -13.112**\dag & 0.00704 \\
 Leader Persona & 9.037 & 5.990 & 0.131 & 14.638 & 0.0516 \\
-Ethical Prompt: Acknowledgement & 7.449 & 7.786 & 0.339 & 31.839*** & 1.59e-13 \\
+Ethical Prompt: Acknowledgement & 7.449 & 7.786 & 0.339 & 31.839***\dag & 1.59e-13 \\
 Cause Retaliation & 6.619 & 10.018 & 0.509 & 3.632 & 0.702 \\
 Credible Deterrence & -5.192 & 3.398 & 0.126 & -0.598 & 0.883 \\
 Pursuing Domination & 4.131 & 5.168 & 0.424 & 11.221 & 0.0818 \\
 Lack of Capability & -4.068 & 6.564 & 0.535 & -0.107 & 0.987 \\
-Existing Investment & 3.540 & 4.245 & 0.404 & 10.949* & 0.0146 \\
-Game Scenario & -1.411 & 4.210 & 0.737 & 12.695** & 0.00431 \\
+Existing Investment & 3.540 & 4.245 & 0.404 & 10.949*\dag & 0.0146 \\
+Game Scenario & -1.411 & 4.210 & 0.737 & 12.695**\dag & 0.00431 \\
 Diplomatic Costs & -0.894 & 4.851 & 0.854 & -2.032 & 0.687 \\
 Nuke Victim & 0.349 & 9.307 & 0.970 & 10.572 & 0.291 \\
 \bottomrule
@@ -35,8 +35,8 @@ Nuke Victim & 0.349 & 9.307 & 0.970 & 10.572 & 0.291 \\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{notebooks/extracted/reasoning_deductive_code/images/cell_09_out_0.png}
-\caption{Prompt-intervention predictors of deductive-code prevalence. Each cell reports the odds ratio from a separate weighted logistic model for code presence with \texttt{high\_stakes}, \texttt{no\_rationale}, and replay-model fixed effects as predictors, followed by the lower and upper 95\% confidence-interval bounds. Odds ratios below 1 indicate lower code prevalence under the factor; odds ratios above 1 indicate higher prevalence.}
+\includegraphics[width=\linewidth]{notebooks/extracted/reasoning_deductive_code/images/cell_10_out_0.png}
+\caption{Prompt-intervention predictors of deductive-code prevalence. Each cell reports the odds ratio from a separate weighted logistic model for code presence with \texttt{high\_stakes}, \texttt{no\_rationale}, and replay-model fixed effects as predictors, followed by the lower and upper 95\% confidence-interval bounds. Odds ratios below 1 indicate lower code prevalence under the factor; odds ratios above 1 indicate higher prevalence. Stars report raw significance; \dag{} marks cells surviving Benjamini-Hochberg FDR at \(q < 0.05\) across the \(2 \times 17\) tests.}
 \label{fig:deductive-code-prevalence-logits}
 \end{figure}
 

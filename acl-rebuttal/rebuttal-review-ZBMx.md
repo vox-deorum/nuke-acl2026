@@ -28,9 +28,7 @@ We took deliberate care to avoid causal claims here. The attenuation probes are 
 
 ## W6: Multiple-comparison correction
 
-No formal correction was applied in the submission, and we agree the paper should state which claims survive one.
-
-(To be completed)
+Due to length constraints, we respond to this issue in the official comment.
 
 ## W7: Coarseness of the ethical-reasoning keywords
 
