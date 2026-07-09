@@ -48,7 +48,7 @@ We acknowledge this in the Limitations. Our study focuses on probing whether int
 
 ## Coder–subject overlap (circularity)
 
-Some ensemble coders (e.g., GPT-OSS-120B, MiniMax-M2.7) also appear as test subjects, but this does not create circularity. The two roles are fundamentally different tasks: as a subject, a model makes an original, open-ended strategic decision inside a ~50,000-token game state; as a coder, it performs a bounded post-hoc classification of an already-written reasoning trail against a fixed 17-item codebook. Moreover, human guardrails anchor the coding: the codebook labels are validated against human coding with reported reliability (Krippendorff's α), so labels are not left to the models alone. We will state this explicitly in the reproduction appendix.
+Some coders (e.g., GPT-OSS-120B, MiniMax-M2.7) also appear as test subjects, but the impact of this circularity is limited. The two roles are fundamentally different tasks: as a subject, a model makes an original, open-ended strategic decision inside a ~50,000-token game state; as a coder, it performs a bounded post-hoc classification of an already-written reasoning trail against a fixed 17-item codebook. Moreover, each coding task is conducted by an ensemble of coders with majority voting, and human guardrails anchor the coding: the codebook labels are validated against human coding with reported reliability (Krippendorff's α), so labels are not left to the models alone. We will state this explicitly in the reproduction appendix.
 
 ## Further suggestions
 
