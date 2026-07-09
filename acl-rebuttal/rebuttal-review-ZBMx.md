@@ -8,11 +8,11 @@ Authorization is a legitimate action distinct from actual use. The `use-nuke` fl
 
 ## W2: Nuke-specific prompt and instruction following
 
-We agree with this confound as discussed in Discussion and Limitations. However, it does not weaken our central claim.
+We agree this confound exists, as discussed in Discussion and Limitations. However, it strengthens rather than weakens our central claim around LLMs' failure modes in emergent ethical reasoning. 
 
-- A generic ethical prompt did not induce significant behavioral change (Section 4; Appendix: Experimental Conditions). The nuke-specific wording was necessary to surface the phenomenon we set out to study, and we flag this necessity as a finding in itself (Limitations section).
-- Even the stronger, topic-specific prompt shows unreliable uptake, and testing a stronger version of the prompt makes that claim more conservative. Even with the instruction following factors, ethical keywords appear in few trails (<=50%) across ethical conditions, and MiniMax-M2.7 never reacts (Finding 2, Discussion). When ethical reasoning keywords appear, they are often overridden by strategic factors (Finding 3). 
-- We appreciate the minimal-pair suggestion (a matched non-ethical instruction discouraging nukes) and will discuss it as a next step.
+- As instruction following can only inflate apparent ethical uptake, the true rate of emergent ethical reasoning is even lower than we report. Even with instruction following working in the models' favor, ethical keywords appear in at most half of trails across ethical conditions, MiniMax-M2.7 never reacts (Finding 2, Discussion), and keyword-positive trails are often overridden by strategic factors (Finding 3).
+- A generic ethical prompt did not induce significant behavioral change (Section 4; Appendix: Experimental Conditions). The nuke-specific wording was necessary to surface the phenomenon at all, and we flag this necessity as a finding in itself (Limitations).
+- We appreciate the minimal-pair suggestion (a matched non-ethical instruction discouraging nukes) and will discuss it as a next step for separating compliance from ethical engagement in the residual de-escalation effect.
 
 ## W3: Partial validity of the high-stakes manipulation
 
