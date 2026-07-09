@@ -30,7 +30,7 @@ Our Limitations section acknowledges this constraint. The replay design captures
 
 ## Suggestions and further analyses
 
-- **What in the inherited rationale drives escalation (Comment 2).** We partially address this in the manuscript. Removing the rationale reduces crisis or urgency framing and previous-rationale references in the trails, and it suggestively reduces game-scenario framing (Findings 2 and 3). This points to crisis momentum as an active ingredient. We agree that selective removal (stripping the crisis framing, the authorization numbers, or the strategic justification independently) would disentangle these components, and we see it as a worthy follow-up.
+- **What in the inherited rationale drives escalation (Comment 2).** We partially address this in the manuscript. Removing the rationale reduces crisis or urgency framing and previous-rationale references in the trails, and it suggestively reduces game-scenario framing (Findings 2 and 3). We agree that selective removal (stripping the crisis framing, the authorization numbers, or the strategic justification independently) would disentangle these components and would be a worthy follow-up.
 - **Mechanistic interpretability (Comment 3).** We agree that probing for ethical-concept activation would complement the trail analysis, given the known faithfulness limits we cite. This is feasible for our open-weight models, and we will note it as a promising direction.
 - **Single environment (Limitations note).** We agree, and we already frame Civilization V as a "useful, limited proxy." We will soften any language that could generalize beyond it, and we will name multi-environment replication as future work.
 

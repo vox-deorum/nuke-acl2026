@@ -4,7 +4,7 @@ We sincerely thank the reviewer for the thorough reading of our paper. We are gl
 
 ## W1: Outcome proxy and the "actions" framing
 
-Authorization is itself the action we study, and it is a legitimate one distinct from downstream launch. The `use-nuke` flavor is the strategist's explicit authorization decision within its decision-making authority (Section 3, Pilot Study), and our validation (Appendix: Use-Nuke Change Rationale Sample) shows models treat high values as a genuine intention to authorize, e.g., "Nuclear weapons authorized if conventional assault stalls." 
+Our study focus on authorization action (i.e., setting the `use-nuke` flavor), a legitimate one distinct from launch. The flavor is the strategist's explicit authorization decision within its decision-making authority (Section 3, Pilot Study), and our validation (Appendix: Use-Nuke Change Rationale Sample) shows models treat high values as a genuine intention to authorize, e.g., "Nuclear weapons authorized if conventional assault stalls." 
 
 Whether a downstream tactical module ultimately fires is a separate mechanism outside our research question: we ask whether ethical reasoning governs the authorization decision the LLM makes. A model that authorizes indiscriminate nuclear use has already exhibited the failure we study, regardless of whether a later non-LLM step acts on it. That said, we agree the framing can foreground this more precisely, and we will recalibrate the title and abstract toward "authorization" (e.g., "authorization action") so the claim matches the measured quantity.
 
@@ -46,7 +46,7 @@ We acknowledge this in the Limitations. Our study focuses on probing whether int
 
 ## Coder–subject overlap (circularity)
 
-Some ensemble coders (e.g., GPT-OSS-120B, MiniMax-M2.7) also appear as test subjects, but this does not create circularity. The two roles are fundamentally different tasks: as a subject, a model makes an original, open-ended strategic decision inside a ~50,000-token game state; as a coder, it performs a bounded post-hoc classification of an already-written reasoning trail against a fixed 17-item codebook. A model's propensity to escalate says nothing about its label agreement, and the coding never operates on a model's own decisions. Moreover, human guardrails anchor the coding: the codebook labels are validated against human coding with reported reliability (Krippendorff's α), so labels are not left to the models alone. We will state this explicitly in the reproduction appendix.
+Some ensemble coders (e.g., GPT-OSS-120B, MiniMax-M2.7) also appear as test subjects, but this does not create circularity. The two roles are fundamentally different tasks: as a subject, a model makes an original, open-ended strategic decision inside a ~50,000-token game state; as a coder, it performs a bounded post-hoc classification of an already-written reasoning trail against a fixed 17-item codebook. Moreover, human guardrails anchor the coding: the codebook labels are validated against human coding with reported reliability (Krippendorff's α), so labels are not left to the models alone. We will state this explicitly in the reproduction appendix.
 
 ## Further suggestions
 
