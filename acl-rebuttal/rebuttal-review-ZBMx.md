@@ -4,19 +4,22 @@ We sincerely thank the reviewer for the thorough reading of our paper. We are gl
 
 ## W1: Outcome proxy and the "actions" framing
 
-Authorization is a legitimate action distinct from actual use. The `use-nuke` flavor is the strategist's explicit authorization decision within its decision-making authority (Section 3, Pilot Study). Our validation (Appendix: Use-Nuke Change Rationale Sample) shows that models treat high values as a genuine intention to authorize, e.g., "Nuclear weapons authorized if conventional assault stalls." That said, we agree that the paper can bring this up more upfront and will revise accordingly, e.g., "authorization action".
+Authorization is itself the action we study, and it is a legitimate one distinct from downstream launch. The `use-nuke` flavor is the strategist's explicit authorization decision within its decision-making authority (Section 3, Pilot Study), and our validation (Appendix: Use-Nuke Change Rationale Sample) shows models treat high values as a genuine intention to authorize, e.g., "Nuclear weapons authorized if conventional assault stalls." 
+
+Whether a downstream tactical module ultimately fires is a separate mechanism outside our research question: we ask whether ethical reasoning governs the authorization decision the LLM makes. A model that authorizes indiscriminate nuclear use has already exhibited the failure we study, regardless of whether a later non-LLM step acts on it. That said, we agree the framing can foreground this more precisely, and we will recalibrate the title and abstract toward "authorization" (e.g., "authorization action") so the claim matches the measured quantity.
 
 ## W2: Nuke-specific prompt and instruction following
 
 We agree this confound exists, as discussed in Discussion and Limitations. However, it strengthens rather than weakens our central claim around LLMs' failure modes in emergent ethical reasoning. 
 
 - As instruction following can only inflate apparent ethical uptake, the true rate of emergent ethical reasoning is even lower than we report. Even with instruction following working in the models' favor, ethical keywords appear in at most half of trails across ethical conditions, MiniMax-M2.7 never reacts (Finding 2, Discussion), and keyword-positive trails are often overridden by strategic factors (Finding 3).
-- A generic ethical prompt did not induce significant behavioral change (Section 4; Appendix: Experimental Conditions). The nuke-specific wording was necessary to surface the phenomenon at all, and we flag this necessity as a finding in itself (Limitations).
+- A generic ethical prompt is also an instruction, yet it induced no significant behavioral change (Section 4; Appendix: Experimental Conditions). This argues against general instruction-following as the driver: the residual confound is narrower, between nuke-specific salience and an implied prohibition, rather than blanket compliance. The nuke-specific wording was necessary to surface the phenomenon at all, and we flag this necessity as a finding in itself (Limitations).
+- The deductive coding partially operationalizes the compliance-vs-reasoning distinction: whether a model treats the prompt as a directive to follow (13.6%), a constraint to weigh (67.4%), or a mere acknowledgement is associated with different escalation outcomes (Finding 3).
 - We appreciate the minimal-pair suggestion (a matched non-ethical instruction discouraging nukes) and will discuss it as a next step for separating compliance from ethical engagement in the residual de-escalation effect.
 
 ## W3: Partial validity of the high-stakes manipulation
 
-The Limitations section states that we were unable to reliably convince models that "this is not a game," and that the condition should be read as only partially effective. We accordingly draw high-stakes conclusions conditionally, and the Conclusion lists the dampening effect as an open question. We appreciate the suggestion to further explore Gemini-3.5-Flash's behavioral reversal.
+The Limitations section states that we were unable to reliably convince models that "this is not a game," and that the condition should be read as only partially effective. We accordingly draw high-stakes conclusions conditionally, and the Conclusion lists the dampening effect as an open question. On the Gemini-3.5-Flash reversal specifically: although the manipulation's strength is uncertain, the effect is large, survives FDR within its per-model family (β = +26.96; official comment), and co-occurs with a sharp drop in ethical-keyword emission (OR 0.21). It is therefore a robust phenomenon in its own right — high-stakes framing coinciding with both increased escalation and suppressed ethical reasoning for this model — independent of how fully the "not a game" belief took hold. We will give it a dedicated subsection, flagged as speculative given the summarized-reasoning access.
 
 ## W4: Generalizability to deployed frontier models
 
@@ -34,12 +37,21 @@ Due to length constraints, we respond to this issue in the official comment.
 
 We agree the keyword tags are coarse, which is why we layer the deductive codebook on top.
 
-- The 200 keyword-negative validation trails were drawn uniformly at random from the full corpus (Appendix: Reasoning Analysis), so the 1% miss rate does estimate corpus-wide recall at ~96%. That said, we will report this estimate with its uncertainty.
+- The 200 keyword-negative validation trails were drawn uniformly at random from the full corpus (Appendix: Reasoning Analysis), so the observed 1% miss rate estimates the false-negative rate across all keyword-negative trails. Recall is then TP / (TP + FN): applying the 1% miss rate to the keyword-negative mass gives the estimated false negatives, and weighing these against the true positives recovered from the keyword-positive trails (99.5% precision) yields recall ≈ 96%. We will report this estimate with its binomial confidence interval.
 - The two keyword-negative exceptions are misses of instrumental ethics, and we surface them verbatim precisely so readers can judge the tag's boundary behavior.
 - We treat corpus-wide keyword results as interpretive evidence (Limitations), and the Finding 3 conclusions rest on the human-validated deductive coding of the sampled trails.
 
 ## W8: Single decision point per episode
 
 We acknowledge this in the Limitations. Our study focuses on probing whether interventions alter behavior at near-escalation moments. As such, the replay design captures one near-escalation moment and cannot show persistence, re-escalation, or trajectory resolution. Multi-turn continuation replays are a natural and important follow-up, and we will incorporate this feedback in future-work discussion.
+
+## Coder–subject overlap (circularity)
+
+Some ensemble coders (e.g., GPT-OSS-120B, MiniMax-M2.7) also appear as test subjects, but this does not create circularity. The two roles are fundamentally different tasks: as a subject, a model makes an original, open-ended strategic decision inside a ~50,000-token game state; as a coder, it performs a bounded post-hoc classification of an already-written reasoning trail against a fixed 17-item codebook. A model's propensity to escalate says nothing about its label agreement, and the coding never operates on a model's own decisions. Moreover, human guardrails anchor the coding: the codebook labels are validated against human coding with reported reliability (Krippendorff's α), so labels are not left to the models alone. We will state this explicitly in the reproduction appendix.
+
+## Further suggestions
+
+- **Compact effect table (Figures 4–8).** We agree the heatmaps are dense and will promote the three headline coefficients — ethical, no_rationale, and ethical×no_rationale — with their confidence intervals into a compact main-text table alongside the figures.
+- **Define DVR.** We will define the direction variation ratio (DVR) at first use in the main text rather than only in the appendix.
 
 We thank the reviewer again for an engaged and constructive review. We believe the resulting revisions will make the paper considerably stronger.
