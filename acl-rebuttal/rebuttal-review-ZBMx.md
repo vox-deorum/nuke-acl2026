@@ -20,7 +20,7 @@ The Limitations section states that we were unable to reliably convince models t
 
 ## W4: Generalizability to deployed frontier models
 
-We agree with this assessment, and it motivates one of our explicit calls to action. Our model pool is constrained by raw reasoning-token access, which currently excludes most frontier closed models. We include Gemini-3.5-Flash as a sanity check and treat its results with caveats (Limitations). This is why we call for major providers to open reasoning-trail access for third-party safety research (Limitations). We will also soften any language that could read as generalizing the main narrative to closed frontier models.
+Our model pool is constrained by raw reasoning-token access, which currently excludes most frontier closed models. We include Gemini-3.5-Flash as a sanity check and treat its results with caveats (Limitations). This is why we call for major providers to open reasoning-trail access for third-party safety research (Limitations). We will also soften any language that could read as generalizing the main narrative to closed frontier models.
 
 ## W5: Causal hedging in the attenuation analysis
 
