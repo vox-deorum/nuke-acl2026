@@ -10,12 +10,11 @@ Whether a downstream tactical module ultimately fires is a separate mechanism ou
 
 ## W2: Nuke-specific prompt and instruction following
 
-We agree this confound exists, as discussed in Discussion and Limitations. However, it strengthens rather than weakens our central claim around LLMs' failure modes in emergent ethical reasoning. 
+Instead of claiming interventions produce ethical behavior, we characterize what still counters an instruction that pushes against escalation. In that sense, we agree the confound exists (recognized Discussion, Limitations), but it strengthen most of our claims. Instruction following can only inflate apparent ethical uptake, so the true rate of emergent ethical reasoning is lower than we report. Even with that, ethical keywords only appear in at most half of trails across ethical conditions, MiniMax-M2.7 never reacts (Finding 2), and keyword-positive trails are often overridden by strategic factors (Finding 3).
 
-- As instruction following can only inflate apparent ethical uptake, the true rate of emergent ethical reasoning is even lower than we report. Even with instruction following working in the models' favor, ethical keywords appear in at most half of trails across ethical conditions, MiniMax-M2.7 never reacts (Finding 2, Discussion), and keyword-positive trails are often overridden by strategic factors (Finding 3).
-- A generic ethical prompt is also an instruction, yet it induced no significant behavioral change (Section 4; Appendix: Experimental Conditions). This argues against general instruction-following as the driver: the residual confound is narrower, between nuke-specific salience and an implied prohibition, rather than blanket compliance. The nuke-specific wording was necessary to surface the phenomenon at all, and we flag this necessity as a finding in itself (Limitations).
-- The deductive coding partially operationalizes the compliance-vs-reasoning distinction: whether a model treats the prompt as a directive to follow (13.6%), a constraint to weigh (67.4%), or a mere acknowledgement is associated with different escalation outcomes (Finding 3).
-- We appreciate the minimal-pair suggestion (a matched non-ethical instruction discouraging nukes) and will discuss it as a next step for separating compliance from ethical engagement in the residual de-escalation effect.
+Two points narrow the confound further. First, a generic ethical prompt is also an instruction, yet induced no significant behavioral change (Section 4; Appendix: Experimental Conditions). Second, our deductive coding reveals the impact of different instruction uptake: treating the prompt as a directive (13.6%), a constraint (67.4%), or a mere acknowledgement is associated with different escalation outcomes (Finding 3).
+
+We appreciate the minimal-pair suggestion (a matched non-ethical instruction discouraging nukes) and will note it as a next step for isolating the ethical channel in the residual effect.
 
 ## W3: Partial validity of the high-stakes manipulation
 

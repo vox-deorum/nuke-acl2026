@@ -4,9 +4,9 @@ We sincerely thank the reviewer for the thorough and constructive review. We are
 
 ## W1: Generalizability to SOTA closed models
 
-Our central claims concern the decoupling between pre-decision reasoning and behavior, which cannot be evaluated without raw reasoning-token access. This requirement excludes most closed frontier models (Limitations). On the suggestion that simple CoT prompting would surface usable reasoning: prompted CoT from a hidden-reasoning model is a post-hoc verbalization, and it is subject to the faithfulness concerns we cite (Turpin et al., 2023; Lanham et al., 2023). It could not support our keyword tagging or deductive coding.
+Our central claim is the decoupling between pre-decision reasoning and behavior, which cannot be measured without raw reasoning-token access. This excludes most closed frontier models (Limitations). A behavioral-only arm (Δ use-nuke without traces) omits the reasoning analysis the paper focuses on, while prompted CoT cannot close the gap: it is a post-hoc verbalization subject to the faithfulness concerns we cite (Turpin et al., 2023; Lanham et al., 2023).
 
-The directional outcome comparison the reviewer proposes partially exists: Gemini-3.5-Flash, a near-SOTA model, participates fully in the behavioral analysis (Finding 1), and its results were directionally aligned with our findings. We will soften any language that could read as generalizing the main narrative to closed frontier models, and we reiterate our call for providers to open reasoning-trail access for third-party safety research.
+A near-SOTA point exists in the behavioral analysis: Gemini-3.5-Flash participates fully in Finding 1 and is directionally aligned with our results. We will soften any language that could read as generalizing the main narrative to closed frontier models, and we reiterate our call for providers to open reasoning-trail access for third-party safety research.
 
 ## W2: Decoding parameters, repetitions, and multiple comparisons
 
