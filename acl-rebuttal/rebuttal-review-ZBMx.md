@@ -12,9 +12,9 @@ Whether a downstream tactical module ultimately fires is a separate mechanism ou
 
 Instead of claiming interventions produce ethical behavior, we characterize what still counters an instruction that pushes against escalation. In that sense, we agree the confound exists (recognized Discussion, Limitations), but it strengthen most of our claims. Instruction following can only inflate apparent ethical uptake, so the true rate of emergent ethical reasoning is lower than we report. Even with that, ethical keywords only appear in at most half of trails across ethical conditions, MiniMax-M2.7 never reacts (Finding 2), and keyword-positive trails are often overridden by strategic factors (Finding 3).
 
-Two points narrow the confound further. First, a generic ethical prompt is also an instruction, yet induced no significant behavioral change (Section 4; Appendix: Experimental Conditions). Second, our deductive coding reveals the impact of different instruction uptake: treating the prompt as a directive (13.6%), a constraint (67.4%), or a mere acknowledgement is associated with different escalation outcomes (Finding 3).
+Two points further narrow the confound. While a generic ethical prompt is an instruction, it induced no significant behavioral change (Section 4; Appendix: Experimental Conditions). Moreover, our deductive coding reveals the impact of different instruction uptake: treating the prompt as a directive (13.6%), a constraint (67.4%), or a mere acknowledgement is associated with different escalation outcomes (Finding 3).
 
-We appreciate the minimal-pair suggestion (a matched non-ethical instruction discouraging nukes) and will note it as a next step for isolating the ethical channel in the residual effect.
+We appreciate the minimal-pair suggestion (a matched non-ethical instruction discouraging nukes) and will note it as a next step to narrow down the ethical prompt impact.
 
 ## W3: Partial validity of the high-stakes manipulation
 
