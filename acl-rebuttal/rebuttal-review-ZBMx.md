@@ -20,7 +20,7 @@ We appreciate the minimal-pair suggestion (a matched non-ethical instruction dis
 
 The Limitations section states that we were unable to reliably convince models that "this is not a game," and that the condition should be read as only partially effective. We accordingly draw high-stakes conclusions conditionally, and the Conclusion lists the dampening effect as an open question.
 
-Interestingly, the uncertain strength of the high-stakes manipulation (almost certainly lower than 100%) strengthens the Gemini-3.5-Flash's reversal effect, which survives FDR within its per-model family (β = +26.96; official comment), and co-occurs with a sharp drop in ethical-keyword emission (OR 0.21).
+Interestingly, the uncertainty around the high-stakes manipulation (almost certainly lower than 100%) strengthens the Gemini-3.5-Flash's reversal effect. The said effect survives FDR within its per-model family (β = +26.96; official comment), and co-occurs with a sharp drop in ethical-keyword emission (OR 0.21).
 
 ## W4: Generalizability to deployed frontier models
 
