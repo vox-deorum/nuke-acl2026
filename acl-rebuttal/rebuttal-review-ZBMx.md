@@ -4,9 +4,9 @@ We sincerely thank the reviewer for the thorough and encouraging review. Below w
 
 ## W1: Outcome proxy and the "actions" framing
 
-Our study focuses on the authorization action (i.e., setting the `use-nuke` flavor), which is distinct from launch. The flavor is the strategist's explicit authorization decision within its decision-making authority (Section 3, Pilot Study), and our validation (Appendix: Use-Nuke Change Rationale Sample) shows models treat high values as a genuine intention to authorize, e.g., "Nuclear weapons authorized if conventional assault stalls." 
+Our study focuses on an authorization action, which is distinct from a launch action. Setting the `use-nuke` flavor is a structured tool call within the strategist's delegated decision authority, not an attitude inferred from its rationale. The setting operationally authorizes or forbids downstream nuclear use when tactical conditions are met (Section 3, Pilot Study). Our validation (Appendix: Use-Nuke Change Rationale Sample) further shows that models interpret high values as genuine authorization, e.g., "Nuclear weapons authorized if conventional assault stalls."
 
-Whether a downstream tactical module ultimately fires is a separate mechanism outside our research question: a model that authorizes indiscriminate nuclear use has already exhibited the failure we study, regardless of whether a later non-LLM step acts on it. That said, we agree the framing can be more precise, and we will recalibrate the title and abstract toward "authorization" (e.g., "authorization action") so the claim matches the measured quantity.
+Whether a downstream tactical module ultimately launches a weapon is a separate mechanism outside our research question. A model that authorizes indiscriminate nuclear use has already performed the decision-making action we study, regardless of whether a later non-LLM module executes it. We agree that our terminology should preserve this distinction, and we will revise the title and abstract to consistently say "authorization action".
 
 ## W2: Nuke-specific prompt and instruction following
 
@@ -20,7 +20,7 @@ We appreciate the minimal-pair suggestion (a matched non-ethical instruction dis
 
 The Limitations section states that we were unable to reliably convince models that "this is not a game," and that the condition should be read as only partially effective. We accordingly draw high-stakes conclusions conditionally, and the Conclusion lists the dampening effect as an open question.
 
-Interestingly, this partial effectiveness strengthens Gemini-3.5-Flash's reversal. The effect survives FDR within its per-model family (β = +26.96; official comment) and co-occurs with a sharp drop in ethical-keyword emission (OR 0.21).
+Despite incomplete uptake of the intended real-world framing, random assignment to the high-stakes prompt robustly suppressed Gemini-3.5-Flash's ethical-keyword emission (OR 0.21) and weakened the behavioral effect of ethical prompting (high-stakes x ethical β = +26.96). Both effects survive FDR correction within their respective per-model families (official comment).
 
 ## W4: Generalizability to deployed frontier models
 
