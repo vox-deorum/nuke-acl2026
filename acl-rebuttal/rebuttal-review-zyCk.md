@@ -6,7 +6,7 @@ We sincerely thank the reviewer for the thorough and constructive review. We are
 
 Our central claim is the decoupling between pre-decision reasoning and behavior, which cannot be measured without raw reasoning-token access. This excludes most closed frontier models (Limitations). A behavioral-only arm (Δ use-nuke without traces) omits the reasoning analysis the paper focuses on, while prompted CoT cannot close the gap: it is a post-hoc verbalization subject to the faithfulness concerns we cite (Turpin et al., 2023; Lanham et al., 2023).
 
-A near-SOTA point exists in the behavioral analysis: Gemini-3.5-Flash participates fully in Finding 1 and is directionally aligned with our results. We will soften any language that could read as generalizing the main narrative to closed frontier models, and we reiterate our call for providers to open reasoning-trail access for third-party safety research.
+A near-SOTA point exists in the behavioral analysis: Gemini-3.5-Flash participates fully in Finding 1 and is directionally aligned with our results. To broaden this evidence, we commit to adding three further near-SOTA models (Claude Sonnet 5, GLM-5.2, and GPT-5.6-Sol) under the same limited analyses used for Gemini-3.5-Flash. These runs may not complete within the rebuttal period, but we will update the reviewers as soon as results are available. We reiterate our call for providers to open reasoning-trail access for third-party safety research.
 
 ## W2: Decoding parameters, repetitions, and multiple comparisons
 

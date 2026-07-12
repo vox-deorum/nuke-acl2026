@@ -24,7 +24,7 @@ Interestingly, the uncertainty around the high-stakes manipulation (almost certa
 
 ## W4: Generalizability to deployed frontier models
 
-Our model pool is constrained by raw reasoning-token access, which currently excludes most frontier closed models. We include Gemini-3.5-Flash as a sanity check and treat its results with caveats (Limitations). This is why we call for major providers to open reasoning-trail access for third-party safety research (Limitations). We will also soften any language that could read as generalizing the main narrative to closed frontier models.
+Our model pool is constrained by raw reasoning-token access, which currently excludes most frontier closed models. We include Gemini-3.5-Flash as a sanity check and treat its results with caveats (Limitations). We commit to adding Claude Sonnet 5, GLM-5.2, and GPT-5.6-Sol under the same (limited) analyses. While these runs may not complete within the rebuttal period, we will update the reviewers as soon as results are available. This is why we call for major providers to open reasoning-trail access for third-party safety research (Limitations).
 
 ## W5: Causal hedging in the attenuation analysis
 

@@ -22,6 +22,8 @@ Our study tested models across a wide range of sizes, from smaller ones such as 
 
 Within this range, ethical-reasoning uptake is related to, but does not strictly track, scale. For example, GPT-OSS-120B shows a higher uptake (~60% averaged across ethical conditions) than Qwen-3.5 (~397B total, ~17B active; ~14%), and Qwen-3.6-27B (~10%) shows a higher uptake than MiniMax-M2.7 (0%). Meanwhile, newer models in the same family consistently show a higher uptake in our data: DeepSeek-V4 > DeepSeek-V3.2, GLM-5.1 > GLM-4.7, and Kimi-K2.6 > Kimi-K2.5. We will add a brief note on this scale-versus-uptake pattern to the Discussion.
 
+To extend the frontier end of this range, we commit to adding three near-SOTA models, Claude Sonnet 5, GLM-5.2, and GPT-5.6-Sol, under the value- and keyword-level analyses we use for Gemini-3.5-Flash. These runs may not complete within the rebuttal period, but we will update the reviewers as soon as results are available.
+
 We did not include models below roughly the dense 27B level or MoE 100B level because our replay prompts reach ~100,000 tokens of game state, which smaller models handle poorly in our internal testing. 
 
 ## W4: Single decision point
