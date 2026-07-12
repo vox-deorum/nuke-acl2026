@@ -1,10 +1,10 @@
 # Response to Reviewer 2
 
-We thank the reviewer for the careful and constructive reading. We are glad the alignment relevance, the factorial design and statistical rigor, the three-pathway taxonomy, and the rationale-removal finding came through.
+We thank the reviewer for the careful and constructive review.
 
 ## W1: Intervention scope and what the paper contributes
 
-While our prompt-level interventions are similar to prior work (Lynch et al., 2025; Pan et al., 2023), our contribution focuses on understanding model behaviors in complex decision-making moments, specifically the mechanistic decomposition enabled by the interventions: the three failure pathways (fails to surface, fails to appear when prompted, and appears but fails to govern), their reasoning-trail signatures, and the rationale-inheritance effect. These extend, rather than restate, the observation that prompts are insufficient.
+Our prompt-level interventions are indeed similar to prior work (Lynch et al., 2025; Pan et al., 2023), yet they serve as instruments to decompose the three failure pathways (fails to surface, fails to appear when prompted, and appears but fails to govern) and the rationale-inheritance effect. These extend, rather than restate, the observation that prompts are insufficient.
 
 We agree that an LLM-as-a-judge decision gate (Comment 1) is an attractive direction for safer deployment, and we will add it to the future-work discussion. As a diagnostic, however, it may not cleanly separate pathway 2 (ethical reasoning fails to appear) from pathway 3 (it appears but fails to govern). The reviewing model faces a much simpler task than the original actor: it evaluates a single proposed decision rather than making an original one within a game state averaging ~50,000 tokens, a setting closer to the scripted dilemmas where models already show ethical competence.
 
@@ -12,23 +12,21 @@ We agree that an LLM-as-a-judge decision gate (Comment 1) is an attractive direc
 
 We share the reviewer's concern about a latent common factor (such as general model compliance), which our design cannot fully rule out. However, this confounding factor actually strengthens our central claims around LLMs' failure modes: ethical reasoning unreliably surfaces and, when present, often fails to govern. If a latent compliance factor produces part of the observed keyword emission and de-escalation, then genuine emergent ethical reasoning is even rarer than we report.
 
-Given this limit, we took deliberate care to avoid causal claims. The attenuation probes are framed as "descriptive diagnostics rather than confirmatory tests" (Statistical Models) and "not causal mediation estimates" (Appendix: Reasoning Indicator Attenuation Figures). Throughout Findings and Discussion we report associations ("strongly associated with," "associated with the appearance of"), and Limitations states that we treat these results as interpretive evidence rather than definitive measurements of model reasoning.
-
-Even so, we agree that a few sentences could still read causally. We commit to auditing and revising the remaining "mediation" language, especially in the appendices, and we will name the latent-factor caveat explicitly in Limitations.
+Given this limit, we took deliberate care to avoid causal claims: the attenuation probes are framed as "descriptive diagnostics rather than confirmatory tests" and "not causal mediation estimates," and Findings and Discussion report associations throughout. We agree that a few sentences could still read causally, and we commit to revising the remaining "mediation" language (especially in the appendices) and naming the latent-factor caveat explicitly in Limitations.
 
 ## W3: Model scale
 
-Our study tested models across a wide range of sizes, from smaller ones such as Qwen-3.6-27B, Gemma-4 (~31B), GPT-OSS-120B (~117B total, ~5.1B active), and Mistral-Small-4 (~119B total, ~6.5B active), to larger ones such as GLM-5.1 (~756B total, ~40B active) and Kimi-K2.6 (~1T total, ~32B active). We will annotate the model table with these total and active parameter counts.
+Our study tested models across a wide range of sizes, from ~27B dense (Qwen-3.6-27B) to ~1T-total MoE (Kimi-K2.6, ~32B active). We will annotate the model table with total and active parameter counts.
 
 Within this range, ethical-reasoning uptake is related to, but does not strictly track, scale. For example, GPT-OSS-120B shows a higher uptake (~60% averaged across ethical conditions) than Qwen-3.5 (~397B total, ~17B active; ~14%), and Qwen-3.6-27B (~10%) shows a higher uptake than MiniMax-M2.7 (0%). Meanwhile, newer models in the same family consistently show a higher uptake in our data: DeepSeek-V4 > DeepSeek-V3.2, GLM-5.1 > GLM-4.7, and Kimi-K2.6 > Kimi-K2.5. We will add a brief note on this scale-versus-uptake pattern to the Discussion.
 
-To extend the frontier end of this range, we commit to adding three near-SOTA models, Claude Sonnet 5, GLM-5.2, and GPT-5.6-Sol, under the value- and keyword-level analyses we use for Gemini-3.5-Flash. These runs may not complete within the rebuttal period, but we will update the reviewers as soon as results are available.
+To extend the frontier end of this range, we commit to adding three near-SOTA models similar to Gemini-3.5-Flash. See the official comment.
 
 We did not include models below roughly the dense 27B level or MoE 100B level because our replay prompts reach ~100,000 tokens of game state, which smaller models handle poorly in our internal testing. 
 
 ## W4: Single decision point
 
-Our Limitations section acknowledges this constraint. The replay design captures a single decision point because our goal is to test whether interventions alter behavior at near-escalation moments. Multi-turn continuation replays are a natural and important follow-up, and we will foreground them in the future-work discussion.
+Our Limitations section acknowledges this constraint. Multi-turn continuation replays are a natural and important follow-up, and we will foreground them in the future-work discussion.
 
 ## Suggestions and further analyses
 
