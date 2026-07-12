@@ -2,7 +2,7 @@
 
 ## FDR correction (asked by zyCk and ZBMx)
 
-Reviewers zyCk and ZBMx both asked about formal correction stance. We ran a Benjamini–Hochberg FDR pass, treating each reported table or figure panel as one family. In our revised manuscript, stars will keep their raw p-values, cells that survive at q<0.05 gain a dagger (†), and the Statistical Models section will state the methodology.
+Reviewers zyCk and ZBMx both asked about formal correction stance. We ran a Benjamini–Hochberg FDR pass, treating each reported regression as one family. In our revised manuscript, stars will keep their raw p-values, cells that survive at q<0.05 gain a dagger (†), and the Statistical Models section will state the methodology.
 
 ### All headline claims survive
 - The pooled effects of ethical prompting (β = -9.50), rationale removal (β = -7.08), and their combination (β = -12.50) all survive at q<0.001. So do the three largest deductive-code associations (Directive β = -29.67, q = 0.003; Counterproductive-to-Victory β = -23.15 and Critical Situations β = +21.03, both q<0.001).

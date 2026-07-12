@@ -4,9 +4,9 @@ We sincerely thank the reviewer for the thorough and constructive review.
 
 ## W1: Generalizability to SOTA closed models
 
-Our central claim is the decoupling between pre-decision reasoning and behavior, which cannot be measured without raw reasoning-token access. This excludes most closed frontier models (Limitations). A behavioral-only arm (Δ use-nuke without traces) omits the reasoning analysis the paper focuses on, while prompted CoT cannot close the gap: it is a post-hoc verbalization subject to the faithfulness concerns we cite (Turpin et al., 2023; Lanham et al., 2023).
+Our central claim is the decoupling between pre-decision reasoning and behavior, which cannot be measured without raw reasoning-token access. This excludes most closed frontier models (Limitations). Unfortunately, prompted CoT cannot close the gap. It is unclear whether CoT prompts can activate the same reasoning pattern, or is only a post-hoc verbalization subject to the faithfulness concerns we cite (Turpin et al., 2023; Lanham et al., 2023). 
 
-A near-SOTA point exists in the behavioral analysis: Gemini-3.5-Flash participates fully in Finding 1 and is directionally aligned with our results. To broaden this evidence, we commit to adding three further near-SOTA models under the same limited analyses; see the official comment.
+That said, we did provide a near-SOTA point in the behavioral analysis: Gemini-3.5-Flash participates fully in Finding 1 and is directionally aligned with our results. Additionally, we commit to adding three further near-SOTA models under the same limited analyses; see the official comment.
 
 ## W2: Decoding parameters, repetitions, and multiple comparisons
 

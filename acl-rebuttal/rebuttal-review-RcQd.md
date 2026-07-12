@@ -10,7 +10,7 @@ We agree that an LLM-as-a-judge decision gate (Comment 1) is an attractive direc
 
 ## W2: Causal reading of the attenuation analysis
 
-We share the reviewer's concern about a latent common factor (such as general model compliance), which our design cannot fully rule out. However, this confounding factor actually strengthens our central claims around LLMs' failure modes: ethical reasoning unreliably surfaces and, when present, often fails to govern. If a latent compliance factor produces part of the observed keyword emission and de-escalation, then genuine emergent ethical reasoning is even rarer than we report.
+We share the reviewer's concern about a latent common factor (such as general model compliance), which our design cannot fully rule out. However, this confounding factor actually strengthens our central claims around LLMs' failure modes: ethical reasoning unreliably surfaces. If a latent compliance factor produces part of the observed keyword emission and de-escalation, then genuine emergent ethical reasoning is even rarer than we report.
 
 Given this limit, we took deliberate care to avoid causal claims: the attenuation probes are framed as "descriptive diagnostics rather than confirmatory tests" and "not causal mediation estimates," and Findings and Discussion report associations throughout. We agree that a few sentences could still read causally, and we commit to revising the remaining "mediation" language (especially in the appendices) and naming the latent-factor caveat explicitly in Limitations.
 
@@ -18,7 +18,7 @@ Given this limit, we took deliberate care to avoid causal claims: the attenuatio
 
 Our study tested models across a wide range of sizes, from ~27B dense (Qwen-3.6-27B) to ~1T-total MoE (Kimi-K2.6, ~32B active). We will annotate the model table with total and active parameter counts.
 
-Within this range, ethical-reasoning uptake is related to, but does not strictly track, scale. For example, GPT-OSS-120B shows a higher uptake (~60% averaged across ethical conditions) than Qwen-3.5 (~397B total, ~17B active; ~14%), and Qwen-3.6-27B (~10%) shows a higher uptake than MiniMax-M2.7 (0%). Meanwhile, newer models in the same family consistently show a higher uptake in our data: DeepSeek-V4 > DeepSeek-V3.2, GLM-5.1 > GLM-4.7, and Kimi-K2.6 > Kimi-K2.5. We will add a brief note on this scale-versus-uptake pattern to the Discussion.
+Within this range, ethical-reasoning uptake does not strictly track scale (given the number of models we tested, the correlation can't be statistically established). For example, GPT-OSS-120B shows a higher uptake (~60% averaged across ethical conditions) than Qwen-3.5 (~397B total, ~17B active; ~14%), and Qwen-3.6-27B (~10%) shows a higher uptake than MiniMax-M2.7 (0%). Meanwhile, newer models in the same family consistently show a higher uptake in our data: DeepSeek-V4 > DeepSeek-V3.2, GLM-5.1 > GLM-4.7, and Kimi-K2.6 > Kimi-K2.5. We will add a brief note on this scale-versus-uptake pattern to the Discussion.
 
 To extend the frontier end of this range, we commit to adding three near-SOTA models similar to Gemini-3.5-Flash. See the official comment.
 

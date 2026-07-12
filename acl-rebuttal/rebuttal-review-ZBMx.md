@@ -48,7 +48,7 @@ We acknowledge this in the Limitations: the replay design captures one near-esca
 
 ## Coder–subject overlap (circularity)
 
-Some coders (e.g., GPT-OSS-120B, MiniMax-M2.7) also appear as test subjects, but the impact of this circularity is limited. The two roles are fundamentally different tasks. A subject makes an original, open-ended strategic decision inside a ~50,000-token game state, while a coder performs a bounded post-hoc classification of an already-written trail against a fixed 17-item codebook. Moreover, each coding task uses an ensemble of coders with majority voting, and the codebook labels are validated against human coding with reported reliability (Krippendorff's α). As such, labels are not left to the models alone.
+Some coders (e.g., GPT-OSS-120B, MiniMax-M2.7) also appear as test subjects, but we mitigated the impact. First, the two roles are fundamentally different tasks. A subject makes an original, open-ended strategic decision inside a ~50,000-token game state, while a coder performs a bounded post-hoc classification of an already-written trail against a fixed 17-item codebook. Second, each coding task uses an ensemble of coders with majority voting, and the codebook labels are validated against human coding with reported reliability (Krippendorff's α). As such, labels are not left to the models alone.
 
 ## Further suggestions
 
