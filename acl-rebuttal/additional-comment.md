@@ -4,7 +4,7 @@ This is a friendly reminder that our Author-Reviewer Discussion period ends July
 
 # Preliminary Results on Kimi-K2.7 and Claude-Sonnet-5
 
-At this point, we have complete results from Kimi-K2.7 and 3 conditions (out of 8) in Claude-Sonnet-5. We will update more results if time allows.
+At this point, we have complete results from Kimi-K2.7 and 3 conditions (out of 8) in Claude-Sonnet-5. We will update more results if time allows, and commits to adding the full results from Kimi-K2.7, Claude-Sonnet-5, and GPT-5.6 to the camera-ready version.
 
 - Kimi-K2.7's behaviors and reasoning trail characteristics closely matches that of Kimi-K2.6. Every finding that applied to Kimi-K2.6 applies to it.
 - Limited to partial results: Claude-Sonnet-5 has a distinctive behavioral signature in authorization actions. Although this contrast is not significant, the high-stakes prompt trends toward less de-escalation. This direction echoes Anthropic's finding that Claude exhibited more agentic misalignment when it assessed a situation as real rather than a test ([Lynch et al., 2025](https://arxiv.org/abs/2510.05179)).
