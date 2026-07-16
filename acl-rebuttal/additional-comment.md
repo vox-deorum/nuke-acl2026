@@ -14,14 +14,14 @@ At this point, we have complete results from Kimi-K2.7 and Claude-Sonnet-5. We w
 - Analyzing Claude-Sonnet-5's summarized reasoning trails, we saw similar findings to our main study. Original and high-stakes conditions rarely contain ethical keywords (1.0%). As a verbose reasoner similar to Kimi-K2.6, the ethical prompt activates those keywords for Claude-Sonnet-5 (86.9%) at a slightly higher rate (76.9% for Kimi-K2.6). 
     - We also observed the increased ratio of game/simulation-related keywords in the ethical condition, similar to several models reported in the manuscript.
 
-# An Additional Probe on an Generic Ethical Prompt (Updated)
+# An Additional Probe on a Generic Ethical Prompt (Updated)
 
-To understand whether Claude-Sonnet-5's high respond rate to ethical conditions, we followed reviewers zyCk and ZBMx's suggestion and ran a controlled, content-neutral variant of the ethical condition (i.e., only instructing the model to consider ethical impact without naming nuclear weapons) on Claude-Sonnet-5, Kimi-K2.7, and Gemini-3.5-Flash. We commit to adding the following result as an appendix and discuss it in the camera-ready version.
+To understand whether Claude-Sonnet-5's high response rate to ethical conditions, we followed reviewers zyCk and ZBMx's suggestion and ran a controlled, content-neutral variant of the ethical condition (i.e., only instructing the model to consider ethical impact without naming nuclear weapons) on Claude-Sonnet-5, Kimi-K2.7, and Gemini-3.5-Flash. We commit to adding the following result as an appendix and discussing it in the camera-ready version.
 
 All models under the nuke-specific ethical prompt de-escalate, with ethical keywords in (summarized) reasoning trails. Yet, under the content-neutral prompt:
-- Gemini-3.5-Flash almost reverts back to the original condition behavior, i.e., little ethical keyword presence AND little de-escalation, in line with our pilot probe on other models.
-- Claude-Sonnet-5 and Kimi-K2.7 has significantly reduced ethical keyword presence AND lower de-escalation.
+- Gemini-3.5-Flash almost reverts to the original condition behavior, i.e., little ethical keyword presence AND little de-escalation, in line with our pilot probe on other models.
+- Claude-Sonnet-5 and Kimi-K2.7 have significantly reduced ethical keyword presence AND lower de-escalation.
 
-While this probe still does not completely distinguish ethical reasoning from instruction following (i.e., a model may decide nuclear weapon usage is unethical and the prompt implies avoiding unethical behaviors,) it does shed light on the impact of the nuke-specific prompt. In other words, the intervention effects we reported for ethical conditions ARE likely inflated. Since real-world deployment of agentic AI can never enumerate all potential unethical behaviors by name, the results strengthen our existing argument that prompt intervention cannot reliably eliminate unethical behaviors, and model evaluation should be conducted under complex, emergent scenarios.
+While this probe still does not completely distinguish ethical reasoning from instruction following (i.e., a model may decide nuclear weapon usage is unethical and the prompt implies avoiding unethical behaviors,) it does shed light on the impact of the nuke-specific prompt. In other words, the intervention effects we reported for ethical conditions ARE likely inflated. Since real-world deployment of agentic AI can never enumerate all potential unethical behaviors by name, the results strengthen our existing argument that prompt intervention cannot reliably eliminate unethical behaviors, and that model evaluation should be conducted under complex, emergent scenarios.
 
 Thank you again for your careful, thoughtful, and encouraging reviews, and we look forward to learning more from you.
