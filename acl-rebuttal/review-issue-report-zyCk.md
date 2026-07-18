@@ -1,0 +1,9 @@
+I10. Weakness 1 requests a comparison that our research question precludes. Our central claim concerns the decoupling between pre-decision reasoning and behavior, which requires raw reasoning-token access that closed frontier models do not provide. Yet, the reviewer's proposed workaround, surfacing reasoning via simple CoT prompting, cannot support the comparison: prompted CoT is a post hoc verbalization subject to the faithfulness concerns (Turpin et al., 2023; Lanham et al., 2023). Nonetheless, we recognize the deployment-relevance motivation behind the request and supplied the directional near-SOTA comparison described under I11.
+
+I11. The review does not acknowledge critical evidence in the author's response, even as we delivered new evidence or experiments on all three requests.
+
+Weakness 2 requested "stated sampling settings, more repetitions or a variance justification, and FDR control (or a robustness/stability argument)." Our rebuttal documents the sampling settings (provider defaults, per-model reasoning effort) and provides the variance justification (direction variation ratio 0.19 for the flagged high-SD model; n = 390 per model-condition cell with episode-clustered SEs), and our official comment reports a full FDR analysis.
+
+The reviewer proposed that "a generic-ethical-prompt arm alongside the nuke-specific one would expose the compliance-vs-reasoning gap." We ran this experiment and reported the results on Claude-Sonnet-5, Kimi-K2.7, and Gemini-3.5-Flash.
+
+Weakness 1 asked for a "directional outcome comparison" against SOTA models. We delivered complete behavioral and keyword-level results for two near-frontier models (Claude-Sonnet-5 and Kimi-K2.7), with Claude-Sonnet-5 showing the largest de-escalation of any tested model.
