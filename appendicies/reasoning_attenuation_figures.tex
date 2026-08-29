@@ -1,21 +1,21 @@
 \section{Reasoning Indicator Attenuation Figures}
 \label{app:reasoning-attenuation-figures}
 
-This appendix reports attenuation diagnostics for the reasoning-indicator probes summarized in Section~\ref{sec:findings-reasoning-interactions}. Each probe compares a base outcome model for \(\Delta\)\texttt{replay\_use\_nuke} with a mediator-controlled model that adds the relevant reasoning indicator. The attenuation proxy is \(c - c'\), where \(c\) is the total condition contrast from the base model and \(c'\) is the corresponding direct contrast after adding the reasoning indicator. These are descriptive attenuation diagnostics, not causal mediation estimates.
+This appendix reports attenuation diagnostics for the reasoning-indicator probes summarized in Section~\ref{sec:findings-reasoning-interactions}. Each probe compares a base outcome model for \(\Delta\)\texttt{replay\_use\_nuke} with an indicator-adjusted model that adds the relevant reasoning indicator. The attenuation proxy is \(c - c'\), where \(c\) is the total condition contrast from the base model and \(c'\) is the corresponding indicator-adjusted contrast after adding the reasoning indicator. These are descriptive attenuation diagnostics, not causal mediation estimates.
 
 \subsection{Ethical Prompting via Explicit Ethical Reasoning}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{notebooks/extracted/replay_mediation/images/cell_16_out_2.png}
-\caption{Per-model proxy mediation share for ethical prompting through explicit ethical reasoning indicators.}
+\caption{Per-model attenuation share for ethical prompting associated with explicit ethical reasoning indicators.}
 \label{fig:app-ethical-explicit-per-model-attenuation}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{notebooks/extracted/replay_mediation/images/cell_12_out_0.png}
-\caption{Ethical-prompting total effects versus mediator-controlled direct effects on \(\Delta\)\texttt{replay\_use\_nuke}, with the conditional outcome association of the explicit ethical reasoning indicator.}
+\caption{Ethical-prompting total effects versus indicator-adjusted effects on \(\Delta\)\texttt{replay\_use\_nuke}, with the conditional outcome association of the explicit ethical reasoning indicator.}
 \label{fig:app-ethical-explicit-total-direct}
 \end{figure}
 
@@ -24,14 +24,14 @@ This appendix reports attenuation diagnostics for the reasoning-indicator probes
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{notebooks/extracted/replay_mediation_high_stakes_game_simulation/images/cell_16_out_2.png}
-\caption{Per-model proxy mediation share for high-stakes framing through simulation/game reasoning indicators.}
+\caption{Per-model attenuation share for high-stakes framing associated with simulation/game reasoning indicators.}
 \label{fig:app-high-stakes-simulation-per-model-attenuation}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{notebooks/extracted/replay_mediation_high_stakes_game_simulation/images/cell_12_out_0.png}
-\caption{High-stakes framing total effects versus mediator-controlled direct effects on \(\Delta\)\texttt{replay\_use\_nuke}, with the conditional outcome association of the simulation/game reasoning indicator.}
+\caption{High-stakes framing total effects versus indicator-adjusted effects on \(\Delta\)\texttt{replay\_use\_nuke}, with the conditional outcome association of the simulation/game reasoning indicator.}
 \label{fig:app-high-stakes-simulation-total-direct}
 \end{figure}
 
