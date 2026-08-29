@@ -10,7 +10,26 @@
 \label{fig:replay-delta-use-nuke-heatmap}
 \end{figure}
 
-When replaying high-tension episodes with the original prompt, models escalate moderately but below CivBench's self-play level, averaging +0.4 (Kimi-K2.6) to +7.4 (Gemini-3.5-Flash). On average, nuke-specific ethical prompting ($\beta$ = -9.5***) and rationale removal ($\beta$ = -7.1***) effectively moderate escalation on the 0-100 authorization scale, while high-stakes framing alone does not. No intervention reliably eliminates emergent escalation (i.e., $\Delta > 0$ in one or more episodes). Interaction effects are mixed: combining \texttt{ethical} and \texttt{no\_rationale} additionally moderates escalation ($\beta$ = -12.50***), while combining \texttt{high-stakes} and \texttt{ethical} does not (especially for Gemini-3.5-Flash, $\beta$ = 26.96***, largely removing \texttt{ethical}'s effect). Outliers: Gemma-4 and MiniMax-M2.7 only respond to \texttt{no-rationale}.
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+Term & $\beta$ & 95\% CI & Sig. \\
+\midrule
+\texttt{ethical} & -9.50 & [-10.60, -8.40] & ***\dag \\
+\texttt{no\_rationale} & -7.08 & [-8.52, -5.64] & ***\dag \\
+\texttt{high\_stakes} & +0.15 & [-0.35, +0.65] & n.s. \\
+\texttt{ethical} $\times$ \texttt{no\_rationale} & -12.50 & [-14.16, -10.83] & ***\dag \\
+\texttt{high\_stakes} $\times$ \texttt{ethical} & +1.60 & [+0.97, +2.23] & ***\dag \\
+\texttt{no\_rationale} $\times$ \texttt{high\_stakes} & -0.18 & [-0.93, +0.58] & n.s. \\
+\bottomrule
+\end{tabular}
+\caption{Pooled OLS coefficients on \(\Delta\)\texttt{replay\_use\_nuke} with episode-clustered standard errors. Stars report raw significance (* \(p<0.05\), ** \(p<0.01\), *** \(p<0.001\)); \dag{} marks coefficients surviving Benjamini-Hochberg FDR correction at \(q<0.05\).}
+\label{tab:pooled-condition-effects}
+\end{table}
+
+When replaying high-tension episodes with the original prompt, models escalate moderately but below CivBench's self-play level, averaging +0.4 (Kimi-K2.6) to +7.4 (Gemini-3.5-Flash). Table~\ref{tab:pooled-condition-effects} reports the pooled condition coefficients underlying Figure~\ref{fig:replay-delta-use-nuke-heatmap}: on average, nuke-specific ethical prompting ($\beta$ = -9.50***) and rationale removal ($\beta$ = -7.08***) effectively moderate escalation on the 0-100 authorization scale, while high-stakes framing alone does not. No intervention reliably eliminates emergent escalation (i.e., $\Delta > 0$ in one or more episodes). Interaction effects are mixed: combining \texttt{ethical} and \texttt{no\_rationale} additionally moderates escalation ($\beta$ = -12.50***), while combining \texttt{high-stakes} and \texttt{ethical} on average does not ($\beta$ = +1.60***). Outliers: Gemma-4 and MiniMax-M2.7 only respond to \texttt{no-rationale}, while combining \texttt{high-stakes} and \texttt{ethical} reverses \texttt{ethical}'s moderation effect for Gemini-3.5-Flash ($\beta$ = 26.96***). 
 
 \subsection{Finding 2. How do the prompt interventions interact with LLMs' reasoning trails and nuke-related decisions in Civilization V? [Figure~\ref{fig:explicit-reasoning-hit-rate}]}
 \label{sec:findings-reasoning-interactions}
@@ -22,7 +41,7 @@ When replaying high-tension episodes with the original prompt, models escalate m
 \label{fig:explicit-reasoning-hit-rate}
 \end{figure}
 
-For most models, nuke-specific ethical prompting increases ethical reasoning keywords, often alongside a game-framing language. Ethical keywords appear almost exclusively in ethical conditions with a widely ranged induced rate: Kimi-K2.6 reaches 75\%, Qwen-3.6-27B sits around 10\%, while MiniMax-M2.7 does not react. Such appearance is strongly associated with the ethical intervention's effect. Under the cluster-bootstrapped probe, adding the ethical-keyword indicator attenuates the majority of the ethical prompting's impact in all comparison pairs (62-88\% on average; per-model attenuation share in Figure~\ref{fig:app-ethical-explicit-per-model-attenuation}). Game or simulation keywords also increase for most models (avg. 2.3\% => 12.1\%), likely to defend the escalation (see Finding 3; Appendix~\ref{app:reasoning-indicator-models}).
+For most models, nuke-specific ethical prompting increases ethical reasoning keywords, often alongside a game-framing language. Ethical keywords appear almost exclusively in ethical conditions with a widely ranged induced rate: Kimi-K2.6 reaches 75\%, Qwen-3.6-27B sits around 10\%, while MiniMax-M2.7 does not react. Such appearance is strongly associated with the ethical intervention's effect: under the cluster-bootstrapped probe, the estimated ethical-prompting coefficient shrinks by 62-88\% on average across comparison pairs, once the ethical-keyword indicator enters the model (per-model attenuation share in Figure~\ref{fig:app-ethical-explicit-per-model-attenuation}). Game or simulation keywords also increase for most models (avg. 2.3\% => 12.1\%), likely to defend the escalation (see Finding 3; Appendix~\ref{app:reasoning-indicator-models}).
 
 High-stakes framing changes how models reason about the situation. It increases ethical keywords for 4 models but suppresses them for 5 models (especially Gemini-3.5-Flash, OR 0.21***; Appendix~\ref{app:reasoning-indicator-models}). For most models, it slightly reduces the already-rare game-framing keyword occurrence (OR 0.74***).
 
