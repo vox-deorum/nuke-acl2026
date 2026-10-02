@@ -80,6 +80,9 @@ Input prompts are above 50,000 tokens per turn. Each replay turn requires the mo
 
 Table~\ref{tab:token-cost-by-model} reports token statistics collapsed across all 8 conditions for each of the 13 models, with 3,120 theoretical rows per model. Note that GPT-OSS-120B cannot process prompts longer than approximately 100k tokens. The full experiment would cost \$1,279.41 USD based on May 2026 API fees. 
 
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{4pt}
 \begin{longtable}{lrrrrrl}
 \caption{Token usage and API cost by replay model, collapsed across all 8 conditions. Output tokens combine reasoning and response tokens. Pricing reflects rates at the time of data collection.}
 \label{tab:token-cost-by-model} \\
@@ -112,6 +115,7 @@ Mistral-Small-4 & 168,105,339 & 53,880 & 5,306,810 & 1,701 & \$28.40 & \$0.15 in
 Qwen-3.5 & 208,398,300 & 66,794 & 6,748,166 & 2,163 & \$97.07 & \$0.39 in / \$2.34 out \\
 Qwen-3.6-27B & 171,391,597 & 54,933 & 4,706,939 & 1,509 & \$25.86 & \$0.13 in / \$0.76 out \\
 \end{longtable}
+\endgroup
 
 \subsection{Statistical Models}
 \label{app:statistical-modeling-details}

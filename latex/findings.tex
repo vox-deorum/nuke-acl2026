@@ -13,6 +13,8 @@
 \begin{table}[t]
 \centering
 \small
+\setlength{\tabcolsep}{4pt}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{lrrl}
 \toprule
 Term & $\beta$ & 95\% CI & Sig. \\
@@ -24,7 +26,8 @@ Term & $\beta$ & 95\% CI & Sig. \\
 \texttt{high\_stakes} $\times$ \texttt{ethical} & +1.60 & [+0.97, +2.23] & ***\dag \\
 \texttt{no\_rationale} $\times$ \texttt{high\_stakes} & -0.18 & [-0.93, +0.58] & n.s. \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \caption{Pooled OLS coefficients on \(\Delta\)\texttt{replay\_use\_nuke} with episode-clustered standard errors. Stars report raw significance (* \(p<0.05\), ** \(p<0.01\), *** \(p<0.001\)); \dag{} marks coefficients surviving Benjamini-Hochberg FDR correction at \(q<0.05\).}
 \label{tab:pooled-condition-effects}
 \end{table}
